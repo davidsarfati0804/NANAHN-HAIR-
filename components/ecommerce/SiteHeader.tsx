@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { navigation } from "@/data/site";
 import CartLink from "./CartLink";
@@ -6,16 +7,19 @@ export default function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-[var(--color-lavender-mist)] bg-white/92 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-5 py-4 lg:px-8">
-          <Link
+        <Link
           href="/#accueil"
-          className="grid h-14 w-20 place-items-center rounded-2xl bg-[var(--color-lavender)] text-center text-[0.68rem] font-black leading-[0.95] text-white shadow-sm"
+          className="relative block h-16 w-[86px] shrink-0 overflow-hidden rounded-xl bg-[#f0ddab] shadow-sm ring-1 ring-[var(--color-lavender-mist)] transition hover:opacity-85 sm:h-[76px] sm:w-[102px]"
           aria-label="Na Nah N'hair accueil"
         >
-          NA
-          <br />
-          NAH
-          <br />
-          N’HAIR
+          <Image
+            src="/images/logo-na-nah-nhair-web.png"
+            alt=""
+            fill
+            priority
+            sizes="(min-width: 640px) 102px, 86px"
+            className="object-contain p-1.5"
+          />
         </Link>
 
         <nav className="hidden items-center gap-5 text-sm font-semibold text-[var(--color-deep-violet)] lg:flex">

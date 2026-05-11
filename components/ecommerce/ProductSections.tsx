@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { Droplets, Plus, Sparkles } from "lucide-react";
+import { Droplets, Sparkles } from "lucide-react";
 import { pack, products } from "@/data/products";
 import { packBenefits } from "@/data/site";
+import AddToCartButton from "./AddToCartButton";
 import ImagePlaceholder from "./ImagePlaceholder";
 
 export function ProductGrid() {
@@ -49,11 +50,8 @@ export function ProductGrid() {
               <p className="text-sm font-bold text-[var(--color-plum)]">{product.accent}</p>
               <p className="mt-3 flex-1 text-base leading-7 text-[var(--color-ink)]">{product.description}</p>
               <div className="mt-6 grid gap-3">
-                <button className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--color-lavender)] px-5 py-3 font-bold text-white transition hover:bg-[var(--color-plum)]">
-                  <Plus size={18} />
-                  Ajouter au panier
-                </button>
-                <Link href={`#${product.id}`} className="rounded-full border border-[var(--color-lavender)] px-5 py-3 text-center font-bold text-[var(--color-deep-violet)] transition hover:bg-[var(--color-lavender-soft)]">
+                <AddToCartButton item={product} />
+                <Link href={`/produits/${product.id}`} className="rounded-full border border-[var(--color-lavender)] px-5 py-3 text-center font-bold text-[var(--color-deep-violet)] transition hover:bg-[var(--color-lavender-soft)]">
                   Voir le produit
                 </Link>
               </div>
@@ -78,9 +76,7 @@ export function PackSection() {
           <p className="mt-5 text-5xl font-black">{pack.price}</p>
           <p className="mt-5 max-w-2xl text-lg leading-8 text-white/92">{pack.description}</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Link href="#panier" className="rounded-full bg-white px-7 py-4 text-center font-black text-[var(--color-deep-violet)] transition hover:-translate-y-0.5">
-              Commander le pack
-            </Link>
+            <AddToCartButton item={pack} label="Commander le pack" variant="white" />
             <Link href="#mix-gagnant" className="rounded-full border border-white/50 px-7 py-4 text-center font-black text-white transition hover:-translate-y-0.5 hover:bg-white/10">
               Pourquoi c’est le mix gagnant ?
             </Link>

@@ -1,12 +1,12 @@
 export const navigation = [
-  { label: "Accueil", href: "#accueil" },
-  { label: "Boutique", href: "#boutique" },
-  { label: "Le Pack", href: "#pack" },
-  { label: "Résultats", href: "#resultats" },
-  { label: "Avis", href: "#avis" },
-  { label: "À propos", href: "#apropos" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Panier", href: "#panier" },
+  { label: "Accueil", href: "/#accueil" },
+  { label: "Boutique", href: "/#boutique" },
+  { label: "Le Pack", href: "/#pack" },
+  { label: "Résultats", href: "/#resultats" },
+  { label: "Avis", href: "/#avis" },
+  { label: "À propos", href: "/#apropos" },
+  { label: "FAQ", href: "/#faq" },
+  { label: "Panier", href: "/panier" },
 ];
 
 export const heroCopy = {

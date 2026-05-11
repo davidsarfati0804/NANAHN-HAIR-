@@ -8,6 +8,8 @@ export type CartLine = {
   name: string;
   price: string;
   priceCents: number;
+  image?: string;
+  imageAlt?: string;
   quantity: number;
 };
 
@@ -34,29 +36,34 @@ const catalog = [
     name: product.name,
     price: product.price,
     priceCents: product.priceCents,
+    image: product.image,
+    imageAlt: product.name,
   })),
   {
     id: pack.id,
     name: pack.name,
     price: pack.price,
     priceCents: pack.priceCents,
+    image: pack.image,
+    imageAlt: pack.name,
   },
 ];
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
-  const [lines, setLines] = useState<CartLine[]>(() => {
-    if (typeof window === "undefined") {
-      return [];
-    }
+  const [lines, setLines] = useState<CartLine[]>([]);
+  const [hasLoadedCart, setHasLoadedCart] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
+  useEffect(() => {
     const stored = window.localStorage.getItem(storageKey);
     if (!stored) {
-      return [];
+      setHasLoadedCart(true);
+      return;
     }
 
     try {
       const parsed = JSON.parse(stored) as CartLine[];
-      return parsed
+      const restoredLines = parsed
         .map((line) => {
           const catalogItem = catalog.find((item) => item.id === line.id);
           if (!catalogItem) {
@@ -69,16 +76,21 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
           };
         })
         .filter(Boolean) as CartLine[];
+      setLines(restoredLines);
     } catch {
       window.localStorage.removeItem(storageKey);
-      return [];
+    } finally {
+      setHasLoadedCart(true);
     }
-  });
-  const [isCartOpen, setIsCartOpen] = useState(false);
+  }, []);
 
   useEffect(() => {
+    if (!hasLoadedCart) {
+      return;
+    }
+
     window.localStorage.setItem(storageKey, JSON.stringify(lines));
-  }, [lines]);
+  }, [hasLoadedCart, lines]);
 
   const addItem = useCallback((item: Omit<CartLine, "quantity">) => {
     setLines((current) => {

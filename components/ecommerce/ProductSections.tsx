@@ -1,9 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Droplets, Sparkles } from "lucide-react";
 import { pack, products } from "@/data/products";
 import { packBenefits } from "@/data/site";
 import AddToCartButton from "./AddToCartButton";
-import ImagePlaceholder from "./ImagePlaceholder";
 
 export function ProductGrid() {
   return (
@@ -13,7 +13,7 @@ export function ProductGrid() {
           <div>
             <p className="text-sm font-black uppercase tracking-[0.18em] text-[var(--color-plum)]">Boutique</p>
             <h2 className="mt-3 text-4xl font-black text-[var(--color-deep-violet)] md:text-6xl">
-              Choisis ton remix capillaire
+              Choisis ton mix capillaire
             </h2>
           </div>
           <p className="max-w-md text-base leading-7 text-[var(--color-ink)]">
@@ -28,12 +28,15 @@ export function ProductGrid() {
               id={product.id}
               className="group flex min-h-[500px] flex-col rounded-[2rem] border border-[var(--color-lavender-mist)] bg-white p-5 shadow-[0_18px_45px_rgba(53,32,95,0.08)] transition hover:-translate-y-1"
             >
-              {/* TODO: remplacer ce placeholder par la photo produit détourée. */}
-              <div className="mb-5 grid min-h-48 place-items-center rounded-[1.5rem] bg-[var(--color-lavender-soft)] text-[var(--color-deep-violet)]">
-                <div className="flex items-end gap-2">
-                  <span className="h-24 w-10 rounded-t-full rounded-b-xl bg-[var(--color-lavender)]" />
-                  <span className="h-32 w-12 rounded-t-full rounded-b-xl bg-[var(--color-plum)]" />
-                </div>
+              <div className="relative mb-5 aspect-[4/5] overflow-hidden rounded-[1.5rem] bg-[var(--color-lavender-soft)]">
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  fill
+                  sizes="(min-width: 768px) 33vw, 100vw"
+                  className="object-cover transition duration-500 group-hover:scale-[1.03]"
+                  style={{ objectPosition: product.imagePosition }}
+                />
               </div>
               <div className="mb-4 flex items-start justify-between gap-4">
                 <div>
@@ -47,8 +50,12 @@ export function ProductGrid() {
                   {product.price}
                 </p>
               </div>
-              <p className="text-sm font-bold text-[var(--color-plum)]">{product.accent}</p>
+              <p className="text-base font-black text-[var(--color-plum)]">{product.headline}</p>
               <p className="mt-3 flex-1 text-base leading-7 text-[var(--color-ink)]">{product.description}</p>
+              <ul className="mt-4 space-y-2 text-sm font-bold text-[var(--color-ink)]">
+                <li>Odeur : {product.scent}</li>
+                <li>{product.price}</li>
+              </ul>
               <div className="mt-6 grid gap-3">
                 <AddToCartButton item={product} />
                 <Link href={`/produits/${product.id}`} className="rounded-full border border-[var(--color-lavender)] px-5 py-3 text-center font-bold text-[var(--color-deep-violet)] transition hover:bg-[var(--color-lavender-soft)]">
@@ -82,8 +89,16 @@ export function PackSection() {
             </Link>
           </div>
         </div>
-        {/* TODO: remplacer par une photo des 3 produits ensemble au spa à Maurice. */}
-        <ImagePlaceholder label="Photo pack spa à Maurice" tone="dark" className="min-h-[430px] border-white/25" />
+        <div className="relative min-h-[430px] overflow-hidden rounded-[2rem] border border-white/25 bg-[var(--color-deep-violet)]">
+          <Image
+            src={pack.image}
+            alt={pack.photoLabel}
+            fill
+            sizes="(min-width: 1024px) 45vw, 100vw"
+            className="object-cover"
+            style={{ objectPosition: "50% 88%" }}
+          />
+        </div>
       </div>
     </section>
   );
@@ -108,9 +123,9 @@ export function WinningMixSection() {
           ))}
         </div>
         <div className="mt-8 rounded-[2rem] bg-[var(--color-deep-violet)] p-7 text-white md:p-10">
-          <p className="text-sm font-black uppercase tracking-[0.18em] text-white/70">Mode d’emploi</p>
+          <p className="text-sm font-black uppercase tracking-[0.18em] text-white/70">Mode d’emploi du Remix</p>
           <p className="mt-4 text-xl font-bold leading-9">
-            Alterne les sérums selon tes besoins ou crée ta propre routine : Miraculous en cure, Fabulous au quotidien, et Luxurious pour briller en sortie. Masse, chante, rayonne ✨ C’est toi l’artiste.
+            Alternes les sérums selon tes besoins ou crées ta propre routine : Miraculous en cure, Fabulous au quotidien, et Luxurious pour briller en sortie. Masses, vibres, rayonne ✨ C’est toi l’artiste !
           </p>
         </div>
       </div>

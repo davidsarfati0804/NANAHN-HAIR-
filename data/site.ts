@@ -18,40 +18,85 @@ export const heroCopy = {
 
 export const packBenefits = [
   {
-    title: "Fabulous Hair Serum",
+    title: "Fabulous",
     text: "Pour gainer, fortifier et apaiser ton cuir chevelu.",
   },
   {
-    title: "Miraculous Hair Serum",
-    text: "Pour accompagner la vitalité du cuir chevelu et donner un boost à ta routine.",
+    title: "Miraculous",
+    text: "Pour stimuler la pousse et dire stop à la chute.",
   },
   {
-    title: "Luxurious Hair Serum",
+    title: "Luxurious",
     text: "Pour la touche finale, le volume et la brillance miroir.",
   },
 ];
 
+export const aboutCopy = [
+  "L’aventure Na Nah N’hair est née d’un moment de partage profondément humain.",
+  "Tout a commencé lorsque j’ai voulu aider une femme incroyable à retrouver ses cheveux après la maladie. Son objectif : stimuler la repousse et ralentir la chute. Le mien : lui redonner confiance, force et lumière.",
+  "Entre soins faits maison, éclats de rire et rituels créés avec amour, quelque chose de fort est né. Ses cheveux reprenaient vie… et son énergie aussi.",
+  "C’est à ce moment-là que j’ai compris une chose : nos cheveux sont bien plus que des cheveux. Ils sont notre couronne, notre identité, notre vibration.",
+  "Na Nah N’hair est née avec une envie simple : proposer des soins naturels, efficaces et sensoriels, sans routines compliquées.",
+  "✨ Des produits qui font du bien. ✨ Des odeurs qui font voyager. ✨ Une routine simple, vibrante et sans prise de tête.",
+  "Aujourd’hui, Na Nah N’hair est entrée dans vos salles de bain avec une seule mission : faire rayonner votre chevelure… et votre énergie.",
+];
+
+export const inciItems = [
+  {
+    title: "PARFUM MONOI",
+    text:
+      "RICINUS COMMUNIS SEED OIL*, OLEA EUROPAEA FRUIT OIL*, COCOS NUCIFERA OIL*, PERSEA GRATISSIMA OIL*, BRASSICA NIGRA SEED OIL*, SIMMONDSIA CHINENESIS SEED OIL*, BRASSICA OLERACEA ITALICA SEED OIL*, VITIS VINIFERA SEED OIL, EMBLICA OFFICINALIS FRUIT POWDER*, FRAGRANCE, TOCOPHEROL, HELIANTHUS ANNUUS SEED OIL, BENZYL SALICYLATE*, ALPHA HEXYL CINNAMALDEHYDE, D-CITRONELLOL, D-LIMONENE, GERANIOL, LINALOOL, BENZYL BENZOATE, CITRAL, EUGENOL, ISOEUGENOL*",
+  },
+  {
+    title: "PARFUM FLEUR ORANGER",
+    text:
+      "RICINUS COMMUNIS SEED OIL*, OLEA EUROPAEA FRUIT OIL*, COCOS NUCIFERA OIL*, PERSEA GRATISSIMA OIL*, BRASSICA NIGRA SEED OIL*, SIMMONDSIA CHINENESIS SEED OIL*, BRASSICA OLERACEA ITALICA SEED OIL*, VITIS VINIFERA SEED OIL, EMBLICA OFFICINALIS FRUIT POWDER*, FRAGRANCE, TOCOPHEROL, HELIANTHUS ANNUUS SEED OIL, ALPHA-HEXYLCINNAMALDEHYDE*, CITRAL, D-LIMONENE, GERANIOL*",
+  },
+  {
+    title: "PARFUM VANILLE PATCHOULI",
+    text:
+      "RICINUS COMMUNIS SEED OIL*, OLEA EUROPAEA FRUIT OIL*, COCOS NUCIFERA OIL*, PERSEA GRATISSIMA OIL*, BRASSICA NIGRA SEED OIL*, SIMMONDSIA CHINENESIS SEED OIL*, BRASSICA OLERACEA ITALICA SEED OIL*, VITIS VINIFERA SEED OIL, EMBLICA OFFICINALIS FRUIT POWDER*, FRAGRANCE, TOCOPHEROL, HELIANTHUS ANNUUS SEED OIL, CITRAL*, COUMARIN, BENZYL BENZOATE, D LIMONENE, LINALOOL*",
+  },
+];
+
+export const companyInfo = [
+  "INGREDIENTS ISSUS DE L’AGRICULTURE BIOLOGIQUE",
+  "** ALLERGENES DU A LA PRESENCE DE PARFUM",
+  "Contenance du flacon : 30 mL - 1.01 fl.oz",
+  "Made in France",
+  "Seare",
+  "24 rue octave feuillet",
+  "75016 Paris",
+  "0180182929",
+];
+
 export const beforeAfterItems = [
   {
-    name: "M.",
-    duration: "8 semaines",
+    name: "Résultat routine 1",
+    duration: "Avant / Après",
     product: "Fabulous Hair Serum",
-    hairType: "Boucles souples",
-    quote: "Ma routine est devenue plus simple et mes cheveux paraissent plus brillants.",
+    hairType: "Longueurs sensibilisées",
+    image: "/images/results/compare-1.jpg",
+    imagePosition: "50% 50%",
+    quote: "Cheveux visiblement plus doux, mieux disciplinés et plus lumineux.",
   },
   {
-    name: "Sarah",
-    duration: "6 semaines",
+    name: "Résultat routine 2",
+    duration: "Avant / Après",
     product: "Miraculous Hair Serum",
     hairType: "Cheveux texturés",
-    quote: "J’aime le geste massage, l’odeur et l’effet plus net au coiffage.",
+    image: "/images/results/compare-2.jpg",
+    imagePosition: "50% 50%",
+    quote: "Une fibre plus nette au coiffage, avec un rendu plus homogène.",
   },
   {
-    name: "Lina",
-    duration: "4 semaines",
+    name: "Résultat routine 3",
+    duration: "Avant / Après",
     product: "Luxurious Hair Serum",
     hairType: "Cheveux ondulés",
-    quote: "La touche finale parfaite avant de sortir, sans alourdir ma longueur.",
+    image: "/images/results/compare-3.jpg",
+    imagePosition: "50% 50%",
+    quote: "Plus de brillance, plus de souplesse et une finition plus soignée.",
   },
 ];
 

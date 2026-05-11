@@ -1,7 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { Minus, Plus, Trash2 } from "lucide-react";
+import { Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
 import { formatPrice, useCart } from "./CartProvider";
 
 export default function CartPageClient() {
@@ -51,11 +52,20 @@ export default function CartPageClient() {
                   key={line.id}
                   className="grid gap-5 rounded-[2rem] border border-[var(--color-lavender-mist)] bg-white p-5 shadow-[0_16px_36px_rgba(53,32,95,0.07)] sm:grid-cols-[110px_1fr_auto]"
                 >
-                  <div className="grid h-28 place-items-center rounded-[1.4rem] bg-[var(--color-lavender-soft)] text-[var(--color-deep-violet)]">
-                    <div className="flex items-end gap-1.5">
-                      <span className="h-14 w-6 rounded-t-full rounded-b-lg bg-[var(--color-lavender)]" />
-                      <span className="h-20 w-7 rounded-t-full rounded-b-lg bg-[var(--color-plum)]" />
-                    </div>
+                  <div className="relative h-28 overflow-hidden rounded-[1.4rem] bg-[var(--color-lavender-soft)] text-[var(--color-deep-violet)]">
+                    {line.image ? (
+                      <Image
+                        src={line.image}
+                        alt={line.imageAlt ?? line.name}
+                        fill
+                        sizes="110px"
+                        className="object-cover"
+                      />
+                    ) : (
+                      <div className="grid h-full place-items-center">
+                        <ShoppingBag size={24} />
+                      </div>
+                    )}
                   </div>
 
                   <div>

@@ -1,17 +1,13 @@
+import Image from "next/image";
 import Link from "next/link";
-import { Music2, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { heroCopy } from "@/data/site";
-import ImagePlaceholder from "./ImagePlaceholder";
 
 export default function HeroSection() {
   return (
     <section id="accueil" className="relative overflow-hidden bg-white">
       <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-16 lg:grid-cols-[0.9fr_1.1fr] lg:px-8 lg:py-24">
         <div>
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-[var(--color-lavender-soft)] px-4 py-2 text-sm font-bold text-[var(--color-deep-violet)]">
-            <Music2 size={16} />
-            Haircare remix
-          </div>
           <h1 className="text-7xl font-black leading-[0.82] text-[var(--color-deep-violet)] sm:text-8xl lg:text-[7.5rem] xl:text-[8.2rem]">
             {heroCopy.titleLines.map((line) => (
               <span key={line} className="block whitespace-nowrap">
@@ -36,8 +32,17 @@ export default function HeroSection() {
             <Sparkles size={17} className="text-[var(--color-gold)]" />
             Code NNH26
           </div>
-          {/* TODO: remplacer par une photo horizontale des 3 flacons. */}
-          <ImagePlaceholder label="Photo horizontale des 3 flacons" className="min-h-[420px] lg:min-h-[560px]" />
+          <div className="relative min-h-[420px] overflow-hidden rounded-[2rem] border border-[var(--color-lavender-mist)] bg-white lg:min-h-[560px]">
+            <Image
+              src="/images/products/three-products.jpg"
+              alt="Les trois sérums Na Nah N'hair"
+              fill
+              priority
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-cover"
+              style={{ objectPosition: "50% 72%" }}
+            />
+          </div>
         </div>
       </div>
     </section>

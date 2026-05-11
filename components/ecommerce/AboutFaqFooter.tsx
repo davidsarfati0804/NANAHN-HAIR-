@@ -1,6 +1,7 @@
+import Image from "next/image";
 import Link from "next/link";
-import { Camera, Mail, Music2 } from "lucide-react";
-import { faqs, values } from "@/data/site";
+import { Camera, FileText, Mail, MapPin, Music2 } from "lucide-react";
+import { aboutCopy, companyInfo, faqs, inciItems, values } from "@/data/site";
 
 export function AboutSection() {
   return (
@@ -8,18 +9,79 @@ export function AboutSection() {
       <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
         <div className="rounded-[2rem] bg-[var(--color-lavender)] p-8 text-white md:p-10">
           <Music2 size={34} />
-          <h2 className="mt-6 text-4xl font-black md:text-6xl">De ma chambre à vos salles de bain</h2>
+          <h2 className="mt-6 text-4xl font-black md:text-6xl">À propos de Na Nah N’hair</h2>
         </div>
         <div>
-          <p className="text-xl font-bold leading-9 text-[var(--color-ink)]">
-            Na Nah N’hair est née d’un moment de partage, d’entraide et de complicité. Tout a commencé avec l’envie d’aider une femme incroyable à retrouver confiance après une période difficile. De soins faits avec amour est née une marque pensée pour faire du bien aux cheveux, mais aussi au moral.
-          </p>
+          <div className="space-y-5 text-lg font-bold leading-8 text-[var(--color-ink)]">
+            {aboutCopy.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
           <div className="mt-8 flex flex-wrap gap-3">
             {values.map((value) => (
               <span key={value} className="rounded-full bg-[var(--color-lavender-soft)] px-5 py-3 font-black text-[var(--color-deep-violet)]">
                 {value}
               </span>
             ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function IngredientsSection() {
+  return (
+    <section id="inci" className="bg-white px-5 py-10 lg:px-8">
+      <div className="mx-auto max-w-5xl border-t border-[var(--color-lavender-mist)] pt-8">
+        <div className="grid gap-5 lg:grid-cols-[260px_1fr]">
+          <div>
+            <p className="text-xs font-black uppercase tracking-[0.18em] text-[var(--color-plum)]">Transparence</p>
+            <h2 className="mt-2 text-2xl font-black text-[var(--color-deep-violet)]">
+              Compositions & mentions
+            </h2>
+            <p className="mt-3 text-sm leading-6 text-[var(--color-ink)]">
+              INCI, contenance, fabrication et coordonnées de la société.
+            </p>
+          </div>
+
+          <div className="divide-y divide-[var(--color-lavender-mist)] overflow-hidden rounded-[1.2rem] border border-[var(--color-lavender-mist)] bg-[var(--color-blush)]">
+            <details className="group p-5">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-black text-[var(--color-deep-violet)]">
+                <span className="inline-flex items-center gap-2">
+                  <FileText size={18} />
+                  INCI huile par parfum
+                </span>
+                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white text-[var(--color-plum)] transition group-open:rotate-45">
+                  +
+                </span>
+              </summary>
+              <div className="mt-5 grid gap-4">
+                {inciItems.map((item) => (
+                  <article key={item.title} className="rounded-[1rem] bg-white p-4">
+                    <h3 className="text-sm font-black uppercase tracking-[0.08em] text-[var(--color-deep-violet)]">{item.title}</h3>
+                    <p className="mt-3 text-xs leading-6 text-[var(--color-ink)]">{item.text}</p>
+                  </article>
+                ))}
+              </div>
+            </details>
+
+            <details className="group p-5">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-black text-[var(--color-deep-violet)]">
+                <span className="inline-flex items-center gap-2">
+                  <MapPin size={18} />
+                  Contenance & infos société
+                </span>
+                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white text-[var(--color-plum)] transition group-open:rotate-45">
+                  +
+                </span>
+              </summary>
+              <div className="mt-5 grid gap-2 text-sm font-bold leading-6 text-[var(--color-ink)] sm:grid-cols-2">
+                {companyInfo.map((item) => (
+                  <p key={item} className="rounded-[0.9rem] bg-white px-4 py-3">{item}</p>
+                ))}
+              </div>
+            </details>
           </div>
         </div>
       </div>
@@ -82,12 +144,14 @@ export function SiteFooter() {
     <footer className="bg-[var(--color-deep-violet)] px-5 py-12 text-white lg:px-8">
       <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-[1fr_1.3fr_0.7fr]">
         <div>
-          <div className="grid h-16 w-24 place-items-center rounded-2xl bg-[var(--color-lavender)] text-center text-xs font-black leading-none">
-            NA
-            <br />
-            NAH
-            <br />
-            N’HAIR
+          <div className="relative h-20 w-28 overflow-hidden rounded-2xl bg-[var(--color-deep-violet)] ring-1 ring-white/20">
+            <Image
+              src="/images/logo-na-nah-nhair-yellow.png"
+              alt="Na Nah N'hair"
+              fill
+              sizes="112px"
+              className="object-contain p-2"
+            />
           </div>
           <p className="mt-5 text-sm text-white/70">Copyright Na Nah N’hair</p>
         </div>

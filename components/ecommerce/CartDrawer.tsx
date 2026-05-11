@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
@@ -73,7 +74,7 @@ export default function CartDrawer() {
                 Ton panier est vide
               </h3>
               <p className="mt-3 leading-7 text-[var(--color-ink)]">
-                Découvre nos sérums et compose ton remix capillaire.
+                Découvre nos sérums et compose ton mix capillaire.
               </p>
             </div>
 
@@ -104,11 +105,20 @@ export default function CartDrawer() {
                     key={line.id}
                     className="grid grid-cols-[82px_1fr] gap-4 rounded-[1.5rem] border border-[var(--color-lavender-mist)] p-3"
                   >
-                    <div className="grid h-24 place-items-center rounded-[1.2rem] bg-[var(--color-lavender-soft)]">
-                      <div className="flex items-end gap-1">
-                        <span className="h-12 w-5 rounded-t-full rounded-b-md bg-[var(--color-lavender)]" />
-                        <span className="h-16 w-6 rounded-t-full rounded-b-md bg-[var(--color-plum)]" />
-                      </div>
+                    <div className="relative h-24 overflow-hidden rounded-[1.2rem] bg-[var(--color-lavender-soft)]">
+                      {line.image ? (
+                        <Image
+                          src={line.image}
+                          alt={line.imageAlt ?? line.name}
+                          fill
+                          sizes="82px"
+                          className="object-cover"
+                        />
+                      ) : (
+                        <div className="grid h-full place-items-center">
+                          <ShoppingBag size={22} className="text-[var(--color-deep-violet)]" />
+                        </div>
+                      )}
                     </div>
                     <div>
                       <div className="flex items-start justify-between gap-3">

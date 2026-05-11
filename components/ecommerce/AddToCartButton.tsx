@@ -10,6 +10,8 @@ type AddToCartButtonProps = {
     name: string;
     price: string;
     priceCents: number;
+    image?: string;
+    imageAlt?: string;
   };
   label?: string;
   variant?: "lavender" | "white";

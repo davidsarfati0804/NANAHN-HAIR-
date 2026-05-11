@@ -9,11 +9,11 @@ export default function SiteHeader() {
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-5 py-4 lg:px-8">
         <Link
           href="/#accueil"
-          className="relative block h-16 w-[86px] shrink-0 overflow-hidden rounded-xl bg-[#f0ddab] shadow-sm ring-1 ring-[var(--color-lavender-mist)] transition hover:opacity-85 sm:h-[76px] sm:w-[102px]"
+          className="relative block h-16 w-[86px] shrink-0 overflow-hidden rounded-xl bg-[var(--color-deep-violet)] shadow-sm ring-1 ring-[var(--color-lavender-mist)] transition hover:opacity-85 sm:h-[76px] sm:w-[102px]"
           aria-label="Na Nah N'hair accueil"
         >
           <Image
-            src="/images/logo-na-nah-nhair-web.png"
+            src="/images/logo-na-nah-nhair-yellow.png"
             alt=""
             fill
             priority

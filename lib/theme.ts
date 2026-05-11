@@ -8,9 +8,10 @@ export const brandColors = {
   white: "#FFFFFF",
   blush: "#FFF5F7",
   gold: "#D8A24A",
+  pantone7499: "#F1E6B2",
 } as const;
 
 export const brandTypography = {
-  // TODO: remplacer par la typographie exacte de la cliente quand elle sera fournie.
-  fontFamily: "var(--font-brand, 'Work Sans', Arial, sans-serif)",
+  fontFamily: "var(--font-brand, 'Montserrat', Arial, sans-serif)",
+  displayFamily: "var(--font-display, 'Bebas Kai', Impact, sans-serif)",
 } as const;

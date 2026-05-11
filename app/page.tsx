@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { AboutSection, CartPlaceholder, FaqSection, SiteFooter } from "@/components/ecommerce/AboutFaqFooter";
+import { AboutSection, CartPlaceholder, FaqSection, IngredientsSection, SiteFooter } from "@/components/ecommerce/AboutFaqFooter";
 import BeforeAfterSlider from "@/components/ecommerce/BeforeAfterSlider";
 import HeroSection from "@/components/ecommerce/HeroSection";
 import MarqueeBar from "@/components/ecommerce/MarqueeBar";
@@ -34,6 +34,7 @@ export default function HomePage() {
         <ReviewsSection />
         <AboutSection />
         <FaqSection />
+        <IngredientsSection />
         <CartPlaceholder />
       </main>
       <SiteFooter />

@@ -1,5 +1,5 @@
 export default function MarqueeBar() {
-  const text = "Sois authentique ✨ Livraison offerte sur ta première commande avec le code NNH26 ✨";
+  const text = "Livraison offerte sur ta première commande avec le code NNH26 ✨";
 
   return (
     <div className="overflow-hidden bg-[var(--color-deep-violet)] py-2 text-sm font-semibold text-white">

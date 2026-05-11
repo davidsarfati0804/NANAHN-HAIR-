@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteFooter } from "@/components/ecommerce/AboutFaqFooter";
 import AddToCartButton from "@/components/ecommerce/AddToCartButton";
-import ImagePlaceholder from "@/components/ecommerce/ImagePlaceholder";
 import MarqueeBar from "@/components/ecommerce/MarqueeBar";
 import SiteHeader from "@/components/ecommerce/SiteHeader";
 import { products } from "@/data/products";
@@ -46,8 +46,17 @@ export default async function ProductPage({ params }: ProductPageProps) {
       <SiteHeader />
       <main className="px-5 py-12 lg:px-8 lg:py-20">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-          {/* TODO: remplacer par les vraies photos produit et détails composition. */}
-          <ImagePlaceholder label={`Photo ${product.name}`} className="min-h-[520px]" />
+          <div className="relative min-h-[520px] overflow-hidden rounded-[2rem] border border-[var(--color-lavender-mist)] bg-[var(--color-lavender-soft)]">
+            <Image
+              src={product.image}
+              alt={product.name}
+              fill
+              priority
+              sizes="(min-width: 1024px) 46vw, 100vw"
+              className="object-cover"
+              style={{ objectPosition: product.imagePosition }}
+            />
+          </div>
           <section>
             <Link
               href="/#boutique"
@@ -64,6 +73,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <p className="mt-6 text-4xl font-black text-[var(--color-deep-violet)]">
               {product.price}
             </p>
+            <p className="mt-6 text-2xl font-black text-[var(--color-plum)]">
+              {product.headline}
+            </p>
             <p className="mt-6 max-w-2xl text-xl font-bold leading-9 text-[var(--color-ink)]">
               {product.description}
             </p>
@@ -72,10 +84,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
             </div>
             <div className="mt-8 rounded-[2rem] bg-[var(--color-blush)] p-6">
               <p className="text-sm font-black uppercase tracking-[0.16em] text-[var(--color-plum)]">
-                À compléter
+                Contenance
               </p>
               <p className="mt-3 leading-7 text-[var(--color-ink)]">
-                TODO: ajouter composition, conseils d’utilisation, précautions, contenance et informations de livraison.
+                30 mL - 1.01 fl.oz
               </p>
             </div>
           </section>

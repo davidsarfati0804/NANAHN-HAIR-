@@ -1,7 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;700&display=swap");
 @import "tailwindcss";
 
 :root {
-  --font-brand: "Work Sans", Arial, sans-serif;
+  --font-brand: "Montserrat", Arial, sans-serif;
+  --font-display: "Bebas Kai", "Bebas Neue", Impact, sans-serif;
   --color-lavender: #aaa1c8;
   --color-lavender-soft: #f3f0fa;
   --color-lavender-mist: #e8e2f2;
@@ -10,6 +12,7 @@
   --color-ink: #211a2e;
   --color-blush: #fff5f7;
   --color-gold: #d8a24a;
+  --color-pantone-7499: #f1e6b2;
   background: #ffffff;
 }
 
@@ -21,11 +24,22 @@ html {
   scroll-behavior: smooth;
 }
 
+[id] {
+  scroll-margin-top: 9rem;
+}
+
 body {
   margin: 0;
   background: #ffffff;
   color: var(--color-ink);
   font-family: var(--font-brand);
+  font-weight: 400;
+}
+
+h1,
+h2 {
+  font-family: var(--font-display);
+  letter-spacing: 0;
 }
 
 button {

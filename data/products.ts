@@ -29,10 +29,10 @@ export const products: Product[] = [
     imagePosition: "50% 50%",
     headline: "Nutrition & force au quotidien ✨",
     description:
-      "Le Fabulous Hair Serum est le soin quotidien essentiel pour des cheveux en pleine santé, doux et équilibrés.",
+      "Le sérum qui nourrit, fortifie et aide tes cheveux à retrouver toute leur vitalité.",
     fullDescription:
-      "Le Fabulous Hair Serum est le soin quotidien essentiel pour des cheveux en pleine santé, doux et équilibrés.\n\nFormulé à base d’huiles végétales riches en vitamines E, il agit en profondeur pour réconforter le cuir chevelu et renforcer la fibre capillaire jour après jour.\n\nCe sérum aide à :\n✨ Gainer, hydrater et fortifier le cheveu\n✨ Améliorer la santé du cheveu\n✨ Diminuer les pellicules\n\nSa texture légère s’intègre parfaitement dans une routine simple et agréable, sans alourdir les cheveux, tout en leur apportant juste ce qu’il faut de nutrition et de soin.\n\nUtilisé au quotidien, le Fabulous Hair Serum devient le geste de base pour des cheveux plus sains, plus doux et naturellement éclatants.\n\n💛 Des cheveux nourris au quotidien.\n💛 Une chevelure en pleine santé.\n💛 Un cuir chevelu apaisé.",
-    benefits: ["Gaine, hydrate et fortifie le cheveu", "Améliore la santé du cheveu", "Diminue les pellicules"],
+      "Fabulous Hair Serum est le geste quotidien pour les cheveux qui ont besoin de nutrition, de confort et de tenue. Sa texture huile accompagne le massage du cuir chevelu et aide les longueurs à retrouver un toucher plus souple.",
+    benefits: ["Nourrit les longueurs", "Fortifie la routine", "Aide à apaiser le cuir chevelu"],
     usage:
       "Applique quelques gouttes dans les mains, chauffe la matière puis masse le cuir chevelu ou répartis sur les longueurs. Ajuste la quantité selon ta densité de cheveux.",
     inciTitle: "PARFUM MONOI",
@@ -50,10 +50,10 @@ export const products: Product[] = [
     imagePosition: "50% 48%",
     headline: "Le boost pousse & anti-chute 🚀",
     description:
-      "Le Miraculous Hair Serum est une cure capillaire intensive pensée pour accompagner les cheveux en phase de fragilité, de chute ou de ralentissement de pousse.",
+      "Stimule la pousse, ralentit la chute et redonne le bon tempo à tes cheveux.",
     fullDescription:
-      "Le Miraculous Hair Serum est une cure capillaire intensive pensée pour accompagner les cheveux en phase de fragilité, de chute ou de ralentissement de pousse.\n\nFormulé à base d’huiles végétales riches en vitamines B, il agit comme un véritable boost naturel pour le cuir chevelu et la fibre capillaire.\n\nCe sérum aide à :\n✨ Stimuler la pousse et la repousse des cheveux\n✨ Ralentir la chute capillaire\n✨ Réduire l’apparition des fourches\n\nSa texture douce et sensorielle pénètre facilement le cuir chevelu pour nourrir, revitaliser et réactiver l’énergie du cheveu dès la racine.\n\nUtilisé en cure, il devient un véritable rituel de transformation.\n\n💛 Des cheveux plus forts.\n💛 Une pousse relancée.\n💛 Une chevelure qui reprend vie.",
-    benefits: ["Stimule la pousse et la repousse", "Ralentit la chute du cheveu", "Diminue les fourches"],
+      "Miraculous Hair Serum est pensé comme une cure ciblée pour accompagner les périodes où les cheveux manquent de vitalité. Il s’intègre facilement dans une routine massage régulière.",
+    benefits: ["Accompagne la pousse", "Aide à ralentir la chute", "Réveille le cuir chevelu"],
     usage:
       "Utilise en cure, idéalement le soir. Dépose quelques gouttes sur le cuir chevelu, masse par mouvements circulaires, puis laisse poser selon ta routine.",
     inciTitle: "PARFUM VANILLE PATCHOULI",
@@ -71,10 +71,10 @@ export const products: Product[] = [
     imagePosition: "50% 43%",
     headline: "Brillance miroir & volume aérien ✨",
     description:
-      "Le Luxurious Hair Serum est le soin éclat par excellence, pensé pour sublimer les cheveux ternes, secs et abîmés.",
+      "Réveille les cheveux ternes, apporte du volume et une brillance lumineuse.",
     fullDescription:
-      "Le Luxurious Hair Serum est le soin éclat par excellence, pensé pour sublimer les cheveux ternes, secs et abîmés.\n\nFormulé à base d’huiles végétales riches en vitamines C, il nourrit la fibre capillaire en profondeur et révèle une chevelure plus forte, souple et éclatante.\n\nCe sérum aide à :\n✨ Renforcer le cheveu terne, sec et abîmé\n✨ Améliorer la beauté du cheveu\n✨ Donner de la brillance\n✨ Donner du volume\n\n💛 Des cheveux brillants.\n💛 Plus de volume et de lumière.\n💛 Une beauté visible et ressentie.",
-    benefits: ["Renforce le cheveu terne, sec et abîmé", "Améliore la beauté du cheveu", "Donne du volume et de la brillance"],
+      "Luxurious Hair Serum est la touche finition de la routine Na Nah N’hair. Il apporte un rendu plus lumineux, aide à discipliner les longueurs et donne une impression de volume plus aérien.",
+    benefits: ["Apporte de la brillance", "Aide à discipliner", "Finition volume léger"],
     usage:
       "Applique une petite quantité sur les longueurs et pointes en finition. Commence par peu de matière, puis ajoute si nécessaire.",
     inciTitle: "PARFUM FLEUR ORANGER",
@@ -86,11 +86,11 @@ export const products: Product[] = [
 export const pack = {
   id: "pack-zero-prise-de-tete",
   name: "Le pack zéro prise de tête",
-  subtitle: "Le coffret pour nourrir, stimuler et faire rayonner ta chevelure.",
+  subtitle: "Le remix total 🎶",
   price: "69,00 €",
   priceCents: 6900,
   description:
-    "Ton rituel capillaire en 3 temps ✨\n\nNe choisis pas un soin… choisis une expérience complète.\nTrois sérums, une seule mission : nourrir, sublimer et révéler la beauté naturelle de tes cheveux.",
+    "C'est l'expérience Na Nah N'hair complète. Un coffret conçu pour ceux qui veulent tout : la pousse, l'hydratation et la brillance.",
   photoLabel: "Photo des 3 produits ensemble au spa à Maurice",
   image: "/images/products/pack-spa.jpg",
 };

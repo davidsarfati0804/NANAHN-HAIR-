@@ -8,16 +8,24 @@ export default function HeroSection() {
     <section id="accueil" className="relative overflow-hidden bg-white">
       <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-16 lg:grid-cols-[0.9fr_1.1fr] lg:px-8 lg:py-24">
         <div>
-          <h1 className="max-w-2xl text-6xl font-black leading-none text-[var(--color-deep-violet)] md:text-8xl">
-            {heroCopy.kicker}
+          <h1 className="relative h-[230px] max-w-[620px] overflow-hidden sm:h-[300px] lg:h-[340px]">
+            <Image
+              src="/images/typographie-hero.png"
+              alt="Na Nah N'hair"
+              fill
+              priority
+              sizes="(min-width: 1024px) 620px, 92vw"
+              className="object-contain object-left"
+            />
           </h1>
+          <p className="mt-7 text-2xl font-extrabold text-[var(--color-plum)]">{heroCopy.kicker}</p>
           <p className="mt-4 max-w-xl text-lg leading-8 text-[var(--color-ink)]">{heroCopy.body}</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link className="rounded-full bg-[var(--color-lavender)] px-7 py-4 text-center font-bold text-white shadow-[0_16px_36px_rgba(170,161,200,0.42)] transition hover:-translate-y-0.5 hover:bg-[var(--color-plum)]" href="/boutique">
               Découvrir les sérums
             </Link>
             <Link className="rounded-full border border-[var(--color-lavender)] px-7 py-4 text-center font-bold text-[var(--color-deep-violet)] transition hover:-translate-y-0.5 hover:bg-[var(--color-lavender-soft)]" href="/routines">
-              Voir le pack
+              Voir le pack zéro prise de tête
             </Link>
           </div>
         </div>

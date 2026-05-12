@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Droplets, Sparkles } from "lucide-react";
 import { pack, products } from "@/data/products";
+import { packBenefits } from "@/data/site";
 import AddToCartButton from "./AddToCartButton";
 
 export function ProductGrid() {
@@ -12,7 +13,7 @@ export function ProductGrid() {
           <div>
             <p className="text-sm font-black uppercase tracking-[0.18em] text-[var(--color-plum)]">Boutique</p>
             <h2 className="mt-3 text-4xl font-black text-[var(--color-deep-violet)] md:text-6xl">
-              choisis ton sérum capillaire ✨
+              Choisis ton mix capillaire
             </h2>
           </div>
           <p className="max-w-md text-base leading-7 text-[var(--color-ink)]">
@@ -80,7 +81,7 @@ export function PackSection() {
           </p>
           <h2 className="text-4xl font-black md:text-6xl">{pack.name}</h2>
           <p className="mt-5 text-5xl font-black">{pack.price}</p>
-          <p className="mt-5 max-w-2xl whitespace-pre-line text-lg leading-8 text-white/92">{pack.description}</p>
+          <p className="mt-5 max-w-2xl text-lg leading-8 text-white/92">{pack.description}</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <AddToCartButton item={pack} label="Commander le pack" variant="white" />
             <Link href="/routines" className="rounded-full border border-white/50 px-7 py-4 text-center font-black text-white transition hover:-translate-y-0.5 hover:bg-white/10">
@@ -108,22 +109,23 @@ export function WinningMixSection() {
     <section id="mix-gagnant" className="bg-[var(--color-blush)] px-5 py-16 lg:px-8 lg:py-24">
       <div className="mx-auto max-w-7xl">
         <h2 className="text-4xl font-black text-[var(--color-deep-violet)] md:text-6xl">
-          Une routine simple, jamais figée ✨
+          Ce qu’il y a dans ton pack
         </h2>
-        <p className="mt-5 max-w-3xl text-2xl font-black text-[var(--color-plum)]">Tes cheveux, ton rythme 💛</p>
-        <p className="mt-5 max-w-3xl text-xl leading-9 text-[var(--color-ink)]">
-          Tu choisis, tu alternes, tu ajustes tes sérums selon leurs besoins du moment.
-          Sans routine compliquée — juste ce qu’il faut pour les nourrir et les sublimer.
-        </p>
+        <div className="mt-10 grid gap-5 md:grid-cols-3">
+          {packBenefits.map((benefit, index) => (
+            <article key={benefit.title} className="rounded-[2rem] bg-white p-6 shadow-[0_18px_45px_rgba(53,32,95,0.08)]">
+              <div className="mb-6 grid h-12 w-12 place-items-center rounded-full bg-[var(--color-lavender)] text-xl font-black text-white">
+                {index + 1}
+              </div>
+              <h3 className="text-xl font-black text-[var(--color-deep-violet)]">{benefit.title}</h3>
+              <p className="mt-3 leading-7 text-[var(--color-ink)]">{benefit.text}</p>
+            </article>
+          ))}
+        </div>
         <div className="mt-8 rounded-[2rem] bg-[var(--color-deep-violet)] p-7 text-white md:p-10">
-          <p className="text-sm font-black uppercase tracking-[0.18em] text-white/70">Mode d’emploi du mix ✨</p>
-          <p className="mt-4 whitespace-pre-line text-xl font-bold leading-9">
-            Écoute tes cheveux, ils savent ce dont ils ont besoin.
-
-            Fabulous pour le quotidien, Miraculous pour transformer, Luxurious pour illuminer.
-
-            Masse, ressens, rayonne ✨
-            Ici, c’est toi qui crées ta magie.
+          <p className="text-sm font-black uppercase tracking-[0.18em] text-white/70">Mode d’emploi du Remix</p>
+          <p className="mt-4 text-xl font-bold leading-9">
+            Alternes les sérums selon tes besoins ou crées ta propre routine : Miraculous en cure, Fabulous au quotidien, et Luxurious pour briller en sortie. Masses, vibres, rayonne ✨ C’est toi l’artiste !
           </p>
         </div>
       </div>

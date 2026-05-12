@@ -23,7 +23,7 @@ export default function BoutiquePage() {
       <main>
         <PageIntro
           eyebrow="Boutique"
-          title="choisis ton sérum capillaire ✨"
+          title="Choisis ton mix capillaire"
           text="Des sérums simples à comprendre, faciles à alterner et pensés pour accompagner tes besoins du moment."
         />
         <section className="bg-white px-5 pb-16 lg:px-8 lg:pb-20">

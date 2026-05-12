@@ -17,8 +17,8 @@ export default function AProposPage() {
       <main>
         <PageIntro
           eyebrow="La marque"
-          title="Tout a commencé avec une histoire vraie."
-          text="Une femme, ses cheveux fragilisés par la maladie, et une envie profonde : les aider à renaître."
+          title="Une histoire de confiance, de cheveux et d’énergie"
+          text="Na Nah N’hair est née d’un moment de partage, avec une envie simple : créer des soins naturels, sensoriels et faciles à adopter."
         />
         <AboutSection />
       </main>

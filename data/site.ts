@@ -10,9 +10,9 @@ export const navigation = [
 
 export const heroCopy = {
   titleLines: ["NA", "NAH", "N’HAIR !"],
-  kicker: "Pas de chichi, juste du style ✨",
+  kicker: "Pas de chichis, juste du style.",
   body:
-    "Des sérums capillaires naturels aux odeurs envoûtantes pour nourrir, faire pousser et révéler l’éclat de tes cheveux.",
+    "Des sérums capillaires pensés pour nourrir, sublimer et faire briller ta routine cheveux, sans prise de tête.",
 };
 
 export const reassuranceItems = [
@@ -36,16 +36,18 @@ export const reassuranceItems = [
 
 export const routineSteps = [
   {
-    title: "Une routine simple, jamais figée ✨",
-    text: "Tes cheveux, ton rythme 💛\n\nTu choisis, tu alternes, tu ajustes tes sérums selon leurs besoins du moment.\nSans routine compliquée — juste ce qu’il faut pour les nourrir et les sublimer.",
+    title: "1. Nourrir",
+    text: "Fabulous accompagne les routines du quotidien pour gainer, fortifier et apaiser le cuir chevelu.",
+  },
+  {
+    title: "2. Stimuler",
+    text: "Miraculous s’utilise en cure ciblée quand tu veux donner un nouvel élan à ta routine.",
+  },
+  {
+    title: "3. Faire briller",
+    text: "Luxurious apporte la touche finale : volume, souplesse et brillance miroir.",
   },
 ];
-
-export const mixUsageCopy = {
-  title: "Mode d’emploi du mix ✨",
-  text:
-    "Écoute tes cheveux, ils savent ce dont ils ont besoin.\n\nFabulous pour le quotidien, Miraculous pour transformer, Luxurious pour illuminer.\n\nMasse, ressens, rayonne ✨\nIci, c’est toi qui crées ta magie.",
-};
 
 export const packBenefits = [
   {
@@ -63,35 +65,36 @@ export const packBenefits = [
 ];
 
 export const aboutCopy = [
-  "Tout a commencé lorsque j’ai voulu aider une femme à retrouver ses cheveux après la maladie.\nSon objectif : stimuler la repousse et ralentir la chute.\nLe mien : lui redonner confiance, force et lumière.",
-  "Entre soins faits maison, éclats de rire et rituels créés avec amour, quelque chose de fort est né.\nSes cheveux reprenaient vie… et son énergie aussi.",
-  "C’est à ce moment-là que j’ai compris une chose essentielle :\nnos cheveux sont bien plus que des cheveux.\nIls sont notre couronne, notre identité, notre vibration.",
-  "Na Nah N’hair est née de cette évidence : transformer le soin capillaire en un rituel simple, sensoriel et joyeux.",
-  "✨ Des soins naturels qui font du bien\n✨ Des odeurs qui font voyager\n✨ Une routine simple, efficace et sans prise de tête",
-  "Aujourd’hui, Na Nah N’hair a une mission :\nfaire rayonner votre chevelure… et votre énergie.",
+  "L’aventure Na Nah N’hair est née d’un moment de partage profondément humain.",
+  "Tout a commencé lorsque j’ai voulu aider une femme incroyable à retrouver ses cheveux après la maladie. Son objectif : stimuler la repousse et ralentir la chute. Le mien : lui redonner confiance, force et lumière.",
+  "Entre soins faits maison, éclats de rire et rituels créés avec amour, quelque chose de fort est né. Ses cheveux reprenaient vie… et son énergie aussi.",
+  "C’est à ce moment-là que j’ai compris une chose : nos cheveux sont bien plus que des cheveux. Ils sont notre couronne, notre identité, notre vibration.",
+  "Na Nah N’hair est née avec une envie simple : proposer des soins naturels, efficaces et sensoriels, sans routines compliquées.",
+  "✨ Des produits qui font du bien. ✨ Des odeurs qui font voyager. ✨ Une routine simple, vibrante et sans prise de tête.",
+  "Aujourd’hui, Na Nah N’hair est entrée dans vos salles de bain avec une seule mission : faire rayonner votre chevelure… et votre énergie.",
 ];
 
 export const inciItems = [
   {
     title: "PARFUM MONOI",
     text:
-      "RICINUS COMMUNIS SEED OIL*, OLEA EUROPAEA FRUIT OIL*, COCOS NUCIFERA OIL*, PERSEA GRATISSIMA OIL*, BRASSICA NIGRA SEED OIL*, SIMMONDSIA CHINENESIS SEED OIL*, BRASSICA OLERACEA ITALICA SEED OIL*, VITIS VINIFERA SEED OIL, EMBLICA OFFICINALIS FRUIT POWDER*, FRAGRANCE, TOCOPHEROL, HELIANTHUS ANNUUS SEED OIL, BENZYL SALICYLATE**, ALPHA HEXYL CINNAMALDEHYDE, D-CITRONELLOL**, D-LIMONENE**, GERANIOL**, LINALOOL**, BENZYL BENZOATE**, CITRAL**, EUGENOL**, ISOEUGENOL**\n• INGREDIENTS ISSUS DE L’AGRICULTURE BIOLOGIQUE\n** ALLERGENES DUS À LA PRÉSENCE DE PARFUM",
+      "RICINUS COMMUNIS SEED OIL*, OLEA EUROPAEA FRUIT OIL*, COCOS NUCIFERA OIL*, PERSEA GRATISSIMA OIL*, BRASSICA NIGRA SEED OIL*, SIMMONDSIA CHINENESIS SEED OIL*, BRASSICA OLERACEA ITALICA SEED OIL*, VITIS VINIFERA SEED OIL, EMBLICA OFFICINALIS FRUIT POWDER*, FRAGRANCE, TOCOPHEROL, HELIANTHUS ANNUUS SEED OIL, BENZYL SALICYLATE*, ALPHA HEXYL CINNAMALDEHYDE, D-CITRONELLOL, D-LIMONENE, GERANIOL, LINALOOL, BENZYL BENZOATE, CITRAL, EUGENOL, ISOEUGENOL*",
   },
   {
     title: "PARFUM FLEUR ORANGER",
     text:
-      "RICINUS COMMUNIS SEED OIL*, OLEA EUROPAEA FRUIT OIL*, COCOS NUCIFERA OIL*, PERSEA GRATISSIMA OIL*, BRASSICA NIGRA SEED OIL*, SIMMONDSIA CHINENESIS SEED OIL*, BRASSICA OLERACEA ITALICA SEED OIL*, VITIS VINIFERA SEED OIL, EMBLICA OFFICINALIS FRUIT POWDER*, FRAGRANCE, TOCOPHEROL, HELIANTHUS ANNUUS SEED OIL, ALPHA-HEXYLCINNAMALDEHYDE**, CITRAL**, D-LIMONENE**, GERANIOL**\n• INGREDIENTS ISSUS DE L’AGRICULTURE BIOLOGIQUE\n** ALLERGENES DUS À LA PRÉSENCE DE PARFUM",
+      "RICINUS COMMUNIS SEED OIL*, OLEA EUROPAEA FRUIT OIL*, COCOS NUCIFERA OIL*, PERSEA GRATISSIMA OIL*, BRASSICA NIGRA SEED OIL*, SIMMONDSIA CHINENESIS SEED OIL*, BRASSICA OLERACEA ITALICA SEED OIL*, VITIS VINIFERA SEED OIL, EMBLICA OFFICINALIS FRUIT POWDER*, FRAGRANCE, TOCOPHEROL, HELIANTHUS ANNUUS SEED OIL, ALPHA-HEXYLCINNAMALDEHYDE*, CITRAL, D-LIMONENE, GERANIOL*",
   },
   {
     title: "PARFUM VANILLE PATCHOULI",
     text:
-      "RICINUS COMMUNIS SEED OIL*, OLEA EUROPAEA FRUIT OIL*, COCOS NUCIFERA OIL*, PERSEA GRATISSIMA OIL*, BRASSICA NIGRA SEED OIL*, SIMMONDSIA CHINENESIS SEED OIL*, BRASSICA OLERACEA ITALICA SEED OIL*, VITIS VINIFERA SEED OIL, EMBLICA OFFICINALIS FRUIT POWDER*, FRAGRANCE, TOCOPHEROL, HELIANTHUS ANNUUS SEED OIL, CITRAL**, COUMARIN**, BENZYL BENZOATE**, D-LIMONENE**, LINALOOL**\n• INGREDIENTS ISSUS DE L’AGRICULTURE BIOLOGIQUE\n** ALLERGENES DUS À LA PRÉSENCE DE PARFUM",
+      "RICINUS COMMUNIS SEED OIL*, OLEA EUROPAEA FRUIT OIL*, COCOS NUCIFERA OIL*, PERSEA GRATISSIMA OIL*, BRASSICA NIGRA SEED OIL*, SIMMONDSIA CHINENESIS SEED OIL*, BRASSICA OLERACEA ITALICA SEED OIL*, VITIS VINIFERA SEED OIL, EMBLICA OFFICINALIS FRUIT POWDER*, FRAGRANCE, TOCOPHEROL, HELIANTHUS ANNUUS SEED OIL, CITRAL*, COUMARIN, BENZYL BENZOATE, D LIMONENE, LINALOOL*",
   },
 ];
 
 export const companyInfo = [
   "INGREDIENTS ISSUS DE L’AGRICULTURE BIOLOGIQUE",
-  "** ALLERGENES DUS À LA PRÉSENCE DE PARFUM",
+  "** ALLERGENES DU A LA PRESENCE DE PARFUM",
   "Contenance du flacon : 30 mL - 1.01 fl.oz",
   "Made in France",
   "Seare",

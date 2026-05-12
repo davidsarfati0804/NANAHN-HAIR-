@@ -6,7 +6,7 @@ export default function ReviewsSection() {
     <section id="avis" className="bg-[var(--color-lavender-soft)] px-5 py-16 lg:px-8 lg:py-24">
       <div className="mx-auto max-w-7xl">
         <h2 className="text-4xl font-black text-[var(--color-deep-violet)] md:text-6xl">
-          Elles ont rejoint le mix
+          Elles ont rejoint le remix
         </h2>
         <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {reviews.map((review) => (

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     "Na Nah N’hair propose des sérums capillaires pour nourrir, sublimer et faire briller la routine cheveux avec une énergie fun et premium accessible.",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Na Nah N’hair | Pas de chichi, juste du style",
+    title: "Na Nah N’hair | Pas de chichis, juste du style",
     description:
       "Découvre les sérums Fabulous, Miraculous, Luxurious et le pack zéro prise de tête.",
     type: "website",
@@ -35,7 +35,7 @@ export default function HomePage() {
               <div>
                 <p className="text-sm font-black uppercase tracking-[0.18em] text-[var(--color-plum)]">Boutique</p>
                 <h2 className="mt-3 text-4xl font-black text-[var(--color-deep-violet)] md:text-6xl">
-                  choisis ton sérum capillaire ✨
+                  Les essentiels Na Nah N’hair
                 </h2>
               </div>
               <Link href="/boutique" className="rounded-full bg-[var(--color-lavender)] px-6 py-4 text-center font-black text-white transition hover:bg-[var(--color-plum)]">
@@ -56,7 +56,7 @@ export default function HomePage() {
               <p className="text-sm font-black uppercase tracking-[0.18em] text-white/75">Pack routine</p>
               <h2 className="mt-3 text-4xl font-black md:text-6xl">{pack.name}</h2>
               <p className="mt-4 text-4xl font-black">{pack.price}</p>
-              <p className="mt-5 max-w-2xl whitespace-pre-line text-lg leading-8 text-white/90">{pack.description}</p>
+              <p className="mt-5 max-w-2xl text-lg leading-8 text-white/90">{pack.description}</p>
               <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                 <Link href="/boutique" className="rounded-full bg-white px-7 py-4 text-center font-black text-[var(--color-deep-violet)]">
                   Commander le pack
@@ -91,7 +91,7 @@ export default function HomePage() {
             </div>
             <div>
               <p className="text-lg font-bold leading-8 text-[var(--color-ink)]">
-                Tout a commencé avec une histoire vraie. Une femme, ses cheveux fragilisés par la maladie, et une envie profonde : les aider à renaître.
+                Na Nah N’hair transforme le soin capillaire en rituel simple, sensoriel et joyeux. Des produits qui font du bien, des odeurs qui font voyager, et une routine sans prise de tête.
               </p>
               <Link href="/a-propos" className="mt-7 inline-flex rounded-full border border-[var(--color-lavender)] px-7 py-4 font-black text-[var(--color-deep-violet)]">
                 Découvrir l’histoire

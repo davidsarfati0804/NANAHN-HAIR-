@@ -8,12 +8,15 @@ export default function HeroSection() {
     <section id="accueil" className="relative overflow-hidden bg-white">
       <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-16 lg:grid-cols-[0.9fr_1.1fr] lg:px-8 lg:py-24">
         <div>
-          <h1 className="text-7xl font-black leading-[0.82] text-[var(--color-deep-violet)] sm:text-8xl lg:text-[7.5rem] xl:text-[8.2rem]">
-            {heroCopy.titleLines.map((line) => (
-              <span key={line} className="block whitespace-nowrap">
-                {line}
-              </span>
-            ))}
+          <h1 className="relative h-[230px] max-w-[620px] overflow-hidden sm:h-[300px] lg:h-[340px]">
+            <Image
+              src="/images/typographie-hero.png"
+              alt="Na Nah N'hair"
+              fill
+              priority
+              sizes="(min-width: 1024px) 620px, 92vw"
+              className="object-contain object-left"
+            />
           </h1>
           <p className="mt-7 text-2xl font-extrabold text-[var(--color-plum)]">{heroCopy.kicker}</p>
           <p className="mt-4 max-w-xl text-lg leading-8 text-[var(--color-ink)]">{heroCopy.body}</p>

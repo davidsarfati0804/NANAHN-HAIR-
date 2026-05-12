@@ -144,13 +144,13 @@ export function SiteFooter() {
     <footer className="bg-[var(--color-deep-violet)] px-5 py-12 text-white lg:px-8">
       <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-[1fr_1.3fr_0.7fr]">
         <div>
-          <div className="relative h-20 w-28 overflow-hidden rounded-2xl bg-[var(--color-deep-violet)] ring-1 ring-white/20">
+          <div className="relative h-20 w-36 overflow-hidden rounded-2xl bg-[var(--color-pantone-7499)] ring-1 ring-white/20">
             <Image
-              src="/images/logo-na-nah-nhair-yellow.png"
+              src="/images/logo-na-nah-nhair-brand.png"
               alt="Na Nah N'hair"
               fill
-              sizes="112px"
-              className="object-contain p-2"
+              sizes="144px"
+              className="object-contain p-1.5"
             />
           </div>
           <p className="mt-5 text-sm text-white/70">Copyright Na Nah N’hair</p>

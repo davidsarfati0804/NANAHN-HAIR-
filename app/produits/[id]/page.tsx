@@ -87,10 +87,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <p className="mt-6 max-w-2xl text-xl font-bold leading-9 text-[var(--color-ink)]">
               {product.description}
             </p>
-            <ul className="mt-6 grid gap-2 sm:grid-cols-3">
+            <ul className="mt-6 grid items-stretch gap-3 sm:grid-cols-3">
               {product.benefits.map((benefit) => (
-                <li key={benefit} className="rounded-[1rem] bg-[var(--color-lavender-soft)] px-4 py-3 text-sm font-black text-[var(--color-deep-violet)]">
-                  {benefit}
+                <li key={benefit} className="flex min-h-24 items-center justify-center rounded-[1rem] bg-[var(--color-lavender-soft)] px-4 py-4 text-center text-sm font-black leading-5 text-[var(--color-deep-violet)]">
+                  <span className="max-w-[13rem]">{benefit}</span>
                 </li>
               ))}
             </ul>
@@ -120,7 +120,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <div className="divide-y divide-[var(--color-lavender-mist)] overflow-hidden rounded-[1.2rem] border border-[var(--color-lavender-mist)] bg-[var(--color-blush)]">
               <details open className="group p-5">
                 <summary className="cursor-pointer list-none font-black text-[var(--color-deep-violet)]">Description complète</summary>
-                <p className="mt-3 leading-7 text-[var(--color-ink)]">{product.fullDescription}</p>
+                <p className="mt-3 whitespace-pre-line leading-7 text-[var(--color-ink)]">{product.fullDescription}</p>
               </details>
               <details className="group p-5">
                 <summary className="cursor-pointer list-none font-black text-[var(--color-deep-violet)]">Mode d’utilisation</summary>
@@ -131,7 +131,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               </details>
               <details className="group p-5">
                 <summary className="cursor-pointer list-none font-black text-[var(--color-deep-violet)]">Ingrédients</summary>
-                <p className="mt-3 text-sm leading-7 text-[var(--color-ink)]">{inci?.text}</p>
+                <p className="mt-3 whitespace-pre-line text-sm leading-7 text-[var(--color-ink)]">{inci?.text}</p>
               </details>
               <details className="group p-5">
                 <summary className="cursor-pointer list-none font-black text-[var(--color-deep-violet)]">Livraison & retours</summary>

@@ -6,18 +6,18 @@ import { aboutCopy, companyInfo, faqs, helpLinks, inciItems, values } from "@/da
 export function AboutSection() {
   return (
     <section id="apropos" className="bg-white px-5 py-16 lg:px-8 lg:py-24">
-      <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-        <div className="rounded-[2rem] bg-[var(--color-lavender)] p-8 text-white md:p-10">
+      <div className="mx-auto max-w-5xl text-center">
+        <div className="mx-auto max-w-3xl rounded-[2rem] bg-[var(--color-lavender)] p-8 text-white md:p-10">
           <Music2 size={34} />
           <h2 className="mt-6 text-4xl font-black md:text-6xl">À propos de Na Nah N’hair</h2>
         </div>
-        <div>
-          <div className="space-y-5 text-lg font-bold leading-8 text-[var(--color-ink)]">
+        <div className="mt-10">
+          <div className="space-y-6 text-lg font-bold leading-8 text-[var(--color-ink)]">
             {aboutCopy.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
+              <p key={paragraph} className="whitespace-pre-line">{paragraph}</p>
             ))}
           </div>
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
             {values.map((value) => (
               <span key={value} className="rounded-full bg-[var(--color-lavender-soft)] px-5 py-3 font-black text-[var(--color-deep-violet)]">
                 {value}

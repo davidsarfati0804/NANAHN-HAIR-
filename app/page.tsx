@@ -53,13 +53,13 @@ export default function HomePage() {
         <section className="bg-[var(--color-lavender)] px-5 py-14 text-white lg:px-8 lg:py-20">
           <div className="mx-auto grid max-w-7xl items-center gap-8 lg:grid-cols-[1fr_0.9fr]">
             <div>
-              <h2 className="inline-flex rounded-full bg-white px-6 py-3 text-2xl font-black uppercase tracking-[0.08em] text-[var(--color-deep-violet)] md:text-3xl">
+              <h2 className="inline-flex rounded-full bg-white px-4 py-2 text-lg font-black uppercase tracking-[0.08em] text-[var(--color-deep-violet)] md:text-xl">
                 Pack routine
               </h2>
-              <p className="mt-5 text-3xl font-black">{pack.price}</p>
-              <p className="mt-3 max-w-xl text-sm font-medium leading-6 text-white">
+              <p className="mt-5 text-3xl font-black md:text-4xl">Le pack - zéro prise de tête</p>
+              <p className="mt-4 text-2xl font-black">{pack.price}</p>
+              <p className="mt-4 max-w-xl text-2xl font-black leading-8 text-white">
                 Le coffret zéro prise de tête pour nourrir, stimuler et faire rayonner ta chevelure.
-                <br />
                 <br />
                 Parce qu’il y a des jours où tes cheveux méritent simplement tout ✨
               </p>
@@ -92,7 +92,11 @@ export default function HomePage() {
             <div className="flex min-h-[260px] flex-col items-center justify-center rounded-[1.5rem] bg-white p-7 text-center shadow-[0_14px_34px_rgba(53,32,95,0.07)]">
               <p className="text-sm font-black uppercase tracking-[0.18em] text-[var(--color-plum)]">La marque</p>
               <h2 className="mt-3 text-4xl font-black text-[var(--color-deep-violet)] md:text-5xl">
-                Na Nah N’hair !
+                Na
+                <br />
+                Nah
+                <br />
+                N’hair !
               </h2>
             </div>
             <div className="rounded-[1.5rem] bg-[var(--color-lavender)] p-7 text-white md:p-9">

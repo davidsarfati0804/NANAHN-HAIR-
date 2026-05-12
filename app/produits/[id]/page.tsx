@@ -97,8 +97,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <div className="mt-8 max-w-sm">
               <AddToCartButton item={product} />
             </div>
-            <div className="mt-8 rounded-[1.5rem] bg-[var(--color-lavender)] p-6 text-white">
-              <p className="text-sm font-black uppercase tracking-[0.16em] text-white/80">
+            <div className="mt-8 rounded-[1.5rem] bg-[var(--color-lavender-soft)] p-6 text-[var(--color-deep-violet)]">
+              <p className="text-sm font-black uppercase tracking-[0.16em] text-[var(--color-plum)]">
                 Contenance
               </p>
               <p className="mt-3 leading-7">
@@ -118,7 +118,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               </h2>
             </div>
             <div className="grid gap-4">
-              <details open className="group rounded-[1.2rem] bg-[var(--color-lavender)] p-5 text-white">
+              <details open className="group rounded-[1.2rem] bg-[var(--color-lavender-soft)] p-5 text-[var(--color-deep-violet)]">
                 <summary className="cursor-pointer list-none font-black">Description complète</summary>
                 <p className="mt-3 whitespace-pre-line leading-7">{product.fullDescription}</p>
               </details>

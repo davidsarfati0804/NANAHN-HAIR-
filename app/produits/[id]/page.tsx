@@ -8,6 +8,7 @@ import MarqueeBar from "@/components/ecommerce/MarqueeBar";
 import ProductCard from "@/components/ecommerce/ProductCard";
 import ReassuranceStrip from "@/components/ecommerce/ReassuranceStrip";
 import SiteHeader from "@/components/ecommerce/SiteHeader";
+import { UsageGuidePanel } from "@/components/ecommerce/UsageGuide";
 import { products } from "@/data/products";
 import { inciItems } from "@/data/site";
 
@@ -124,6 +125,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
               <details className="group p-5">
                 <summary className="cursor-pointer list-none font-black text-[var(--color-deep-violet)]">Mode d’utilisation</summary>
                 <p className="mt-3 leading-7 text-[var(--color-ink)]">{product.usage}</p>
+                <div className="mt-5">
+                  <UsageGuidePanel productName={product.name} />
+                </div>
               </details>
               <details className="group p-5">
                 <summary className="cursor-pointer list-none font-black text-[var(--color-deep-violet)]">Ingrédients</summary>

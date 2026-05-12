@@ -31,8 +31,8 @@ export const products: Product[] = [
     description:
       "Le sérum qui nourrit, fortifie et aide tes cheveux à retrouver toute leur vitalité.",
     fullDescription:
-      "Fabulous Hair Serum est le geste quotidien pour les cheveux qui ont besoin de nutrition, de confort et de tenue. Sa texture huile accompagne le massage du cuir chevelu et aide les longueurs à retrouver un toucher plus souple.",
-    benefits: ["Nourrit les longueurs", "Fortifie la routine", "Aide à apaiser le cuir chevelu"],
+      "Le Fabulous Hair Serum est le soin quotidien essentiel pour des cheveux en pleine santé, doux et équilibrés.\n\nFormulé à base d’huiles végétales riches en vitamines E, il agit en profondeur pour réconforter le cuir chevelu et renforcer la fibre capillaire jour après jour.\n\nCe sérum aide à :\n✨ Gainer, hydrater et fortifier le cheveu\n✨ Améliorer la santé du cheveu\n✨ Diminuer les pellicules\n\nSa texture légère s’intègre parfaitement dans une routine simple et agréable, sans alourdir les cheveux, tout en leur apportant juste ce qu’il faut de nutrition et de soin.\n\nUtilisé au quotidien, le Fabulous Hair Serum devient le geste de base pour des cheveux plus sains, plus doux et naturellement éclatants.\n\n💛 Des cheveux nourris au quotidien.\n💛 Une chevelure en pleine santé.\n💛 Un cuir chevelu apaisé.",
+    benefits: ["Gaine , hydrate et fortifie le cheveu", "Améliore la santé du cheveu", "Diminue les pellicules"],
     usage:
       "Applique quelques gouttes dans les mains, chauffe la matière puis masse le cuir chevelu ou répartis sur les longueurs. Ajuste la quantité selon ta densité de cheveux.",
     inciTitle: "PARFUM MONOI",

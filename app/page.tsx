@@ -53,11 +53,15 @@ export default function HomePage() {
         <section className="bg-[var(--color-lavender)] px-5 py-14 text-white lg:px-8 lg:py-20">
           <div className="mx-auto grid max-w-7xl items-center gap-8 lg:grid-cols-[1fr_0.9fr]">
             <div>
-              <h2 className="text-4xl font-black uppercase tracking-[0.12em] md:text-6xl">Pack routine</h2>
-              <p className="mt-4 text-2xl font-black uppercase md:text-3xl">Le pack ZÉRO PRISE DE TÊTE</p>
-              <p className="mt-4 text-4xl font-black">{pack.price}</p>
-              <p className="mt-3 max-w-xl text-sm font-light leading-6 text-white/90">
-                Le coffret pour nourrir, stimuler et faire rayonner ta chevelure.
+              <h2 className="inline-flex rounded-full bg-white px-6 py-3 text-2xl font-black uppercase tracking-[0.08em] text-[var(--color-deep-violet)] md:text-3xl">
+                Pack routine
+              </h2>
+              <p className="mt-5 text-3xl font-black">{pack.price}</p>
+              <p className="mt-3 max-w-xl text-sm font-medium leading-6 text-white">
+                Le coffret zéro prise de tête pour nourrir, stimuler et faire rayonner ta chevelure.
+                <br />
+                <br />
+                Parce qu’il y a des jours où tes cheveux méritent simplement tout ✨
               </p>
               <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                 <Link href="/boutique" className="rounded-full bg-white px-7 py-4 text-center font-black text-[var(--color-deep-violet)]">
@@ -83,17 +87,19 @@ export default function HomePage() {
 
         <ReassuranceStrip />
 
-        <section className="bg-[var(--color-blush)] px-5 py-14 lg:px-8 lg:py-20">
+        <section className="bg-white px-5 py-14 lg:px-8 lg:py-20">
           <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
             <div className="flex min-h-[260px] flex-col items-center justify-center rounded-[1.5rem] bg-white p-7 text-center shadow-[0_14px_34px_rgba(53,32,95,0.07)]">
               <p className="text-sm font-black uppercase tracking-[0.18em] text-[var(--color-plum)]">La marque</p>
               <h2 className="mt-3 text-4xl font-black text-[var(--color-deep-violet)] md:text-5xl">
-                Une routine née d’un moment humain
+                Na Nah N’hair !
               </h2>
             </div>
-            <div className="rounded-[1.5rem] bg-[var(--color-lavender)] p-7 text-[var(--color-ink)] md:p-9">
+            <div className="rounded-[1.5rem] bg-[var(--color-lavender)] p-7 text-white md:p-9">
               <p className="text-lg font-bold leading-8">
-                Tout a commencé avec une histoire vraie. Une femme, ses cheveux fragilisés par la maladie, et une envie profonde : les aider à renaître.
+                Tout a commencé avec une histoire authentique.
+                <br />
+                Une femme, ses cheveux fragilisés par la maladie, et une envie profonde : les aider à renaître.
               </p>
               <Link href="/a-propos" className="mt-7 inline-flex rounded-full bg-white px-7 py-4 font-black text-[var(--color-deep-violet)]">
                 Découvrir l’histoire

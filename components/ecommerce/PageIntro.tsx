@@ -1,7 +1,7 @@
 type PageIntroProps = {
   eyebrow: string;
   title: string;
-  text: string;
+  text?: string;
 };
 
 export default function PageIntro({ eyebrow, title, text }: PageIntroProps) {
@@ -12,7 +12,7 @@ export default function PageIntro({ eyebrow, title, text }: PageIntroProps) {
         <h1 className="mt-3 max-w-4xl text-5xl font-black leading-none text-[var(--color-deep-violet)] md:text-7xl">
           {title}
         </h1>
-        <p className="mt-5 max-w-2xl text-lg leading-8 text-[var(--color-ink)]">{text}</p>
+        {text ? <p className="mt-5 max-w-2xl text-lg leading-8 text-[var(--color-ink)]">{text}</p> : null}
       </div>
     </section>
   );

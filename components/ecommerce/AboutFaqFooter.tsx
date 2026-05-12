@@ -133,7 +133,7 @@ export function CartPlaceholder() {
 
 export function SiteFooter() {
   return (
-    <footer className="bg-[var(--color-deep-violet)] px-5 py-12 text-white lg:px-8">
+    <footer className="bg-[var(--color-lavender)] px-5 py-12 text-white lg:px-8">
       <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-[1fr_1.3fr_0.7fr]">
         <div>
           <div className="relative h-20 w-36 overflow-hidden rounded-2xl bg-[var(--color-pantone-7499)] ring-1 ring-white/20">

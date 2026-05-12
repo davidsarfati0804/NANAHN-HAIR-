@@ -87,21 +87,21 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <p className="mt-6 max-w-2xl text-xl font-bold leading-9 text-[var(--color-ink)]">
               {product.description}
             </p>
-            <ul className="mt-6 grid gap-2 sm:grid-cols-3">
+            <ul className="mt-6 grid items-stretch gap-3 sm:grid-cols-3">
               {product.benefits.map((benefit) => (
-                <li key={benefit} className="rounded-[1rem] bg-[var(--color-lavender-soft)] px-4 py-3 text-sm font-black text-[var(--color-deep-violet)]">
-                  {benefit}
+                <li key={benefit} className="flex min-h-24 items-center justify-center rounded-[1rem] bg-[var(--color-lavender-soft)] px-4 py-4 text-center text-sm font-black leading-5 text-[var(--color-deep-violet)]">
+                  <span className="max-w-[13rem]">{benefit}</span>
                 </li>
               ))}
             </ul>
             <div className="mt-8 max-w-sm">
               <AddToCartButton item={product} />
             </div>
-            <div className="mt-8 rounded-[1.5rem] bg-[var(--color-blush)] p-6">
-              <p className="text-sm font-black uppercase tracking-[0.16em] text-[var(--color-plum)]">
+            <div className="mt-8 rounded-[1.5rem] bg-[var(--color-lavender)] p-6 text-white">
+              <p className="text-sm font-black uppercase tracking-[0.16em] text-white/80">
                 Contenance
               </p>
-              <p className="mt-3 leading-7 text-[var(--color-ink)]">
+              <p className="mt-3 leading-7">
                 30 mL - 1.01 fl.oz
               </p>
             </div>
@@ -117,25 +117,24 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 Tout savoir avant d’ajouter au panier
               </h2>
             </div>
-            <div className="divide-y divide-[var(--color-lavender-mist)] overflow-hidden rounded-[1.2rem] border border-[var(--color-lavender-mist)] bg-[var(--color-blush)]">
-              <details open className="group p-5">
-                <summary className="cursor-pointer list-none font-black text-[var(--color-deep-violet)]">Description complète</summary>
-                <p className="mt-3 leading-7 text-[var(--color-ink)]">{product.fullDescription}</p>
+            <div className="grid gap-4">
+              <details open className="group rounded-[1.2rem] bg-[var(--color-lavender)] p-5 text-white">
+                <summary className="cursor-pointer list-none font-black">Description complète</summary>
+                <p className="mt-3 whitespace-pre-line leading-7">{product.fullDescription}</p>
               </details>
-              <details className="group p-5">
-                <summary className="cursor-pointer list-none font-black text-[var(--color-deep-violet)]">Mode d’utilisation</summary>
-                <p className="mt-3 leading-7 text-[var(--color-ink)]">{product.usage}</p>
+              <details className="group rounded-[1.2rem] bg-[var(--color-lavender)] p-5 text-white">
+                <summary className="cursor-pointer list-none font-black">Mode d’utilisation</summary>
                 <div className="mt-5">
                   <UsageGuidePanel productName={product.name} />
                 </div>
               </details>
-              <details className="group p-5">
-                <summary className="cursor-pointer list-none font-black text-[var(--color-deep-violet)]">Ingrédients</summary>
-                <p className="mt-3 text-sm leading-7 text-[var(--color-ink)]">{inci?.text}</p>
+              <details className="group rounded-[1.2rem] bg-[var(--color-lavender)] p-5 text-white">
+                <summary className="cursor-pointer list-none font-black">Ingrédients</summary>
+                <p className="mt-3 whitespace-pre-line text-sm leading-7">{inci?.text}</p>
               </details>
-              <details className="group p-5">
-                <summary className="cursor-pointer list-none font-black text-[var(--color-deep-violet)]">Livraison & retours</summary>
-                <p className="mt-3 leading-7 text-[var(--color-ink)]">
+              <details className="group rounded-[1.2rem] bg-[var(--color-lavender)] p-5 text-white">
+                <summary className="cursor-pointer list-none font-black">Livraison & retours</summary>
+                <p className="mt-3 leading-7">
                   Les informations finales seront confirmées avant l’ouverture officielle des commandes.
                 </p>
               </details>

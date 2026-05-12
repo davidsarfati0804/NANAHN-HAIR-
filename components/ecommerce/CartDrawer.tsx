@@ -86,7 +86,7 @@ export default function CartDrawer() {
                 {products.slice(0, 3).map((product) => (
                   <Link
                     key={product.id}
-                    href={`/#${product.id}`}
+                    href={`/produits/${product.id}`}
                     onClick={closeCart}
                     className="rounded-2xl border border-[var(--color-lavender-mist)] p-4 font-black text-[var(--color-deep-violet)]"
                   >

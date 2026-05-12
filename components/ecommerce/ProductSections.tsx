@@ -84,7 +84,7 @@ export function PackSection() {
           <p className="mt-5 max-w-2xl text-lg leading-8 text-white/92">{pack.description}</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <AddToCartButton item={pack} label="Commander le pack" variant="white" />
-            <Link href="#mix-gagnant" className="rounded-full border border-white/50 px-7 py-4 text-center font-black text-white transition hover:-translate-y-0.5 hover:bg-white/10">
+            <Link href="/routines" className="rounded-full border border-white/50 px-7 py-4 text-center font-black text-white transition hover:-translate-y-0.5 hover:bg-white/10">
               Pourquoi c’est le mix gagnant ?
             </Link>
           </div>

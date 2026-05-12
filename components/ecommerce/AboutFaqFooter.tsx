@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Camera, FileText, Mail, MapPin, Music2 } from "lucide-react";
-import { aboutCopy, companyInfo, faqs, inciItems, values } from "@/data/site";
+import { aboutCopy, companyInfo, faqs, helpLinks, inciItems, values } from "@/data/site";
 
 export function AboutSection() {
   return (
@@ -123,7 +123,7 @@ export function CartPlaceholder() {
             Les boutons sont prêts à être connectés à Shopify, Stripe, Medusa, WooCommerce ou un panier sur mesure.
           </p>
         </div>
-        <Link href="#boutique" className="mt-6 inline-flex rounded-full bg-[var(--color-lavender)] px-6 py-4 font-black text-white md:mt-0">
+        <Link href="/boutique" className="mt-6 inline-flex rounded-full bg-[var(--color-lavender)] px-6 py-4 font-black text-white md:mt-0">
           Continuer le shopping
         </Link>
       </div>
@@ -132,14 +132,6 @@ export function CartPlaceholder() {
 }
 
 export function SiteFooter() {
-  const links = [
-    "Contact",
-    "Livraison & retours",
-    "CGV",
-    "Mentions légales",
-    "Politique de confidentialité",
-  ];
-
   return (
     <footer className="bg-[var(--color-deep-violet)] px-5 py-12 text-white lg:px-8">
       <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-[1fr_1.3fr_0.7fr]">
@@ -156,12 +148,11 @@ export function SiteFooter() {
           <p className="mt-5 text-sm text-white/70">Copyright Na Nah N’hair</p>
         </div>
         <div className="grid gap-3 sm:grid-cols-2">
-          {links.map((link) => (
-            <Link key={link} href="#" className="text-sm font-bold text-white/82 transition hover:text-white">
-              {link}
+          {helpLinks.map((link) => (
+            <Link key={link.href} href={link.href} className="text-sm font-bold text-white/82 transition hover:text-white">
+              {link.label}
             </Link>
           ))}
-          {/* TODO: remplacer les liens # par les vraies pages CGV, mentions légales, confidentialité, livraison et retours. */}
         </div>
         <div className="flex gap-3 md:justify-end">
           <Link href="mailto:contact@nanahnhair.example" className="grid h-11 w-11 place-items-center rounded-full bg-white/10" aria-label="Contact email">

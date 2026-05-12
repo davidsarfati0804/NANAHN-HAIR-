@@ -22,7 +22,7 @@ export default function CartPageClient() {
             </h1>
           </div>
           <Link
-            href="/#boutique"
+            href="/boutique"
             className="rounded-full border border-[var(--color-lavender)] px-6 py-3 text-center font-black text-[var(--color-deep-violet)] transition hover:bg-[var(--color-lavender-soft)]"
           >
             Continuer le shopping
@@ -38,7 +38,7 @@ export default function CartPageClient() {
               Ajoute un sérum ou le pack zéro prise de tête pour préparer ta commande.
             </p>
             <Link
-              href="/#boutique"
+              href="/boutique"
               className="mt-7 inline-flex rounded-full bg-[var(--color-lavender)] px-7 py-4 font-black text-white"
             >
               Découvrir les sérums

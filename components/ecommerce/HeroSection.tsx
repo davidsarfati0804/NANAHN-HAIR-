@@ -21,10 +21,10 @@ export default function HeroSection() {
           <p className="mt-7 text-2xl font-extrabold text-[var(--color-plum)]">{heroCopy.kicker}</p>
           <p className="mt-4 max-w-xl text-lg leading-8 text-[var(--color-ink)]">{heroCopy.body}</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Link className="rounded-full bg-[var(--color-lavender)] px-7 py-4 text-center font-bold text-white shadow-[0_16px_36px_rgba(170,161,200,0.42)] transition hover:-translate-y-0.5 hover:bg-[var(--color-plum)]" href="#boutique">
+            <Link className="rounded-full bg-[var(--color-lavender)] px-7 py-4 text-center font-bold text-white shadow-[0_16px_36px_rgba(170,161,200,0.42)] transition hover:-translate-y-0.5 hover:bg-[var(--color-plum)]" href="/boutique">
               Découvrir les sérums
             </Link>
-            <Link className="rounded-full border border-[var(--color-lavender)] px-7 py-4 text-center font-bold text-[var(--color-deep-violet)] transition hover:-translate-y-0.5 hover:bg-[var(--color-lavender-soft)]" href="#pack">
+            <Link className="rounded-full border border-[var(--color-lavender)] px-7 py-4 text-center font-bold text-[var(--color-deep-violet)] transition hover:-translate-y-0.5 hover:bg-[var(--color-lavender-soft)]" href="/routines">
               Voir le pack zéro prise de tête
             </Link>
           </div>

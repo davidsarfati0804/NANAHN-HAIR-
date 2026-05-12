@@ -1,11 +1,10 @@
 export const navigation = [
-  { label: "Accueil", href: "/#accueil" },
-  { label: "Boutique", href: "/#boutique" },
-  { label: "Le Pack", href: "/#pack" },
-  { label: "Résultats", href: "/#resultats" },
-  { label: "Avis", href: "/#avis" },
-  { label: "À propos", href: "/#apropos" },
-  { label: "FAQ", href: "/#faq" },
+  { label: "Accueil", href: "/" },
+  { label: "Boutique", href: "/boutique" },
+  { label: "Routines", href: "/routines" },
+  { label: "Résultats", href: "/resultats" },
+  { label: "La marque", href: "/a-propos" },
+  { label: "Aide", href: "/faq" },
   { label: "Panier", href: "/panier" },
 ];
 
@@ -15,6 +14,40 @@ export const heroCopy = {
   body:
     "Des sérums capillaires pensés pour nourrir, sublimer et faire briller ta routine cheveux, sans prise de tête.",
 };
+
+export const reassuranceItems = [
+  {
+    title: "Made in France",
+    text: "Des soins pensés avec une exigence de qualité locale.",
+  },
+  {
+    title: "Routine simple",
+    text: "Trois sérums, un mix clair selon ton besoin du moment.",
+  },
+  {
+    title: "Paiement sécurisé",
+    text: "Tunnel de paiement à connecter avant ouverture officielle.",
+  },
+  {
+    title: "Aide & conseils",
+    text: "Une FAQ et une page contact pour accompagner chaque commande.",
+  },
+];
+
+export const routineSteps = [
+  {
+    title: "1. Nourrir",
+    text: "Fabulous accompagne les routines du quotidien pour gainer, fortifier et apaiser le cuir chevelu.",
+  },
+  {
+    title: "2. Stimuler",
+    text: "Miraculous s’utilise en cure ciblée quand tu veux donner un nouvel élan à ta routine.",
+  },
+  {
+    title: "3. Faire briller",
+    text: "Luxurious apporte la touche finale : volume, souplesse et brillance miroir.",
+  },
+];
 
 export const packBenefits = [
   {
@@ -135,6 +168,15 @@ export const reviews = [
 ];
 
 export const values = ["Entraide", "Simplicité", "Authenticité", "Énergie", "Confiance"];
+
+export const helpLinks = [
+  { label: "FAQ", href: "/faq" },
+  { label: "Livraison & retours", href: "/livraison-retours" },
+  { label: "Contact", href: "/contact" },
+  { label: "Mentions légales", href: "/mentions-legales" },
+  { label: "CGV", href: "/cgv" },
+  { label: "Politique de confidentialité", href: "/politique-confidentialite" },
+];
 
 export const faqs = [
   {

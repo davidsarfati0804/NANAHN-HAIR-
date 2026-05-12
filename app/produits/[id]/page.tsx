@@ -5,8 +5,11 @@ import { notFound } from "next/navigation";
 import { SiteFooter } from "@/components/ecommerce/AboutFaqFooter";
 import AddToCartButton from "@/components/ecommerce/AddToCartButton";
 import MarqueeBar from "@/components/ecommerce/MarqueeBar";
+import ProductCard from "@/components/ecommerce/ProductCard";
+import ReassuranceStrip from "@/components/ecommerce/ReassuranceStrip";
 import SiteHeader from "@/components/ecommerce/SiteHeader";
 import { products } from "@/data/products";
+import { inciItems } from "@/data/site";
 
 type ProductPageProps = {
   params: Promise<{ id: string }>;
@@ -40,13 +43,17 @@ export default async function ProductPage({ params }: ProductPageProps) {
     notFound();
   }
 
+  const inci = inciItems.find((item) => item.title === product.inciTitle);
+  const recommended = products.filter((item) => item.id !== product.id).slice(0, 2);
+
   return (
     <div className="min-h-screen bg-white text-[var(--color-ink)]">
       <MarqueeBar />
       <SiteHeader />
-      <main className="px-5 py-12 lg:px-8 lg:py-20">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-          <div className="relative min-h-[520px] overflow-hidden rounded-[2rem] border border-[var(--color-lavender-mist)] bg-[var(--color-lavender-soft)]">
+      <main>
+        <section className="px-5 py-12 lg:px-8 lg:py-20">
+          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+          <div className="relative min-h-[520px] overflow-hidden rounded-[1.5rem] border border-[var(--color-lavender-mist)] bg-[var(--color-lavender-soft)]">
             <Image
               src={product.image}
               alt={product.name}
@@ -59,7 +66,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
           </div>
           <section>
             <Link
-              href="/#boutique"
+              href="/boutique"
               className="text-sm font-black uppercase tracking-[0.16em] text-[var(--color-plum)]"
             >
               Retour boutique
@@ -79,10 +86,17 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <p className="mt-6 max-w-2xl text-xl font-bold leading-9 text-[var(--color-ink)]">
               {product.description}
             </p>
+            <ul className="mt-6 grid gap-2 sm:grid-cols-3">
+              {product.benefits.map((benefit) => (
+                <li key={benefit} className="rounded-[1rem] bg-[var(--color-lavender-soft)] px-4 py-3 text-sm font-black text-[var(--color-deep-violet)]">
+                  {benefit}
+                </li>
+              ))}
+            </ul>
             <div className="mt-8 max-w-sm">
               <AddToCartButton item={product} />
             </div>
-            <div className="mt-8 rounded-[2rem] bg-[var(--color-blush)] p-6">
+            <div className="mt-8 rounded-[1.5rem] bg-[var(--color-blush)] p-6">
               <p className="text-sm font-black uppercase tracking-[0.16em] text-[var(--color-plum)]">
                 Contenance
               </p>
@@ -92,6 +106,51 @@ export default async function ProductPage({ params }: ProductPageProps) {
             </div>
           </section>
         </div>
+        </section>
+
+        <section className="bg-white px-5 pb-16 lg:px-8 lg:pb-20">
+          <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-[0.85fr_1.15fr]">
+            <div>
+              <p className="text-sm font-black uppercase tracking-[0.18em] text-[var(--color-plum)]">Détails</p>
+              <h2 className="mt-3 text-4xl font-black text-[var(--color-deep-violet)] md:text-5xl">
+                Tout savoir avant d’ajouter au panier
+              </h2>
+            </div>
+            <div className="divide-y divide-[var(--color-lavender-mist)] overflow-hidden rounded-[1.2rem] border border-[var(--color-lavender-mist)] bg-[var(--color-blush)]">
+              <details open className="group p-5">
+                <summary className="cursor-pointer list-none font-black text-[var(--color-deep-violet)]">Description complète</summary>
+                <p className="mt-3 leading-7 text-[var(--color-ink)]">{product.fullDescription}</p>
+              </details>
+              <details className="group p-5">
+                <summary className="cursor-pointer list-none font-black text-[var(--color-deep-violet)]">Mode d’utilisation</summary>
+                <p className="mt-3 leading-7 text-[var(--color-ink)]">{product.usage}</p>
+              </details>
+              <details className="group p-5">
+                <summary className="cursor-pointer list-none font-black text-[var(--color-deep-violet)]">Ingrédients</summary>
+                <p className="mt-3 text-sm leading-7 text-[var(--color-ink)]">{inci?.text}</p>
+              </details>
+              <details className="group p-5">
+                <summary className="cursor-pointer list-none font-black text-[var(--color-deep-violet)]">Livraison & retours</summary>
+                <p className="mt-3 leading-7 text-[var(--color-ink)]">
+                  Les informations finales seront confirmées avant l’ouverture officielle des commandes.
+                </p>
+              </details>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-[var(--color-blush)] px-5 py-16 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <h2 className="text-4xl font-black text-[var(--color-deep-violet)] md:text-5xl">À associer avec</h2>
+            <div className="mt-8 grid gap-5 md:grid-cols-2">
+              {recommended.map((item) => (
+                <ProductCard key={item.id} product={item} compact />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <ReassuranceStrip />
       </main>
       <SiteFooter />
     </div>

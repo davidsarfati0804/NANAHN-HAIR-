@@ -8,7 +8,7 @@ export default function SiteHeader() {
     <header className="sticky top-0 z-40 border-b border-[var(--color-lavender-mist)] bg-white/92 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-5 py-4 lg:px-8">
         <Link
-          href="/#accueil"
+          href="/"
           className="relative block h-16 w-[112px] shrink-0 overflow-hidden rounded-xl bg-[var(--color-pantone-7499)] shadow-sm ring-1 ring-[var(--color-lavender-mist)] transition hover:opacity-85 sm:h-[76px] sm:w-[132px]"
           aria-label="Na Nah N'hair accueil"
         >
@@ -38,7 +38,7 @@ export default function SiteHeader() {
             <CartLink />
           </div>
           <Link
-            href="/#boutique"
+            href="/boutique"
             className="rounded-full bg-[var(--color-lavender)] px-5 py-3 text-sm font-bold text-white shadow-[0_12px_30px_rgba(170,161,200,0.45)] transition hover:-translate-y-0.5 hover:bg-[var(--color-plum)]"
           >
             Commander maintenant
@@ -46,7 +46,7 @@ export default function SiteHeader() {
         </div>
       </div>
       <nav className="flex gap-4 overflow-x-auto px-5 pb-3 text-sm font-semibold text-[var(--color-deep-violet)] lg:hidden">
-        {navigation.slice(0, -1).map((item) => (
+        {navigation.filter((item) => item.href !== "/panier").map((item) => (
           <Link key={item.href} href={item.href} className="shrink-0">
             {item.label}
           </Link>

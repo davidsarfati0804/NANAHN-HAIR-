@@ -10,9 +10,9 @@ export const navigation = [
 
 export const heroCopy = {
   titleLines: ["NA", "NAH", "N’HAIR !"],
-  kicker: "Pas de chichis, juste du style.",
+  kicker: "Pas de chichis, juste du style ✨",
   body:
-    "Des sérums capillaires pensés pour nourrir, sublimer et faire briller ta routine cheveux, sans prise de tête.",
+    "Des sérums capillaires naturels aux odeurs envoûtantes pour nourrir, faire pousser et révéler l’éclat de tes cheveux.",
 };
 
 export const reassuranceItems = [

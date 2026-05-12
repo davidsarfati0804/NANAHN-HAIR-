@@ -25,7 +25,7 @@ export default function HeroSection() {
               Découvrir les sérums
             </Link>
             <Link className="rounded-full border border-[var(--color-lavender)] px-7 py-4 text-center font-bold text-[var(--color-deep-violet)] transition hover:-translate-y-0.5 hover:bg-[var(--color-lavender-soft)]" href="/routines">
-              Voir le pack zéro prise de tête
+              Voir le pack
             </Link>
           </div>
         </div>

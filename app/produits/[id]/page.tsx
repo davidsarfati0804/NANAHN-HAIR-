@@ -122,17 +122,17 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 <summary className="cursor-pointer list-none font-black">Description complète</summary>
                 <p className="mt-3 whitespace-pre-line leading-7">{product.fullDescription}</p>
               </details>
-              <details className="group rounded-[1.2rem] bg-[var(--color-lavender)] p-5 text-white">
+              <details className="group rounded-[1.2rem] bg-[var(--color-lavender-soft)] p-5 text-[var(--color-deep-violet)]">
                 <summary className="cursor-pointer list-none font-black">Mode d’utilisation</summary>
                 <div className="mt-5">
                   <UsageGuidePanel productName={product.name} />
                 </div>
               </details>
-              <details className="group rounded-[1.2rem] bg-[var(--color-lavender)] p-5 text-white">
+              <details className="group rounded-[1.2rem] bg-[var(--color-lavender-soft)] p-5 text-[var(--color-deep-violet)]">
                 <summary className="cursor-pointer list-none font-black">Ingrédients</summary>
                 <p className="mt-3 whitespace-pre-line text-sm leading-7">{inci?.text}</p>
               </details>
-              <details className="group rounded-[1.2rem] bg-[var(--color-lavender)] p-5 text-white">
+              <details className="group rounded-[1.2rem] bg-[var(--color-lavender-soft)] p-5 text-[var(--color-deep-violet)]">
                 <summary className="cursor-pointer list-none font-black">Livraison & retours</summary>
                 <p className="mt-3 leading-7">
                   Les informations finales seront confirmées avant l’ouverture officielle des commandes.

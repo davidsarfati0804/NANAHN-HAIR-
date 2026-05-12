@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Droplets, Sparkles } from "lucide-react";
+import { Droplets } from "lucide-react";
 import { pack, products } from "@/data/products";
 import { packBenefits } from "@/data/site";
 import AddToCartButton from "./AddToCartButton";
@@ -75,13 +75,16 @@ export function PackSection() {
     <section id="pack" className="bg-[var(--color-lavender)] px-5 py-16 text-white lg:px-8 lg:py-24">
       <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
         <div>
-          <p className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/16 px-4 py-2 text-sm font-black uppercase tracking-[0.14em]">
-            <Sparkles size={16} />
-            {pack.subtitle}
+          <h2 className="inline-flex rounded-full bg-white px-4 py-2 text-lg font-black uppercase tracking-[0.08em] text-[var(--color-deep-violet)] md:text-xl">
+            Pack routine
+          </h2>
+          <p className="mt-5 text-3xl font-black md:text-4xl">Le pack - Zéro prise de tête</p>
+          <p className="mt-4 text-2xl font-black">{pack.price}</p>
+          <p className="mt-4 max-w-xl text-lg font-bold leading-8 text-white">
+            La routine idéale pour des cheveux nourris, stimulés et lumineux
+            <br />
+            Parce que tes cheveux méritent qu’on prenne soin d’eux tout simplement ✨
           </p>
-          <h2 className="text-4xl font-black md:text-6xl">{pack.name}</h2>
-          <p className="mt-5 text-5xl font-black">{pack.price}</p>
-          <p className="mt-5 max-w-2xl text-lg leading-8 text-white/92">{pack.description}</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <AddToCartButton item={pack} label="Commander le pack" variant="white" />
             <Link href="/routines" className="rounded-full border border-white/50 px-7 py-4 text-center font-black text-white transition hover:-translate-y-0.5 hover:bg-white/10">

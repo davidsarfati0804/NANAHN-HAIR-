@@ -56,12 +56,12 @@ export default function HomePage() {
               <h2 className="inline-flex rounded-full bg-white px-4 py-2 text-lg font-black uppercase tracking-[0.08em] text-[var(--color-deep-violet)] md:text-xl">
                 Pack routine
               </h2>
-              <p className="mt-5 text-3xl font-black md:text-4xl">Le pack - zéro prise de tête</p>
+              <p className="mt-5 text-3xl font-black md:text-4xl">Le pack - Zéro prise de tête</p>
               <p className="mt-4 text-2xl font-black">{pack.price}</p>
-              <p className="mt-4 max-w-xl text-2xl font-black leading-8 text-white">
-                Le coffret zéro prise de tête pour nourrir, stimuler et faire rayonner ta chevelure.
+              <p className="mt-4 max-w-xl text-lg font-bold leading-8 text-white">
+                La routine idéale pour des cheveux nourris, stimulés et lumineux
                 <br />
-                Parce qu’il y a des jours où tes cheveux méritent simplement tout ✨
+                Parce que tes cheveux méritent qu’on prenne soin d’eux tout simplement ✨
               </p>
               <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                 <Link href="/boutique" className="rounded-full bg-white px-7 py-4 text-center font-black text-[var(--color-deep-violet)]">

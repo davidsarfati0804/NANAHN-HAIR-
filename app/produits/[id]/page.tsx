@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { LockKeyhole, MapPin } from "lucide-react";
 import { notFound } from "next/navigation";
 import { SiteFooter } from "@/components/ecommerce/AboutFaqFooter";
-import AddToCartButton from "@/components/ecommerce/AddToCartButton";
 import MarqueeBar from "@/components/ecommerce/MarqueeBar";
 import ProductCard from "@/components/ecommerce/ProductCard";
+import QuantityAddToCart from "@/components/ecommerce/QuantityAddToCart";
 import ReassuranceStrip from "@/components/ecommerce/ReassuranceStrip";
 import SiteHeader from "@/components/ecommerce/SiteHeader";
 import { UsageGuidePanel } from "@/components/ecommerce/UsageGuide";
@@ -75,16 +76,16 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <h1 className="mt-5 text-5xl font-black leading-none text-[var(--color-deep-violet)] md:text-7xl">
               {product.name}
             </h1>
-            <p className="mt-5 inline-flex rounded-full bg-[var(--color-lavender-soft)] px-4 py-2 font-black text-[var(--color-deep-violet)]">
-              Odeur : {product.scent}
-            </p>
-            <p className="mt-6 text-4xl font-black text-[var(--color-deep-violet)]">
+            <p className="mt-5 text-4xl font-black text-[var(--color-deep-violet)]">
               {product.price}
             </p>
-            <p className="mt-6 text-2xl font-black text-[var(--color-plum)]">
+            <p className="mt-4 inline-flex rounded-full bg-[var(--color-lavender-soft)] px-4 py-2 font-black text-[var(--color-deep-violet)]">
+              Odeur : {product.scent}
+            </p>
+            <p className="mt-5 text-2xl font-black text-[var(--color-plum)]">
               {product.headline}
             </p>
-            <p className="mt-6 max-w-2xl text-xl font-bold leading-9 text-[var(--color-ink)]">
+            <p className="mt-4 max-w-2xl text-xl font-bold leading-9 text-[var(--color-ink)]">
               {product.description}
             </p>
             <ul className="mt-6 grid items-stretch gap-3 sm:grid-cols-3">
@@ -94,16 +95,27 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 </li>
               ))}
             </ul>
-            <div className="mt-8 max-w-sm">
-              <AddToCartButton item={product} />
+            <div className="mt-8">
+              <QuantityAddToCart item={product} />
             </div>
-            <div className="mt-8 rounded-[1.5rem] bg-[var(--color-lavender-soft)] p-6 text-[var(--color-deep-violet)]">
-              <p className="text-sm font-black uppercase tracking-[0.16em] text-[var(--color-plum)]">
-                Contenance
-              </p>
-              <p className="mt-3 leading-7">
-                30 mL - 1.01 fl.oz
-              </p>
+            <div className="mt-4 flex flex-wrap items-center gap-2">
+              <LockKeyhole size={13} className="text-[var(--color-plum)]" />
+              <span className="text-xs text-[var(--color-ink)]/60">Paiement sécurisé :</span>
+              {["Visa", "Mastercard", "CB", "Apple Pay", "PayPal"].map((method) => (
+                <span key={method} className="rounded border border-[var(--color-lavender-mist)] px-2 py-0.5 text-xs font-bold text-[var(--color-deep-violet)]">
+                  {method}
+                </span>
+              ))}
+            </div>
+            <div className="mt-6 rounded-[1.2rem] bg-[var(--color-lavender-soft)] p-5 text-[var(--color-deep-violet)]">
+              <p className="text-sm font-black uppercase tracking-[0.16em] text-[var(--color-plum)]">Contenance</p>
+              <p className="mt-2 font-bold leading-7">30 mL · 1.01 fl.oz</p>
+            </div>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <span className="inline-flex items-center gap-2 rounded-full bg-[var(--color-lavender-soft)] px-4 py-2 text-sm font-black text-[var(--color-deep-violet)]">
+                <MapPin size={14} />
+                Made in France
+              </span>
             </div>
           </section>
         </div>
@@ -134,9 +146,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
               </details>
               <details className="group rounded-[1.2rem] bg-[var(--color-lavender-soft)] p-5 text-[var(--color-deep-violet)]">
                 <summary className="cursor-pointer list-none font-black">Livraison & retours</summary>
-                <p className="mt-3 leading-7">
-                  Les informations finales seront confirmées avant l’ouverture officielle des commandes.
-                </p>
+                <div className="mt-3 grid gap-3 text-sm leading-7">
+                  <p><strong>Livraison :</strong> 3 à 5 jours ouvrés en France métropolitaine via Colissimo. Livraison offerte sur ta première commande avec le code NNH26, sinon 4,90 €.</p>
+                  <p><strong>Retours :</strong> Tu as 14 jours après réception pour retourner un produit non ouvert dans son emballage d’origine. Contacte-nous via la page Contact.</p>
+                </div>
               </details>
             </div>
           </div>

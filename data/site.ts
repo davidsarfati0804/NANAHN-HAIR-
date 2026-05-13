@@ -26,7 +26,7 @@ export const reassuranceItems = [
   },
   {
     title: "Paiement sécurisé",
-    text: "Tunnel de paiement à connecter avant ouverture officielle.",
+    text: "Visa, Mastercard, Apple Pay — paiement chiffré et sécurisé.",
   },
   {
     title: "Aide & conseils",
@@ -86,7 +86,7 @@ export const inciItems = [
   {
     title: "PARFUM VANILLE PATCHOULI",
     text:
-      "RICINUS COMMUNIS SEED OIL*, OLEA EUROPAEA FRUIT OIL*, COCOS NUCIFERA OIL*, PERSEA GRATISSIMA OIL*, BRASSICA NIGRA SEED OIL*, SIMMONDSIA CHINENESIS SEED OIL*, BRASSICA OLERACEA ITALICA SEED OIL*, VITIS VINIFERA SEED OIL, EMBLICA OFFICINALIS FRUIT POWDER*, FRAGRANCE, TOCOPHEROL, HELIANTHUS ANNUUS SEED OIL, CITRAL*, COUMARIN, BENZYL BENZOATE, D LIMONENE, LINALOOL*",
+      "RICINUS COMMUNIS SEED OIL*, OLEA EUROPAEA FRUIT OIL*, COCOS NUCIFERA OIL*, PERSEA GRATISSIMA OIL*, BRASSICA NIGRA SEED OIL*, SIMMONDSIA CHINENESIS SEED OIL*, BRASSICA OLERACEA ITALICA SEED OIL*, VITIS VINIFERA SEED OIL, EMBLICA OFFICINALIS FRUIT POWDER*, FRAGRANCE, TOCOPHEROL, HELIANTHUS ANNUUS SEED OIL, CITRAL**, COUMARIN**, BENZYL BENZOATE**, D-LIMONENE**, LINALOOL**\n*INGREDIENTS ISSUS DE L'AGRICULTURE BIOLOGIQUE\n** ALLERGENES DUS À LA PRÉSENCE DE PARFUM",
   },
 ];
 
@@ -205,16 +205,16 @@ export const faqs = [
   {
     question: "Comment utiliser le code NNH26 ?",
     answer:
-      "Ajoute tes produits au panier, puis renseigne le code NNH26 au moment du paiement lorsque le tunnel e-commerce sera connecté.",
+      "Ajoute tes produits au panier, puis entre le code NNH26 à l'étape paiement pour bénéficier de la livraison offerte sur ta première commande.",
   },
   {
     question: "Quels sont les délais de livraison ?",
     answer:
-      "Les informations finales de livraison seront ajoutées avant la mise en vente officielle.",
+      "3 à 5 jours ouvrés en France métropolitaine via Colissimo. Livraison offerte sur ta première commande avec le code NNH26, sinon 4,90 € de frais de port.",
   },
   {
     question: "Quelle est la politique de retour ?",
     answer:
-      "La politique complète de retour sera précisée dans les mentions e-commerce avant lancement.",
+      "Tu as 14 jours après réception pour retourner un produit non ouvert dans son emballage d'origine. Contacte-nous via la page Contact pour initier ton retour.",
   },
 ];

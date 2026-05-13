@@ -12,7 +12,7 @@ export default function PageIntro({ eyebrow, title, text }: PageIntroProps) {
         <h1 className="mt-3 max-w-4xl text-5xl font-black leading-none text-[var(--color-deep-violet)] md:text-7xl">
           {title}
         </h1>
-        {text ? <p className="mt-5 max-w-2xl whitespace-pre-line text-lg leading-8 text-[var(--color-ink)]">{text}</p> : null}
+        {text ? <p className="mt-5 max-w-2xl whitespace-pre-line text-xl font-extrabold leading-9 text-[var(--color-plum)]">{text}</p> : null}
       </div>
     </section>
   );

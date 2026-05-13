@@ -189,10 +189,10 @@ export default function CartDrawer() {
                 Voir le panier
               </Link>
               <button
-                className="mt-3 w-full rounded-full border border-[var(--color-lavender)] px-6 py-3 font-black text-[var(--color-deep-violet)]"
+                className="mt-3 w-full rounded-full border border-[var(--color-lavender)] px-6 py-3 font-black text-[var(--color-deep-violet)] transition hover:bg-[var(--color-lavender-soft)]"
                 type="button"
               >
-                Checkout à connecter
+                Procéder au paiement
               </button>
             </footer>
           </>

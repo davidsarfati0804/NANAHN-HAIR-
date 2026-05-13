@@ -21,7 +21,7 @@ export default function RoutinesPage() {
         <PageIntro
           eyebrow="Routines"
           title="Une routine simple pour chaque moment ✨"
-          text="La routine idéale pour tes cheveux nourris, stimulés et lumineux ✨\nParce que tes cheveux méritent qu’on prenne soin d’eux tout simplement !"
+          text={`La routine idéale pour tes cheveux nourris, stimulés et lumineux ✨\nParce que tes cheveux méritent qu’on prenne soin d’eux tout simplement !`}
         />
         <section className="bg-white px-5 pb-16 lg:px-8 lg:pb-20">
           <div className="mx-auto max-w-2xl">

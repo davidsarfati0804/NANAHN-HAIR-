@@ -52,8 +52,8 @@ export const products: Product[] = [
     description:
       "Stimule la pousse, ralentit la chute et redonne le bon tempo à tes cheveux.",
     fullDescription:
-      "Miraculous Hair Serum est pensé comme une cure ciblée pour accompagner les périodes où les cheveux manquent de vitalité. Il s’intègre facilement dans une routine massage régulière.",
-    benefits: ["Accompagne la pousse", "Aide à ralentir la chute", "Réveille le cuir chevelu"],
+      "Le Miraculous Hair Serum est une cure capillaire intensive pensée pour accompagner les cheveux en phase de fragilité, de chute ou de ralentissement de pousse.\n\nFormulé à base d’huiles végétales riches en vitamines B, il agit comme un véritable boost naturel pour le cuir chevelu et la fibre capillaire.\n\nCe sérum aide à :\n✨ Stimuler la pousse et la repousse des cheveux\n✨ Ralentir la chute capillaire\n✨ Réduire l’apparition des fourches\n\nSa texture douce et sensorielle pénètre facilement le cuir chevelu pour nourrir, revitaliser et réactiver l’énergie du cheveu dès la racine.\n\nUtilisé en cure, il devient un véritable rituel de transformation.\n\n💛 Des cheveux plus forts.\n💛 Une pousse relancée.\n💛 Une chevelure qui reprend vie.",
+    benefits: ["Stimule la pousse et la repousse", "Ralentit la chute du cheveu", "Diminue les fourches"],
     usage:
       "Utilise en cure, idéalement le soir. Dépose quelques gouttes sur le cuir chevelu, masse par mouvements circulaires, puis laisse poser selon ta routine.",
     inciTitle: "PARFUM VANILLE PATCHOULI",
@@ -71,7 +71,7 @@ export const products: Product[] = [
     imagePosition: "50% 43%",
     headline: "Brillance miroir & volume aérien ✨",
     description:
-      "Réveille les cheveux ternes, apporte du volume et une brillance lumineuse.",
+      "Réveille tes cheveux ternes, apporte du volume et une brillance lumineuse.",
     fullDescription:
       "Le Luxurious Hair Serum est le soin éclat par excellence, pensé pour sublimer les cheveux ternes, secs et abîmés.\n\nFormulé à base d’huiles végétales riches en vitamines C, il nourrit la fibre capillaire en profondeur et révèle une chevelure plus forte, souple et éclatante.\n\nCe sérum aide à :\n✨ Renforcer le cheveu terne, sec et abîmé\n✨ Améliorer la beauté du cheveu\n✨ Donner de la brillance\n✨ Donner du volume\n\n💛 Des cheveux brillants.\n💛 Plus de volume et de lumière.\n💛 Une beauté visible et ressentie.",
     benefits: ["Renforce le cheveu terne, sec et abîmé", "Améliore la beauté du cheveu", "Donne du volume et de la brillance"],

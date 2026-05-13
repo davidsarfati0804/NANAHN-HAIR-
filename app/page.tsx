@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import AddToCartButton from "@/components/ecommerce/AddToCartButton";
 import { SiteFooter } from "@/components/ecommerce/AboutFaqFooter";
 import HeroSection from "@/components/ecommerce/HeroSection";
 import MarqueeBar from "@/components/ecommerce/MarqueeBar";
@@ -50,7 +51,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="bg-[var(--color-lavender)] px-5 py-14 text-white lg:px-8 lg:py-20">
+        <section id="pack" className="bg-[var(--color-lavender)] px-5 py-14 text-white lg:px-8 lg:py-20">
           <div className="mx-auto grid max-w-7xl items-center gap-8 lg:grid-cols-[1fr_0.9fr]">
             <div>
               <h2 className="inline-flex rounded-full bg-white px-4 py-2 text-lg font-black uppercase tracking-[0.08em] text-[var(--color-deep-violet)] md:text-xl">
@@ -66,11 +67,9 @@ export default function HomePage() {
                 Trois sérums, une seule mission : nourrir, sublimer et révéler la beauté naturelle de tes cheveux.
               </p>
               <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                <Link href="/boutique" className="rounded-full bg-white px-7 py-4 text-center font-black text-[var(--color-deep-violet)]">
-                  Commander le pack
-                </Link>
+                <AddToCartButton item={pack} label="Commander le pack" variant="white" />
                 <Link href="/routines" className="rounded-full border border-white/45 px-7 py-4 text-center font-black text-white">
-                  Comprendre le sérum
+                  En savoir plus
                 </Link>
               </div>
             </div>

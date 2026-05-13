@@ -18,7 +18,7 @@ type CartContextValue = {
   isCartOpen: boolean;
   totalItems: number;
   subtotalCents: number;
-  addItem: (item: Omit<CartLine, "quantity">) => void;
+  addItem: (item: Omit<CartLine, "quantity">, qty?: number) => void;
   openCart: () => void;
   closeCart: () => void;
   increment: (id: string) => void;
@@ -92,16 +92,16 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     window.localStorage.setItem(storageKey, JSON.stringify(lines));
   }, [hasLoadedCart, lines]);
 
-  const addItem = useCallback((item: Omit<CartLine, "quantity">) => {
+  const addItem = useCallback((item: Omit<CartLine, "quantity">, qty = 1) => {
     setLines((current) => {
       const existing = current.find((line) => line.id === item.id);
       if (existing) {
         return current.map((line) =>
-          line.id === item.id ? { ...line, quantity: line.quantity + 1 } : line,
+          line.id === item.id ? { ...line, quantity: line.quantity + qty } : line,
         );
       }
 
-      return [...current, { ...item, quantity: 1 }];
+      return [...current, { ...item, quantity: qty }];
     });
     setIsCartOpen(true);
   }, []);

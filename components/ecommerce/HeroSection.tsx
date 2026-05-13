@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Sparkles } from "lucide-react";
 import { heroCopy } from "@/data/site";
 
+
 export default function HeroSection() {
   return (
     <section id="accueil" className="relative overflow-hidden bg-white">
@@ -24,7 +25,7 @@ export default function HeroSection() {
             <Link className="rounded-full bg-[var(--color-lavender)] px-7 py-4 text-center font-bold text-white shadow-[0_16px_36px_rgba(170,161,200,0.42)] transition hover:-translate-y-0.5 hover:bg-[var(--color-plum)]" href="/boutique">
               Découvrir les sérums
             </Link>
-            <Link className="rounded-full border border-[var(--color-lavender)] px-7 py-4 text-center font-bold text-[var(--color-deep-violet)] transition hover:-translate-y-0.5 hover:bg-[var(--color-lavender-soft)]" href="/routines">
+            <Link className="rounded-full border border-[var(--color-lavender)] px-7 py-4 text-center font-bold text-[var(--color-deep-violet)] transition hover:-translate-y-0.5 hover:bg-[var(--color-lavender-soft)]" href="#pack">
               Voir le pack
             </Link>
           </div>

@@ -7,7 +7,7 @@ import { formatPrice, useCart } from "./CartProvider";
 
 export default function CartPageClient() {
   const { clearCart, decrement, increment, lines, removeItem, subtotalCents } = useCart();
-  const shippingLabel = subtotalCents > 0 ? "À configurer" : "0,00 €";
+  const shippingLabel = subtotalCents > 0 ? "Calculée à l'étape suivante" : "—";
 
   return (
     <main className="bg-white px-5 py-12 lg:px-8 lg:py-20">
@@ -18,7 +18,7 @@ export default function CartPageClient() {
               Panier
             </p>
             <h1 className="mt-3 text-4xl font-black text-[var(--color-deep-violet)] md:text-6xl">
-              Ton mix avant checkout
+              Ta sélection
             </h1>
           </div>
           <Link
@@ -133,15 +133,15 @@ export default function CartPageClient() {
               <div className="mt-6 rounded-2xl bg-white/10 p-4">
                 <p className="text-sm font-black">Code promo</p>
                 <p className="mt-1 text-sm text-white/75">
-                  TODO: connecter le code NNH26 au checkout final.
+                  Entre ton code à l'étape paiement. (Ex : NNH26 pour la livraison offerte)
                 </p>
               </div>
 
               <button
-                className="mt-6 w-full rounded-full bg-white px-6 py-4 font-black text-[var(--color-deep-violet)]"
+                className="mt-6 w-full rounded-full bg-white px-6 py-4 font-black text-[var(--color-deep-violet)] transition hover:bg-[var(--color-pantone-7499)]"
                 type="button"
               >
-                Checkout à connecter
+                Procéder au paiement
               </button>
               <button
                 onClick={clearCart}

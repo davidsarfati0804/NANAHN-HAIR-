@@ -73,8 +73,8 @@ export const products: Product[] = [
     description:
       "Réveille les cheveux ternes, apporte du volume et une brillance lumineuse.",
     fullDescription:
-      "Luxurious Hair Serum est la touche finition de la routine Na Nah N’hair. Il apporte un rendu plus lumineux, aide à discipliner les longueurs et donne une impression de volume plus aérien.",
-    benefits: ["Apporte de la brillance", "Aide à discipliner", "Finition volume léger"],
+      "Le Luxurious Hair Serum est le soin éclat par excellence, pensé pour sublimer les cheveux ternes, secs et abîmés.\n\nFormulé à base d’huiles végétales riches en vitamines C, il nourrit la fibre capillaire en profondeur et révèle une chevelure plus forte, souple et éclatante.\n\nCe sérum aide à :\n✨ Renforcer le cheveu terne, sec et abîmé\n✨ Améliorer la beauté du cheveu\n✨ Donner de la brillance\n✨ Donner du volume\n\n💛 Des cheveux brillants.\n💛 Plus de volume et de lumière.\n💛 Une beauté visible et ressentie.",
+    benefits: ["Renforce le cheveu terne, sec et abîmé", "Améliore la beauté du cheveu", "Donne du volume et de la brillance"],
     usage:
       "Applique une petite quantité sur les longueurs et pointes en finition. Commence par peu de matière, puis ajoute si nécessaire.",
     inciTitle: "PARFUM FLEUR ORANGER",

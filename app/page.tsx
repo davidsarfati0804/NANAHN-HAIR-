@@ -57,18 +57,20 @@ export default function HomePage() {
                 Pack routine
               </h2>
               <p className="mt-5 text-3xl font-black md:text-4xl">Le pack - Zéro prise de tête</p>
-              <p className="mt-4 text-2xl font-black">{pack.price}</p>
+              <p className="mt-4 inline-flex rounded-full bg-[var(--color-pantone-7499)] px-4 py-2 text-xl font-black text-[var(--color-deep-violet)]">
+                {pack.price}
+              </p>
               <p className="mt-4 max-w-xl text-lg font-bold leading-8 text-white">
-                La routine idéale pour des cheveux nourris, stimulés et lumineux
+                Ne choisis pas un soin… choisis une expérience complète.
                 <br />
-                Parce que tes cheveux méritent qu’on prenne soin d’eux tout simplement ✨
+                Trois sérums, une seule mission : nourrir, sublimer et révéler la beauté naturelle de tes cheveux.
               </p>
               <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                 <Link href="/boutique" className="rounded-full bg-white px-7 py-4 text-center font-black text-[var(--color-deep-violet)]">
                   Commander le pack
                 </Link>
                 <Link href="/routines" className="rounded-full border border-white/45 px-7 py-4 text-center font-black text-white">
-                  Comprendre le mix
+                  Comprendre le sérum
                 </Link>
               </div>
             </div>
@@ -89,17 +91,17 @@ export default function HomePage() {
 
         <section className="bg-white px-5 py-14 lg:px-8 lg:py-20">
           <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
-            <div className="flex min-h-[260px] flex-col items-center justify-center rounded-[1.5rem] bg-white p-7 text-center shadow-[0_14px_34px_rgba(53,32,95,0.07)]">
-              <p className="text-sm font-black uppercase tracking-[0.18em] text-[var(--color-plum)]">La marque</p>
-              <h2 className="mt-3 text-4xl font-black text-[var(--color-deep-violet)] md:text-5xl">
-                Na
-                <br />
-                Nah
-                <br />
-                N’hair !
-              </h2>
+            <div className="flex h-full min-h-[290px] flex-col items-center justify-center rounded-[1.5rem] bg-white p-7 text-center shadow-[0_14px_34px_rgba(53,32,95,0.07)]">
+              <Image
+                src="/images/typographie-section-marque.png"
+                alt="Na Nah N'hair"
+                width={1772}
+                height={1772}
+                sizes="(min-width: 1024px) 300px, 68vw"
+                className="h-auto w-full max-w-[300px]"
+              />
             </div>
-            <div className="rounded-[1.5rem] bg-[var(--color-lavender)] p-7 text-white md:p-9">
+            <div className="flex h-full min-h-[290px] flex-col justify-center rounded-[1.5rem] bg-[var(--color-lavender)] p-7 text-white md:p-9">
               <p className="text-lg font-bold leading-8">
                 Tout a commencé avec une histoire authentique.
                 <br />

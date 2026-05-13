@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { AboutSection, SiteFooter } from "@/components/ecommerce/AboutFaqFooter";
 import MarqueeBar from "@/components/ecommerce/MarqueeBar";
 import PageIntro from "@/components/ecommerce/PageIntro";
@@ -17,9 +18,22 @@ export default function AProposPage() {
       <main>
         <PageIntro
           eyebrow="La marque"
-          title="Une histoire de confiance, de cheveux et d’énergie"
-          text="Na Nah N’hair est née d’un moment de partage, avec une envie simple : créer des soins naturels, sensoriels et faciles à adopter."
+          title="Une histoire de confiance et de lumière ✨"
         />
+        <section className="bg-white px-5 pb-12 lg:px-8">
+          <div className="mx-auto max-w-2xl">
+            <div className="overflow-hidden rounded-[1.5rem] border border-[var(--color-lavender-mist)] bg-[var(--color-lavender-soft)]">
+              <Image
+                src="/images/page-la-marque.jpg"
+                alt="La marque Na Nah N'hair"
+                width={1366}
+                height={2048}
+                sizes="(min-width: 1024px) 672px, 100vw"
+                className="h-auto w-full"
+              />
+            </div>
+          </div>
+        </section>
         <AboutSection />
       </main>
       <SiteFooter />

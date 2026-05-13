@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { SiteFooter } from "@/components/ecommerce/AboutFaqFooter";
 import MarqueeBar from "@/components/ecommerce/MarqueeBar";
 import PageIntro from "@/components/ecommerce/PageIntro";
 import { WinningMixSection } from "@/components/ecommerce/ProductSections";
 import SiteHeader from "@/components/ecommerce/SiteHeader";
-import { routineSteps } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Routines | Na Nah N’hair",
@@ -20,23 +20,27 @@ export default function RoutinesPage() {
       <main>
         <PageIntro
           eyebrow="Routines"
-          title="Un mix simple pour chaque moment"
-          text="Pas besoin d’une routine compliquée. Alterne les sérums selon ce que tes cheveux réclament : nutrition, vitalité ou brillance."
+          title="Une routine simple pour chaque moment ✨"
+          text="La routine idéale pour tes cheveux nourris, stimulés et lumineux ✨\nParce que tes cheveux méritent qu’on prenne soin d’eux tout simplement !"
         />
         <section className="bg-white px-5 pb-16 lg:px-8 lg:pb-20">
-          <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-3">
-            {routineSteps.map((step) => (
-              <article key={step.title} className="rounded-[1.5rem] border border-[var(--color-lavender-mist)] bg-[var(--color-blush)] p-6">
-                <h2 className="text-2xl font-black text-[var(--color-deep-violet)]">{step.title}</h2>
-                <p className="mt-3 leading-7 text-[var(--color-ink)]">{step.text}</p>
-              </article>
-            ))}
+          <div className="mx-auto max-w-2xl">
+            <div className="overflow-hidden rounded-[1.5rem] border border-[var(--color-lavender-mist)] bg-[var(--color-lavender-soft)]">
+              <Image
+                src="/images/page-routine.jpg"
+                alt="Routine Na Nah N'hair"
+                width={1328}
+                height={2048}
+                sizes="(min-width: 1024px) 672px, 100vw"
+                className="h-auto w-full"
+              />
+            </div>
           </div>
         </section>
         <WinningMixSection />
         <section className="bg-white px-5 py-12 text-center lg:px-8">
           <Link href="/boutique" className="inline-flex rounded-full bg-[var(--color-lavender)] px-7 py-4 font-black text-white">
-            Composer mon mix
+            Compose ta magie
           </Link>
         </section>
       </main>

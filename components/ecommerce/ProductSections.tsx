@@ -79,16 +79,18 @@ export function PackSection() {
             Pack routine
           </h2>
           <p className="mt-5 text-3xl font-black md:text-4xl">Le pack - Zéro prise de tête</p>
-          <p className="mt-4 text-2xl font-black">{pack.price}</p>
+          <p className="mt-4 inline-flex rounded-full bg-[var(--color-pantone-7499)] px-4 py-2 text-xl font-black text-[var(--color-deep-violet)]">
+            {pack.price}
+          </p>
           <p className="mt-4 max-w-xl text-lg font-bold leading-8 text-white">
-            La routine idéale pour des cheveux nourris, stimulés et lumineux
+            Ne choisis pas un soin… choisis une expérience complète.
             <br />
-            Parce que tes cheveux méritent qu’on prenne soin d’eux tout simplement ✨
+            Trois sérums, une seule mission : nourrir, sublimer et révéler la beauté naturelle de tes cheveux.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <AddToCartButton item={pack} label="Commander le pack" variant="white" />
             <Link href="/routines" className="rounded-full border border-white/50 px-7 py-4 text-center font-black text-white transition hover:-translate-y-0.5 hover:bg-white/10">
-              Pourquoi c’est le mix gagnant ?
+              Comprendre le sérum
             </Link>
           </div>
         </div>
@@ -125,10 +127,16 @@ export function WinningMixSection() {
             </article>
           ))}
         </div>
-        <div className="mt-8 rounded-[2rem] bg-[var(--color-deep-violet)] p-7 text-white md:p-10">
-          <p className="text-sm font-black uppercase tracking-[0.18em] text-white/70">Mode d’emploi du Remix</p>
+        <div className="mt-8 rounded-[2rem] bg-[var(--color-lavender)] p-7 text-white md:p-10">
+          <p className="text-sm font-black uppercase tracking-[0.18em] text-white/70">Mode d’emploi</p>
           <p className="mt-4 text-xl font-bold leading-9">
-            Alternes les sérums selon tes besoins ou crées ta propre routine : Miraculous en cure, Fabulous au quotidien, et Luxurious pour briller en sortie. Masses, vibres, rayonne ✨ C’est toi l’artiste !
+            Écoute tes cheveux, ils savent ce dont ils ont besoin.
+            <br />
+            Fabulous pour le quotidien, Miraculous pour transformer, Luxurious pour illuminer.
+            <br />
+            Masse, ressens, rayonne ✨
+            <br />
+            Ici, c’est toi qui crées ta magie.
           </p>
         </div>
       </div>

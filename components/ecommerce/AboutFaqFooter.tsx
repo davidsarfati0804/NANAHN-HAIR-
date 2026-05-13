@@ -1,29 +1,23 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Camera, FileText, Mail, MapPin, Music2 } from "lucide-react";
+import { Camera, FileText, Mail, MapPin } from "lucide-react";
 import { aboutCopy, companyInfo, faqs, helpLinks, inciItems, values } from "@/data/site";
 
 export function AboutSection() {
   return (
     <section id="apropos" className="bg-white px-5 py-16 lg:px-8 lg:py-24">
-      <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-        <div className="rounded-[2rem] bg-[var(--color-lavender)] p-8 text-white md:p-10">
-          <Music2 size={34} />
-          <h2 className="mt-6 text-4xl font-black md:text-6xl">À propos de Na Nah N’hair</h2>
+      <div className="mx-auto max-w-4xl text-center">
+        <div className="space-y-5 whitespace-pre-line text-lg font-bold leading-8 text-[var(--color-ink)]">
+          {aboutCopy.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
         </div>
-        <div>
-          <div className="space-y-5 text-lg font-bold leading-8 text-[var(--color-ink)]">
-            {aboutCopy.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
-          </div>
-          <div className="mt-8 flex flex-wrap gap-3">
-            {values.map((value) => (
-              <span key={value} className="rounded-full bg-[var(--color-lavender-soft)] px-5 py-3 font-black text-[var(--color-deep-violet)]">
-                {value}
-              </span>
-            ))}
-          </div>
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
+          {values.map((value) => (
+            <span key={value} className="rounded-full bg-[var(--color-lavender-soft)] px-5 py-3 font-black text-[var(--color-deep-violet)]">
+              {value}
+            </span>
+          ))}
         </div>
       </div>
     </section>

@@ -185,22 +185,22 @@ export const faqs = [
   {
     question: "Puis-je utiliser les 3 sérums ensemble ?",
     answer:
-      "Oui, tu peux les alterner selon tes besoins. Évite simplement de surcharger les longueurs : quelques gouttes suffisent.",
+      "Oui tu peux les alterner selon tes besoins toutes en suivant les étapes , 1 pipette de chaque suffisent.",
   },
   {
     question: "À quelle fréquence les appliquer ?",
     answer:
-      "Commence par 2 à 3 applications par semaine, puis ajuste selon la nature de tes cheveux et ton ressenti.",
+      "Pour un résultat optimisé utilise le soin 3 fois par semaine.",
   },
   {
     question: "Convient-il à tous les types de cheveux ?",
     answer:
-      "La routine est pensée pour s’adapter à plusieurs textures. Fais un test sur une petite zone si ton cuir chevelu est sensible.",
+      "La routine est pensée pour s’adapter à plusieurs textures. Fais un test sur une petite zone si ton cuir chevelu est sensible. Il ne faut pas utiliser le soin les 2 jours qui précèdent et suivent la coloration.",
   },
   {
     question: "En combien de temps voit-on les résultats ?",
     answer:
-      "Les effets cosmétiques peuvent être immédiats sur la douceur ou la brillance. Les résultats varient selon la régularité et la nature des cheveux.",
+      "Les résultats varient selon la régularité et la nature des cheveux.\nEn moyenne au bout de quelques jours à 2 semaines de soins.",
   },
   {
     question: "Comment utiliser le code NNH26 ?",
@@ -215,6 +215,6 @@ export const faqs = [
   {
     question: "Quelle est la politique de retour ?",
     answer:
-      "Tu as 14 jours après réception pour retourner un produit non ouvert dans son emballage d'origine. Contacte-nous via la page Contact pour initier ton retour.",
+      "Tu as 14 jours après réception pour retourner un produit non ouvert dans son emballage d'origine. Contacte-nous via la page Contact ou par mail à Contact@nanahnhair.com pour initier ton retour.",
   },
 ];

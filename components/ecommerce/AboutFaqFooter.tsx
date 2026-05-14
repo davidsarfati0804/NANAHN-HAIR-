@@ -149,7 +149,7 @@ export function SiteFooter() {
           ))}
         </div>
         <div className="flex gap-3 md:justify-end">
-          <Link href="mailto:contact@nanahnhair.example" className="grid h-11 w-11 place-items-center rounded-full bg-white/10" aria-label="Contact email">
+          <Link href="mailto:Contact@nanahnhair.com" className="grid h-11 w-11 place-items-center rounded-full bg-white/10" aria-label="Contact email">
             <Mail size={18} />
           </Link>
           <Link href="#" className="grid h-11 w-11 place-items-center rounded-full bg-white/10" aria-label="Instagram Na Nah N'hair">

@@ -17,8 +17,8 @@ export default function FaqPage() {
       <main>
         <PageIntro
           eyebrow="Aide"
-          title="Questions fréquentes"
-          text="Choix du sérum, fréquence d’utilisation, résultats, livraison : les réponses importantes sont regroupées ici."
+          title="On t’explique tout, sans prise de tête ✨"
+          text="Utilisation, routines, résultats, livraisons …&#10;Retrouve ici toutes les réponses pour choisir ton sérum capillaire 💛"
         />
         <FaqSection />
         <IngredientsSection />

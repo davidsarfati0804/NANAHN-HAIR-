@@ -11,20 +11,23 @@ export default function PhotoSlot({
   className = "",
   sizes = "(max-width: 768px) 100vw, 33vw",
   priority = false,
+  src = null,
 }: {
   photo: Photo;
   theme?: ProductTheme;
   className?: string;
   sizes?: string;
   priority?: boolean;
+  // Photo envoyée depuis le back-office (prioritaire)
+  src?: string | null;
 }) {
   const t = theme ? themeClasses[theme] : null;
 
-  if (photo.available) {
+  if (src || photo.available) {
     return (
       <div className={`relative overflow-hidden ${className}`}>
         <Image
-          src={`/images/${photo.file}`}
+          src={src ?? `/images/${photo.file}`}
           alt={photo.alt}
           fill
           sizes={sizes}

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { navigation } from "@/content/site";
+import CartCount from "@/components/cart/CartCount";
 import Wordmark from "@/components/Wordmark";
 
 export default function SiteHeader() {
@@ -34,12 +35,7 @@ export default function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Link
-            href="/panier"
-            className="rounded-full border-2 border-deep-violet px-4 py-2 text-sm font-bold uppercase text-deep-violet hover:bg-lavender-soft"
-          >
-            Panier <span aria-label="0 article">(0)</span>
-          </Link>
+          <CartCount />
           <button
             type="button"
             className="rounded-full bg-deep-violet px-4 py-2 text-sm font-bold uppercase text-white lg:hidden"

@@ -4,16 +4,24 @@ import LavenderBox from "@/components/LavenderBox";
 import PhotoSlot from "@/components/PhotoSlot";
 import ProductCard from "@/components/ProductCard";
 import { emotionalConcept, home, pack, products, story } from "@/content/site";
+import type { ProductId, PublicProduct } from "@/lib/catalog";
+import { formatPrice } from "@/lib/money";
+import { getShopData } from "@/lib/shop-data";
 import { themeClasses } from "@/lib/theme-classes";
 
-export default function HomePage() {
+export const dynamic = "force-dynamic";
+
+type Shop = Record<ProductId, PublicProduct>;
+
+export default async function HomePage() {
+  const { products: shop } = await getShopData();
   return (
     <>
       <Hero />
-      <Trio />
+      <Trio shop={shop} />
       <Concept />
-      <Products />
-      <Pack />
+      <Products shop={shop} />
+      <Pack shop={shop} />
       <StoryTeaser />
       <Reasons />
       <FinalCta />
@@ -83,14 +91,14 @@ function SectionTitle({ kicker, title, id }: { kicker: string; title: string; id
   );
 }
 
-function Trio() {
+function Trio({ shop }: { shop: Shop }) {
   return (
     <section aria-labelledby="trio" className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
       <SectionTitle kicker={home.trio.kicker} title={home.trio.title} id="trio" />
       <ul className="grid gap-6 md:grid-cols-3">
         {products.map((p) => (
           <li key={p.slug}>
-            <ProductCard product={p} cta={home.trio.cta} />
+            <ProductCard product={p} shop={shop[p.slug]} cta={home.trio.cta} />
           </li>
         ))}
       </ul>
@@ -127,7 +135,7 @@ function Concept() {
   );
 }
 
-function Products() {
+function Products({ shop }: { shop: Shop }) {
   return (
     <section aria-labelledby="soins" className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
       <SectionTitle kicker={home.products.kicker} title={home.products.title} id="soins" />
@@ -154,7 +162,7 @@ function Products() {
                 href={`/soins/${p.slug}`}
                 className={`mt-6 inline-block font-bold underline underline-offset-4 ${t.text}`}
               >
-                {p.shortName} · {p.price}
+                {p.shortName} · {formatPrice(shop[p.slug].priceCents)}
               </Link>
             </article>
           );
@@ -164,14 +172,14 @@ function Products() {
   );
 }
 
-function Pack() {
+function Pack({ shop }: { shop: Shop }) {
   return (
     <section aria-labelledby="pack" className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
       <div className="grid items-center gap-8 md:grid-cols-2">
-        <PhotoSlot photo={pack.photo} className="aspect-square rounded-[2rem]" />
+        <PhotoSlot photo={pack.photo} src={shop.pack.photoUrl} className="aspect-square rounded-[2rem]" />
         <div>
           <SectionTitle kicker={home.pack.kicker} title={pack.name} id="pack" />
-          <p className="-mt-6 font-display text-5xl text-plum">{pack.price}</p>
+          <p className="-mt-6 font-display text-5xl text-plum">{formatPrice(shop.pack.priceCents)}</p>
           <LavenderBox className="mt-6">
             <h3 className="font-body text-lg font-bold">{pack.contentTitle}</h3>
             <ol className="mt-3 space-y-2">

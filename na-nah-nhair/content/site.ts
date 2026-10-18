@@ -40,7 +40,8 @@ export type Product = {
   slug: ProductTheme;
   name: string;
   shortName: string;
-  price: string;
+  // Prix INFOS.md : valeur initiale du catalogue (le prix affiché vient du back-office)
+  infosPrice: string;
   photo: { file: string; alt: string; available: boolean };
   personality: string;
   universe: string;
@@ -73,7 +74,7 @@ export const products: Product[] = [
     slug: "fabulous",
     name: "FABULOUS HAIR SERUM",
     shortName: "Fabulous",
-    price: "19,90 €",
+    infosPrice: "19,90 €",
     photo: {
       file: "fabulous.jpg",
       alt: "Flacon du Fabulous Hair Serum, 30 ml",
@@ -113,7 +114,7 @@ export const products: Product[] = [
     slug: "miraculous",
     name: "MIRACULOUS HAIR SERUM",
     shortName: "Miraculous",
-    price: "39,90 €",
+    infosPrice: "39,90 €",
     photo: {
       file: "miraculous.jpg",
       alt: "Flacon du Miraculous Hair Serum, 30 ml",
@@ -154,7 +155,7 @@ export const products: Product[] = [
     slug: "luxurious",
     name: "LUXURIOUS HAIR SERUM",
     shortName: "Luxurious",
-    price: "29,90 €",
+    infosPrice: "29,90 €",
     photo: {
       file: "luxurious.jpg",
       alt: "Flacon du Luxurious Hair Serum, 30 ml",
@@ -198,13 +199,14 @@ export const productBySlug = (slug: string) => products.find((p) => p.slug === s
 export const pack = {
   slug: "pack",
   name: "PACK DES 3 SOINS",
-  price: "69,90 €",
+  infosPrice: "69,90 €",
   photo: {
     file: "pack.jpg",
     alt: "Les trois sérums NA NAH N'HAIR ensemble, au spa à Maurice",
     available: false,
   },
   contentTitle: "Contenu du pack",
+  contentShort: "Fabulous + Miraculous + Luxurious",
   content: [
     { product: "Fabulous", text: "pour gainer, fortifier et apaiser ton cuir chevelu." },
     { product: "Miraculous", text: "pour stimuler la pousse et dire stop à la chute." },
@@ -310,9 +312,6 @@ export const footer = {
 
 // Pages pas encore construites : phase du brief où elles arrivent
 export const upcomingPages: Record<string, { title: string; phase: string }> = {
-  quiz: { title: "Quel Na Nah N'Hair es-tu ?", phase: "Phase 4 : quiz" },
-  boutique: { title: "Boutique", phase: "Phase 5 : boutique" },
-  panier: { title: "Panier", phase: "Phase 5 : boutique" },
   contact: { title: "Contact", phase: "Phase 7 : contact et juridique" },
   "mentions-legales": { title: "Mentions légales", phase: "Phase 7 : contact et juridique" },
   cgv: { title: "Conditions générales de vente", phase: "Phase 7 : contact et juridique" },
@@ -336,7 +335,6 @@ export const productPage = {
   faqTitle: "Questions fréquentes",
   founderBadge: "Mon produit fondateur",
   addToCart: "Ajouter au panier",
-  cartComingSoon: "Le panier sera activé à la phase 5 (boutique).",
   othersTitle: "Découvre aussi",
   packTitle: "Et si tu étais les trois ?",
   packCta: "Découvrir le pack",
@@ -456,4 +454,167 @@ export const faq: { title: string; groups: FaqGroup[] } = {
       ],
     },
   ],
+};
+
+// Quiz (INFOS §10). L'ordre des réponses est mélangé d'une question à l'autre :
+// le soin proposé en premier change à chaque question.
+export type QuizAnswer = { text: string; product: ProductTheme; points: number };
+
+export const quiz = {
+  title: "Quel Na Nah N'Hair es-tu ?",
+  intro: "5 questions, une seule réponse par question.",
+  start: "Commencer le quiz",
+  progress: (n: number, total: number) => `Question ${n} sur ${total}`,
+  previous: "Question précédente",
+  restart: "Refaire le quiz",
+  questions: [
+    {
+      question: "Ton rituel idéal du week-end ?",
+      answers: [
+        { text: "Une séance de sport et mes objectifs de la semaine", product: "miraculous", points: 1 },
+        { text: "Un petit-déj en terrasse, sans prise de tête", product: "fabulous", points: 1 },
+        { text: "Une soirée spa, bougies et douceur", product: "luxurious", points: 1 },
+      ],
+    },
+    {
+      question: "Ce que tu aimes dans un soin ?",
+      answers: [
+        { text: "Une belle texture et un parfum qui enveloppe", product: "luxurious", points: 1 },
+        { text: "Un vrai rituel intensif", product: "miraculous", points: 1 },
+        { text: "Qu'il soit simple et rapide", product: "fabulous", points: 1 },
+      ],
+    },
+    {
+      question: "L'expérience que tu recherches ?",
+      answers: [
+        { text: "Fraîcheur et légèreté", product: "fabulous", points: 1 },
+        { text: "Plaisir et glamour", product: "luxurious", points: 1 },
+        { text: "Énergie et transformation", product: "miraculous", points: 1 },
+      ],
+    },
+    {
+      question: "Ta priorité pour tes cheveux ?",
+      answers: [
+        { text: "Qu'ils soient plus forts, avec un soin suivi sur la durée", product: "miraculous", points: 2 },
+        { text: "Qu'ils brillent et aient du volume", product: "luxurious", points: 1 },
+        { text: "Qu'ils soient doux et équilibrés au quotidien", product: "fabulous", points: 1 },
+      ],
+    },
+    {
+      question: "Ta phrase préférée ?",
+      answers: [
+        { text: "« Je mérite ce petit luxe »", product: "luxurious", points: 1 },
+        { text: "« Simplement moi »", product: "fabulous", points: 1 },
+        { text: "« Je crois en mon objectif »", product: "miraculous", points: 2 },
+      ],
+    },
+  ] as Array<{ question: string; answers: QuizAnswer[] }>,
+  result: {
+    kicker: "Ton Na Nah N'Hair",
+    packTitle: "Fabulous et Luxurious à égalité",
+    packText: "Tu as autant de Fabulous que de Luxurious en toi : le pack réunit les trois soins.",
+    founderTitle: "Découvre aussi Miraculous, mon produit fondateur",
+    founderCta: "Voir Miraculous",
+    finalMessage: "Et si tu étais les trois ? Découvre toute la collection.",
+    finalCta: { label: "Découvrir toute la collection", href: "/boutique" },
+    productCta: "Voir la fiche",
+  },
+};
+
+export const shop = {
+  title: "Boutique",
+  intro: "Trois soins et le pack.",
+  addToCart: "Ajouter au panier",
+  added: "Ajouté au panier",
+  quantity: "Quantité",
+  soldOut: "Épuisé",
+  lowStock: (n: number) => `Plus que ${n} en stock`,
+  viewProduct: "Voir la fiche",
+  freeShipping: "Livraison offerte en France · 3 jours ouvrés",
+};
+
+export const cartTexts = {
+  title: "Panier",
+  empty: "Ton panier est vide.",
+  emptyCta: { label: "Aller à la boutique", href: "/boutique" },
+  remove: "Retirer",
+  quantityLabel: "Quantité",
+  decrease: "Diminuer la quantité",
+  increase: "Augmenter la quantité",
+  subtotal: "Sous-total",
+  shipping: "Livraison",
+  shippingFree: "Offerte",
+  shippingTbd: "Calculée à l'étape suivante",
+  total: "Total TTC",
+  checkout: "Commander",
+  continue: "Continuer mes achats",
+  loading: "Chargement du panier…",
+  errors: {
+    unavailable: "Ce produit n'est plus disponible : retire-le du panier.",
+    "insufficient-stock": (n: number) => `Stock insuffisant : ${n} disponible(s) au maximum.`,
+  },
+};
+
+export const checkoutTexts = {
+  title: "Commande",
+  carrierTitle: "Mode de livraison",
+  relayTitle: "Point relais Mondial Relay",
+  summaryTitle: "Récapitulatif",
+  serverNote: "Montants recalculés par le serveur à partir des prix en vigueur.",
+  pay: "Payer",
+  backToCart: "Modifier le panier",
+  paymentPending: "Le paiement sécurisé (Stripe : carte, Apple Pay, Google Pay) sera activé à la phase 6.",
+  carrierRequired: "Choisis un mode de livraison.",
+  delay: "Délai : 3 jours ouvrés.",
+};
+
+export const adminTexts = {
+  title: "Back-office",
+  login: {
+    title: "Connexion au back-office",
+    password: "Mot de passe",
+    totp: "Code de double authentification (6 chiffres)",
+    submit: "Se connecter",
+    invalid: "Identifiants incorrects.",
+    blocked: "Trop de tentatives. Réessaie dans 15 minutes.",
+    notConfigured:
+      "Le back-office n'est pas encore configuré : il faut définir ADMIN_PASSWORD_HASH et ADMIN_SESSION_SECRET (voir GUIDE.md).",
+  },
+  nav: [
+    { label: "Tableau de bord", href: "/admin" },
+    { label: "Produits et stocks", href: "/admin/produits" },
+    { label: "Livraison", href: "/admin/livraison" },
+    { label: "Journal", href: "/admin/journal" },
+  ],
+  logout: "Se déconnecter",
+  saved: "Modifications enregistrées.",
+  products: {
+    title: "Produits et stocks",
+    price: "Prix TTC (€)",
+    stock: "Stock",
+    stockHelp: "Laisser vide si le stock n'est pas suivi.",
+    packStock: "Le pack n'a pas de stock propre : il est disponible tant que les trois sérums le sont.",
+    available: "Disponible à la vente",
+    photo: "Photo (JPEG, PNG ou WebP, 4 Mo maximum)",
+    removePhoto: "Retirer la photo",
+    save: "Enregistrer",
+    soldOut: "Épuisé",
+    errors: {
+      price: "Prix invalide (exemple : 19,90).",
+      stock: "Stock invalide : nombre entier entre 0 et 100 000, ou vide.",
+      photoType: "Format de photo refusé : JPEG, PNG ou WebP uniquement.",
+      photoSize: "Photo trop lourde : 4 Mo maximum.",
+    },
+  },
+  shipping: {
+    title: "Livraison",
+    threshold: "Livraison offerte à partir de (€)",
+    thresholdHelp: "0 = livraison offerte sur toutes les commandes (réglage actuel).",
+    carrierPrice: "Tarif (€)",
+    carrierPriceHelp: "À COMPLÉTER : utile seulement si la livraison redevient payante.",
+    carrierActive: "Proposé à la commande",
+    save: "Enregistrer",
+    errors: { threshold: "Montant invalide.", price: "Tarif invalide." },
+  },
+  journal: { title: "Journal", audit: "Actions du back-office", errors: "Erreurs serveur", empty: "Rien pour l'instant." },
 };

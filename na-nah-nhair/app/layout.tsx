@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Bebas_Neue, Montserrat } from "next/font/google";
 import AnnouncementBar from "@/components/AnnouncementBar";
+import { CartProvider } from "@/components/cart/CartProvider";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import { brand } from "@/content/site";
@@ -31,10 +32,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         >
           Aller au contenu
         </a>
-        <AnnouncementBar />
-        <SiteHeader />
-        <main id="contenu">{children}</main>
-        <SiteFooter />
+        <CartProvider>
+          <AnnouncementBar />
+          <SiteHeader />
+          <main id="contenu">{children}</main>
+          <SiteFooter />
+        </CartProvider>
       </body>
     </html>
   );

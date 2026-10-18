@@ -14,7 +14,7 @@ const section = (title: string) => {
 
 describe("produits conformes à INFOS.md", () => {
   it.each(products.map((p) => [p.name, p] as const))("%s", (name, p) => {
-    const s = section(`## ${[4, 5, 6][products.indexOf(p)]}. ${name} — ${p.price}`);
+    const s = section(`## ${[4, 5, 6][products.indexOf(p)]}. ${name} — ${p.infosPrice}`);
     expect(s, "section introuvable").not.toBe("");
     expect(s).toContain(`**Personnalité** : ${p.personality}`);
     expect(s).toContain(`**Univers** : ${p.universe}`);
@@ -37,8 +37,8 @@ describe("produits conformes à INFOS.md", () => {
   });
 
   it("prix : Fabulous 19,90 €, Miraculous 39,90 €, Luxurious 29,90 €, pack 69,90 €", () => {
-    expect(products.map((p) => p.price)).toEqual(["19,90 €", "39,90 €", "29,90 €"]);
-    expect(pack.price).toBe("69,90 €");
+    expect(products.map((p) => p.infosPrice)).toEqual(["19,90 €", "39,90 €", "29,90 €"]);
+    expect(pack.infosPrice).toBe("69,90 €");
   });
 
   it("aucune photo n'est marquée disponible tant que le Drive n'est pas livré", () => {

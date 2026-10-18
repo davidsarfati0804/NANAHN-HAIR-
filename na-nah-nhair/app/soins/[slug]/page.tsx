@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import AddToCartButton from "@/components/AddToCartButton";
+import AddToCart from "@/components/cart/AddToCart";
 import LavenderBox from "@/components/LavenderBox";
 import PhotoSlot from "@/components/PhotoSlot";
 import ToComplete from "@/components/ToComplete";
 import { pack, productBySlug, productPage as l, products } from "@/content/site";
+import { formatPrice } from "@/lib/money";
+import { getShopData } from "@/lib/shop-data";
 import { themeClasses } from "@/lib/theme-classes";
 
 export const dynamicParams = false;
+export const dynamic = "force-dynamic";
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
@@ -17,13 +20,14 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const p = productBySlug(slug);
-  return p ? { title: `${p.name} · ${p.price}`, description: p.description.intro } : {};
+  return p ? { title: p.name, description: p.description.intro } : {};
 }
 
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const p = productBySlug(slug);
   if (!p) notFound();
+  const { products: shop } = await getShopData();
   const t = themeClasses[p.slug];
   const others = products.filter((o) => o.slug !== p.slug);
 
@@ -33,6 +37,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-2 md:py-16">
           <PhotoSlot
             photo={p.photo}
+            src={shop[p.slug].photoUrl}
             theme={p.slug}
             priority
             sizes="(max-width: 768px) 100vw, 50vw"
@@ -48,7 +53,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             <h1 className="mt-4 text-6xl sm:text-7xl">{p.name}</h1>
             <p className="mt-2 font-display text-5xl">
               <span className="sr-only">{l.priceLabel} : </span>
-              {p.price}
+              {formatPrice(shop[p.slug].priceCents)}
             </p>
             <p className="mt-6 text-xl font-bold">{p.phrase}</p>
 
@@ -73,7 +78,14 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               ))}
             </ul>
 
-            <AddToCartButton className="mt-8" />
+            <AddToCart
+              id={p.slug}
+              name={p.name}
+              available={shop[p.slug].available}
+              withQuantity
+              className="mt-8"
+              buttonClassName={t.button}
+            />
           </div>
         </div>
       </div>
@@ -134,7 +146,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 <Link href={`/soins/${o.slug}`} className={`${ot.base} ${ot.text} block h-full rounded-3xl p-6`}>
                   <span className="block font-display text-4xl">{o.shortName}</span>
                   <span className="mt-1 block text-sm font-bold">{o.phrase}</span>
-                  <span className="mt-4 block font-display text-3xl">{o.price}</span>
+                  <span className="mt-4 block font-display text-3xl">{formatPrice(shop[o.slug].priceCents)}</span>
                 </Link>
               </li>
             );
@@ -142,7 +154,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           <li>
             <Link href="/pack" className="block h-full rounded-3xl bg-deep-violet p-6 text-white">
               <span className="block font-display text-4xl">{pack.name}</span>
-              <span className="mt-4 block font-display text-3xl">{pack.price}</span>
+              <span className="mt-4 block font-display text-3xl">{formatPrice(shop.pack.priceCents)}</span>
             </Link>
           </li>
         </ul>

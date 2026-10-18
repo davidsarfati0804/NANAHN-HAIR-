@@ -1,6 +1,21 @@
 import { expect, test } from "@playwright/test";
 
-const pages = ["/soins", "/soins/fabulous", "/soins/miraculous", "/soins/luxurious", "/pack", "/mon-histoire", "/faq"];
+const pages = [
+  "/soins",
+  "/soins/fabulous",
+  "/soins/miraculous",
+  "/soins/luxurious",
+  "/pack",
+  "/mon-histoire",
+  "/faq",
+  "/quiz",
+  "/quiz/resultat/fabulous",
+  "/quiz/resultat/pack",
+  "/boutique",
+  "/panier",
+  "/commande",
+  "/admin/connexion",
+];
 const viewports = [
   { name: "375", width: 375, height: 812 },
   { name: "768", width: 768, height: 1024 },
@@ -26,22 +41,22 @@ for (const path of pages) {
 test("fiche Miraculous : contenu INFOS, INCI, emplacements À COMPLÉTER", async ({ page }) => {
   await page.goto("/soins/miraculous");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("MIRACULOUS HAIR SERUM");
-  await expect(page.getByText("39,90 €").first()).toBeVisible();
+  await expect(page.getByText(/39,90\s€/).first()).toBeVisible();
   await expect(page.getByText("Mon produit fondateur", { exact: true })).toBeVisible();
   await expect(page.getByText("vanille patchouli")).toBeVisible();
   await expect(page.getByText(/CITRAL\*\*, COUMARIN\*\*, BENZYL BENZOATE\*\*/)).toBeVisible();
   await expect(page.getByText("À COMPLÉTER : mode d'emploi Miraculous")).toBeVisible();
   await expect(page.getByText("À COMPLÉTER : précautions d'emploi Miraculous")).toBeVisible();
-  await expect(page.getByRole("button", { name: "Ajouter au panier" })).toBeDisabled();
+  await expect(page.getByRole("button", { name: /Ajouter au panier/ })).toBeEnabled();
 });
 
 test("fiches : prix corrects", async ({ page }) => {
   for (const [slug, price] of [["fabulous", "19,90 €"], ["miraculous", "39,90 €"], ["luxurious", "29,90 €"]]) {
     await page.goto(`/soins/${slug}`);
-    await expect(page.locator("h1 + p")).toContainText(price);
+    await expect(page.locator("h1 + p")).toContainText(new RegExp(price.replace(" ", "\\s")));
   }
   await page.goto("/pack");
-  await expect(page.getByText("69,90 €").first()).toBeVisible();
+  await expect(page.getByText(/69,90\s€/).first()).toBeVisible();
 });
 
 test("FAQ : les questions s'ouvrent et affichent la réponse", async ({ page }) => {

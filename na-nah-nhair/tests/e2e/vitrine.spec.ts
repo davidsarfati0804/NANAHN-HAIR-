@@ -1,6 +1,9 @@
 import { expect, test } from "@playwright/test";
 
 const pages = [
+  "/",
+  "/quiz/resultat/miraculous",
+  "/quiz/resultat/luxurious",
   "/soins",
   "/soins/fabulous",
   "/soins/miraculous",
@@ -17,8 +20,10 @@ const pages = [
   "/admin/connexion",
 ];
 const viewports = [
+  { name: "320", width: 320, height: 640 },
   { name: "375", width: 375, height: 812 },
   { name: "768", width: 768, height: 1024 },
+  { name: "900", width: 900, height: 1000 },
   { name: "1280", width: 1280, height: 800 },
 ];
 
@@ -30,6 +35,13 @@ for (const path of pages) {
       await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
       expect(overflow, `${path} à ${vp.name}px`).toBeLessThanOrEqual(0);
+      // Aucun titre ne dépasse de son bloc
+      const wide = await page.evaluate(() =>
+        [...document.querySelectorAll("h1, h2")]
+          .filter((h) => h.scrollWidth > (h as HTMLElement).clientWidth + 1)
+          .map((h) => h.textContent),
+      );
+      expect(wide, `${path} à ${vp.name}px`).toEqual([]);
       const name = path === "/" ? "accueil" : path.slice(1).replace(/\//g, "-");
       await page.screenshot({ path: `captures/${name}-${vp.name}.png`, fullPage: true });
     }

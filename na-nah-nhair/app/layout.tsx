@@ -4,7 +4,7 @@ import AnnouncementBar from "@/components/AnnouncementBar";
 import { CartProvider } from "@/components/cart/CartProvider";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
-import { brand } from "@/content/site";
+import { brand, seo } from "@/content/site";
 import "./globals.css";
 
 // Polices du premier site, en attendant celles des flacons
@@ -18,7 +18,7 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   title: { default: `${brand.name} | ${brand.signature}`, template: `%s | ${brand.name}` },
-  description: "Trois soins. Trois personnalités. Une seule question : lequel est le tien ?",
+  description: seo.description,
   openGraph: { siteName: brand.name, type: "website", locale: "fr_FR" },
 };
 

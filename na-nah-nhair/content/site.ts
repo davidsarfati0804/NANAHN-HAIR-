@@ -3,24 +3,25 @@
 // Une valeur `null` = information manquante : le site affiche « À COMPLÉTER : … ».
 
 import type { ProductTheme } from "@/lib/design-tokens";
+import { fr } from "@/lib/typography";
 
-export const brand = {
+export const brand = fr({
   name: "NA NAH N'HAIR",
   logoLines: ["NA", "NAH", "N'HAIR !"],
   signature: "Révèle ton Na Nah N'Hair.",
   marketingConcept: "Quel Na Nah N'Hair es-tu ?",
   madeIn: "Made in France",
-};
+});
 
-export const announcement = {
+export const announcement = fr({
   text: "Quel Na Nah N'Hair es-tu ?",
   href: "/quiz",
   // Texte gardé en réserve (INFOS §1 et §11), à réactiver si la livraison redevient payante
   reserveText:
     "Révèle ton Na Nah N'hair ! — Livraison offerte pour la première commande avec le code NNH27",
-};
+});
 
-export const navigation = [
+export const navigation = fr([
   { label: "Accueil", href: "/" },
   { label: "Le quiz", href: "/quiz" },
   { label: "Les soins", href: "/soins" },
@@ -28,13 +29,13 @@ export const navigation = [
   { label: "Mon histoire", href: "/mon-histoire" },
   { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/contact" },
-];
+]);
 
-export const emotionalConcept = {
+export const emotionalConcept = fr({
   title: "« Je ne suis pas qu'une seule femme. »",
   lines: ["Je suis Fabulous.", "Je suis Miraculous.", "Je suis Luxurious.", "Je suis les trois."],
   note: "Les personnalités ne sont pas des catégories exclusives : une cliente peut être les trois.",
-};
+});
 
 export type Product = {
   slug: ProductTheme;
@@ -69,7 +70,7 @@ const inciNotes = [
   "** Allergènes dus à la présence de parfum",
 ];
 
-export const products: Product[] = [
+export const products: Product[] = fr([
   {
     slug: "fabulous",
     name: "FABULOUS HAIR SERUM",
@@ -191,12 +192,12 @@ export const products: Product[] = [
     precautions: null,
     volume: "30 ml",
   },
-];
+]);
 
 // Ordre d'affichage côte à côte : Fabulous, Miraculous, Luxurious
 export const productBySlug = (slug: string) => products.find((p) => p.slug === slug);
 
-export const pack = {
+export const pack = fr({
   slug: "pack",
   name: "PACK DES 3 SOINS",
   infosPrice: "69,90 €",
@@ -215,9 +216,9 @@ export const pack = {
   usageTitle: "Mode d'emploi du pack",
   usage:
     "alterne les sérums selon tes besoins ou crée ta propre routine : Miraculous en cure, Fabulous au quotidien, et Luxurious pour briller en sortie.",
-};
+});
 
-export const story = {
+export const story = fr({
   title: "Mon histoire",
   paragraphs: [
     "Je suis naturopathe et diplômée en aromathérapie.",
@@ -226,9 +227,9 @@ export const story = {
     "J'aime aider les autres, me rendre utile et savoir qu'une petite action de ma part peut apporter de la satisfaction à quelqu'un.",
     "C'est ainsi qu'est née l'idée de NA NAH N'HAIR : trois soins, trois univers, une même envie de permettre aux femmes de prendre soin de leurs cheveux tout en révélant différentes facettes de leur personnalité.",
   ],
-};
+});
 
-export const home = {
+export const home = fr({
   hero: {
     title: brand.logoLines,
     signature: brand.signature,
@@ -275,17 +276,18 @@ export const home = {
       {
         title: "Livraison offerte en France",
         text: "Délai : 3 jours ouvrés.",
+        todo: "préparation incluse ou non dans le délai",
       },
-    ] as Array<{ title: string; text: string | null }>,
+    ] as Array<{ title: string; text: string | null; todo?: string }>,
   },
   finalCta: {
     title: "Et si tu étais les trois ?",
     text: "Découvre toute la collection.",
     cta: { label: "Aller à la boutique", href: "/boutique" },
   },
-};
+});
 
-export const legal = {
+export const legal = fr({
   brand: "NA NAH N'HAIR",
   siret: "922 151 170 00011",
   address: "24 rue Octave Feuillet, 75016 Paris",
@@ -296,9 +298,9 @@ export const legal = {
   host: "Netlify", // coordonnées à confirmer
   publicationManager: null,
   instagram: null,
-};
+});
 
-export const footer = {
+export const footer = fr({
   legalLinks: [
     { label: "Mentions légales", href: "/mentions-legales" },
     { label: "CGV", href: "/cgv" },
@@ -308,21 +310,33 @@ export const footer = {
   ],
   contactTitle: "Contact",
   followTitle: "Instagram",
-};
+});
+
+export const upcomingTexts = fr({
+  soon: "Cette page arrive bientôt.",
+  back: "Retour à l'accueil",
+});
+
+export const seo = fr({
+  description: "Trois soins. Trois personnalités. Une seule question : lequel est le tien ?",
+  faqDescription: "Utilisation, composition, précautions, livraison, retours et commandes.",
+});
 
 // Pages pas encore construites : phase du brief où elles arrivent
-export const upcomingPages: Record<string, { title: string; phase: string }> = {
+export const upcomingPages: Record<string, { title: string; phase: string }> = fr({
   contact: { title: "Contact", phase: "Phase 7 : contact et juridique" },
   "mentions-legales": { title: "Mentions légales", phase: "Phase 7 : contact et juridique" },
   cgv: { title: "Conditions générales de vente", phase: "Phase 7 : contact et juridique" },
   confidentialite: { title: "Politique de confidentialité", phase: "Phase 7 : contact et juridique" },
   cookies: { title: "Politique cookies", phase: "Phase 7 : contact et juridique" },
   retours: { title: "Retours et droit de rétractation", phase: "Phase 7 : contact et juridique" },
-};
+});
 
 // Libellés communs des pages produits
-export const productPage = {
+export const productPage = fr({
   priceLabel: "Prix",
+  personalityPrefix: "Personnalité : ",
+  universePrefix: "Univers : ",
   personalityLabel: "Personnalité",
   universeLabel: "Univers",
   scentLabel: "Odeur",
@@ -338,26 +352,26 @@ export const productPage = {
   othersTitle: "Découvre aussi",
   packTitle: "Et si tu étais les trois ?",
   packCta: "Découvrir le pack",
-};
+});
 
-export const soinsPage = {
+export const soinsPage = fr({
   title: "Les trois soins",
   intro: "Trois soins. Trois personnalités. Une seule question : lequel est le tien ?",
   cta: "Voir la fiche",
   quizCta: { label: "Je découvre mon Na Nah N'Hair", href: "/quiz" },
-};
+});
 
-export const storyPage = {
+export const storyPage = fr({
   kicker: "Mon histoire",
   founderTitle: "Miraculous, mon produit fondateur",
   shopCta: { label: "Découvrir les trois soins", href: "/soins" },
-};
+});
 
 // FAQ : questions = structure ; réponses = INFOS.md uniquement, sinon À COMPLÉTER
 export type FaqItem = { question: string; answer: string[] | null; todo?: string };
 export type FaqGroup = { title: string; items: FaqItem[] };
 
-export const faq: { title: string; groups: FaqGroup[] } = {
+export const faq: { title: string; groups: FaqGroup[] } = fr({
   title: "FAQ",
   groups: [
     {
@@ -381,7 +395,10 @@ export const faq: { title: string; groups: FaqGroup[] } = {
           question: "Quelle est la composition des sérums ?",
           answer: [
             "La liste complète des ingrédients (INCI) est affichée sur la fiche de chaque soin.",
-            ...products.map((p) => `${p.shortName} : ${p.description.vitamins.split(",")[0]}.`),
+            ...products.map((p) => {
+              const v = p.description.vitamins.split(",")[0];
+              return `${p.shortName} : ${v.charAt(0).toLowerCase()}${v.slice(1)}.`;
+            }),
           ],
         },
         {
@@ -454,13 +471,13 @@ export const faq: { title: string; groups: FaqGroup[] } = {
       ],
     },
   ],
-};
+});
 
 // Quiz (INFOS §10). L'ordre des réponses est mélangé d'une question à l'autre :
 // le soin proposé en premier change à chaque question.
 export type QuizAnswer = { text: string; product: ProductTheme; points: number };
 
-export const quiz = {
+export const quiz = fr({
   title: "Quel Na Nah N'Hair es-tu ?",
   intro: "5 questions, une seule réponse par question.",
   start: "Commencer le quiz",
@@ -519,21 +536,24 @@ export const quiz = {
     finalCta: { label: "Découvrir toute la collection", href: "/boutique" },
     productCta: "Voir la fiche",
   },
-};
+});
 
-export const shop = {
+export const shop = fr({
   title: "Boutique",
   intro: "Trois soins et le pack.",
   addToCart: "Ajouter au panier",
   added: "Ajouté au panier",
+  viewCart: "Voir le panier",
   quantity: "Quantité",
   soldOut: "Épuisé",
   lowStock: (n: number) => `Plus que ${n} en stock`,
   viewProduct: "Voir la fiche",
-  freeShipping: "Livraison offerte en France · 3 jours ouvrés",
-};
+  freeShipping: "Livraison offerte en France · Délai : 3 jours ouvrés",
+  freeShippingFrom: (amount: string) => `Livraison offerte en France dès ${amount} · Délai : 3 jours ouvrés`,
+  deliveryTodo: "préparation incluse ou non dans le délai",
+});
 
-export const cartTexts = {
+export const cartTexts = fr({
   title: "Panier",
   empty: "Ton panier est vide.",
   emptyCta: { label: "Aller à la boutique", href: "/boutique" },
@@ -549,13 +569,14 @@ export const cartTexts = {
   checkout: "Commander",
   continue: "Continuer mes achats",
   loading: "Chargement du panier…",
+  pricesError: "Impossible de charger les prix. Réessaie dans un instant.",
   errors: {
     unavailable: "Ce produit n'est plus disponible : retire-le du panier.",
     "insufficient-stock": (n: number) => `Stock insuffisant : ${n} disponible(s) au maximum.`,
   },
-};
+});
 
-export const checkoutTexts = {
+export const checkoutTexts = fr({
   title: "Commande",
   carrierTitle: "Mode de livraison",
   relayTitle: "Point relais Mondial Relay",
@@ -566,9 +587,13 @@ export const checkoutTexts = {
   paymentPending: "Le paiement sécurisé (Stripe : carte, Apple Pay, Google Pay) sera activé à la phase 6.",
   carrierRequired: "Choisis un mode de livraison.",
   delay: "Délai : 3 jours ouvrés.",
-};
+  quoteError: "Impossible de calculer le total. Réessaie dans un instant.",
+  noCarrier: "Aucun mode de livraison n'est disponible pour le moment. Contacte-nous.",
+  carrierPriceMissing: "Tarif indisponible pour ce transporteur : choisis-en un autre.",
+  lineError: (name: string, message: string) => `${name} : ${message}`,
+});
 
-export const adminTexts = {
+export const adminTexts = fr({
   title: "Back-office",
   login: {
     title: "Connexion au back-office",
@@ -577,8 +602,8 @@ export const adminTexts = {
     submit: "Se connecter",
     invalid: "Identifiants incorrects.",
     blocked: "Trop de tentatives. Réessaie dans 15 minutes.",
-    notConfigured:
-      "Le back-office n'est pas encore configuré : il faut définir ADMIN_PASSWORD_HASH et ADMIN_SESSION_SECRET (voir GUIDE.md).",
+    // Les variables techniques à définir sont décrites dans GUIDE.md
+    notConfigured: "Le back-office n'est pas encore activé.",
   },
   nav: [
     { label: "Tableau de bord", href: "/admin" },
@@ -614,7 +639,12 @@ export const adminTexts = {
     carrierPriceHelp: "À COMPLÉTER : utile seulement si la livraison redevient payante.",
     carrierActive: "Proposé à la commande",
     save: "Enregistrer",
-    errors: { threshold: "Montant invalide.", price: "Tarif invalide." },
+    errors: {
+      threshold: "Montant invalide.",
+      price: "Tarif invalide.",
+      noCarrier: "Au moins un transporteur doit être proposé.",
+      missingPrice: "Livraison payante : renseigne le tarif de chaque transporteur proposé.",
+    },
   },
   journal: { title: "Journal", audit: "Actions du back-office", errors: "Erreurs serveur", empty: "Rien pour l'instant." },
-};
+});

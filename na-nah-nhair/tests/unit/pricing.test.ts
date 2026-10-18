@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { availableQuantity, type Catalog, seedCatalog, toPublic } from "@/lib/catalog";
+import { availableQuantity, type Catalog, fromPublic, seedCatalog, toPublic } from "@/lib/catalog";
 import { formatPrice, parseEuroInput, parsePrice } from "@/lib/money";
-import { computeQuote, sanitizeCart } from "@/lib/pricing";
+import { computeQuote, maxAddable, sanitizeCart } from "@/lib/pricing";
 import { seedSettings } from "@/lib/settings";
 
 const catalog = () => seedCatalog();
@@ -17,6 +17,8 @@ describe("prix", () => {
     expect(formatPrice(1990)).toBe("19,90 €");
     expect(formatPrice(6990)).toBe("69,90 €");
     expect(formatPrice(5)).toBe("0,05 €");
+    expect(formatPrice(425880)).toBe("4 258,80 €");
+    expect(formatPrice(123456789)).toBe("1 234 567,89 €");
     expect(parsePrice("39,90 €")).toBe(3990);
   });
 
@@ -62,9 +64,11 @@ describe("panier", () => {
       { id: "luxurious", quantity: 0 },
       { id: "miraculous", quantity: 1.5 },
       { id: "pack", quantity: 1000 },
+      { id: "luxurious", quantity: 1e9 },
       null,
     ]);
-    expect(items).toEqual([{ id: "fabulous", quantity: 3 }]);
+    // Au-delà de 99 : ramené à 99 (pas supprimé)
+    expect(items).toEqual([{ id: "fabulous", quantity: 3 }, { id: "pack", quantity: 99 }]);
     expect(errors.map((e) => e.code)).toEqual(["unknown-product", "invalid-quantity", "invalid-quantity", "invalid-quantity", "unknown-product"]);
     expect(sanitizeCart("pas un tableau").items).toEqual([]);
   });
@@ -112,6 +116,31 @@ describe("stock", () => {
   it("stock insuffisant sur un sérum seul", () => {
     const q = computeQuote(withStock({ miraculous: 2 }), settings(), [{ id: "miraculous", quantity: 3 }]);
     expect(q.errors).toEqual([{ code: "insufficient-stock", id: "miraculous", available: 2 }]);
+  });
+});
+
+describe("quantité ajoutable (stock partagé sérum + pack)", () => {
+  it("2 packs au panier et 2 Fabulous en stock : plus aucun Fabulous ajoutable", () => {
+    const c = catalog();
+    c.fabulous.stock = 2;
+    expect(maxAddable(c, [{ id: "pack", quantity: 2 }], "fabulous")).toBe(0);
+    expect(maxAddable(c, [{ id: "pack", quantity: 1 }], "fabulous")).toBe(1);
+    expect(maxAddable(c, [{ id: "fabulous", quantity: 2 }], "pack")).toBe(0);
+    expect(maxAddable(c, [], "pack")).toBe(2);
+  });
+
+  it("stock non suivi : jusqu'à 99 par ligne", () => {
+    expect(maxAddable(catalog(), [{ id: "fabulous", quantity: 97 }], "fabulous")).toBe(2);
+  });
+
+  it("le catalogue public permet le même calcul que le serveur", () => {
+    const c = catalog();
+    c.miraculous.stock = 4;
+    c.luxurious.active = false;
+    const rebuilt = fromPublic(toPublic(c));
+    expect(availableQuantity(rebuilt, "pack")).toBe(0);
+    expect(rebuilt.miraculous.stock).toBe(4);
+    expect(rebuilt.fabulous.priceCents).toBe(1990);
   });
 });
 

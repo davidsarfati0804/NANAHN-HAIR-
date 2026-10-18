@@ -3,9 +3,10 @@
 import Link from "next/link";
 import { useId, useState } from "react";
 import { useCart } from "@/components/cart/CartProvider";
+import { useCatalog } from "@/components/cart/useCatalog";
 import { shop } from "@/content/site";
-import type { ProductId } from "@/lib/catalog";
-import { MAX_QUANTITY_PER_LINE } from "@/lib/pricing";
+import { fromPublic, type ProductId } from "@/lib/catalog";
+import { MAX_QUANTITY_PER_LINE, maxAddable } from "@/lib/pricing";
 
 // Bouton « Ajouter au panier ». `available` vient du serveur (null = stock non suivi).
 export default function AddToCart({
@@ -28,8 +29,12 @@ export default function AddToCart({
   const [added, setAdded] = useState(false);
   const inputId = useId();
 
+  const { data } = useCatalog();
   const inCart = items.find((i) => i.id === id)?.quantity ?? 0;
-  const max = Math.min(MAX_QUANTITY_PER_LINE, available === null ? MAX_QUANTITY_PER_LINE : available) - inCart;
+  // Avec le catalogue à jour : tient compte des sérums contenus dans les packs du panier
+  const max = data
+    ? maxAddable(fromPublic(data.products), items, id)
+    : Math.min(MAX_QUANTITY_PER_LINE, available === null ? MAX_QUANTITY_PER_LINE : available) - inCart;
   const soldOut = available === 0;
   const canAdd = !soldOut && max >= 1;
 
@@ -81,7 +86,7 @@ export default function AddToCart({
           <>
             {shop.added} ·{" "}
             <Link href="/panier" className="underline underline-offset-4">
-              Voir le panier
+              {shop.viewCart}
             </Link>
           </>
         )}

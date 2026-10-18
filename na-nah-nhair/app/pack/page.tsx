@@ -6,6 +6,7 @@ import PhotoSlot from "@/components/PhotoSlot";
 import { emotionalConcept, pack, products } from "@/content/site";
 import { formatPrice } from "@/lib/money";
 import { getShopData } from "@/lib/shop-data";
+import { capitalize } from "@/lib/typography";
 import { themeClasses } from "@/lib/theme-classes";
 
 export const dynamic = "force-dynamic";
@@ -34,7 +35,7 @@ export default async function PackPage() {
               return (
                 <li key={c.product} className={`${t.base} ${t.text} rounded-2xl px-4 py-3`}>
                   <span className="font-bold">
-                    {i + 1}. <Link href={`/soins/${p.slug}`} className="underline underline-offset-4">{c.product}</Link>
+                    {i + 1}. <Link href={`/soins/${p.slug}`} className="inline-block py-1 underline underline-offset-4">{c.product}</Link>
                   </span>{" "}
                   : {c.text}
                 </li>
@@ -44,7 +45,7 @@ export default async function PackPage() {
 
           <LavenderBox className="mt-6">
             <h2 className="font-body text-lg font-bold">{pack.usageTitle}</h2>
-            <p className="mt-2">{pack.usage.charAt(0).toUpperCase() + pack.usage.slice(1)}</p>
+            <p className="mt-2">{capitalize(pack.usage)}</p>
           </LavenderBox>
 
           <AddToCart id="pack" name={pack.name} available={shop.pack.available} withQuantity className="mt-8" />

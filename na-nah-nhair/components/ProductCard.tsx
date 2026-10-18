@@ -1,6 +1,6 @@
 import Link from "next/link";
 import PhotoSlot from "@/components/PhotoSlot";
-import type { Product } from "@/content/site";
+import { type Product, productPage } from "@/content/site";
 import type { PublicProduct } from "@/lib/catalog";
 import { formatPrice } from "@/lib/money";
 import { themeClasses } from "@/lib/theme-classes";
@@ -25,11 +25,11 @@ export default function ProductCard({
         <H className="text-5xl">{p.shortName}</H>
         <p className="mt-1 text-sm font-bold uppercase tracking-wide">{p.name}</p>
         <p className="mt-4">
-          <span className="font-bold">Personnalité : </span>
+          <span className="font-bold">{productPage.personalityPrefix}</span>
           {p.personality}
         </p>
         <p className="mt-1">
-          <span className="font-bold">Univers : </span>
+          <span className="font-bold">{productPage.universePrefix}</span>
           {p.universe}
         </p>
         <p className="mt-4 text-lg font-bold">{p.phrase}</p>

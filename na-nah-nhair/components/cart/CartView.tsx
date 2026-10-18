@@ -7,8 +7,8 @@ import { productHref, productName } from "@/components/cart/names";
 import { useCatalog } from "@/components/cart/useCatalog";
 import { cartTexts as t } from "@/content/site";
 import { formatPrice } from "@/lib/money";
-import { computeQuote } from "@/lib/pricing";
-import { seedCatalog } from "@/lib/catalog";
+import { fromPublic } from "@/lib/catalog";
+import { computeQuote, maxAddable } from "@/lib/pricing";
 
 export default function CartView() {
   const { items, ready, setQuantity, remove } = useCart();
@@ -34,25 +34,21 @@ export default function CartView() {
   if (!data) {
     return (
       <Shell>
-        <p role="alert">Impossible de charger les prix. Réessaie dans un instant.</p>
+        <p role="alert">{t.pricesError}</p>
       </Shell>
     );
   }
 
   // Affichage : même calcul que le serveur, avec les prix et stocks reçus du serveur
-  const catalog = seedCatalog();
-  for (const id of Object.keys(catalog) as Array<keyof typeof catalog>) {
-    catalog[id] = { ...catalog[id], priceCents: data.products[id].priceCents };
-  }
+  const catalog = fromPublic(data.products);
   const quote = computeQuote(catalog, data.settings, items);
   const errorFor = (id: string) => {
-    const available = data.products[id as keyof typeof data.products].available;
-    const line = items.find((i) => i.id === id)!;
-    if (available === 0) return t.errors.unavailable;
-    if (available !== null && line.quantity > available) return t.errors["insufficient-stock"](available);
-    return null;
+    const e = quote.errors.find((x) => "id" in x && x.id === id);
+    if (!e) return null;
+    if (e.code === "insufficient-stock") return t.errors["insufficient-stock"](e.available);
+    return t.errors.unavailable;
   };
-  const blocked = items.some((i) => errorFor(i.id));
+  const blocked = quote.errors.some((e) => e.code !== "empty-cart");
 
   return (
     <Shell>
@@ -60,12 +56,11 @@ export default function CartView() {
         {quote.lines.map((line) => {
           const name = productName(line.id);
           const err = errorFor(line.id);
-          const available = data.products[line.id].available;
-          const max = Math.min(99, available ?? 99);
+          const canIncrease = maxAddable(catalog, items, line.id) > 0;
           return (
             <li key={line.id} className="flex flex-wrap items-center gap-4 py-5" data-testid={`ligne-${line.id}`}>
               <div className="min-w-48 flex-1">
-                <Link href={productHref(line.id)} className="font-bold text-deep-violet underline-offset-4 hover:underline">
+                <Link href={productHref(line.id)} className="inline-block py-2 font-bold text-deep-violet underline-offset-4 hover:underline">
                   {name}
                 </Link>
                 <p className="text-sm">{formatPrice(line.unitCents)}</p>
@@ -79,7 +74,7 @@ export default function CartView() {
                 <button
                   type="button"
                   onClick={() => setQuantity(line.id, line.quantity - 1)}
-                  className="h-10 w-10 rounded-full border-2 border-deep-violet font-bold text-deep-violet"
+                  className="h-11 w-11 rounded-full border-2 border-deep-violet font-bold text-deep-violet"
                   aria-label={`${t.decrease} : ${name}`}
                 >
                   −
@@ -90,8 +85,8 @@ export default function CartView() {
                 <button
                   type="button"
                   onClick={() => setQuantity(line.id, line.quantity + 1)}
-                  disabled={line.quantity >= max}
-                  className="h-10 w-10 rounded-full border-2 border-deep-violet font-bold text-deep-violet disabled:opacity-40"
+                  disabled={!canIncrease}
+                  className="h-11 w-11 rounded-full border-2 border-deep-violet font-bold text-deep-violet disabled:opacity-40"
                   aria-label={`${t.increase} : ${name}`}
                 >
                   +
@@ -101,7 +96,7 @@ export default function CartView() {
               <button
                 type="button"
                 onClick={() => remove(line.id)}
-                className="text-sm font-bold text-plum underline underline-offset-4"
+                className="min-h-11 px-2 text-sm font-bold text-plum underline underline-offset-4"
               >
                 {t.remove}
                 <span className="sr-only"> {name}</span>

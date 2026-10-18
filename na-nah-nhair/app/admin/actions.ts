@@ -1,6 +1,7 @@
 "use server";
 
 import { randomBytes } from "node:crypto";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { adminTexts as t } from "@/content/site";
 import { adminConfig, clientIp, endSession, requireAdmin, startSession } from "@/lib/auth";
@@ -108,7 +109,9 @@ export async function updateProduct(_prev: FormState, formData: FormData): Promi
     "produit",
     `${id} : prix ${before.priceCents} → ${priceCents} c, stock ${before.stock ?? "non suivi"} → ${stock ?? "non suivi"}, ${active ? "actif" : "inactif"}${photoKey !== before.photoKey ? ", photo modifiée" : ""}`,
   );
-  // Pas de revalidatePath : les pages qui affichent prix et stocks sont rendues à chaque visite
+  // Seule la page du back-office est rechargée (le formulaire affiche les valeurs enregistrées) ;
+  // les pages du site sont rendues à chaque visite
+  revalidatePath("/admin/produits");
   return { ok: true };
 }
 
@@ -124,9 +127,12 @@ export async function updateShipping(_prev: FormState, formData: FormData): Prom
     if (raw !== "" && (price === null || price > 100_000)) return { error: t.shipping.errors.price };
     settings.carriers[id] = { ...settings.carriers[id], priceCents: price, active: formData.get(`active-${id}`) === "on" };
   }
+  const active = Object.values(settings.carriers).filter((c) => c.active);
+  if (active.length === 0) return { error: t.shipping.errors.noCarrier };
+  if (threshold > 0 && active.some((c) => c.priceCents === null)) return { error: t.shipping.errors.missingPrice };
   settings.freeShippingThresholdCents = threshold;
   await saveSettings(settings);
   await appendAudit("livraison", `seuil ${threshold} c, ${JSON.stringify(settings.carriers)}`);
-  // Pas de revalidatePath : les pages qui affichent prix et stocks sont rendues à chaque visite
+  revalidatePath("/admin/livraison");
   return { ok: true };
 }

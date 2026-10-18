@@ -4,6 +4,7 @@ import ButtonLink from "@/components/ButtonLink";
 import { emotionalConcept, productBySlug, story, storyPage } from "@/content/site";
 import { formatPrice } from "@/lib/money";
 import { getShopData } from "@/lib/shop-data";
+import { capitalize } from "@/lib/typography";
 
 export const dynamic = "force-dynamic";
 
@@ -24,7 +25,7 @@ export default async function StoryPage() {
         <div aria-hidden className="pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full bg-miraculous opacity-70 blur-3xl" />
         <div className="relative mx-auto max-w-4xl px-4 py-20 sm:px-6 sm:py-28">
           <p className="text-sm font-bold uppercase tracking-[0.3em] text-plum">{storyPage.kicker}</p>
-          <h1 className="mt-4 text-6xl text-deep-violet sm:text-8xl">{first}</h1>
+          <h1 className="mt-4 text-[clamp(2.5rem,11vw,6rem)] text-deep-violet">{first}</h1>
         </div>
       </header>
 
@@ -43,7 +44,7 @@ export default async function StoryPage() {
       <section className="mx-auto mt-16 max-w-4xl px-4 sm:px-6">
         <div className="rounded-[2rem] bg-miraculous p-8 text-miraculous-deep sm:p-12">
           <h2 className="text-5xl">{storyPage.founderTitle}</h2>
-          <p className="mt-4 text-lg">{miraculous.text.charAt(0).toUpperCase() + miraculous.text.slice(1)}</p>
+          <p className="mt-4 text-lg">{capitalize(miraculous.text)}</p>
           <p className="mt-4 text-xl font-bold">{miraculous.phrase}</p>
           <Link href="/soins/miraculous" className="mt-6 inline-block rounded-full bg-miraculous-deep px-6 py-3 text-sm font-bold uppercase text-white">
             {miraculous.shortName} · {formatPrice(shop.miraculous.priceCents)}

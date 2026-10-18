@@ -36,13 +36,28 @@ export function sanitizeCart(raw: unknown): { items: CartItem[]; errors: QuoteEr
       errors.push({ code: "unknown-product", id: String(id) });
       continue;
     }
-    if (typeof quantity !== "number" || !Number.isInteger(quantity) || quantity < 1 || quantity > MAX_QUANTITY_PER_LINE) {
+    if (typeof quantity !== "number" || !Number.isInteger(quantity) || quantity < 1 || quantity > 1_000_000) {
       errors.push({ code: "invalid-quantity", id });
       continue;
     }
     merged.set(id, Math.min((merged.get(id) ?? 0) + quantity, MAX_QUANTITY_PER_LINE));
   }
   return { items: [...merged].map(([id, q]) => ({ id, quantity: q })), errors };
+}
+
+// Quantité supplémentaire qu'on peut encore ajouter au panier pour ce produit (pack et sérums liés)
+export function maxAddable(catalog: Catalog, items: CartItem[], id: ProductId): number {
+  const current = items.find((i) => i.id === id)?.quantity ?? 0;
+  const others = items.filter((i) => i.id !== id);
+  const baseline = stockErrors(catalog, others).length;
+  let extra = 0;
+  while (current + extra < MAX_QUANTITY_PER_LINE) {
+    const errors = stockErrors(catalog, [...others, { id, quantity: current + extra + 1 }]);
+    // Refus si ce produit manque de stock, ou s'il en prive une autre ligne du panier
+    if (errors.some((e) => "id" in e && e.id === id) || errors.length > baseline) break;
+    extra++;
+  }
+  return extra;
 }
 
 // Vérifie le stock : un pack consomme un exemplaire de chaque sérum

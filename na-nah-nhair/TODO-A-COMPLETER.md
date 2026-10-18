@@ -51,6 +51,8 @@ Toutes les informations manquantes. Chacune apparaît sur le site sous forme d'e
 
 ## Boutique
 
+- [ ] Texte du résultat « pack » du quiz à valider
+- [ ] Bloc « Découvre aussi Miraculous » sur le résultat Miraculous : garder ou masquer
 - [ ] Stock initial de chaque sérum (à saisir dans le back-office ; vide = stock non suivi)
 
 ## Technique

@@ -8,6 +8,7 @@ import ToComplete from "@/components/ToComplete";
 import { pack, productBySlug, productPage as l, products } from "@/content/site";
 import { formatPrice } from "@/lib/money";
 import { getShopData } from "@/lib/shop-data";
+import { capitalize } from "@/lib/typography";
 import { themeClasses } from "@/lib/theme-classes";
 
 export const dynamicParams = false;
@@ -67,7 +68,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               <dt className="font-bold">{l.volumeLabel}</dt>
               <dd>{p.volume}</dd>
             </dl>
-            <p className="mt-4">{p.text.charAt(0).toUpperCase() + p.text.slice(1)}</p>
+            <p className="mt-4">{capitalize(p.text)}</p>
 
             <h2 className="mt-8 font-body text-lg font-bold">{l.highlightsTitle}</h2>
             <ul className="mt-3 grid gap-3">

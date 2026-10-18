@@ -53,6 +53,9 @@ test("produits : prix, stock, épuisé, désactivation, photo", async ({ page })
   await fab.getByLabel("Stock").fill("3");
   await fab.getByRole("button", { name: "Enregistrer" }).click();
   await expect(fab.getByRole("status")).toHaveText("Modifications enregistrées.");
+  // Le formulaire affiche bien les valeurs enregistrées
+  await expect(fab.getByLabel("Prix TTC (€)")).toHaveValue("21,50");
+  await expect(fab.getByLabel("Stock")).toHaveValue("3");
   await page.goto("/soins/fabulous");
   await expect(page.locator("h1 + p")).toContainText(/21,50\s€/);
   await expect(page.getByText("Plus que 3 en stock")).toBeVisible();
@@ -109,34 +112,9 @@ test("produits : prix, stock, épuisé, désactivation, photo", async ({ page })
   await expect(page.getByText(/fabulous : prix 1990 → 2150 c/)).toBeVisible();
 });
 
-test("livraison : seuil et tarifs configurables", async ({ page }) => {
-  await clearCart(page);
-  await adminLogin(page);
-  await page.goto("/admin/livraison");
-  await page.getByLabel("Livraison offerte à partir de (€)").fill("50");
-  await page.getByRole("group", { name: "Colissimo" }).getByLabel("Tarif (€)").fill("4,90");
-  await page.getByRole("button", { name: "Enregistrer" }).click();
-  await expect(page.getByText("Modifications enregistrées.")).toBeVisible();
-
-  await page.goto("/soins/fabulous");
-  await page.getByRole("button", { name: /Ajouter au panier/ }).click();
-  await page.goto("/commande");
-  await page.getByLabel("Colissimo").check();
-  // Fabulous à 21,50 € (test précédent) + 4,90 € de livraison
-  await expect(page.getByTestId("total-serveur")).toHaveText(/26,40\s€/);
-  await page.getByLabel("Mondial Relay (point relais)").check();
-  // Tarif Mondial Relay non renseigné : livraison « calculée », total sans livraison
-  await expect(page.getByTestId("total-serveur")).toHaveText(/21,50\s€/);
-
-  await page.goto("/admin/livraison");
-  await page.getByLabel("Livraison offerte à partir de (€)").fill("0");
-  await page.getByRole("button", { name: "Enregistrer" }).click();
-  await expect(page.getByText("Modifications enregistrées.")).toBeVisible();
-});
-
 test("aucune donnée du back-office dans les réponses envoyées à un visiteur non connecté", async ({ request }) => {
   for (const path of ["/admin", "/admin/produits", "/admin/livraison", "/admin/journal"]) {
-    for (const headers of [{}, { RSC: "1" }]) {
+    for (const headers of [{}, { RSC: "1" }] as Array<Record<string, string>>) {
       const res = await request.get(path, { maxRedirects: 0, headers });
       expect(res.status(), path).toBe(307);
       const body = await res.text();
@@ -178,4 +156,68 @@ test("back-office : actions refusées sans session (appel direct)", async ({ req
   const res = await request.get("/admin/produits", { maxRedirects: 0 });
   expect([303, 307, 308, 200]).toContain(res.status());
   if (res.status() === 200) expect(await res.text()).not.toContain("Produits et stocks</h1>");
+});
+
+test.describe("stock partagé et livraison (bugs remontés par la recette)", () => {
+  test.afterAll(resetShop);
+
+  test("pack + sérum : le panier respecte le stock du sérum", async ({ page }) => {
+    await resetShop();
+    await clearCart(page);
+    await adminLogin(page);
+    await page.goto("/admin/produits");
+    const fab = page.getByRole("form", { name: "FABULOUS HAIR SERUM" });
+    await fab.getByLabel("Stock").fill("2");
+    await fab.getByRole("button", { name: "Enregistrer" }).click();
+    await expect(fab.getByRole("status")).toHaveText("Modifications enregistrées.");
+
+    await page.goto("/pack");
+    await page.getByLabel("Quantité").fill("2");
+    await page.getByRole("button", { name: /Ajouter au panier/ }).click();
+    await expect(page.getByTestId("cart-count")).toHaveText("(2)");
+    // Plus aucun Fabulous disponible : les 2 sont dans les packs
+    await page.goto("/soins/fabulous");
+    await expect(page.getByRole("button", { name: /Ajouter au panier/ })).toBeDisabled();
+
+    // Panier trafiqué au-delà du stock : erreur nommée, commande bloquée
+    await page.evaluate(() =>
+      localStorage.setItem("nnh-panier-v1", JSON.stringify([{ id: "pack", quantity: 2 }, { id: "fabulous", quantity: 1 }])),
+    );
+    await page.goto("/panier");
+    await expect(page.getByText(/Stock insuffisant/).first()).toBeVisible();
+    await expect(page.getByRole("button", { name: "Commander" })).toBeDisabled();
+    await expect(page.getByRole("button", { name: "Augmenter la quantité : FABULOUS HAIR SERUM" })).toBeDisabled();
+    await page.goto("/commande");
+    await expect(page.getByText(/FABULOUS HAIR SERUM\s:\sStock insuffisant/)).toBeVisible();
+  });
+
+  test("livraison payante : un transporteur sans tarif n'est pas proposé, et l'admin le signale", async ({ page }) => {
+    await resetShop();
+    await clearCart(page);
+    await adminLogin(page);
+    await page.goto("/admin/livraison");
+    await page.getByLabel("Livraison offerte à partir de (€)").fill("50");
+    await page.getByRole("group", { name: "Colissimo" }).getByLabel("Tarif (€)").fill("4,90");
+    await page.getByRole("button", { name: "Enregistrer" }).click();
+    await expect(page.getByText(/renseigne le tarif de chaque transporteur/)).toBeVisible();
+    // Les saisies ne sont pas effacées par l'erreur
+    await expect(page.getByLabel("Livraison offerte à partir de (€)")).toHaveValue("50");
+    // Mondial Relay retiré : enregistrement accepté
+    await page.getByRole("group", { name: "Mondial Relay (point relais)" }).getByLabel("Proposé à la commande").uncheck();
+    await page.getByRole("button", { name: "Enregistrer" }).click();
+    await expect(page.getByText("Modifications enregistrées.")).toBeVisible();
+    // Les deux décochés : refusé
+    await page.getByRole("group", { name: "Colissimo" }).getByLabel("Proposé à la commande").uncheck();
+    await page.getByRole("button", { name: "Enregistrer" }).click();
+    await expect(page.getByText("Au moins un transporteur doit être proposé.")).toBeVisible();
+
+    await page.goto("/boutique");
+    await expect(page.getByText(/Livraison offerte en France dès 50,00\s€/)).toBeVisible();
+    await page.goto("/soins/fabulous");
+    await page.getByRole("button", { name: /Ajouter au panier/ }).click();
+    await page.goto("/commande");
+    await expect(page.getByLabel("Mondial Relay (point relais)")).toHaveCount(0);
+    await page.getByLabel("Colissimo").check();
+    await expect(page.getByTestId("total-serveur")).toHaveText(/24,80\s€/);
+  });
 });

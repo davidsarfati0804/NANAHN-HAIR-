@@ -53,7 +53,15 @@ export default function Checkout() {
   }
 
   const carriers = data ? (Object.entries(data.settings.carriers) as Array<[CarrierId, { label: string; priceCents: number | null; active: boolean }]>) : [];
-  const stockProblem = quote?.errors.some((e) => e.code === "unavailable" || e.code === "insufficient-stock");
+  const free = quote?.freeShipping ?? true;
+  // Livraison payante : seuls les transporteurs dont le tarif est connu sont proposés
+  const offered = carriers.filter(([, c]) => c.active && (free || c.priceCents !== null));
+  const lineErrors = (quote?.errors ?? []).flatMap((e) => {
+    if (e.code === "insufficient-stock") return [t.lineError(productName(e.id), cartTexts.errors["insufficient-stock"](e.available))];
+    if (e.code === "unavailable") return [t.lineError(productName(e.id), cartTexts.errors.unavailable)];
+    return [];
+  });
+  const carrierError = quote?.errors.some((e) => e.code === "carrier-price-missing" || e.code === "unknown-carrier");
 
   return (
     <Shell>
@@ -65,9 +73,8 @@ export default function Checkout() {
           <p className="mt-1 text-sm">{t.delay}</p>
           <fieldset className="mt-4 grid gap-3">
             <legend className="sr-only">{t.carrierTitle}</legend>
-            {carriers
-              .filter(([, c]) => c.active)
-              .map(([id, c]) => (
+            {data && offered.length === 0 && <p role="alert">{t.noCarrier}</p>}
+            {offered.map(([id, c]) => (
                 <label
                   key={id}
                   className="flex cursor-pointer items-center justify-between gap-4 rounded-3xl border-2 border-deep-violet px-5 py-4 has-[:checked]:bg-lavender-soft"
@@ -87,8 +94,13 @@ export default function Checkout() {
                     {quote?.freeShipping ? cartTexts.shippingFree : c.priceCents !== null ? formatPrice(c.priceCents) : ""}
                   </span>
                 </label>
-              ))}
+            ))}
           </fieldset>
+          {carrierError && (
+            <p role="alert" className="mt-3 font-bold text-luxurious-deep">
+              {t.carrierPriceMissing}
+            </p>
+          )}
           {carrier === "mondial-relay" && (
             <div className="mt-4 rounded-3xl border-2 border-lavender-mist p-5">
               <h3 className="font-body text-lg font-bold text-deep-violet">{t.relayTitle}</h3>
@@ -101,7 +113,7 @@ export default function Checkout() {
           <h2 id="recap" className="text-4xl">
             {t.summaryTitle}
           </h2>
-          {failed && <p role="alert">Impossible de calculer le total. Réessaie dans un instant.</p>}
+          {failed && <p role="alert">{t.quoteError}</p>}
           {!quote && !failed && <p role="status">{cartTexts.loading}</p>}
           {quote && (
             <>
@@ -124,7 +136,7 @@ export default function Checkout() {
                     ? cartTexts.shippingFree
                     : quote.shippingCents !== null
                       ? formatPrice(quote.shippingCents)
-                      : cartTexts.shippingTbd}
+                      : t.carrierRequired}
                 </dd>
                 <dt className="text-lg font-bold">{cartTexts.total}</dt>
                 <dd className="text-right text-lg font-bold" data-testid="total-serveur">
@@ -132,11 +144,11 @@ export default function Checkout() {
                 </dd>
               </dl>
               <p className="mt-2 text-xs">{t.serverNote}</p>
-              {stockProblem && (
-                <p role="alert" className="mt-3 font-bold">
-                  {cartTexts.errors.unavailable}
+              {lineErrors.map((msg) => (
+                <p key={msg} role="alert" className="mt-3 font-bold">
+                  {msg}
                 </p>
-              )}
+              ))}
             </>
           )}
 
@@ -149,7 +161,7 @@ export default function Checkout() {
             {t.pay}
           </button>
           <p id="paiement-info" className="mt-2 text-sm">
-            {!carrier ? `${t.carrierRequired} ` : ""}
+            {!carrier && offered.length > 0 ? `${t.carrierRequired} ` : ""}
             {t.paymentPending}
           </p>
           <ButtonLink href="/panier" variant="secondary" className="mt-4 w-full">

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { navigation } from "@/content/site";
 import CartCount from "@/components/cart/CartCount";
 import Wordmark from "@/components/Wordmark";
@@ -10,6 +10,15 @@ import Wordmark from "@/components/Wordmark";
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const isCurrent = (href: string) => (href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`));
+
+  // Échap ferme le menu mobile
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
 
   return (
     <header className="sticky top-0 z-40 border-b border-lavender-mist bg-white/95 backdrop-blur">
@@ -24,7 +33,7 @@ export default function SiteHeader() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  aria-current={pathname === item.href ? "page" : undefined}
+                  aria-current={isCurrent(item.href) ? "page" : undefined}
                   className="text-ink hover:text-plum aria-[current=page]:text-plum aria-[current=page]:underline aria-[current=page]:underline-offset-8"
                 >
                   {item.label}
@@ -38,7 +47,7 @@ export default function SiteHeader() {
           <CartCount />
           <button
             type="button"
-            className="rounded-full bg-deep-violet px-4 py-2 text-sm font-bold uppercase text-white lg:hidden"
+            className="min-h-11 rounded-full bg-deep-violet px-4 py-2 text-sm font-bold uppercase text-white lg:hidden"
             aria-expanded={open}
             aria-controls="menu-mobile"
             onClick={() => setOpen((v) => !v)}
@@ -56,7 +65,7 @@ export default function SiteHeader() {
                 <Link
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  aria-current={pathname === item.href ? "page" : undefined}
+                  aria-current={isCurrent(item.href) ? "page" : undefined}
                   className="block py-3 font-display text-3xl text-deep-violet aria-[current=page]:text-plum"
                 >
                   {item.label}

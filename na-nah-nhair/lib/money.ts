@@ -1,6 +1,6 @@
 // Prix en centimes d'euro (entiers), affichés à la française : « 19,90 € »
 export function formatPrice(cents: number): string {
-  const euros = Math.floor(cents / 100);
+  const euros = String(Math.floor(cents / 100)).replace(/\B(?=(\d{3})+(?!\d))/g, "\u00a0");
   const rest = String(cents % 100).padStart(2, "0");
   return `${euros},${rest} €`;
 }

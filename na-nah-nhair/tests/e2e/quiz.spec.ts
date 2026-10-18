@@ -57,6 +57,7 @@ test("quiz : bouton question précédente et ajout au panier depuis le résultat
 test("quiz : réponses au clavier", async ({ page }) => {
   await page.goto("/quiz");
   for (let i = 0; i < 5; i++) {
+    await expect(page.getByText(`Question ${i + 1} sur 5`)).toBeVisible();
     const text = quiz.questions[i].answers.find((a) => a.product === "luxurious")!.text;
     await page.getByRole("button", { name: text, exact: true }).focus();
     await page.keyboard.press("Enter");

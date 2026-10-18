@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import FaqList from "@/components/FaqList";
-import { faq } from "@/content/site";
+import { faq, seo } from "@/content/site";
 
 export const metadata: Metadata = {
   title: faq.title,
-  description: "Utilisation, composition, précautions, livraison, retours et commandes.",
+  description: seo.faqDescription,
 };
 
 export default function FaqPage() {
@@ -16,7 +16,7 @@ export default function FaqPage() {
           <a
             key={g.title}
             href={`#${slugify(g.title)}`}
-            className="rounded-full bg-lavender px-4 py-2 text-sm font-bold text-deep-violet hover:bg-lavender-mist"
+            className="inline-flex min-h-11 items-center rounded-full bg-lavender px-4 py-2 text-sm font-bold text-deep-violet hover:bg-lavender-mist"
           >
             {g.title}
           </a>

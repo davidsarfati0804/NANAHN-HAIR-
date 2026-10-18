@@ -23,7 +23,7 @@ export default async function SoinsPage() {
         {soinsPage.quizCta.label}
       </ButtonLink>
 
-      <ul className="mt-12 grid gap-6 md:grid-cols-3">
+      <ul className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {products.map((p) => (
           <li key={p.slug}>
             <ProductCard product={p} shop={shop[p.slug]} cta={soinsPage.cta} headingLevel="h2" />

@@ -28,7 +28,7 @@ export async function POST(request: Request) {
     const [catalog, settings] = await Promise.all([getCatalog(), getSettings()]);
     const quote = computeQuote(catalog, settings, items, carrier);
     if (rawCarrier !== undefined && rawCarrier !== null && !carrier) quote.errors.push({ code: "unknown-carrier" });
-    quote.errors.unshift(...errors);
+    quote.errors.unshift(...errors.filter((e) => e.code !== "empty-cart"));
     return NextResponse.json(quote, { headers: { "Cache-Control": "no-store" } });
   } catch (e) {
     await logError("api/quote", e);

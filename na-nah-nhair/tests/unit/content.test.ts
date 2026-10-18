@@ -1,6 +1,18 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { announcement, brand, emotionalConcept, home, legal, pack, products } from "@/content/site";
+import * as site from "@/content/site";
+
+// Les textes du site ont des espaces insécables (typographie) : on compare avec des espaces simples
+const plain = <T,>(v: T): T => JSON.parse(JSON.stringify(v).replaceAll("\u00a0", " "));
+const { announcement, brand, emotionalConcept, home, legal, pack, products } = plain({
+  announcement: site.announcement,
+  brand: site.brand,
+  emotionalConcept: site.emotionalConcept,
+  home: site.home,
+  legal: site.legal,
+  pack: site.pack,
+  products: site.products,
+});
 
 // Le contenu du site doit reprendre INFOS.md mot pour mot
 const infos = readFileSync(new URL("../../INFOS.md", import.meta.url), "utf8");
@@ -76,7 +88,7 @@ describe("textes de marque", () => {
 
 describe("FAQ : réponses issues d'INFOS.md", () => {
   it("chaque réponse de livraison et retours figure dans INFOS.md", async () => {
-    const { faq } = await import("@/content/site");
+    const faq = plain(site.faq);
     const groups = faq.groups.filter((g) => ["Livraison", "Retours"].includes(g.title));
     for (const g of groups)
       for (const item of g.items)
@@ -87,15 +99,29 @@ describe("FAQ : réponses issues d'INFOS.md", () => {
   });
 
   it("les questions sans réponse fournie affichent un À COMPLÉTER", async () => {
-    const { faq } = await import("@/content/site");
+    const faq = plain(site.faq);
     for (const g of faq.groups) for (const item of g.items) if (!item.answer) expect(item.todo).toBeTruthy();
   });
 });
 
 describe("histoire : texte du brief mot pour mot", () => {
   it("les paragraphes recomposent le texte de BRIEF.md §3", async () => {
-    const { story } = await import("@/content/site");
+    const story = plain(site.story);
     const brief = readFileSync(new URL("../../BRIEF.md", import.meta.url), "utf8");
     expect(brief).toContain(story.paragraphs.join(" "));
+  });
+});
+
+describe("typographie française", () => {
+  it("espace insécable avant ? : ! » et après «", () => {
+    expect(site.announcement.text).toBe("Quel Na Nah N'Hair es-tu ?");
+    expect(site.products[0].phrase).toBe("« Simplement moi, simplement Fabulous. »");
+    const all = JSON.stringify(site);
+    expect(all).not.toMatch(/ [?!:»]/);
+    expect(all).not.toMatch(/« /);
+  });
+
+  it("INCI inchangées (aucun signe concerné)", () => {
+    for (const p of site.products) expect(p.inci).not.toContain(" ");
   });
 });

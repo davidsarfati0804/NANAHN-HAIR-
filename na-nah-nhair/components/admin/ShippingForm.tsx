@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { startTransition, useActionState } from "react";
 import { type FormState, updateShipping } from "@/app/admin/actions";
 import { adminTexts as t } from "@/content/site";
 import type { CarrierId, ShopSettings } from "@/lib/settings";
@@ -11,7 +11,14 @@ export default function ShippingForm({ settings }: { settings: ShopSettings }) {
   const [state, action, pending] = useActionState<FormState, FormData>(updateShipping, null);
   const field = "h-11 rounded-2xl border-2 border-deep-violet bg-white px-3 text-ink";
   return (
-    <form action={action} className="mt-8 grid gap-6">
+    <form
+      // Soumission manuelle : en cas d'erreur, les saisies restent affichées (pas de remise à zéro du formulaire)
+      onSubmit={(e) => {
+        e.preventDefault();
+        const data = new FormData(e.currentTarget);
+        startTransition(() => action(data));
+      }}
+      className="mt-8 grid gap-6">
       <label className="grid max-w-sm gap-1 text-sm font-bold">
         {t.shipping.threshold}
         <input name="threshold" defaultValue={euros(settings.freeShippingThresholdCents)} inputMode="decimal" required className={field} />

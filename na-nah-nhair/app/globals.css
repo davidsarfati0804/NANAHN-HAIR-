@@ -31,6 +31,8 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* Les ancres ne passent pas sous l'en-tête collant */
+    scroll-padding-top: 8rem;
   }
 
   body {
@@ -47,6 +49,8 @@
     font-weight: 400;
     letter-spacing: 0.01em;
     line-height: 0.95;
+    text-wrap: balance;
+    overflow-wrap: break-word;
   }
 
   ::selection {

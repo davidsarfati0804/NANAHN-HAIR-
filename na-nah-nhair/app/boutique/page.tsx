@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import AddToCart from "@/components/cart/AddToCart";
 import PhotoSlot from "@/components/PhotoSlot";
+import ToComplete from "@/components/ToComplete";
 import { brand, pack, products, shop as texts } from "@/content/site";
 import { formatPrice } from "@/lib/money";
 import { getShopData } from "@/lib/shop-data";
@@ -11,15 +12,18 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = { title: texts.title, description: texts.intro };
 
 export default async function BoutiquePage() {
-  const { products: shop, freeShipping } = await getShopData();
+  const { products: shop, freeShipping, freeShippingThresholdCents } = await getShopData();
   return (
     <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
       <h1 className="text-7xl text-deep-violet sm:text-8xl">{texts.title}</h1>
       <p className="mt-3 text-lg">{texts.intro}</p>
-      <p className="mt-4 inline-block rounded-full bg-lavender px-4 py-2 text-sm font-bold text-deep-violet">
-        {freeShipping ? `${texts.freeShipping} · ` : ""}
-        {brand.madeIn}
-      </p>
+      <div className="mt-4 flex flex-wrap items-center gap-2">
+        <p className="rounded-2xl bg-lavender px-4 py-2 text-sm font-bold text-deep-violet">
+          {freeShipping ? texts.freeShipping : texts.freeShippingFrom(formatPrice(freeShippingThresholdCents))}
+        </p>
+        <p className="rounded-2xl bg-lavender px-4 py-2 text-sm font-bold text-deep-violet">{brand.madeIn}</p>
+        <ToComplete label={texts.deliveryTodo} className="text-xs" />
+      </div>
 
       <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {products.map((p) => {

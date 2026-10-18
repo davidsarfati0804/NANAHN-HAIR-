@@ -5,7 +5,7 @@ import Wordmark from "@/components/Wordmark";
 
 export default function SiteFooter() {
   return (
-    <footer className="mt-24 bg-deep-violet text-white">
+    <footer className="mt-16 bg-deep-violet text-white">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-3">
         <div>
           <Wordmark className="text-5xl" />
@@ -18,12 +18,12 @@ export default function SiteFooter() {
           <address className="mt-3 space-y-1 text-sm not-italic">
             <p>{legal.address}</p>
             <p>
-              <a href={`tel:${legal.phone.replace(/\s/g, "")}`} className="underline underline-offset-4">
+              <a href={`tel:${legal.phone.replace(/\s/g, "")}`} className="inline-block py-1.5 underline underline-offset-4">
                 {legal.phone}
               </a>
             </p>
             <p>
-              <a href={`mailto:${legal.email}`} className="underline underline-offset-4">
+              <a href={`mailto:${legal.email}`} className="inline-block py-1.5 underline underline-offset-4">
                 {legal.email}
               </a>
             </p>
@@ -31,7 +31,7 @@ export default function SiteFooter() {
           <h2 className="mt-6 text-2xl">{footer.followTitle}</h2>
           <div className="mt-2">
             {legal.instagram ? (
-              <a href={legal.instagram} className="underline underline-offset-4">
+              <a href={legal.instagram} className="inline-block py-1.5 underline underline-offset-4">
                 Instagram
               </a>
             ) : (
@@ -41,10 +41,10 @@ export default function SiteFooter() {
         </div>
 
         <nav aria-label="Informations légales">
-          <ul className="space-y-2 text-sm">
+          <ul className="space-y-1 text-sm">
             {footer.legalLinks.map((link) => (
               <li key={link.href}>
-                <Link href={link.href} className="underline-offset-4 hover:underline">
+                <Link href={link.href} className="inline-block py-1.5 underline-offset-4 hover:underline">
                   {link.label}
                 </Link>
               </li>

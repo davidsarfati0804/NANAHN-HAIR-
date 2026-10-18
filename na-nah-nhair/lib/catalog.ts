@@ -60,6 +60,8 @@ export type PublicProduct = {
   priceCents: number;
   available: number | null;
   photoUrl: string | null;
+  stock: number | null;
+  active: boolean;
 };
 
 export function toPublic(catalog: Catalog): Record<ProductId, PublicProduct> {
@@ -71,7 +73,19 @@ export function toPublic(catalog: Catalog): Record<ProductId, PublicProduct> {
         priceCents: catalog[id].priceCents,
         available: availableQuantity(catalog, id),
         photoUrl: catalog[id].photoKey ? `/media/${catalog[id].photoKey}` : null,
+        stock: catalog[id].stock,
+        active: catalog[id].active,
       },
     ]),
   ) as Record<ProductId, PublicProduct>;
+}
+
+// Reconstitue le catalogue à partir de sa version publique (même calcul que le serveur)
+export function fromPublic(products: Record<ProductId, PublicProduct>): Catalog {
+  return Object.fromEntries(
+    PRODUCT_IDS.map((id) => [
+      id,
+      { id, priceCents: products[id].priceCents, stock: products[id].stock, active: products[id].active, photoKey: null },
+    ]),
+  ) as Catalog;
 }

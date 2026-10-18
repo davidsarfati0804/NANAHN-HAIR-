@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { startTransition, useActionState } from "react";
 import { type FormState, updateProduct } from "@/app/admin/actions";
 import { adminTexts as t } from "@/content/site";
 import type { CatalogProduct } from "@/lib/catalog";
@@ -11,7 +11,14 @@ export default function ProductForm({ product, name }: { product: CatalogProduct
   const field = "h-11 rounded-2xl border-2 border-deep-violet bg-white px-3 text-ink";
 
   return (
-    <form action={action} className="rounded-3xl border-2 border-lavender-mist p-5" aria-label={name}>
+    <form
+      // Soumission manuelle : en cas d'erreur, les saisies restent affichées (pas de remise à zéro du formulaire)
+      onSubmit={(e) => {
+        e.preventDefault();
+        const data = new FormData(e.currentTarget);
+        startTransition(() => action(data));
+      }}
+      className="rounded-3xl border-2 border-lavender-mist p-5" aria-label={name}>
       <input type="hidden" name="id" value={product.id} />
       <h2 className="font-body text-xl font-bold text-deep-violet">{name}</h2>
       <div className="mt-4 grid gap-4 sm:grid-cols-2">

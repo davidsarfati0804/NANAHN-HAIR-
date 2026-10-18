@@ -6,7 +6,12 @@ import { getCatalog, getSettings } from "@/lib/store";
 export async function getShopData(): Promise<{
   products: Record<ProductId, PublicProduct>;
   freeShipping: boolean;
+  freeShippingThresholdCents: number;
 }> {
   const [catalog, settings] = await Promise.all([getCatalog(), getSettings()]);
-  return { products: toPublic(catalog), freeShipping: settings.freeShippingThresholdCents === 0 };
+  return {
+    products: toPublic(catalog),
+    freeShipping: settings.freeShippingThresholdCents === 0,
+    freeShippingThresholdCents: settings.freeShippingThresholdCents,
+  };
 }

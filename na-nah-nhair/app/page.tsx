@@ -3,10 +3,12 @@ import ButtonLink from "@/components/ButtonLink";
 import LavenderBox from "@/components/LavenderBox";
 import PhotoSlot from "@/components/PhotoSlot";
 import ProductCard from "@/components/ProductCard";
+import ToComplete from "@/components/ToComplete";
 import { emotionalConcept, home, pack, products, story } from "@/content/site";
 import type { ProductId, PublicProduct } from "@/lib/catalog";
 import { formatPrice } from "@/lib/money";
 import { getShopData } from "@/lib/shop-data";
+import { capitalize } from "@/lib/typography";
 import { themeClasses } from "@/lib/theme-classes";
 
 export const dynamic = "force-dynamic";
@@ -40,7 +42,7 @@ function Hero() {
         <div className="absolute bottom-0 left-1/3 h-72 w-72 rounded-full bg-luxurious opacity-50 blur-3xl" />
       </div>
 
-      <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 pb-20 pt-14 sm:px-6 md:grid-cols-[1.2fr_1fr] md:pt-20">
+      <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 pb-20 pt-14 sm:px-6 lg:grid-cols-[1.2fr_1fr] md:pt-20">
         <div>
           <h1 className="text-[clamp(5.5rem,22vw,11rem)] leading-[0.82] text-deep-violet">
             {hero.title.map((line) => (
@@ -51,7 +53,7 @@ function Hero() {
           </h1>
           <p className="mt-6 text-2xl font-bold text-plum sm:text-3xl">{hero.signature}</p>
           <p className="mt-3 max-w-md text-lg">{hero.subtitle}</p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <ButtonLink href={hero.primaryCta.href}>{hero.primaryCta.label}</ButtonLink>
             <ButtonLink href={hero.secondaryCta.href} variant="secondary">
               {hero.secondaryCta.label}
@@ -66,7 +68,7 @@ function Hero() {
               <li
                 key={p.slug}
                 className={`${t.base} ${t.text} rounded-full px-8 py-5 shadow-sm ${
-                  i === 1 ? "md:translate-x-10" : ""
+                  i === 1 ? "lg:ml-8 lg:-mr-2" : "lg:mr-6"
                 }`}
               >
                 <span className="block font-display text-4xl sm:text-5xl">{p.shortName}</span>
@@ -95,7 +97,7 @@ function Trio({ shop }: { shop: Shop }) {
   return (
     <section aria-labelledby="trio" className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
       <SectionTitle kicker={home.trio.kicker} title={home.trio.title} id="trio" />
-      <ul className="grid gap-6 md:grid-cols-3">
+      <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {products.map((p) => (
           <li key={p.slug}>
             <ProductCard product={p} shop={shop[p.slug]} cta={home.trio.cta} />
@@ -139,7 +141,7 @@ function Products({ shop }: { shop: Shop }) {
   return (
     <section aria-labelledby="soins" className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
       <SectionTitle kicker={home.products.kicker} title={home.products.title} id="soins" />
-      <div className="grid gap-6 md:grid-cols-3">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {products.map((p) => {
           const t = themeClasses[p.slug];
           return (
@@ -160,7 +162,7 @@ function Products({ shop }: { shop: Shop }) {
               </dl>
               <Link
                 href={`/soins/${p.slug}`}
-                className={`mt-6 inline-block font-bold underline underline-offset-4 ${t.text}`}
+                className={`mt-4 inline-block py-2 font-bold underline underline-offset-4 ${t.text}`}
               >
                 {p.shortName} · {formatPrice(shop[p.slug].priceCents)}
               </Link>
@@ -190,7 +192,7 @@ function Pack({ shop }: { shop: Shop }) {
               ))}
             </ol>
             <h3 className="mt-5 font-body text-lg font-bold">{pack.usageTitle}</h3>
-            <p className="mt-2">{pack.usage}</p>
+            <p className="mt-2">{capitalize(pack.usage)}</p>
           </LavenderBox>
           <ButtonLink href="/pack" className="mt-6">
             {home.pack.cta}
@@ -229,6 +231,7 @@ function Reasons() {
           <li key={r.title} className="rounded-3xl bg-lavender p-5 text-deep-violet">
             <h3 className="font-body text-lg font-bold leading-tight">{r.title}</h3>
             {r.text && <p className="mt-2 text-sm">{r.text}</p>}
+            {r.todo && <ToComplete label={r.todo} className="mt-2 text-xs" />}
           </li>
         ))}
       </ul>

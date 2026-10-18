@@ -49,6 +49,10 @@ Toutes les informations manquantes. Chacune apparaît sur le site sous forme d'e
 - [ ] Responsable de publication
 - [ ] Lien Instagram de la marque
 
+## Boutique
+
+- [ ] Stock initial de chaque sérum (à saisir dans le back-office ; vide = stock non suivi)
+
 ## Technique
 
 - [ ] Nom de domaine

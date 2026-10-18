@@ -11,8 +11,8 @@ Le nouveau site est dans le dossier `na-nah-nhair/`. Le premier site (à la raci
 
 ## Tester
 
-- `npm test` : tests automatiques (contrastes des couleurs, textes conformes à INFOS.md).
-- `npm run build` puis `npm run test:e2e` : tests dans un navigateur (affichage en 375 px, tablette et ordinateur, liens, menu). Les captures d'écran sont enregistrées dans `captures/`.
+- `npm test` : tests automatiques (contrastes, textes conformes à INFOS.md, quiz : les 243 combinaisons, prix, panier, stock, sécurité).
+- `npm run build` puis `npm run test:e2e` : tests dans un navigateur (quiz, panier, commande, back-office, accessibilité, affichage en 375 px / tablette / ordinateur). Les captures d'écran sont enregistrées dans `captures/`.
 
 ## Modifier
 
@@ -24,8 +24,34 @@ Le nouveau site est dans le dossier `na-nah-nhair/`. Le premier site (à la raci
 
 ## Ajouter les photos
 
-1. Déposer la photo dans `assets/images/` (ex. `fabulous.jpg`) et la copier dans `public/images/`.
-2. Dans `content/site.ts`, passer `available: false` à `available: true` pour cette photo.
+Le plus simple : depuis le back-office, **Produits et stocks** > Photo.
+
+Ou dans le code : déposer la photo dans `assets/images/` (ex. `fabulous.jpg`), la copier dans `public/images/`, puis dans `content/site.ts` passer `available: false` à `available: true` pour cette photo.
+
+## Back-office (`/admin`)
+
+1. Choisir un mot de passe d'au moins 12 caractères, puis lancer :
+   `npm run admin:setup -- "mon mot de passe"`
+2. La commande affiche trois lignes `ADMIN_PASSWORD_HASH`, `ADMIN_SESSION_SECRET` et `ADMIN_TOTP_SECRET`.
+   - En local : les copier dans un fichier `.env.local` (jamais envoyé sur GitHub).
+   - En ligne : les ajouter dans Netlify > Site configuration > Environment variables.
+3. Ajouter la clé `ADMIN_TOTP_SECRET` dans une application d'authentification (Google Authenticator, Authy…) : elle donne le code à 6 chiffres demandé à chaque connexion.
+4. Se connecter sur `/admin/connexion`.
+
+Le mot de passe n'est jamais enregistré, seule son empreinte (hash) l'est. Pour le changer, relancer `npm run admin:setup` et remplacer les variables.
+
+Dans le back-office :
+
+- **Produits et stocks** : prix, stock (vide = non suivi), disponibilité, photo de chaque produit. Le pack n'a pas de stock propre.
+- **Livraison** : seuil de livraison offerte (0 = toujours offerte) et tarifs Colissimo / Mondial Relay.
+- **Journal** : historique des modifications et des erreurs.
+
+## Où sont les données ?
+
+En attendant Supabase, les prix, stocks, réglages et photos envoyées sont enregistrés :
+
+- en ligne : dans **Netlify Blobs** (inclus dans Netlify, rien à créer) ;
+- en local : dans le dossier `.data/` (ignoré par Git).
 
 ## Publier sur Netlify (deuxième site)
 

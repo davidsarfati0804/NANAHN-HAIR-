@@ -73,3 +73,29 @@ describe("textes de marque", () => {
     for (const v of [legal.siret, legal.address, legal.phone, legal.email]) expect(infos).toContain(v);
   });
 });
+
+describe("FAQ : réponses issues d'INFOS.md", () => {
+  it("chaque réponse de livraison et retours figure dans INFOS.md", async () => {
+    const { faq } = await import("@/content/site");
+    const groups = faq.groups.filter((g) => ["Livraison", "Retours"].includes(g.title));
+    for (const g of groups)
+      for (const item of g.items)
+        for (const line of item.answer ?? []) {
+          const core = line.replace(/\.$/, "");
+          expect(infos, line).toContain(core.split(", au choix")[0]);
+        }
+  });
+
+  it("les questions sans réponse fournie affichent un À COMPLÉTER", async () => {
+    const { faq } = await import("@/content/site");
+    for (const g of faq.groups) for (const item of g.items) if (!item.answer) expect(item.todo).toBeTruthy();
+  });
+});
+
+describe("histoire : texte du brief mot pour mot", () => {
+  it("les paragraphes recomposent le texte de BRIEF.md §3", async () => {
+    const { story } = await import("@/content/site");
+    const brief = readFileSync(new URL("../../BRIEF.md", import.meta.url), "utf8");
+    expect(brief).toContain(story.paragraphs.join(" "));
+  });
+});

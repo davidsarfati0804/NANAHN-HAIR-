@@ -311,16 +311,149 @@ export const footer = {
 // Pages pas encore construites : phase du brief où elles arrivent
 export const upcomingPages: Record<string, { title: string; phase: string }> = {
   quiz: { title: "Quel Na Nah N'Hair es-tu ?", phase: "Phase 4 : quiz" },
-  soins: { title: "Les trois soins", phase: "Phase 3 : pages vitrine" },
-  pack: { title: "Pack des 3 soins", phase: "Phase 3 : pages vitrine" },
   boutique: { title: "Boutique", phase: "Phase 5 : boutique" },
   panier: { title: "Panier", phase: "Phase 5 : boutique" },
-  "mon-histoire": { title: "Mon histoire", phase: "Phase 3 : pages vitrine" },
-  faq: { title: "FAQ", phase: "Phase 3 : pages vitrine" },
   contact: { title: "Contact", phase: "Phase 7 : contact et juridique" },
   "mentions-legales": { title: "Mentions légales", phase: "Phase 7 : contact et juridique" },
   cgv: { title: "Conditions générales de vente", phase: "Phase 7 : contact et juridique" },
   confidentialite: { title: "Politique de confidentialité", phase: "Phase 7 : contact et juridique" },
   cookies: { title: "Politique cookies", phase: "Phase 7 : contact et juridique" },
   retours: { title: "Retours et droit de rétractation", phase: "Phase 7 : contact et juridique" },
+};
+
+// Libellés communs des pages produits
+export const productPage = {
+  priceLabel: "Prix",
+  personalityLabel: "Personnalité",
+  universeLabel: "Univers",
+  scentLabel: "Odeur",
+  volumeLabel: "Contenance",
+  highlightsTitle: "Points clés",
+  descriptionTitle: "Description",
+  inciTitle: "Ingrédients (INCI)",
+  usageTitle: "Mode d'emploi",
+  precautionsTitle: "Précautions d'emploi",
+  faqTitle: "Questions fréquentes",
+  founderBadge: "Mon produit fondateur",
+  addToCart: "Ajouter au panier",
+  cartComingSoon: "Le panier sera activé à la phase 5 (boutique).",
+  othersTitle: "Découvre aussi",
+  packTitle: "Et si tu étais les trois ?",
+  packCta: "Découvrir le pack",
+};
+
+export const soinsPage = {
+  title: "Les trois soins",
+  intro: "Trois soins. Trois personnalités. Une seule question : lequel est le tien ?",
+  cta: "Voir la fiche",
+  quizCta: { label: "Je découvre mon Na Nah N'Hair", href: "/quiz" },
+};
+
+export const storyPage = {
+  kicker: "Mon histoire",
+  founderTitle: "Miraculous, mon produit fondateur",
+  shopCta: { label: "Découvrir les trois soins", href: "/soins" },
+};
+
+// FAQ : questions = structure ; réponses = INFOS.md uniquement, sinon À COMPLÉTER
+export type FaqItem = { question: string; answer: string[] | null; todo?: string };
+export type FaqGroup = { title: string; items: FaqItem[] };
+
+export const faq: { title: string; groups: FaqGroup[] } = {
+  title: "FAQ",
+  groups: [
+    {
+      title: "Utilisation",
+      items: [
+        {
+          question: "Comment utiliser les sérums ?",
+          answer: null,
+          todo: "mode d'emploi de chaque sérum",
+        },
+        {
+          question: "Comment utiliser le pack des 3 soins ?",
+          answer: [`Mode d'emploi du pack : ${pack.usage}`],
+        },
+      ],
+    },
+    {
+      title: "Composition",
+      items: [
+        {
+          question: "Quelle est la composition des sérums ?",
+          answer: [
+            "La liste complète des ingrédients (INCI) est affichée sur la fiche de chaque soin.",
+            ...products.map((p) => `${p.shortName} : ${p.description.vitamins.split(",")[0]}.`),
+          ],
+        },
+        {
+          question: "Quel est le parfum de chaque sérum ?",
+          answer: products.map((p) => `${p.shortName} : ${p.scent}.`),
+        },
+        {
+          question: "Quelle est la contenance d'un flacon ?",
+          answer: ["Chaque sérum est présenté en flacon de 30 ml."],
+        },
+      ],
+    },
+    {
+      title: "Précautions",
+      items: [
+        {
+          question: "Y a-t-il des précautions d'emploi ?",
+          answer: null,
+          todo: "précautions d'emploi de chaque sérum",
+        },
+      ],
+    },
+    {
+      title: "Livraison",
+      items: [
+        {
+          question: "Où livrez-vous ?",
+          answer: ["France uniquement."],
+        },
+        {
+          question: "Combien coûte la livraison ?",
+          answer: ["Livraison offerte sur toutes les commandes en France, pour l'instant."],
+        },
+        {
+          question: "Quel est le délai de livraison ?",
+          answer: ["3 jours ouvrés."],
+          todo: "préparation incluse ou non dans ce délai",
+        },
+        {
+          question: "Quels transporteurs proposez-vous ?",
+          answer: ["Colissimo et Mondial Relay, au choix à la commande (avec choix d'un point relais pour Mondial Relay)."],
+        },
+      ],
+    },
+    {
+      title: "Retours",
+      items: [
+        {
+          question: "Puis-je retourner un produit ?",
+          answer: [
+            "Droit de rétractation de 14 jours pour les produits non ouverts, comme l'impose la loi pour la vente à distance.",
+            "Les produits ouverts ne sont pas repris (raison d'hygiène).",
+          ],
+          todo: "qui paie les frais de retour",
+        },
+        {
+          question: "Que faire si mon produit est défectueux ou erroné ?",
+          answer: ["Garantie légale en cas de produit défectueux ou erroné."],
+          todo: "procédure à suivre (politique de retours à valider)",
+        },
+      ],
+    },
+    {
+      title: "Commandes",
+      items: [
+        {
+          question: "Comment vous contacter au sujet d'une commande ?",
+          answer: [`Par email à ${legal.email} ou par téléphone au ${legal.phone}.`],
+        },
+      ],
+    },
+  ],
 };

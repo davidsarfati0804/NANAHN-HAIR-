@@ -2,6 +2,7 @@ import Link from "next/link";
 import ButtonLink from "@/components/ButtonLink";
 import LavenderBox from "@/components/LavenderBox";
 import PhotoSlot from "@/components/PhotoSlot";
+import ProductCard from "@/components/ProductCard";
 import { emotionalConcept, home, pack, products, story } from "@/content/site";
 import { themeClasses } from "@/lib/theme-classes";
 
@@ -87,37 +88,11 @@ function Trio() {
     <section aria-labelledby="trio" className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
       <SectionTitle kicker={home.trio.kicker} title={home.trio.title} id="trio" />
       <ul className="grid gap-6 md:grid-cols-3">
-        {products.map((p) => {
-          const t = themeClasses[p.slug];
-          return (
-            <li key={p.slug} className={`${t.base} ${t.text} flex flex-col overflow-hidden rounded-[2rem]`}>
-              <PhotoSlot photo={p.photo} theme={p.slug} className="aspect-[4/5] m-3 rounded-[1.5rem]" />
-              <div className="flex flex-1 flex-col p-6 pt-3">
-                <h3 className="text-5xl">{p.shortName}</h3>
-                <p className="mt-1 text-sm font-bold uppercase tracking-wide">{p.name}</p>
-                <p className="mt-4">
-                  <span className="font-bold">Personnalité : </span>
-                  {p.personality}
-                </p>
-                <p className="mt-1">
-                  <span className="font-bold">Univers : </span>
-                  {p.universe}
-                </p>
-                <p className="mt-4 text-lg font-bold">{p.phrase}</p>
-                <div className="mt-auto flex items-center justify-between gap-4 pt-6">
-                  <span className="font-display text-4xl">{p.price}</span>
-                  <Link
-                    href={`/soins/${p.slug}`}
-                    className={`${t.button} rounded-full px-5 py-3 text-sm font-bold uppercase`}
-                  >
-                    {home.trio.cta}
-                    <span className="sr-only"> {p.shortName}</span>
-                  </Link>
-                </div>
-              </div>
-            </li>
-          );
-        })}
+        {products.map((p) => (
+          <li key={p.slug}>
+            <ProductCard product={p} cta={home.trio.cta} />
+          </li>
+        ))}
       </ul>
     </section>
   );

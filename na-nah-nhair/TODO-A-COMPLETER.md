@@ -12,6 +12,7 @@ Toutes les informations manquantes. Chacune apparaît sur le site sous forme d'e
 - [ ] Luxurious : précautions d'emploi
 - [ ] Validation des allégations avant mise en ligne (en particulier Miraculous et le pack : pousse, chute)
 - [ ] FAQ de chaque produit : questions et réponses
+- [ ] FAQ générale : préparation incluse ou non dans le délai, frais de retour, procédure en cas de produit défectueux
 
 ## Visuels et identité
 

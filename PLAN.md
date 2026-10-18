@@ -12,7 +12,7 @@
 - Les couleurs : Lavender `#AAA1C8`, Lavender doux `#F3F0FA`, brume `#E8E2F2`, violet profond `#35205F`, prune `#6D4E91`, encre `#211A2E`, blanc `#FFFFFF`, et les touches existantes (blush `#FFF5F7`, or `#D8A24A`, jaune Pantone 7499 `#F1E6B2`).
 - La typographie : titres en **Bebas Kai** (remplacement Bebas Neue), texte en **Montserrat**. À remplacer par les polices des flacons dès qu'elles arrivent dans `assets/fonts/`.
 
-**On supprime** : toutes les pages, composants, textes et données actuels, en particulier les avis clients fictifs et la page « Résultats » avant/après (interdits par le brief), ainsi que la configuration Netlify si l'hébergement passe sur Vercel (question 7.2).
+**On supprime** : toutes les pages, composants, textes et données actuels, en particulier les avis clients fictifs et la page « Résultats » avant/après (interdits par le brief), L'hébergement reste sur **Netlify** (décision du 18/10/2026).
 
 **On ajoute** (demandé par le brief, absent aujourd'hui) : vert Fabulous et rose Luxurious. Je proposerai des teintes en phase 2, accordées au Lavender, à valider visuellement.
 
@@ -30,7 +30,7 @@ Contrastes mesurés (WCAG AA = 4,5 minimum pour du texte) :
 
 ## 2. Architecture technique
 
-| Brique | Choix (imposé par BRIEF §7) | Rôle |
+| Brique | Choix (BRIEF §7, sauf hébergement) | Rôle |
 |---|---|---|
 | Site | Next.js (App Router) + TypeScript + Tailwind CSS | pages, API, back-office |
 | Base de données | Supabase (PostgreSQL) | produits, stocks, commandes, codes promo, réglages |
@@ -38,7 +38,7 @@ Contrastes mesurés (WCAG AA = 4,5 minimum pour du texte) :
 | Paiement | Stripe Checkout (carte, Apple Pay, Google Pay), **mode test** | paiement, webhook de confirmation |
 | Emails | Resend | confirmation de commande, expédition, accusé de contact |
 | Factures | PDF généré côté serveur, stocké dans Supabase Storage | facture par commande |
-| Hébergement | Vercel (voir question 7.2) | HTTPS, variables d'environnement |
+| Hébergement | **Netlify** (décidé, à la place de Vercel) | HTTPS, variables d'environnement, fonctions serveur |
 | Tests | Vitest (logique) + Playwright (parcours) + Lighthouse | section 8 du brief |
 
 **Règles de sécurité appliquées partout**
@@ -153,19 +153,28 @@ Les données clientes (commandes, messages) sont accessibles **uniquement côté
 | Questions du quiz | 5 thèmes généraux | 5 questions détaillées | INFOS |
 | Livraison | seuil À COMPLÉTER | offerte en France, seuil modifiable | INFOS |
 | Bandeau | — | « Quel Na Nah N'Hair es-tu ? » → quiz, texte NNH27 en réserve | INFOS |
-| **Allégations de pousse** | **interdit : « pas de promesse de pousse des cheveux »** | **Miraculous : « Stimule la pousse et la repousse », « Ralentit la chute » ; pack : « dire stop à la chute »** | **question 7.1, à trancher** |
+| Allégations de pousse | interdit : « pas de promesse de pousse des cheveux » | Miraculous : « Stimule la pousse et la repousse », « Ralentit la chute » ; pack : « dire stop à la chute » | **INFOS, mot pour mot** (décidé). Textes modifiables dans `content/site.ts`, validation avant mise en ligne (INFOS §8) |
 
 ---
 
-## 7. Questions avant de commencer
+| Hébergement | Vercel | — | **Netlify** (décidé) |
 
-1. **Allégations Miraculous.** INFOS prime, mais ces phrases sont précisément celles que BRIEF interdit. La réglementation cosmétique européenne (règlement 655/2013) exige qu'une allégation soit justifiée. « Stimule la pousse » et « stop à la chute » sont souvent considérées comme des allégations de type médicament. Je les affiche telles quelles avec une mention « à valider », ou j'attends une formulation validée par votre laboratoire ?
-2. **Hébergement.** BRIEF impose Vercel, mais le site actuel est configuré pour Netlify. Je passe sur Vercel ?
-3. **Photos et logo.** Le lien Drive n'est pas encore là. Le dépôt contient déjà des photos de flacons (Fabulous, Miraculous, Luxurious, trois produits ensemble) et des logos. Je les utilise en attendant, ou je mets des emplacements vides ?
-4. **Polices des flacons.** En attendant, je garde Bebas Kai / Bebas Neue et Montserrat comme polices de remplacement ?
-5. **Comptes.** Avez-vous déjà des comptes Stripe, Supabase, Resend et Vercel ? Sinon, je vous donne les étapes de création au moment de la phase concernée (aucune clé ne doit passer par le chat).
-6. **Stock du pack.** Je propose que le pack n'ait pas de stock propre : il est disponible tant que les trois sérums le sont, et un pack vendu décrémente un exemplaire de chacun. D'accord ?
-7. **Mondial Relay.** Le choix d'un point relais demande un compte professionnel Mondial Relay (identifiants pour leur widget). Avez-vous ce compte ? Sinon, je prépare l'emplacement.
-8. **Prénom et photo pour « Mon histoire ».** Le texte est à la première personne : faut-il afficher votre prénom ou une photo de vous ? (sinon, emplacement À COMPLÉTER)
-9. **Accès au back-office.** Qui doit y avoir accès (une ou plusieurs adresses email) ?
-10. **Domaine.** L'email `Contact@nanahnhair.com` laisse penser que le domaine `nanahnhair.com` vous appartient. C'est bien celui du site ?
+---
+
+## 7. Décisions et questions
+
+**Décidé le 18/10/2026**
+
+- Allégations : INFOS s'applique mot pour mot. En cas de doute, INFOS prime.
+- Hébergement : Netlify.
+- Photos et logo : emplacements vides « À COMPLÉTER : photo » jusqu'à l'arrivée des fichiers du Drive. Les anciennes images du dépôt ne sont pas réutilisées.
+- Stock du pack : pas de stock propre. Il est disponible tant que les trois sérums le sont, et chaque pack vendu retire un exemplaire de chaque sérum.
+
+**Encore ouvertes**
+
+1. **Polices.** En attendant les polices des flacons, je garde Bebas Kai / Bebas Neue et Montserrat ?
+2. **Comptes.** Avez-vous déjà des comptes Stripe, Supabase et Resend ? Sinon, je vous donne les étapes au moment de la phase concernée (aucune clé ne doit passer par le chat).
+3. **Mondial Relay.** Le choix d'un point relais demande un compte professionnel Mondial Relay. Avez-vous ce compte ? Sinon, je prépare l'emplacement.
+4. **Mon histoire.** Faut-il afficher votre prénom ou une photo de vous ? Sinon, emplacement À COMPLÉTER.
+5. **Back-office.** Quelle(s) adresse(s) email doivent y avoir accès ?
+6. **Domaine.** `nanahnhair.com` est bien le domaine du site ?

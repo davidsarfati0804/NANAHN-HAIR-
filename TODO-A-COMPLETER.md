@@ -42,12 +42,12 @@ Toutes les informations manquantes. Chacune apparaît sur le site sous forme d'e
 
 - [ ] Statut de l'entreprise
 - [ ] Numéro de TVA / statut fiscal (mention sur les factures)
-- [ ] Hébergeur (nom, adresse, téléphone)
+- [ ] Hébergeur : Netlify (décidé). Coordonnées légales à confirmer pour les mentions légales
 - [ ] Responsable de publication
 - [ ] Lien Instagram de la marque
 
 ## Technique
 
 - [ ] Nom de domaine
-- [ ] Comptes Stripe, Supabase, Resend, Vercel
+- [ ] Comptes Stripe, Supabase, Resend, Netlify
 - [ ] Adresse(s) email des administrateurs du back-office

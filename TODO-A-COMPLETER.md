@@ -49,5 +49,7 @@ Toutes les informations manquantes. Chacune apparaît sur le site sous forme d'e
 ## Technique
 
 - [ ] Nom de domaine
-- [ ] Comptes Stripe, Supabase, Resend, Netlify
+- [ ] Comptes Supabase et Stripe (plus tard)
+- [ ] Service d'envoi des emails (Resend non retenu pour l'instant)
+- [ ] Compte Mondial Relay
 - [ ] Adresse(s) email des administrateurs du back-office

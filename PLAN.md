@@ -167,11 +167,11 @@ Les données clientes (commandes, messages) sont accessibles **uniquement côté
 - Photos et logo : emplacements vides « À COMPLÉTER : photo » jusqu'à l'arrivée des fichiers du Drive. Les anciennes images du dépôt ne sont pas réutilisées.
 - Stock du pack : pas de stock propre. Il est disponible tant que les trois sérums le sont, et chaque pack vendu retire un exemplaire de chaque sérum.
 
-**Encore ouvertes**
+- Polices : on garde celles du site actuel (Bebas Kai / Bebas Neue pour les titres, Montserrat pour le texte) jusqu'à l'arrivée des polices des flacons.
+- Données : pas encore de Supabase. Pour l'instant, produits, prix et stocks sont stockés dans le code du site (`data/catalog.ts`), derrière une couche d'accès qui pourra être branchée sur Supabase plus tard sans toucher aux pages.
+- Stripe : plus tard. Resend : non, pas pour l'instant (service d'emails à choisir plus tard).
+- Mondial Relay : pas encore de compte, emplacement prévu.
+- Mon histoire : texte du brief uniquement, sans prénom ni photo ajoutés.
+- Accès au back-office et nom de domaine : à voir plus tard.
 
-1. **Polices.** En attendant les polices des flacons, je garde Bebas Kai / Bebas Neue et Montserrat ?
-2. **Comptes.** Avez-vous déjà des comptes Stripe, Supabase et Resend ? Sinon, je vous donne les étapes au moment de la phase concernée (aucune clé ne doit passer par le chat).
-3. **Mondial Relay.** Le choix d'un point relais demande un compte professionnel Mondial Relay. Avez-vous ce compte ? Sinon, je prépare l'emplacement.
-4. **Mon histoire.** Faut-il afficher votre prénom ou une photo de vous ? Sinon, emplacement À COMPLÉTER.
-5. **Back-office.** Quelle(s) adresse(s) email doivent y avoir accès ?
-6. **Domaine.** `nanahnhair.com` est bien le domaine du site ?
+**Conséquence** : les phases 5 et 6 (base de données, paiement, emails) attendront la création des comptes. Les phases 2, 3, 4 et 7 avancent dès maintenant.

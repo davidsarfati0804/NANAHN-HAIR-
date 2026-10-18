@@ -1,3 +1,4 @@
+import { requireAdmin } from "@/lib/auth";
 import Link from "next/link";
 import { pack, products } from "@/content/site";
 import { adminTexts as t } from "@/content/site";
@@ -6,6 +7,7 @@ import { formatPrice } from "@/lib/money";
 import { getCatalog, getSettings } from "@/lib/store";
 
 export default async function AdminHome() {
+  await requireAdmin(); // chaque page vérifie elle-même : le layout ne suffit pas
   const [catalog, settings] = await Promise.all([getCatalog(), getSettings()]);
   const name = (id: string) => (id === "pack" ? pack.name : products.find((p) => p.slug === id)!.name);
   return (

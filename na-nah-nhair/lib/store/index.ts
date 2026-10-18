@@ -1,5 +1,6 @@
 import "server-only";
 import path from "node:path";
+import type { AttemptLog } from "@/lib/auth-core";
 import { type Catalog, PRODUCT_IDS, seedCatalog } from "@/lib/catalog";
 import { seedSettings, type ShopSettings } from "@/lib/settings";
 import { createFileStore } from "./file-store";
@@ -79,4 +80,21 @@ export async function logError(where: string, error: unknown) {
   } catch {
     console.error(where, error);
   }
+}
+
+// Sessions du back-office ouvertes avant cette date : refusées
+export async function getSessionEpoch(): Promise<number> {
+  return (await kv().getJSON<number>("admin-session-epoch")) ?? 0;
+}
+
+export async function setSessionEpoch(at: number) {
+  await kv().setJSON("admin-session-epoch", at);
+}
+
+export async function getLoginAttempts(): Promise<AttemptLog> {
+  return (await kv().getJSON<AttemptLog>("login-attempts")) ?? {};
+}
+
+export async function saveLoginAttempts(log: AttemptLog) {
+  await kv().setJSON("login-attempts", log);
 }

@@ -2,9 +2,10 @@ import { describe, expect, it } from "vitest";
 import {
   base32Decode,
   base32Encode,
-  createRateLimiter,
+  checkAttempts,
   createSessionToken,
   hashPassword,
+  recordFailure,
   totpCode,
   verifyPassword,
   verifySessionToken,
@@ -67,13 +68,35 @@ describe("double authentification TOTP", () => {
   });
 });
 
-describe("limitation des tentatives", () => {
-  it("bloque après 5 échecs pendant 15 minutes", () => {
-    const rl = createRateLimiter();
-    const now = 0;
-    for (let i = 0; i < 5; i++) rl.fail("ip", now);
-    expect(rl.isBlocked("ip", now)).toBe(true);
-    expect(rl.isBlocked("autre-ip", now)).toBe(false);
-    expect(rl.isBlocked("ip", now + 15 * 60 * 1000 + 1)).toBe(false);
+describe("limitation des tentatives (persistante)", () => {
+  it("bloque une IP après 5 échecs pendant 15 minutes, sans toucher les autres IP", () => {
+    let log = {};
+    for (let i = 0; i < 5; i++) log = recordFailure(log, ["ip:a", "global"], 15 * 60 * 1000, 0);
+    expect(checkAttempts(log, [["ip:a", 5], ["global", 50]], 0)).toBe(true);
+    expect(checkAttempts(log, [["ip:b", 5], ["global", 50]], 0)).toBe(false);
+    expect(checkAttempts(log, [["ip:a", 5]], 15 * 60 * 1000 + 1)).toBe(false);
+  });
+
+  it("verrou global : 50 échecs toutes IP confondues", () => {
+    let log = {};
+    for (let i = 0; i < 50; i++) log = recordFailure(log, [`ip:${i}`, "global"], 15 * 60 * 1000, 0);
+    expect(checkAttempts(log, [["ip:nouvelle", 5], ["global", 50]], 0)).toBe(true);
+  });
+
+  it("les compteurs expirés sont nettoyés", () => {
+    const log = recordFailure({ "ip:old": { count: 3, reset: 10 } }, ["ip:new"], 1000, 100);
+    expect(Object.keys(log)).toEqual(["ip:new"]);
+  });
+});
+
+describe("déconnexion côté serveur", () => {
+  it("une session ouverte avant la déconnexion est refusée", () => {
+    const secret = "s".repeat(40);
+    const t0 = 1_700_000_000_000;
+    const token = createSessionToken(secret, t0);
+    expect(verifySessionToken(token, secret, t0 + 1000, 0)).toBe(true);
+    expect(verifySessionToken(token, secret, t0 + 1000, t0 + 500)).toBe(false);
+    const after = createSessionToken(secret, t0 + 600);
+    expect(verifySessionToken(after, secret, t0 + 1000, t0 + 500)).toBe(true);
   });
 });

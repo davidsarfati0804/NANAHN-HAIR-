@@ -1,7 +1,9 @@
+import { requireAdmin } from "@/lib/auth";
 import { adminTexts as t } from "@/content/site";
 import { type AuditEntry, getAudit, getErrors } from "@/lib/store";
 
 export default async function AdminJournalPage() {
+  await requireAdmin(); // chaque page vérifie elle-même : le layout ne suffit pas
   const [audit, errors] = await Promise.all([getAudit(), getErrors()]);
   return (
     <div>

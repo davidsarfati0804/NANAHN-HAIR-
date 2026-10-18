@@ -35,7 +35,13 @@ export function createSessionToken(secret: string, now = Date.now()): string {
   return `${payload}.${sign(payload, secret)}`;
 }
 
-export function verifySessionToken(token: string | undefined, secret: string, now = Date.now()): boolean {
+// notBefore : les sessions ouvertes avant cette date sont refusées (déconnexion côté serveur)
+export function verifySessionToken(
+  token: string | undefined,
+  secret: string,
+  now = Date.now(),
+  notBefore = 0,
+): boolean {
   if (!token) return false;
   const [payload, signature] = token.split(".");
   if (!payload || !signature) return false;
@@ -44,7 +50,8 @@ export function verifySessionToken(token: string | undefined, secret: string, no
   if (expected.length !== actual.length || !timingSafeEqual(expected, actual)) return false;
   try {
     const data = JSON.parse(Buffer.from(payload, "base64url").toString("utf8"));
-    return data.v === 1 && typeof data.exp === "number" && data.exp > now;
+    const issuedAt = data.exp - SESSION_MAX_AGE_SECONDS * 1000;
+    return data.v === 1 && typeof data.exp === "number" && data.exp > now && issuedAt >= notBefore;
   } catch {
     return false;
   }
@@ -90,21 +97,22 @@ export function verifyTotp(secretBase32: string, code: string, now = Date.now())
   });
 }
 
-// Limitation des tentatives de connexion : 5 échecs par 15 minutes et par adresse IP
-export function createRateLimiter(max = 5, windowMs = 15 * 60 * 1000) {
-  const hits = new Map<string, { count: number; reset: number }>();
-  return {
-    isBlocked(key: string, now = Date.now()) {
-      const h = hits.get(key);
-      return Boolean(h && h.reset > now && h.count >= max);
-    },
-    fail(key: string, now = Date.now()) {
-      const h = hits.get(key);
-      if (!h || h.reset <= now) hits.set(key, { count: 1, reset: now + windowMs });
-      else h.count++;
-    },
-    reset(key: string) {
-      hits.delete(key);
-    },
-  };
+// Limiteur persistant : les compteurs sont lus et écrits dans le stockage (partagés entre serveurs)
+export type AttemptLog = Record<string, { count: number; reset: number }>;
+
+export function checkAttempts(log: AttemptLog, keys: Array<[key: string, max: number]>, now = Date.now()): boolean {
+  return keys.some(([key, max]) => {
+    const h = log[key];
+    return Boolean(h && h.reset > now && h.count >= max);
+  });
+}
+
+export function recordFailure(log: AttemptLog, keys: string[], windowMs = 15 * 60 * 1000, now = Date.now()): AttemptLog {
+  const next: AttemptLog = {};
+  for (const [k, v] of Object.entries(log)) if (v.reset > now) next[k] = v;
+  for (const key of keys) {
+    const h = next[key];
+    next[key] = !h ? { count: 1, reset: now + windowMs } : { ...h, count: h.count + 1 };
+  }
+  return next;
 }

@@ -3,12 +3,26 @@
 import { randomBytes } from "node:crypto";
 import { redirect } from "next/navigation";
 import { adminTexts as t } from "@/content/site";
-import { adminConfig, clientIp, endSession, loginLimiter, requireAdmin, startSession } from "@/lib/auth";
-import { verifyPassword, verifyTotp } from "@/lib/auth-core";
+import { adminConfig, clientIp, endSession, requireAdmin, startSession } from "@/lib/auth";
+import { checkAttempts, recordFailure, verifyPassword, verifyTotp } from "@/lib/auth-core";
 import { isProductId } from "@/lib/catalog";
 import { parseEuroInput } from "@/lib/money";
 import type { CarrierId } from "@/lib/settings";
-import { appendAudit, deleteMedia, getCatalog, getSettings, putMedia, saveCatalog, saveSettings } from "@/lib/store";
+import {
+  appendAudit,
+  deleteMedia,
+  getCatalog,
+  getLoginAttempts,
+  getSettings,
+  putMedia,
+  saveCatalog,
+  saveLoginAttempts,
+  saveSettings,
+} from "@/lib/store";
+
+// 5 échecs par IP, et 50 échecs au total (toutes IP confondues), par tranche de 15 minutes
+const LIMITS: Array<[string, number]> = [["global", 50]];
+const PER_IP = 5;
 
 export type FormState = { ok?: boolean; error?: string } | null;
 
@@ -16,7 +30,9 @@ export async function login(_prev: FormState, formData: FormData): Promise<FormS
   const config = adminConfig();
   if (!config.configured) return { error: t.login.notConfigured };
   const ip = await clientIp();
-  if (loginLimiter.isBlocked(ip)) return { error: t.login.blocked };
+  const ipKey = `ip:${ip}`;
+  const attempts = await getLoginAttempts();
+  if (checkAttempts(attempts, [[ipKey, PER_IP], ...LIMITS])) return { error: t.login.blocked };
 
   const password = String(formData.get("password") ?? "");
   const code = String(formData.get("totp") ?? "").replace(/\s/g, "");
@@ -24,11 +40,14 @@ export async function login(_prev: FormState, formData: FormData): Promise<FormS
   const totpOk = !config.totpSecret || verifyTotp(config.totpSecret, code);
 
   if (!passwordOk || !totpOk) {
-    loginLimiter.fail(ip);
+    await saveLoginAttempts(recordFailure(attempts, [ipKey, "global"]));
+    await appendAudit("connexion refusée", `IP ${ip}`);
     await new Promise((r) => setTimeout(r, 400)); // ralentit les essais en série
     return { error: t.login.invalid };
   }
-  loginLimiter.reset(ip);
+  const { [ipKey]: _cleared, ...rest } = attempts;
+  void _cleared;
+  await saveLoginAttempts(rest);
   await startSession();
   await appendAudit("connexion", `IP ${ip}`);
   redirect("/admin");

@@ -1,10 +1,10 @@
 import "server-only";
 import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { createRateLimiter, createSessionToken, SESSION_MAX_AGE_SECONDS, verifySessionToken } from "@/lib/auth-core";
+import { createSessionToken, SESSION_MAX_AGE_SECONDS, verifySessionToken } from "@/lib/auth-core";
+import { getSessionEpoch, setSessionEpoch } from "@/lib/store";
 
 export const SESSION_COOKIE = "nnh_admin";
-export const loginLimiter = createRateLimiter();
 
 // Le back-office n'est accessible que si les variables d'environnement sont définies (voir GUIDE.md)
 export function adminConfig() {
@@ -19,7 +19,9 @@ export async function isAdmin(): Promise<boolean> {
   const { configured, sessionSecret } = adminConfig();
   if (!configured) return false;
   const jar = await cookies();
-  return verifySessionToken(jar.get(SESSION_COOKIE)?.value, sessionSecret);
+  const token = jar.get(SESSION_COOKIE)?.value;
+  if (!token) return false;
+  return verifySessionToken(token, sessionSecret, Date.now(), await getSessionEpoch());
 }
 
 // À appeler au début de chaque page et de chaque action du back-office
@@ -38,11 +40,14 @@ export async function startSession() {
   });
 }
 
+// Déconnexion : le cookie est supprimé ET toutes les sessions ouvertes jusqu'ici sont invalidées
 export async function endSession() {
+  await setSessionEpoch(Date.now());
   (await cookies()).delete(SESSION_COOKIE);
 }
 
+// Seule l'IP posée par Netlify est fiable ; X-Forwarded-For peut être falsifié par le client
 export async function clientIp(): Promise<string> {
   const h = await headers();
-  return h.get("x-nf-client-connection-ip") ?? h.get("x-forwarded-for")?.split(",")[0].trim() ?? "local";
+  return h.get("x-nf-client-connection-ip") ?? "ip-inconnue";
 }

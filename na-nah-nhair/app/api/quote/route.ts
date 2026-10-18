@@ -6,14 +6,20 @@ import { getCatalog, getSettings, logError } from "@/lib/store";
 export const dynamic = "force-dynamic";
 
 // Calcul qui fait foi : prix lus en base, jamais ceux envoyés par le navigateur
+const MAX_BODY_BYTES = 5000;
+
 export async function POST(request: Request) {
+  // Taille contrôlée avant toute lecture du JSON
+  const declared = Number(request.headers.get("content-length") ?? "0");
+  if (declared > MAX_BODY_BYTES) return NextResponse.json({ error: "requête trop grande" }, { status: 413 });
   let body: unknown;
   try {
-    body = await request.json();
+    const text = await readLimited(request, MAX_BODY_BYTES);
+    if (text === null) return NextResponse.json({ error: "requête trop grande" }, { status: 413 });
+    body = JSON.parse(text);
   } catch {
     return NextResponse.json({ error: "requête invalide" }, { status: 400 });
   }
-  if (JSON.stringify(body).length > 5000) return NextResponse.json({ error: "requête trop grande" }, { status: 413 });
 
   try {
     const { items, errors } = sanitizeCart((body as { items?: unknown })?.items);
@@ -28,4 +34,23 @@ export async function POST(request: Request) {
     await logError("api/quote", e);
     return NextResponse.json({ error: "indisponible" }, { status: 500 });
   }
+}
+
+// Lit le corps en s'arrêtant dès que la limite est dépassée (null = trop grand)
+async function readLimited(request: Request, max: number): Promise<string | null> {
+  if (!request.body) return "";
+  const reader = request.body.getReader();
+  const chunks: Uint8Array[] = [];
+  let size = 0;
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    size += value.byteLength;
+    if (size > max) {
+      await reader.cancel();
+      return null;
+    }
+    chunks.push(value);
+  }
+  return new TextDecoder().decode(Buffer.concat(chunks));
 }

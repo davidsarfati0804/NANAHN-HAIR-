@@ -134,6 +134,46 @@ test("livraison : seuil et tarifs configurables", async ({ page }) => {
   await expect(page.getByText("Modifications enregistrées.")).toBeVisible();
 });
 
+test("aucune donnée du back-office dans les réponses envoyées à un visiteur non connecté", async ({ request }) => {
+  for (const path of ["/admin", "/admin/produits", "/admin/livraison", "/admin/journal"]) {
+    for (const headers of [{}, { RSC: "1" }]) {
+      const res = await request.get(path, { maxRedirects: 0, headers });
+      expect(res.status(), path).toBe(307);
+      const body = await res.text();
+      for (const secret of ["priceCents", "freeShippingThresholdCents", "Produits et stocks", "IP "]) {
+        expect(body, `${path} ${JSON.stringify(headers)}`).not.toContain(secret);
+      }
+    }
+  }
+});
+
+test("déconnexion : l'ancien cookie de session ne fonctionne plus", async ({ page, context, browser }) => {
+  await adminLogin(page);
+  const cookie = (await context.cookies()).find((c) => c.name === "nnh_admin")!;
+  await page.getByRole("button", { name: "Se déconnecter" }).click();
+  await expect(page).toHaveURL(/\/admin\/connexion$/);
+  const other = await browser.newContext();
+  await other.addCookies([cookie]);
+  const p2 = await other.newPage();
+  await p2.goto("http://localhost:3100/admin");
+  await expect(p2).toHaveURL(/\/admin\/connexion$/);
+  await other.close();
+});
+
+test("en-têtes de sécurité", async ({ request }) => {
+  const res = await request.get("/");
+  const h = res.headers();
+  expect(h["content-security-policy"]).toContain("frame-ancestors 'none'");
+  expect(h["strict-transport-security"]).toContain("max-age=");
+  expect(h["x-frame-options"]).toBe("DENY");
+  expect(h["x-powered-by"]).toBeUndefined();
+});
+
+test("API : corps trop volumineux refusé avant lecture", async ({ request }) => {
+  const res = await request.post("/api/quote", { headers: { "Content-Type": "application/json" }, data: Buffer.from("x".repeat(20000)) });
+  expect(res.status()).toBe(413);
+});
+
 test("back-office : actions refusées sans session (appel direct)", async ({ request }) => {
   const res = await request.get("/admin/produits", { maxRedirects: 0 });
   expect([303, 307, 308, 200]).toContain(res.status());

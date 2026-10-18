@@ -1,6 +1,12 @@
+# Branche site-2 : publie le NOUVEAU site (dossier na-nah-nhair/).
+# Le premier site reste publié depuis la branche main, avec son propre netlify.toml.
 [build]
+  base = "na-nah-nhair"
   command = "npm run build"
   publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"

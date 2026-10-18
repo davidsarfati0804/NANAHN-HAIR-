@@ -9,6 +9,7 @@ import { getShopData } from "@/lib/shop-data";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/soins" },
   title: soinsPage.title,
   description: soinsPage.intro,
 };

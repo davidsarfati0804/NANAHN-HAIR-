@@ -3,6 +3,7 @@ import FaqList from "@/components/FaqList";
 import { faq, seo } from "@/content/site";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/faq" },
   title: faq.title,
   description: seo.faqDescription,
 };

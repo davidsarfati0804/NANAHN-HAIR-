@@ -312,24 +312,59 @@ export const footer = fr({
   followTitle: "Instagram",
 });
 
-export const upcomingTexts = fr({
-  soon: "Cette page arrive bientôt.",
-  back: "Retour à l'accueil",
-});
 
 export const seo = fr({
   description: "Trois soins. Trois personnalités. Une seule question : lequel est le tien ?",
   faqDescription: "Utilisation, composition, précautions, livraison, retours et commandes.",
 });
 
-// Pages pas encore construites : phase du brief où elles arrivent
-export const upcomingPages: Record<string, { title: string; phase: string }> = fr({
-  contact: { title: "Contact", phase: "Phase 7 : contact et juridique" },
-  "mentions-legales": { title: "Mentions légales", phase: "Phase 7 : contact et juridique" },
-  cgv: { title: "Conditions générales de vente", phase: "Phase 7 : contact et juridique" },
-  confidentialite: { title: "Politique de confidentialité", phase: "Phase 7 : contact et juridique" },
-  cookies: { title: "Politique cookies", phase: "Phase 7 : contact et juridique" },
-  retours: { title: "Retours et droit de rétractation", phase: "Phase 7 : contact et juridique" },
+export const legalTexts = fr({
+  cookieChoiceTitle: "Ton choix concernant les cookies",
+  contactLink: "Une question ? Contacte-nous",
+});
+
+export const consentTexts = fr({
+  label: "Cookies",
+  text: "Ce site n'utilise que le stockage nécessaire à son fonctionnement (ton panier). Aucun cookie publicitaire ni de mesure d'audience.",
+  accept: "Accepter",
+  refuse: "Refuser",
+  more: "En savoir plus",
+  reset: "Modifier mon choix",
+  current: (choice: string) => `Ton choix actuel : ${choice}.`,
+  accepted: "accepté",
+  refused: "refusé",
+  none: "aucun choix enregistré",
+});
+
+export const contactTexts = fr({
+  title: "Contact",
+  intro: "Une question sur un soin, une commande ou la livraison ? Écris-nous.",
+  name: "Nom",
+  email: "Email",
+  subject: "Sujet",
+  subjects: ["Une commande", "Les soins", "Autre"],
+  message: "Message",
+  submit: "Envoyer",
+  sending: "Envoi…",
+  success: "Merci ! Ton message a bien été envoyé. Nous te répondrons rapidement.",
+  privacy: "Tes informations servent uniquement à te répondre. Voir la politique de confidentialité.",
+  coordinatesTitle: "Coordonnées",
+  instagramTitle: "Instagram",
+  errors: {
+    name: "Indique ton nom (2 à 100 caractères).",
+    email: "Indique une adresse email valide.",
+    subject: "Choisis un sujet.",
+    message: "Ton message doit contenir entre 10 et 3 000 caractères.",
+    spam: "Message refusé. Réessaie dans quelques instants.",
+    rate: "Trop de messages envoyés. Réessaie plus tard.",
+    server: "Le message n'a pas pu être envoyé. Écris-nous directement par email.",
+  },
+});
+
+export const shareTexts = fr({
+  share: "Partager mon résultat",
+  copied: "Lien copié !",
+  shareTitle: (name: string) => `Mon Na Nah N'Hair : ${name}`,
 });
 
 // Libellés communs des pages produits
@@ -609,6 +644,7 @@ export const adminTexts = fr({
     { label: "Tableau de bord", href: "/admin" },
     { label: "Produits et stocks", href: "/admin/produits" },
     { label: "Livraison", href: "/admin/livraison" },
+    { label: "Messages", href: "/admin/messages" },
     { label: "Journal", href: "/admin/journal" },
   ],
   logout: "Se déconnecter",
@@ -645,6 +681,13 @@ export const adminTexts = fr({
       noCarrier: "Au moins un transporteur doit être proposé.",
       missingPrice: "Livraison payante : renseigne le tarif de chaque transporteur proposé.",
     },
+  },
+  messages: {
+    title: "Messages",
+    empty: "Aucun message.",
+    delete: "Supprimer",
+    export: "Exporter (CSV)",
+    rgpd: "Suppression définitive (droit à l'effacement, RGPD).",
   },
   journal: { title: "Journal", audit: "Actions du back-office", errors: "Erreurs serveur", empty: "Rien pour l'instant." },
 });

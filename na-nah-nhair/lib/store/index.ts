@@ -2,6 +2,7 @@ import "server-only";
 import path from "node:path";
 import type { AttemptLog } from "@/lib/auth-core";
 import { type Catalog, PRODUCT_IDS, seedCatalog } from "@/lib/catalog";
+import type { ContactMessage } from "@/lib/contact";
 import { seedSettings, type ShopSettings } from "@/lib/settings";
 import { createFileStore } from "./file-store";
 import { createNetlifyStore } from "./netlify-store";
@@ -97,4 +98,28 @@ export async function getLoginAttempts(): Promise<AttemptLog> {
 
 export async function saveLoginAttempts(log: AttemptLog) {
   await kv().setJSON("login-attempts", log);
+}
+
+// Messages du formulaire de contact (les 1 000 derniers)
+export async function getContactMessages(): Promise<ContactMessage[]> {
+  return (await kv().getJSON<ContactMessage[]>("contact-messages")) ?? [];
+}
+
+export async function appendContactMessage(message: ContactMessage) {
+  const list = await getContactMessages();
+  list.unshift(message);
+  await kv().setJSON("contact-messages", list.slice(0, 1000));
+}
+
+export async function deleteContactMessage(id: string) {
+  const list = await getContactMessages();
+  await kv().setJSON("contact-messages", list.filter((m) => m.id !== id));
+}
+
+export async function getContactAttempts(): Promise<AttemptLog> {
+  return (await kv().getJSON<AttemptLog>("contact-attempts")) ?? {};
+}
+
+export async function saveContactAttempts(log: AttemptLog) {
+  await kv().setJSON("contact-attempts", log);
 }

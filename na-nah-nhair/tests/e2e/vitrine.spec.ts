@@ -18,6 +18,9 @@ const pages = [
   "/panier",
   "/commande",
   "/admin/connexion",
+  "/contact",
+  "/cgv",
+  "/mentions-legales",
 ];
 const viewports = [
   { name: "320", width: 320, height: 640 },

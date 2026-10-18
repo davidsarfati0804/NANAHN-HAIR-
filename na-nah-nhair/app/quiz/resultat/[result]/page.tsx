@@ -5,6 +5,7 @@ import AddToCart from "@/components/cart/AddToCart";
 import ButtonLink from "@/components/ButtonLink";
 import LavenderBox from "@/components/LavenderBox";
 import PhotoSlot from "@/components/PhotoSlot";
+import ShareButton from "@/components/ShareButton";
 import { pack, productBySlug, productPage, quiz } from "@/content/site";
 import { formatPrice } from "@/lib/money";
 import { isQuizResult, QUIZ_RESULTS } from "@/lib/quiz";
@@ -80,6 +81,7 @@ export default async function QuizResultPage({ params }: { params: Promise<{ res
             {quiz.restart}
           </ButtonLink>
         </div>
+        <ShareButton name={result === "pack" ? pack.name : productBySlug(result)!.shortName} className="mt-6" />
       </section>
     </div>
   );

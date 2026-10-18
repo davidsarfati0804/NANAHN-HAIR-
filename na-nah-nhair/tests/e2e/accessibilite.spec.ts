@@ -17,6 +17,11 @@ const pages = [
   "/panier",
   "/commande",
   "/contact",
+  "/mentions-legales",
+  "/cgv",
+  "/confidentialite",
+  "/cookies",
+  "/retours",
   "/admin/connexion",
 ];
 
@@ -29,3 +34,13 @@ for (const path of pages) {
     expect(summary, summary.join("\n")).toEqual([]);
   });
 }
+
+test.describe("accessibilité du bandeau cookies", () => {
+  test.use({ storageState: { cookies: [], origins: [] } });
+  test("bandeau affiché : WCAG AA", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.getByRole("region", { name: "Cookies" })).toBeVisible();
+    const results = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"]).analyze();
+    expect(results.violations.map((v) => v.id)).toEqual([]);
+  });
+});

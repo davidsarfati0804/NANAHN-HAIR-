@@ -15,6 +15,11 @@ export default defineConfig({
   workers: 1,
   use: {
     baseURL: "http://localhost:3100",
+    // Choix cookies déjà fait : le bandeau ne recouvre pas les pages pendant les tests (testé à part)
+    storageState: {
+      cookies: [],
+      origins: [{ origin: "http://localhost:3100", localStorage: [{ name: "nnh-consentement", value: "refuse" }] }],
+    },
     launchOptions: process.env.PW_CHROMIUM_PATH ? { executablePath: process.env.PW_CHROMIUM_PATH } : {},
   },
   webServer: {

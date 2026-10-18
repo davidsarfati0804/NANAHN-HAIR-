@@ -53,6 +53,21 @@ En attendant Supabase, les prix, stocks, réglages et photos envoyées sont enre
 - en ligne : dans **Netlify Blobs** (inclus dans Netlify, rien à créer) ;
 - en local : dans le dossier `.data/` (ignoré par Git).
 
-## Publier sur Netlify (deuxième site)
+## Voir le nouveau site en ligne (Netlify)
 
-À faire seulement après validation. Créer un **nouveau** site Netlify relié au même dépôt GitHub, avec « Base directory » = `na-nah-nhair`. Le premier site Netlify reste inchangé.
+Le premier site (branche `main`) n'est pas modifié. Le nouveau site est publié depuis la branche **`site-2`** :
+son fichier `netlify.toml` à la racine indique à Netlify de construire le dossier `na-nah-nhair/`.
+
+**Une seule fois, dans Netlify** (site déjà relié à GitHub) :
+
+1. Site configuration > Build & deploy > Continuous deployment > **Branches and deploy contexts** > Configure.
+2. **Branch deploys** : choisir « Let me add individual branches » et ajouter `site-2` (ou « All »). Enregistrer.
+3. Site configuration > Environment variables : ajouter `ADMIN_PASSWORD_HASH`, `ADMIN_SESSION_SECRET` et `ADMIN_TOTP_SECRET` (voir « Back-office » ci-dessus), avec le contexte « Branch deploys ».
+4. Deploys > Trigger deploy (ou attendre le prochain envoi sur `site-2`).
+
+Adresse du nouveau site : `https://site-2--<nom-du-site-netlify>.netlify.app`.
+Chaque envoi sur la branche `site-2` met ce site à jour automatiquement.
+
+## Mise en ligne officielle
+
+Uniquement après validation : choix du domaine, `SITE_URL`, `NNH_INDEXABLE=1`, Stripe en production (phase 9).

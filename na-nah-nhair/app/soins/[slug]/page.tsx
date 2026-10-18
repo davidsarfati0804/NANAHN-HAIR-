@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import AddToCart from "@/components/cart/AddToCart";
+import JsonLd from "@/components/JsonLd";
 import LavenderBox from "@/components/LavenderBox";
 import PhotoSlot from "@/components/PhotoSlot";
 import ToComplete from "@/components/ToComplete";
 import { pack, productBySlug, productPage as l, products } from "@/content/site";
 import { formatPrice } from "@/lib/money";
+import { productJsonLd } from "@/lib/structured-data";
 import { getShopData } from "@/lib/shop-data";
 import { capitalize } from "@/lib/typography";
 import { themeClasses } from "@/lib/theme-classes";
@@ -21,7 +23,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const p = productBySlug(slug);
-  return p ? { title: p.name, description: p.description.intro } : {};
+  return p ? { title: p.name, description: p.description.intro, alternates: { canonical: `/soins/${p.slug}` } } : {};
 }
 
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -34,6 +36,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
   return (
     <article>
+      <JsonLd data={productJsonLd({ name: p.name, description: p.description.intro, path: `/soins/${p.slug}`, shop: shop[p.slug] })} />
       <div className={`${t.soft}`}>
         <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-2 md:py-16">
           <PhotoSlot

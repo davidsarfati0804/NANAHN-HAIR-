@@ -11,6 +11,7 @@ import { parseEuroInput } from "@/lib/money";
 import type { CarrierId } from "@/lib/settings";
 import {
   appendAudit,
+  deleteContactMessage,
   deleteMedia,
   getCatalog,
   getLoginAttempts,
@@ -135,4 +136,13 @@ export async function updateShipping(_prev: FormState, formData: FormData): Prom
   await appendAudit("livraison", `seuil ${threshold} c, ${JSON.stringify(settings.carriers)}`);
   revalidatePath("/admin/livraison");
   return { ok: true };
+}
+
+export async function removeMessage(formData: FormData) {
+  await requireAdmin();
+  const id = String(formData.get("id") ?? "");
+  if (!/^[a-f0-9]{16}$/.test(id)) return;
+  await deleteContactMessage(id);
+  await appendAudit("message supprimé", id);
+  revalidatePath("/admin/messages");
 }

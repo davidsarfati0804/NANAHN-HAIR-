@@ -43,6 +43,12 @@ Toutes les informations manquantes. Chacune apparaît sur le site sous forme d'e
 
 ## Informations légales
 
+- [ ] Médiateur de la consommation (CGV)
+- [ ] Droit applicable et juridiction (CGV)
+- [ ] Durée de conservation des messages et des commandes (confidentialité)
+- [ ] Modèle de formulaire de rétractation, procédure et adresse de retour
+- [ ] Relecture juridique de toutes les pages légales
+
 - [ ] Statut de l'entreprise
 - [ ] Numéro de TVA / statut fiscal (mention sur les factures)
 - [ ] Hébergeur : Netlify (décidé). Coordonnées légales à confirmer pour les mentions légales
@@ -56,6 +62,9 @@ Toutes les informations manquantes. Chacune apparaît sur le site sous forme d'e
 - [ ] Stock initial de chaque sérum (à saisir dans le back-office ; vide = stock non suivi)
 
 ## Technique
+
+- [ ] Email d'accusé de réception du formulaire de contact (service d'envoi d'emails à choisir)
+- [ ] Activer l'indexation Google (`NNH_INDEXABLE=1`) au moment de la mise en ligne officielle
 
 - [ ] Nom de domaine
 - [ ] Comptes Supabase et Stripe (plus tard)

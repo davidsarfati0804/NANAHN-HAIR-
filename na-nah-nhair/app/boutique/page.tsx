@@ -9,7 +9,8 @@ import { getShopData } from "@/lib/shop-data";
 import { themeClasses } from "@/lib/theme-classes";
 
 export const dynamic = "force-dynamic";
-export const metadata: Metadata = { title: texts.title, description: texts.intro };
+export const metadata: Metadata = {
+  alternates: { canonical: "/boutique" }, title: texts.title, description: texts.intro };
 
 export default async function BoutiquePage() {
   const { products: shop, freeShipping, freeShippingThresholdCents } = await getShopData();

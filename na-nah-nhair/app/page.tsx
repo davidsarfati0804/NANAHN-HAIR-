@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ButtonLink from "@/components/ButtonLink";
+import JsonLd from "@/components/JsonLd";
 import LavenderBox from "@/components/LavenderBox";
 import PhotoSlot from "@/components/PhotoSlot";
 import ProductCard from "@/components/ProductCard";
@@ -8,6 +9,7 @@ import { emotionalConcept, home, pack, products, story } from "@/content/site";
 import type { ProductId, PublicProduct } from "@/lib/catalog";
 import { formatPrice } from "@/lib/money";
 import { getShopData } from "@/lib/shop-data";
+import { organizationJsonLd } from "@/lib/structured-data";
 import { capitalize } from "@/lib/typography";
 import { themeClasses } from "@/lib/theme-classes";
 
@@ -19,6 +21,7 @@ export default async function HomePage() {
   const { products: shop } = await getShopData();
   return (
     <>
+      <JsonLd data={organizationJsonLd()} />
       <Hero />
       <Trio shop={shop} />
       <Concept />

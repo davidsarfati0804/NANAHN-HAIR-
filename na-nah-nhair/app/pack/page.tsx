@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import AddToCart from "@/components/cart/AddToCart";
+import JsonLd from "@/components/JsonLd";
 import LavenderBox from "@/components/LavenderBox";
 import PhotoSlot from "@/components/PhotoSlot";
 import { emotionalConcept, pack, products } from "@/content/site";
 import { formatPrice } from "@/lib/money";
+import { productJsonLd } from "@/lib/structured-data";
 import { getShopData } from "@/lib/shop-data";
 import { capitalize } from "@/lib/typography";
 import { themeClasses } from "@/lib/theme-classes";
@@ -13,6 +15,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: pack.name,
+  alternates: { canonical: "/pack" },
   description: `${pack.contentTitle} : Fabulous, Miraculous et Luxurious.`,
 };
 
@@ -20,6 +23,9 @@ export default async function PackPage() {
   const { products: shop } = await getShopData();
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 md:py-16">
+      <JsonLd
+        data={productJsonLd({ name: pack.name, description: pack.content.map((c) => `${c.product} : ${c.text}`).join(" "), path: "/pack", shop: shop.pack })}
+      />
       <div className="grid gap-10 md:grid-cols-2">
         <PhotoSlot photo={pack.photo} src={shop.pack.photoUrl} priority className="aspect-square rounded-[2rem]" />
         <div>

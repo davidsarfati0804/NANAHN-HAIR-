@@ -9,6 +9,7 @@ import { capitalize } from "@/lib/typography";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/mon-histoire" },
   title: story.title,
   description: story.paragraphs[0],
 };

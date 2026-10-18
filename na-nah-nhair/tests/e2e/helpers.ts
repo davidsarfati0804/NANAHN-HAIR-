@@ -20,5 +20,5 @@ export async function resetShop() {
 
 export async function clearCart(page: Page) {
   await page.goto("/");
-  await page.evaluate(() => localStorage.clear());
+  await page.evaluate(() => localStorage.removeItem("nnh-panier-v1"));
 }

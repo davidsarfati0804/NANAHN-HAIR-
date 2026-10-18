@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { Bebas_Neue, Montserrat } from "next/font/google";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import { CartProvider } from "@/components/cart/CartProvider";
+import ConsentBanner from "@/components/consent/ConsentBanner";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import { brand, seo } from "@/content/site";
+import { isIndexable, siteUrl } from "@/lib/site-url";
 import "./globals.css";
 
 // Polices du premier site, en attendant celles des flacons
@@ -17,6 +19,8 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl()),
+  robots: isIndexable() ? undefined : { index: false, follow: false },
   title: { default: `${brand.name} | ${brand.signature}`, template: `%s | ${brand.name}` },
   description: seo.description,
   openGraph: { siteName: brand.name, type: "website", locale: "fr_FR" },
@@ -37,6 +41,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <SiteHeader />
           <main id="contenu">{children}</main>
           <SiteFooter />
+          <ConsentBanner />
         </CartProvider>
       </body>
     </html>

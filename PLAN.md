@@ -154,9 +154,6 @@ Les données clientes (commandes, messages) sont accessibles **uniquement côté
 | Livraison | seuil À COMPLÉTER | offerte en France, seuil modifiable | INFOS |
 | Bandeau | — | « Quel Na Nah N'Hair es-tu ? » → quiz, texte NNH27 en réserve | INFOS |
 | Allégations de pousse | interdit : « pas de promesse de pousse des cheveux » | Miraculous : « Stimule la pousse et la repousse », « Ralentit la chute » ; pack : « dire stop à la chute » | **INFOS, mot pour mot** (décidé). Textes modifiables dans `content/site.ts`, validation avant mise en ligne (INFOS §8) |
-
----
-
 | Hébergement | Vercel | — | **Netlify** (décidé) |
 
 ---

@@ -13,17 +13,45 @@ import type { KeyValueStore } from "./types";
 let store: KeyValueStore | null = null;
 function kv(): KeyValueStore {
   if (!store) {
-    const onNetlify = Boolean(process.env.NETLIFY_BLOBS_CONTEXT || process.env.NETLIFY === "true");
-    store = onNetlify
+    // Sur Netlify, les fonctions serveur reçoivent NETLIFY_BLOBS_CONTEXT (ou SITE_ID) ; en local : fichiers
+    const onNetlify = Boolean(process.env.NETLIFY_BLOBS_CONTEXT || process.env.NETLIFY === "true" || process.env.SITE_ID);
+    const base = onNetlify
       ? createNetlifyStore("na-nah-nhair")
       : createFileStore(process.env.NNH_DATA_DIR ?? path.join(process.cwd(), ".data"));
+    store = withTimeout(base, 8000);
   }
   return store;
 }
 
+// Une lecture ou une écriture qui traîne ne doit jamais bloquer une page : erreur au bout de `ms`
+function withTimeout(s: KeyValueStore, ms: number): KeyValueStore {
+  const limit = <T,>(p: Promise<T>, what: string) =>
+    Promise.race([
+      p,
+      new Promise<never>((_, reject) => setTimeout(() => reject(new Error(`Stockage trop lent (${what})`)), ms)),
+    ]);
+  return {
+    getJSON: (k) => limit(s.getJSON(k), `lecture ${k}`),
+    setJSON: (k, v) => limit(s.setJSON(k, v), `écriture ${k}`),
+    getBinary: (k) => limit(s.getBinary(k), `lecture ${k}`),
+    setBinary: (k, d, t) => limit(s.setBinary(k, d, t), `écriture ${k}`),
+    delete: (k) => limit(s.delete(k), `suppression ${k}`),
+  };
+}
+
+// Lecture tolérante : si le stockage est indisponible, le site affiche les valeurs d'INFOS (journalisé)
+async function readOrNull<T>(key: string): Promise<T | null> {
+  try {
+    return await kv().getJSON<T>(key);
+  } catch (e) {
+    console.error(`[stockage] ${key}`, e);
+    return null;
+  }
+}
+
 export async function getCatalog(): Promise<Catalog> {
   const seed = seedCatalog();
-  const saved = await kv().getJSON<Partial<Catalog>>("catalog");
+  const saved = await readOrNull<Partial<Catalog>>("catalog");
   if (!saved) return seed;
   // Les produits enregistrés complètent les valeurs initiales (champs ajoutés plus tard)
   return Object.fromEntries(PRODUCT_IDS.map((id) => [id, { ...seed[id], ...saved[id], id }])) as Catalog;
@@ -35,7 +63,7 @@ export async function saveCatalog(catalog: Catalog) {
 
 export async function getSettings(): Promise<ShopSettings> {
   const seed = seedSettings();
-  const saved = await kv().getJSON<Partial<ShopSettings>>("settings");
+  const saved = await readOrNull<Partial<ShopSettings>>("settings");
   return { ...seed, ...saved, carriers: { ...seed.carriers, ...saved?.carriers } };
 }
 
@@ -84,6 +112,7 @@ export async function logError(where: string, error: unknown) {
 }
 
 // Sessions du back-office ouvertes avant cette date : refusées
+// Pas de repli ici : si le stockage est indisponible, la session admin est refusée (sécurité)
 export async function getSessionEpoch(): Promise<number> {
   return (await kv().getJSON<number>("admin-session-epoch")) ?? 0;
 }

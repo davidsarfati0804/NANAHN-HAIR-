@@ -21,7 +21,11 @@ export async function isAdmin(): Promise<boolean> {
   const jar = await cookies();
   const token = jar.get(SESSION_COOKIE)?.value;
   if (!token) return false;
-  return verifySessionToken(token, sessionSecret, Date.now(), await getSessionEpoch());
+  try {
+    return verifySessionToken(token, sessionSecret, Date.now(), await getSessionEpoch());
+  } catch {
+    return false; // stockage indisponible : accès refusé
+  }
 }
 
 // À appeler au début de chaque page et de chaque action du back-office

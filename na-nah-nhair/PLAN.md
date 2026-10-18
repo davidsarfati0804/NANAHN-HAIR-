@@ -12,7 +12,7 @@
 - Les couleurs : Lavender `#AAA1C8`, Lavender doux `#F3F0FA`, brume `#E8E2F2`, violet profond `#35205F`, prune `#6D4E91`, encre `#211A2E`, blanc `#FFFFFF`, et les touches existantes (blush `#FFF5F7`, or `#D8A24A`, jaune Pantone 7499 `#F1E6B2`).
 - La typographie : titres en **Bebas Kai** (remplacement Bebas Neue), texte en **Montserrat**. À remplacer par les polices des flacons dès qu'elles arrivent dans `assets/fonts/`.
 
-**On supprime** : toutes les pages, composants, textes et données actuels, en particulier les avis clients fictifs et la page « Résultats » avant/après (interdits par le brief), L'hébergement reste sur **Netlify** (décision du 18/10/2026).
+**On ne touche pas au premier site** (décision du 18/10/2026) : il reste tel quel à la racine du dépôt. Le nouveau site est un projet séparé dans le dossier `na-nah-nhair/`, publié comme un **deuxième site Netlify** avec sa propre adresse. Les avis fictifs et la page avant/après de l'ancien site ne sont pas repris.
 
 **On ajoute** (demandé par le brief, absent aujourd'hui) : vert Fabulous et rose Luxurious. Je proposerai des teintes en phase 2, accordées au Lavender, à valider visuellement.
 

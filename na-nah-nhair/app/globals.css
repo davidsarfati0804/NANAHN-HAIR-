@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+/* Mêmes valeurs que lib/design-tokens.ts */
+@theme {
+  --color-white: #ffffff;
+  --color-lavender: #aaa1c8;
+  --color-lavender-soft: #f3f0fa;
+  --color-lavender-mist: #e8e2f2;
+  --color-deep-violet: #35205f;
+  --color-plum: #6d4e91;
+  --color-ink: #211a2e;
+  --color-blush: #fff5f7;
+  --color-gold: #d8a24a;
+  --color-yellow: #f1e6b2;
+
+  --color-fabulous: #8fd3ae;
+  --color-fabulous-soft: #e8f7ee;
+  --color-fabulous-deep: #1d5a3c;
+  --color-miraculous: #c7b2ec;
+  --color-miraculous-soft: #f4eefc;
+  --color-miraculous-deep: #35205f;
+  --color-luxurious: #f5a9c6;
+  --color-luxurious-soft: #fdecf2;
+  --color-luxurious-deep: #8a2453;
+
+  --font-display: "Bebas Kai", var(--font-bebas), Impact, sans-serif;
+  --font-body: var(--font-montserrat), Arial, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-white);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 0.95;
+}
+
+::selection {
+  background: var(--color-deep-violet);
+  color: var(--color-white);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-deep-violet);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

@@ -21,6 +21,8 @@ Toutes les informations manquantes. Chacune apparaît sur le site sous forme d'e
 - [ ] `assets/logo/` : logo NA / NAH / N'HAIR !
 - [ ] `assets/fonts/` : polices des flacons (remplacement provisoire : Bebas Neue + Montserrat)
 - [ ] Hex exact du Pantone 15-3817 TCX Lavender (valeur actuelle `#AAA1C8`, à valider visuellement)
+- [ ] Validation des couleurs produits : vert Fabulous `#8FD3AE`, violet Miraculous `#C7B2EC`, rose Luxurious `#F5A9C6`
+- [ ] Icône d'onglet (favicon) à faire à partir du logo
 
 ## Code NNH27
 

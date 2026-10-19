@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import ButtonLink from "@/components/ButtonLink";
 import JsonLd from "@/components/JsonLd";
@@ -5,7 +6,7 @@ import LavenderBox from "@/components/LavenderBox";
 import PhotoSlot from "@/components/PhotoSlot";
 import ProductCard from "@/components/ProductCard";
 import ToComplete from "@/components/ToComplete";
-import { emotionalConcept, home, pack, products, story } from "@/content/site";
+import { brand, emotionalConcept, home, pack, products, story } from "@/content/site";
 import type { ProductId, PublicProduct } from "@/lib/catalog";
 import { formatPrice } from "@/lib/money";
 import { getShopData } from "@/lib/shop-data";
@@ -47,12 +48,17 @@ function Hero() {
 
       <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 pb-20 pt-14 sm:px-6 lg:grid-cols-[1.2fr_1fr] md:pt-20">
         <div>
-          <h1 className="text-[clamp(5.5rem,22vw,11rem)] leading-[0.82] text-deep-violet">
-            {hero.title.map((line) => (
-              <span key={line} className="block">
-                {line}
-              </span>
-            ))}
+          {/* Titre : le logo fourni (même police et même violet), texte « Na Nah N’hair ! » pour les lecteurs d'écran */}
+          <h1>
+            <Image
+              src={brand.logo.src}
+              width={brand.logo.width}
+              height={brand.logo.height}
+              alt={brand.logo.alt}
+              priority
+              sizes="(max-width: 640px) 90vw, 560px"
+              className="h-auto w-full max-w-[560px]"
+            />
           </h1>
           <p className="mt-6 text-2xl font-bold text-plum sm:text-3xl">{hero.signature}</p>
           <p className="mt-3 max-w-md text-lg">{hero.subtitle}</p>

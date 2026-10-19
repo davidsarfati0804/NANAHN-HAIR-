@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { navigation } from "@/content/site";
+import { brand, navigation } from "@/content/site";
 import CartCount from "@/components/cart/CartCount";
-import Wordmark from "@/components/Wordmark";
+import Image from "next/image";
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -23,8 +23,16 @@ export default function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-lavender-mist bg-white/95 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-        <Link href="/" aria-label="NA NAH N'HAIR, accueil" className="text-deep-violet">
-          <Wordmark className="text-2xl" />
+        <Link href="/" className="shrink-0">
+          <Image
+            src={brand.logo.src}
+            width={brand.logo.width}
+            height={brand.logo.height}
+            alt={`${brand.logo.alt} – accueil`}
+            priority
+            sizes="80px"
+            className="h-12 w-auto sm:h-14"
+          />
         </Link>
 
         <nav aria-label="Navigation principale" className="hidden lg:block">

@@ -2,6 +2,10 @@
 
 Toutes les informations manquantes. Chacune apparaît sur le site sous forme d'emplacement visible « À COMPLÉTER : … ».
 
+## Textes
+
+- [ ] Valider les textes que j'ai écrits (liste dans `TEXTES-A-VALIDER.md`)
+
 ## Produits
 
 - [ ] Fabulous : mode d'emploi
@@ -19,7 +23,8 @@ Toutes les informations manquantes. Chacune apparaît sur le site sous forme d'e
 - [ ] Lien Drive : photos des flacons, logo, polices
 - [ ] `assets/images/fabulous.jpg`, `miraculous.jpg`, `luxurious.jpg`
 - [ ] `assets/images/pack.jpg` : les trois produits au spa à Maurice
-- [ ] `assets/logo/` : logo NA / NAH / N'HAIR !
+- [x] `assets/logo/` : logo fourni le 19/10/2026 (utilisé dans l'en-tête et comme titre de l'accueil)
+- [ ] Logo en version vectorielle (SVG) ou police du logo, pour un rendu encore plus net
 - [ ] `assets/fonts/` : polices des flacons (remplacement provisoire : Bebas Neue + Montserrat)
 - [ ] Hex exact du Pantone 15-3817 TCX Lavender (valeur actuelle `#AAA1C8`, à valider visuellement)
 - [ ] Validation des couleurs produits : vert Fabulous `#8FD3AE`, violet Miraculous `#C7B2EC`, rose Luxurious `#F5A9C6`

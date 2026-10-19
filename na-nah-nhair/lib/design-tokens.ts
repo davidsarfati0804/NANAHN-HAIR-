@@ -14,6 +14,10 @@ export const colors = {
   gold: "#D8A24A",
   yellow: "#F1E6B2", // Pantone 7499
 
+  // Couleurs prélevées dans le logo (assets/logo/logo-na-nah-nhair.jpg)
+  logoViolet: "#8076B3",
+  logoYellow: "#F1E1B0",
+
   // Nouveaux : couleurs produits (à valider en phase 2)
   fabulous: "#8FD3AE",
   fabulousSoft: "#E8F7EE",
@@ -35,6 +39,12 @@ export const fonts = {
 } as const;
 
 export type ProductTheme = "fabulous" | "miraculous" | "luxurious";
+
+// Grands textes uniquement (≥ 19 px gras ou ≥ 24 px) : WCAG AA exige 3:1
+export const largeTextPairs: Array<[text: ColorName, background: ColorName]> = [
+  ["logoViolet", "logoYellow"], // bandeau d'annonce
+  ["logoViolet", "white"], // titre de l'accueil (logo)
+];
 
 // Paires texte / fond réellement utilisées : vérifiées WCAG AA par tests/design-tokens.test.ts
 export const contrastPairs: Array<[text: ColorName, background: ColorName]> = [

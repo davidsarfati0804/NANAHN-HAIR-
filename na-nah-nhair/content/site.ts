@@ -8,6 +8,8 @@ import { fr } from "@/lib/typography";
 export const brand = fr({
   name: "NA NAH N'HAIR",
   logoLines: ["NA", "NAH", "N'HAIR !"],
+  // Logo fourni (assets/logo/logo-na-nah-nhair.jpg), version sans fond pour le site
+  logo: { src: "/images/logo-na-nah-nhair.png", width: 1426, height: 994, alt: "Na Nah N’hair !" },
   signature: "Révèle ton Na Nah N'Hair.",
   marketingConcept: "Quel Na Nah N'Hair es-tu ?",
   madeIn: "Made in France",
@@ -231,7 +233,6 @@ export const story = fr({
 
 export const home = fr({
   hero: {
-    title: brand.logoLines,
     signature: brand.signature,
     subtitle: "Trois soins. Trois personnalités. Une seule question : lequel est le tien ?",
     primaryCta: { label: "Je découvre mon Na Nah N'Hair", href: "/quiz" },

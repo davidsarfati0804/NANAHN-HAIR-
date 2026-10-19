@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { colors, contrastPairs } from "@/lib/design-tokens";
+import { colors, contrastPairs, largeTextPairs } from "@/lib/design-tokens";
 
 function luminance(hex: string) {
   const [r, g, b] = [1, 3, 5].map((i) => {
@@ -17,6 +17,10 @@ export function contrast(a: string, b: string) {
 describe("contrastes WCAG AA (4,5:1)", () => {
   it.each(contrastPairs)("texte %s sur fond %s", (text, bg) => {
     expect(contrast(colors[text], colors[bg])).toBeGreaterThanOrEqual(4.5);
+  });
+
+  it.each(largeTextPairs)("grand texte %s sur fond %s (3:1)", (text, bg) => {
+    expect(contrast(colors[text], colors[bg])).toBeGreaterThanOrEqual(3);
   });
 
   it("le blanc sur Lavender reste interdit (INFOS §2)", () => {

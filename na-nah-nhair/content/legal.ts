@@ -15,7 +15,6 @@ export type LegalPage = {
   slug: string;
   title: string;
   description: string;
-  notice: string;
   sections: LegalSection[];
 };
 
@@ -27,14 +26,11 @@ const identity = [
   `Email : ${legal.email}`,
 ];
 
-const reviewNotice = "Document à faire relire avant la mise en ligne.";
-
 export const legalPages: LegalPage[] = fr([
   {
     slug: "mentions-legales",
     title: "Mentions légales",
     description: "Éditeur, hébergeur et contact du site NA NAH N'HAIR.",
-    notice: reviewNotice,
     sections: [
       {
         title: "Éditeur du site",
@@ -56,8 +52,6 @@ export const legalPages: LegalPage[] = fr([
     slug: "cgv",
     title: "Conditions générales de vente",
     description: "Conditions de vente des soins NA NAH N'HAIR.",
-    notice:
-      "Projet de CGV : ce document n'est pas définitif. Il sera relu et validé avant la mise en ligne (INFOS §11).",
     sections: [
       {
         title: "Vendeur",
@@ -89,10 +83,10 @@ export const legalPages: LegalPage[] = fr([
         items: [
           "Livraison en France uniquement.",
           "Transporteurs : Colissimo ou Mondial Relay (point relais), au choix à la commande.",
-          "Délai : 3 jours ouvrés.",
+          "Délai : 3 jours ouvrés, préparation incluse.",
           "Livraison offerte sur toutes les commandes en France, pour l'instant.",
         ],
-        todo: ["préparation incluse ou non dans le délai", "tarifs de livraison si elle redevient payante"],
+        todo: ["tarifs de livraison si elle redevient payante"],
       },
       {
         title: "Droit de rétractation",
@@ -121,7 +115,6 @@ export const legalPages: LegalPage[] = fr([
     slug: "confidentialite",
     title: "Politique de confidentialité",
     description: "Données personnelles collectées par NA NAH N'HAIR et vos droits.",
-    notice: reviewNotice,
     sections: [
       {
         title: "Responsable du traitement",
@@ -164,7 +157,6 @@ export const legalPages: LegalPage[] = fr([
     slug: "cookies",
     title: "Politique cookies",
     description: "Cookies et stockage utilisés par le site NA NAH N'HAIR.",
-    notice: reviewNotice,
     sections: [
       {
         title: "Aucun suivi publicitaire",
@@ -180,7 +172,7 @@ export const legalPages: LegalPage[] = fr([
       },
       {
         title: "Paiement",
-        todo: ["cookies déposés par Stripe lors du paiement (phase 6)"],
+        todo: ["cookies déposés par Stripe lors du paiement"],
       },
     ],
   },
@@ -188,7 +180,6 @@ export const legalPages: LegalPage[] = fr([
     slug: "retours",
     title: "Retours et droit de rétractation",
     description: "Conditions de retour des soins NA NAH N'HAIR.",
-    notice: "Politique de retours à valider avant la mise en ligne (INFOS §11).",
     sections: [
       {
         title: "Droit de rétractation",

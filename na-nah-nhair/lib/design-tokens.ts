@@ -7,8 +7,9 @@ export const colors = {
   lavender: "#AAA1C8", // Pantone 15-3817 TCX, hex à valider visuellement
   lavenderSoft: "#F3F0FA",
   lavenderMist: "#E8E2F2",
-  deepViolet: "#35205F",
-  plum: "#6D4E91",
+  // Violet foncé : même teinte que le logo (250°), lisible partout (WCAG AA)
+  deepViolet: "#342B64",
+  plum: "#504587", // violet intermédiaire, même teinte que le logo
   ink: "#211A2E",
   blush: "#FFF5F7",
   gold: "#D8A24A",
@@ -24,7 +25,7 @@ export const colors = {
   fabulousDeep: "#1D5A3C",
   miraculous: "#C7B2EC",
   miraculousSoft: "#F4EEFC",
-  miraculousDeep: "#35205F",
+  miraculousDeep: "#342B64",
   luxurious: "#F5A9C6",
   luxuriousSoft: "#FDECF2",
   luxuriousDeep: "#8A2453",
@@ -42,12 +43,13 @@ export type ProductTheme = "fabulous" | "miraculous" | "luxurious";
 
 // Grands textes uniquement (≥ 19 px gras ou ≥ 24 px) : WCAG AA exige 3:1
 export const largeTextPairs: Array<[text: ColorName, background: ColorName]> = [
-  ["logoViolet", "logoYellow"], // bandeau d'annonce
+  ["logoViolet", "logoYellow"], // logo de l'en-tête (fichier fourni)
   ["logoViolet", "white"], // titre de l'accueil (logo)
 ];
 
 // Paires texte / fond réellement utilisées : vérifiées WCAG AA par tests/design-tokens.test.ts
 export const contrastPairs: Array<[text: ColorName, background: ColorName]> = [
+  ["deepViolet", "logoYellow"], // bandeau d'annonce
   ["ink", "white"],
   ["deepViolet", "white"],
   ["plum", "white"],

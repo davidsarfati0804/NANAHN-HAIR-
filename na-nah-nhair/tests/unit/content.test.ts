@@ -62,7 +62,7 @@ describe("textes de marque", () => {
   it("pack", () => {
     const s = section("## 7. PACK DES 3 SOINS");
     for (const c of pack.content) expect(s).toContain(`${c.product} : ${c.text}`);
-    expect(s).toContain(`**Mode d'emploi du pack** : ${pack.usage}`);
+    expect(s).toContain(`**${pack.usageTitle}** : ${pack.usage}`);
   });
 
   it("bandeau, signature, accueil", () => {
@@ -76,9 +76,11 @@ describe("textes de marque", () => {
   });
 
   it("concept émotionnel", () => {
-    expect(infos).toContain(emotionalConcept.title);
+    // Apostrophe typographique demandée (modification 2) : comparée avec l'apostrophe droite d'INFOS
+    expect(infos).toContain(emotionalConcept.title.replace("’", "'"));
     expect(infos).toContain(emotionalConcept.lines.join(" "));
-    expect(infos).toContain(emotionalConcept.note);
+    // Consigne d'INFOS, jamais affichée
+    expect(JSON.stringify(site)).not.toContain("catégories exclusives");
   });
 
   it("informations légales", () => {
@@ -123,5 +125,26 @@ describe("typographie française", () => {
 
   it("INCI inchangées (aucun signe concerné)", () => {
     for (const p of site.products) expect(p.inci).not.toContain(" ");
+  });
+});
+
+describe("modifications du 20/10/2026", () => {
+  it("phrases « Je suis » et odeurs avec majuscule, conformes à INFOS §12", () => {
+    for (const p of site.products) {
+      expect(infos.replaceAll("’", "'")).toContain(`**Phrase « Je suis »** (cartes et fiche) : ${p.iAm}`.replaceAll("’", "'"));
+      expect(p.scent.charAt(0)).toBe(p.scent.charAt(0).toUpperCase());
+    }
+    expect(site.products.map((p) => p.scent)).toEqual(["Monoï", "Vanille patchouli", "Fleur d’oranger"]);
+  });
+
+  it("délai de livraison identique partout", () => {
+    const all = JSON.stringify(site).replaceAll("\u00a0", " ");
+    expect(all).not.toMatch(/3 jours ouvrés(?!, préparation incluse)/);
+    expect(all).not.toContain("préparation incluse ou non");
+  });
+
+  it("aucune consigne de BRIEF/INFOS affichée", () => {
+    const all = JSON.stringify(site);
+    for (const consigne of ["catégories exclusives", "INFOS §", "phase 6", "Claude Code"]) expect(all).not.toContain(consigne);
   });
 });

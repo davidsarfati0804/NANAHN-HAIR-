@@ -24,7 +24,8 @@ export default function ButtonLink({
         variant === "custom" ? "" : variants[variant]
       } ${className}`}
     >
-      {children}
+      {/* Un seul bloc de texte : les espaces autour du nom de marque sont conservés */}
+      <span>{children}</span>
     </Link>
   );
 }

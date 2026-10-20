@@ -5,6 +5,7 @@ import ProductCard from "@/components/ProductCard";
 import { pack, products, productPage, soinsPage } from "@/content/site";
 import { formatPrice } from "@/lib/money";
 import { getShopData } from "@/lib/shop-data";
+import { BrandText } from "@/components/BrandName";
 
 export const dynamic = "force-dynamic";
 
@@ -21,7 +22,7 @@ export default async function SoinsPage() {
       <h1 className="text-7xl text-deep-violet sm:text-8xl">{soinsPage.title}</h1>
       <p className="mt-4 max-w-xl text-lg">{soinsPage.intro}</p>
       <ButtonLink href={soinsPage.quizCta.href} className="mt-6">
-        {soinsPage.quizCta.label}
+        <BrandText text={soinsPage.quizCta.label} />
       </ButtonLink>
 
       <ul className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">

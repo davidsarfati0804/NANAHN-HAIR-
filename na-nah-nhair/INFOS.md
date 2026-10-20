@@ -43,8 +43,9 @@ Les personnalités ne sont pas des catégories exclusives : une cliente peut êt
 
 - **Photo** : `assets/images/fabulous.jpg`
 - **Personnalité** : la fraîche, naturelle et spontanée.
+- **Phrase « Je suis »** (cartes et fiche) : Je suis fraîche, naturelle et spontanée.
 - **Univers** : vert, frais, positif, accessible et pétillant.
-- **Odeur** : monoï
+- **Odeur** : Monoï
 - **Texte** : elle aime prendre soin de ses cheveux sans se compliquer la vie.
 - **Sa phrase** : « Simplement moi, simplement Fabulous. »
 
@@ -85,8 +86,9 @@ RICINUS COMMUNIS SEED OIL\*, OLEA EUROPAEA FRUIT OIL\*, COCOS NUCIFERA OIL\*, PE
 
 - **Photo** : `assets/images/miraculous.jpg`
 - **Personnalité** : la déterminée, ambitieuse et audacieuse.
+- **Phrase « Je suis »** (cartes et fiche) : Je suis déterminée, ambitieuse et audacieuse.
 - **Univers** : violet, confiance, force, ambition et transformation.
-- **Odeur** : vanille patchouli
+- **Odeur** : Vanille patchouli
 - **Texte** : c'est mon produit fondateur. L'histoire de ma marque a commencé avec cette envie de créer une synergie capillaire pour aider une femme à prendre soin de ses cheveux.
 - **Sa phrase** : « Je crois en mon objectif. »
 
@@ -127,8 +129,9 @@ RICINUS COMMUNIS SEED OIL\*, OLEA EUROPAEA FRUIT OIL\*, COCOS NUCIFERA OIL\*, PE
 
 - **Photo** : `assets/images/luxurious.jpg`
 - **Personnalité** : la féminine, élégante et sensorielle.
+- **Phrase « Je suis »** (cartes et fiche) : Je suis féminine, élégante et sensorielle.
 - **Univers** : rose, beauté, plaisir, sophistication et douceur.
-- **Odeur** : fleur d'oranger
+- **Odeur** : Fleur d’oranger
 - **Texte** : elle aime sentir bon, se sentir belle et transformer sa routine capillaire en un moment de plaisir.
 - **Sa phrase** : « Parce que je mérite ce petit luxe. »
 
@@ -168,10 +171,10 @@ RICINUS COMMUNIS SEED OIL\*, OLEA EUROPAEA FRUIT OIL\*, COCOS NUCIFERA OIL\*, PE
 
 - **Photos** : les trois produits ensemble, au spa à Maurice : `À COMPLÉTER` (`assets/images/pack.jpg`)
 - **Contenu du pack** :
-  1. Fabulous : pour gainer, fortifier et apaiser ton cuir chevelu.
-  2. Miraculous : pour stimuler la pousse et dire stop à la chute.
-  3. Luxurious : pour la touche finale, le volume et la brillance miroir.
-- **Mode d'emploi du pack** : alterne les sérums selon tes besoins ou crée ta propre routine : Miraculous en cure, Fabulous au quotidien, et Luxurious pour briller en sortie.
+  1. Fabulous : Pour gainer, hydrater et fortifier le cheveu.
+  2. Miraculous : Pour stimuler la pousse et la repousse du cheveu et ralentir la chute.
+  3. Luxurious : Pour la touche finale, le volume et la brillance miroir.
+- **Mode d’emploi du pack** : Alterne les sérums selon tes besoins ou crée ta propre routine : Miraculous en cure, Fabulous au quotidien et Luxurious pour briller en sortie.
 
 ---
 
@@ -249,7 +252,7 @@ Cette section complète et remplace les `À COMPLÉTER` correspondants des secti
 ### Livraison
 
 - Pays : France uniquement (le code NNH27 aussi).
-- Délai : 3 jours ouvrés (préparation incluse ou non : `À COMPLÉTER`).
+- Délai : 3 jours ouvrés, préparation incluse.
 - Livraison offerte sur toutes les commandes en France, pour l'instant. Coder le seuil de gratuité comme un réglage modifiable dans le back-office, pour pouvoir le remonter plus tard.
 - Le code NNH27 reste prévu mais n'a plus d'effet tant que la livraison est offerte à tous. **DÉCIDÉ** : le bandeau du haut affiche « Quel Na Nah N'Hair es-tu ? » (lien vers le quiz). Le texte avec le code est gardé en réserve, facile à réactiver.
 - Transporteurs : proposer Colissimo et Mondial Relay au choix de la cliente à la commande (avec choix d'un point relais pour Mondial Relay). Tarifs : `À COMPLÉTER`, configurables dans le back-office (utiles si la livraison redevient payante).
@@ -271,3 +274,18 @@ Cette section complète et remplace les `À COMPLÉTER` correspondants des secti
 - **Email de contact et de réception des messages et commandes** : Contact@nanahnhair.com
 - **Statut de l'entreprise, TVA, hébergeur, responsable de publication** : `À COMPLÉTER`
 - **Instagram** : `À COMPLÉTER` (plus tard)
+
+---
+
+## 12. Modifications validées (20/10/2026)
+
+Ces décisions de la propriétaire de la marque complètent et remplacent les passages correspondants ci-dessus.
+
+- **Odeurs** avec majuscule : Monoï, Vanille patchouli, Fleur d’oranger.
+- **Cartes et fiches produits** : la ligne « Personnalité » est remplacée par la phrase « Je suis… » ; la ligne « Univers » n'est plus affichée.
+- **Pack** : nouveau contenu et nouveau mode d'emploi (section 7).
+- **Livraison** : « Délai : 3 jours ouvrés, préparation incluse. »
+- **Accueil, section « Mon histoire »** : trois cartes « Le défi », « Le bureau », « Les trois soins » (textes dans `content/site.ts`), titre « De mon bureau à ta routine », sticker « Naturopathe · Aromathérapie », photo `assets/images/histoire.jpg` à fournir.
+- **Fiches produits et pack** : bouton « Quel soin est le tien ? » vers le quiz.
+- **Nom de marque** affiché « Na Nah N’hair », dans la typographie du logo.
+- La phrase « Les personnalités ne sont pas des catégories exclusives… » est une consigne : elle n'est pas affichée.

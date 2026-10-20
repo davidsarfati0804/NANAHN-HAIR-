@@ -90,13 +90,14 @@ test("pages juridiques : contenu, À COMPLÉTER, avertissement de relecture", as
   ]) {
     await page.goto(path);
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(title);
-    await expect(page.getByRole("note")).toBeVisible();
+    // Aucune consigne interne (INFOS, relecture, phase) affichée
+    await expect(page.locator("main")).not.toContainText(/INFOS|à faire relire|phase \d/);
   }
   await page.goto("/mentions-legales");
   await expect(page.getByText(/SIRET\s:\s922 151 170 00011/)).toBeVisible();
   await expect(page.getByText(/À COMPLÉTER\s:\sstatut de l'entreprise/)).toBeVisible();
   await page.goto("/cgv");
-  await expect(page.getByText(/Projet de CGV/)).toBeVisible();
+  await expect(page.getByText(/3 jours ouvrés, préparation incluse/)).toBeVisible();
 });
 
 test("SEO : sitemap, robots (non indexé avant la mise en ligne), données produit", async ({ page, request }) => {

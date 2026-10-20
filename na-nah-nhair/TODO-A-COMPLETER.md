@@ -16,9 +16,13 @@ Toutes les informations manquantes. Chacune apparaît sur le site sous forme d'e
 - [ ] Luxurious : précautions d'emploi
 - [ ] Validation des allégations avant mise en ligne (en particulier Miraculous et le pack : pousse, chute)
 - [ ] FAQ de chaque produit : questions et réponses
-- [ ] FAQ générale : préparation incluse ou non dans le délai, frais de retour, procédure en cas de produit défectueux
+- [ ] FAQ générale : frais de retour, procédure en cas de produit défectueux
 
 ## Visuels et identité
+
+- [ ] `assets/images/histoire.jpg` : photo « Le bureau » (section Mon histoire de l'accueil)
+- [ ] Police du logo (nom ou fichier) : en attendant, logo vectorisé (SVG)
+- [ ] Police Bebas Kai (fichier) : en attendant, Bebas Neue
 
 - [ ] Lien Drive : photos des flacons, logo, polices
 - [ ] `assets/images/fabulous.jpg`, `miraculous.jpg`, `luxurious.jpg`
@@ -36,7 +40,6 @@ Toutes les informations manquantes. Chacune apparaît sur le site sous forme d'e
 
 ## Livraison
 
-- [ ] Délai de 3 jours ouvrés : préparation incluse ou non
 - [ ] Tarifs Colissimo et Mondial Relay (utiles si la livraison redevient payante)
 - [ ] Compte Mondial Relay pour le choix du point relais
 

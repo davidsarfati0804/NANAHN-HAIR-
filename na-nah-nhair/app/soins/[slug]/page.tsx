@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import ButtonLink from "@/components/ButtonLink";
 import AddToCart from "@/components/cart/AddToCart";
 import JsonLd from "@/components/JsonLd";
 import LavenderBox from "@/components/LavenderBox";
@@ -12,6 +13,7 @@ import { productJsonLd } from "@/lib/structured-data";
 import { getShopData } from "@/lib/shop-data";
 import { capitalize } from "@/lib/typography";
 import { themeClasses } from "@/lib/theme-classes";
+import { BrandText } from "@/components/BrandName";
 
 export const dynamicParams = false;
 export const dynamic = "force-dynamic";
@@ -61,11 +63,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             </p>
             <p className="mt-6 text-xl font-bold">{p.phrase}</p>
 
-            <dl className="mt-6 grid grid-cols-[auto_1fr] gap-x-4 gap-y-2">
-              <dt className="font-bold">{l.personalityLabel}</dt>
-              <dd>{p.personality}</dd>
-              <dt className="font-bold">{l.universeLabel}</dt>
-              <dd>{p.universe}</dd>
+            <p className="mt-6 text-lg">{p.iAm}</p>
+            <dl className="mt-4 grid grid-cols-[auto_1fr] gap-x-4 gap-y-2">
               <dt className="font-bold">{l.scentLabel}</dt>
               <dd>{p.scent}</dd>
               <dt className="font-bold">{l.volumeLabel}</dt>
@@ -90,6 +89,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               className="mt-8"
               buttonClassName={t.button}
             />
+            <ButtonLink href={l.quizCta.href} variant="secondary" className="mt-3">
+              <BrandText text={l.quizCta.label} />
+            </ButtonLink>
           </div>
         </div>
       </div>

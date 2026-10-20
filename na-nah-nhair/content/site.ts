@@ -7,9 +7,12 @@ import { fr } from "@/lib/typography";
 
 export const brand = fr({
   name: "NA NAH N'HAIR",
-  logoLines: ["NA", "NAH", "N'HAIR !"],
-  // Logo fourni (assets/logo/logo-na-nah-nhair.jpg), version sans fond pour le site
-  logo: { src: "/images/logo-na-nah-nhair.png", width: 1426, height: 994, alt: "Na Nah N’hair !" },
+  // Logo fourni (assets/logo/logo-na-nah-nhair.jpg), utilisé tel quel dans l'en-tête
+  logo: { src: "/images/logo-na-nah-nhair.jpg", width: 1772, height: 1772, alt: "Na Nah N’hair !" },
+  // Même logo vectorisé (scripts/vectoriser-logo.py), pour le grand titre de l'accueil
+  logoSvg: { src: "/images/logo-na-nah-nhair.svg", width: 1403, height: 987 },
+  // Nom de marque tel qu'écrit sur le logo
+  displayName: "Na Nah N’hair",
   signature: "Révèle ton Na Nah N'Hair.",
   marketingConcept: "Quel Na Nah N'Hair es-tu ?",
   madeIn: "Made in France",
@@ -34,9 +37,8 @@ export const navigation = fr([
 ]);
 
 export const emotionalConcept = fr({
-  title: "« Je ne suis pas qu'une seule femme. »",
+  title: "« Je ne suis pas qu’une seule femme. »",
   lines: ["Je suis Fabulous.", "Je suis Miraculous.", "Je suis Luxurious.", "Je suis les trois."],
-  note: "Les personnalités ne sont pas des catégories exclusives : une cliente peut être les trois.",
 });
 
 export type Product = {
@@ -47,6 +49,8 @@ export type Product = {
   infosPrice: string;
   photo: { file: string; alt: string; available: boolean };
   personality: string;
+  // Phrase à la première personne affichée sur les cartes et les fiches (modification 1, 20/10/2026)
+  iAm: string;
   universe: string;
   scent: string;
   text: string;
@@ -84,8 +88,9 @@ export const products: Product[] = fr([
       available: false,
     },
     personality: "la fraîche, naturelle et spontanée.",
+    iAm: "Je suis fraîche, naturelle et spontanée.",
     universe: "vert, frais, positif, accessible et pétillant.",
-    scent: "monoï",
+    scent: "Monoï",
     text: "elle aime prendre soin de ses cheveux sans se compliquer la vie.",
     phrase: "« Simplement moi, simplement Fabulous. »",
     highlights: [
@@ -124,8 +129,9 @@ export const products: Product[] = fr([
       available: false,
     },
     personality: "la déterminée, ambitieuse et audacieuse.",
+    iAm: "Je suis déterminée, ambitieuse et audacieuse.",
     universe: "violet, confiance, force, ambition et transformation.",
-    scent: "vanille patchouli",
+    scent: "Vanille patchouli",
     text: "c'est mon produit fondateur. L'histoire de ma marque a commencé avec cette envie de créer une synergie capillaire pour aider une femme à prendre soin de ses cheveux.",
     phrase: "« Je crois en mon objectif. »",
     highlights: [
@@ -165,8 +171,9 @@ export const products: Product[] = fr([
       available: false,
     },
     personality: "la féminine, élégante et sensorielle.",
+    iAm: "Je suis féminine, élégante et sensorielle.",
     universe: "rose, beauté, plaisir, sophistication et douceur.",
-    scent: "fleur d'oranger",
+    scent: "Fleur d’oranger",
     text: "elle aime sentir bon, se sentir belle et transformer sa routine capillaire en un moment de plaisir.",
     phrase: "« Parce que je mérite ce petit luxe. »",
     highlights: [
@@ -211,13 +218,14 @@ export const pack = fr({
   contentTitle: "Contenu du pack",
   contentShort: "Fabulous + Miraculous + Luxurious",
   content: [
-    { product: "Fabulous", text: "pour gainer, fortifier et apaiser ton cuir chevelu." },
-    { product: "Miraculous", text: "pour stimuler la pousse et dire stop à la chute." },
-    { product: "Luxurious", text: "pour la touche finale, le volume et la brillance miroir." },
+    // Textes de la modification 4 (20/10/2026)
+    { product: "Fabulous", text: "Pour gainer, hydrater et fortifier le cheveu." },
+    { product: "Miraculous", text: "Pour stimuler la pousse et la repousse du cheveu et ralentir la chute." },
+    { product: "Luxurious", text: "Pour la touche finale, le volume et la brillance miroir." },
   ],
-  usageTitle: "Mode d'emploi du pack",
+  usageTitle: "Mode d’emploi du pack",
   usage:
-    "alterne les sérums selon tes besoins ou crée ta propre routine : Miraculous en cure, Fabulous au quotidien, et Luxurious pour briller en sortie.",
+    "Alterne les sérums selon tes besoins ou crée ta propre routine : Miraculous en cure, Fabulous au quotidien et Luxurious pour briller en sortie.",
 });
 
 export const story = fr({
@@ -253,9 +261,31 @@ export const home = fr({
     kicker: "Le pack",
     cta: "Découvrir le pack",
   },
+  // Section « Mon histoire » en trois cartes (textes de la modification 6, 20/10/2026)
   story: {
     kicker: "Mon histoire",
-    cta: "Lire mon histoire",
+    titleLines: ["De mon bureau", "à ta routine"],
+    sticker: "Naturopathe · Aromathérapie",
+    regionLabel: "Mon histoire en trois cartes",
+    swipeHint: "glisse pour la suite →",
+    dotLabel: (n: number) => `Afficher la carte ${n}`,
+    cards: [
+      {
+        title: "Le défi",
+        text: "Première année de naturopathie, stage en clinique. Une femme souhaite prendre soin de ses cheveux et favoriser leur longueur. J’ai relevé le défi : une synergie sur mesure, rien que pour elle.",
+      },
+      {
+        title: "Le bureau",
+        text: "Mes premières préparations sont nées dans ma chambre, sur mon bureau.",
+      },
+      {
+        title: "Les trois soins",
+        text: "Trois soins, trois univers, une même envie : prendre soin de tes cheveux.",
+      },
+    ],
+    photo: { file: "histoire.jpg", alt: "Mes premières préparations sur mon bureau", available: false },
+    cta: { label: "Découvrir les trois soins", href: "/soins" },
+    readMore: { label: "Lire toute mon histoire", href: "/mon-histoire" },
   },
   // Faits repris d'INFOS.md uniquement
   reasons: {
@@ -268,18 +298,22 @@ export const home = fr({
       },
       {
         title: "Huiles végétales",
-        text: "Fabulous : huiles végétales riches en vitamines E. Miraculous : huiles végétales riches en vitamines B. Luxurious : huiles végétales riches en vitamines C.",
+        text: null,
+        lines: [
+          { product: "Fabulous", text: "Huiles végétales riches en vitamines E." },
+          { product: "Miraculous", text: "Huiles végétales riches en vitamines B." },
+          { product: "Luxurious", text: "Huiles végétales riches en vitamines C." },
+        ],
       },
       {
         title: "Trois parfums",
-        text: "Monoï, vanille patchouli et fleur d'oranger.",
+        text: "Monoï, Vanille patchouli et Fleur d’oranger.",
       },
       {
         title: "Livraison offerte en France",
-        text: "Délai : 3 jours ouvrés.",
-        todo: "préparation incluse ou non dans le délai",
+        text: "Délai : 3 jours ouvrés, préparation incluse.",
       },
-    ] as Array<{ title: string; text: string | null; todo?: string }>,
+    ] as Array<{ title: string; text: string | null; todo?: string; lines?: Array<{ product: string; text: string }> }>,
   },
   finalCta: {
     title: "Et si tu étais les trois ?",
@@ -386,6 +420,7 @@ export const productPage = fr({
   founderBadge: "Mon produit fondateur",
   addToCart: "Ajouter au panier",
   othersTitle: "Découvre aussi",
+  quizCta: { label: "Quel soin est le tien ?", href: "/quiz" },
   packTitle: "Et si tu étais les trois ?",
   packCta: "Découvrir le pack",
 });
@@ -420,7 +455,7 @@ export const faq: { title: string; groups: FaqGroup[] } = fr({
         },
         {
           question: "Comment utiliser le pack des 3 soins ?",
-          answer: [`Mode d'emploi du pack : ${pack.usage}`],
+          answer: [`${pack.usageTitle} : ${pack.usage}`],
         },
       ],
     },
@@ -470,8 +505,7 @@ export const faq: { title: string; groups: FaqGroup[] } = fr({
         },
         {
           question: "Quel est le délai de livraison ?",
-          answer: ["3 jours ouvrés."],
-          todo: "préparation incluse ou non dans ce délai",
+          answer: ["3 jours ouvrés, préparation incluse."],
         },
         {
           question: "Quels transporteurs proposez-vous ?",
@@ -493,7 +527,7 @@ export const faq: { title: string; groups: FaqGroup[] } = fr({
         {
           question: "Que faire si mon produit est défectueux ou erroné ?",
           answer: ["Garantie légale en cas de produit défectueux ou erroné."],
-          todo: "procédure à suivre (politique de retours à valider)",
+          todo: "procédure à suivre",
         },
       ],
     },
@@ -584,9 +618,8 @@ export const shop = fr({
   soldOut: "Épuisé",
   lowStock: (n: number) => `Plus que ${n} en stock`,
   viewProduct: "Voir la fiche",
-  freeShipping: "Livraison offerte en France · Délai : 3 jours ouvrés",
-  freeShippingFrom: (amount: string) => `Livraison offerte en France dès ${amount} · Délai : 3 jours ouvrés`,
-  deliveryTodo: "préparation incluse ou non dans le délai",
+  freeShipping: "Livraison offerte en France · Délai : 3 jours ouvrés, préparation incluse.",
+  freeShippingFrom: (amount: string) => `Livraison offerte en France dès ${amount} · Délai : 3 jours ouvrés, préparation incluse.`,
 });
 
 export const cartTexts = fr({
@@ -617,12 +650,11 @@ export const checkoutTexts = fr({
   carrierTitle: "Mode de livraison",
   relayTitle: "Point relais Mondial Relay",
   summaryTitle: "Récapitulatif",
-  serverNote: "Montants recalculés par le serveur à partir des prix en vigueur.",
   pay: "Payer",
   backToCart: "Modifier le panier",
-  paymentPending: "Le paiement sécurisé (Stripe : carte, Apple Pay, Google Pay) sera activé à la phase 6.",
+  paymentPending: "Le paiement en ligne (carte, Apple Pay, Google Pay) arrive bientôt.",
   carrierRequired: "Choisis un mode de livraison.",
-  delay: "Délai : 3 jours ouvrés.",
+  delay: "Délai : 3 jours ouvrés, préparation incluse.",
   quoteError: "Impossible de calculer le total. Réessaie dans un instant.",
   noCarrier: "Aucun mode de livraison n'est disponible pour le moment. Contacte-nous.",
   carrierPriceMissing: "Tarif indisponible pour ce transporteur : choisis-en un autre.",

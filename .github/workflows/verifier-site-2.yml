@@ -33,6 +33,9 @@ jobs:
           echo "--- /api/sante"
           curl -sS -m 30 "$URL/api/sante" || true
           echo
+          echo "--- /api/sante?detail=1"
+          curl -sS -m 40 "$URL/api/sante?detail=1" || true
+          echo
           echo "--- pages (code, durée)"
           for p in / /soins /soins/fabulous /pack /boutique /quiz /mon-histoire /faq /contact /cgv /panier /admin/connexion /api/catalog /images/logo-na-nah-nhair.svg; do
             curl -s -o /dev/null -m 30 -w "$p %{http_code} %{time_total}s\n" "$URL$p" || echo "$p erreur"

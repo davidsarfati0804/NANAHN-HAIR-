@@ -172,3 +172,29 @@ export async function storeHealth() {
     erreur: error,
   };
 }
+
+// Diagnostic approfondi (/api/sante?detail=1) : accès direct à Netlify Blobs, sans délai court
+export async function storeDeepCheck() {
+  if (!(process.env.NETLIFY_BLOBS_CONTEXT || process.env.SITE_ID)) return { ignore: "pas sur Netlify" };
+  const { getStore } = await import("@netlify/blobs");
+  const timed = async (label: string, run: () => Promise<unknown>) => {
+    const t0 = Date.now();
+    try {
+      const r = await Promise.race([run(), new Promise((_, rej) => setTimeout(() => rej(new Error("délai 8 s dépassé")), 8000))]);
+      return { etape: label, ok: true, ms: Date.now() - t0, resultat: r === null ? "vide" : typeof r };
+    } catch (e) {
+      return { etape: label, ok: false, ms: Date.now() - t0, erreur: e instanceof Error ? `${e.name}: ${e.message}` : String(e) };
+    }
+  };
+  const direct = getStore({ name: "na-nah-nhair" });
+  const sansCache = kvRaw();
+  return [
+    await timed("lecture (fetch standard)", () => direct.get("diagnostic")),
+    await timed("écriture (fetch standard)", () => direct.setJSON("diagnostic", { at: Date.now() })),
+    await timed("lecture (fetch sans cache Next)", () => sansCache.getJSON("diagnostic")),
+  ];
+}
+
+function kvRaw() {
+  return createNetlifyStore("na-nah-nhair");
+}

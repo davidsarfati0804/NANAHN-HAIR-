@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
-import { storeHealth } from "@/lib/store";
+import { storeDeepCheck, storeHealth } from "@/lib/store";
 
 export const dynamic = "force-dynamic";
 
 // Page de diagnostic : /api/sante (à ouvrir dans le navigateur et à copier en cas de problème)
-export async function GET() {
+export async function GET(request: Request) {
+  const detail = new URL(request.url).searchParams.get("detail") === "1";
   const started = Date.now();
   const store = await storeHealth();
   return NextResponse.json(
@@ -21,6 +22,7 @@ export async function GET() {
         SITE_ID: Boolean(process.env.SITE_ID),
       },
       backOfficeConfigure: Boolean(process.env.ADMIN_PASSWORD_HASH && process.env.ADMIN_SESSION_SECRET),
+      ...(detail ? { diagnosticBlobs: await storeDeepCheck() } : {}),
       dureeTotaleMs: Date.now() - started,
       date: new Date().toISOString(),
     },

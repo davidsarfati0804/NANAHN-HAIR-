@@ -85,3 +85,16 @@ describe("calcul du résultat", () => {
     expect(() => scoreAnswers(["fabulous"])).toThrow();
   });
 });
+
+describe("quiz : réponses identiques à INFOS.md §10", () => {
+  it("chaque réponse et son soin figurent dans INFOS", async () => {
+    const { readFileSync } = await import("node:fs");
+    const infos = readFileSync(new URL("../../INFOS.md", import.meta.url), "utf8");
+    const label = { fabulous: "Fabulous", miraculous: "Miraculous", luxurious: "Luxurious" } as const;
+    for (const q of quiz.questions)
+      for (const a of q.answers) {
+        const text = a.text.replaceAll(" ", " ");
+        expect(infos, text).toContain(`- ${text} → ${label[a.product]} (${a.points} point${a.points > 1 ? "s" : ""})`);
+      }
+  });
+});

@@ -6,6 +6,7 @@ import AddToCart from "@/components/cart/AddToCart";
 import JsonLd from "@/components/JsonLd";
 import LavenderBox from "@/components/LavenderBox";
 import PhotoSlot from "@/components/PhotoSlot";
+import UsageGuide from "@/components/product/UsageGuide";
 import ToComplete from "@/components/ToComplete";
 import { pack, productBySlug, productPage as l, products } from "@/content/site";
 import { formatPrice } from "@/lib/money";
@@ -120,17 +121,22 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           </ul>
         </section>
 
-        <section className="rounded-3xl border-2 border-lavender-mist p-6 sm:p-8">
+        {/* Mode d'emploi fourni : il contient aussi les précautions, affiché sur toute la largeur */}
+        <section className={`rounded-3xl border-2 border-lavender-mist p-6 sm:p-8 ${p.usage ? "md:col-span-2" : ""}`}>
           <h2 className="font-body text-2xl font-bold text-deep-violet">{l.usageTitle}</h2>
-          <div className="mt-3">{p.usage ? <p>{p.usage}</p> : <ToComplete label={`mode d'emploi ${p.shortName}`} />}</div>
-        </section>
-
-        <section className="rounded-3xl border-2 border-lavender-mist p-6 sm:p-8">
-          <h2 className="font-body text-2xl font-bold text-deep-violet">{l.precautionsTitle}</h2>
-          <div className="mt-3">
-            {p.precautions ? <p>{p.precautions}</p> : <ToComplete label={`précautions d'emploi ${p.shortName}`} />}
+          <div className="mt-4">
+            {p.usage ? <UsageGuide guide={p.usage} theme={p.slug} /> : <ToComplete label={`mode d'emploi ${p.shortName}`} />}
           </div>
         </section>
+
+        {!p.usage && (
+          <section className="rounded-3xl border-2 border-lavender-mist p-6 sm:p-8">
+            <h2 className="font-body text-2xl font-bold text-deep-violet">{l.precautionsTitle}</h2>
+            <div className="mt-3">
+              {p.precautions ? <p>{p.precautions}</p> : <ToComplete label={`précautions d'emploi ${p.shortName}`} />}
+            </div>
+          </section>
+        )}
 
         <section className="rounded-3xl border-2 border-lavender-mist p-6 sm:p-8 md:col-span-2">
           <h2 className="font-body text-2xl font-bold text-deep-violet">{l.faqTitle}</h2>

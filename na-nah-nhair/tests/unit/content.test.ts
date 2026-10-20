@@ -42,10 +42,18 @@ describe("produits conformes à INFOS.md", () => {
     // INCI : reproduite exactement
     expect(s).toContain(`\n${p.inci}\n`);
     for (const note of p.inciNotes) expect(s).toContain(note);
-    // Mode d'emploi et précautions : encore À COMPLÉTER
-    expect(s).toContain("**Mode d'emploi** : `À COMPLÉTER`");
-    expect(p.usage).toBeNull();
-    expect(p.precautions).toBeNull();
+    if (p.usage) {
+      // Mode d'emploi fourni : chaque texte affiché figure dans INFOS
+      const plainText = (x: string) => x.replaceAll("\u00a0", " ");
+      for (const step of p.usage.steps) {
+        expect(s).toContain(`${step.title} : ${plainText(step.text.before + step.text.strong + step.text.after)}`);
+      }
+      for (const pr of p.usage.precautions) expect(s).toContain(`- ${plainText(pr.text)}`);
+      expect(s).toContain(plainText(p.usage.badge.label));
+    } else {
+      expect(s).toContain("**Mode d'emploi** : `À COMPLÉTER`");
+      expect(p.precautions).toBeNull();
+    }
   });
 
   it("prix : Fabulous 19,90 €, Miraculous 39,90 €, Luxurious 29,90 €, pack 69,90 €", () => {

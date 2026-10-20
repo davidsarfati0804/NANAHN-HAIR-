@@ -65,11 +65,56 @@ export type Product = {
   };
   inci: string;
   inciNotes: string[];
-  usage: string | null;
+  usage: UsageGuide | null;
   precautions: string | null;
   volume: string;
   founder?: boolean;
 };
+
+// Mode d'emploi (textes fournis le 20/10/2026 : mode-emploi-miraculous.html, mode-emploi-fabulous.html)
+export type UsageGuide = {
+  steps: Array<{
+    title: string;
+    text: { before: string; strong: string; after: string };
+    image: { src: string; width: number; height: number };
+  }>;
+  precautions: Array<{ icon: string; text: string }>;
+  badge: { icon: string; label: string };
+};
+
+function usageGuide(productName: string, folder: string): UsageGuide {
+  const img = (name: string) => `/images/${folder}/${name}.png`;
+  return {
+    steps: [
+      {
+        title: "Étape 1",
+        text: {
+          before: "Appliquer ",
+          strong: productName,
+          after:
+            " des racines vers les pointes. Pour un soin complet, 3 pipettes sont nécessaires : sur le cuir chevelu, les longueurs et les pointes.",
+        },
+        image: { src: img("etape1-application"), width: 370, height: 384 },
+      },
+      {
+        title: "Étape 2",
+        text: {
+          before: "",
+          strong: "",
+          after: "Laver les cheveux avec un shampoing classique. Pour un résultat optimal, utiliser le soin 3 fois par semaine.",
+        },
+        image: { src: img("etape2-shampoing"), width: 262, height: 288 },
+      },
+    ],
+    precautions: [
+      { icon: img("icone-coloration"), text: "Ne pas utiliser le soin les 2 jours qui précèdent et qui suivent une coloration." },
+      // Une seule icône fournie (triangle) pour ces deux précautions
+      { icon: img("icone-avertissement"), text: "Éviter tout contact avec les yeux." },
+      { icon: img("icone-avertissement"), text: "Usage externe uniquement." },
+    ],
+    badge: { icon: img("icone-nuit-jour"), label: "Nuit & jour" },
+  };
+}
 
 const inciNotes = [
   "* Ingrédients issus de l'agriculture biologique",
@@ -114,7 +159,7 @@ export const products: Product[] = fr([
     },
     inci: "RICINUS COMMUNIS SEED OIL*, OLEA EUROPAEA FRUIT OIL*, COCOS NUCIFERA OIL*, PERSEA GRATISSIMA OIL*, BRASSICA NIGRA SEED OIL*, SIMMONDSIA CHINENSIS SEED OIL*, BRASSICA OLERACEA ITALICA SEED OIL*, VITIS VINIFERA SEED OIL, EMBLICA OFFICINALIS FRUIT POWDER*, FRAGRANCE, TOCOPHEROL, HELIANTHUS ANNUUS SEED OIL, BENZYL SALICYLATE**, ALPHA-HEXYLCINNAMALDEHYDE**, D-CITRONELLOL**, D-LIMONENE**, GERANIOL**, LINALOOL**, BENZYL BENZOATE**, CITRAL**, EUGENOL**, ISOEUGENOL**",
     inciNotes,
-    usage: null,
+    usage: usageGuide("Fabulous Hair Serum", "mode-emploi-fabulous"),
     precautions: null,
     volume: "30 ml",
   },
@@ -155,7 +200,7 @@ export const products: Product[] = fr([
     },
     inci: "RICINUS COMMUNIS SEED OIL*, OLEA EUROPAEA FRUIT OIL*, COCOS NUCIFERA OIL*, PERSEA GRATISSIMA OIL*, BRASSICA NIGRA SEED OIL*, SIMMONDSIA CHINENSIS SEED OIL*, BRASSICA OLERACEA ITALICA SEED OIL*, VITIS VINIFERA SEED OIL, EMBLICA OFFICINALIS FRUIT POWDER*, FRAGRANCE, TOCOPHEROL, HELIANTHUS ANNUUS SEED OIL, CITRAL**, COUMARIN**, BENZYL BENZOATE**, D-LIMONENE**, LINALOOL**",
     inciNotes,
-    usage: null,
+    usage: usageGuide("Miraculous Hair Serum", "mode-emploi"),
     precautions: null,
     volume: "30 ml",
     founder: true,
@@ -555,36 +600,37 @@ export const quiz = fr({
   previous: "Question précédente",
   restart: "Refaire le quiz",
   questions: [
+    // Questions 1 à 4 : réponses fournies le 20/10/2026 (ordre d'affichage tel que fourni) ; question 5 inchangée
     {
       question: "Ton rituel idéal du week-end ?",
       answers: [
-        { text: "Une séance de sport et mes objectifs de la semaine", product: "miraculous", points: 1 },
-        { text: "Un petit-déj en terrasse, sans prise de tête", product: "fabulous", points: 1 },
-        { text: "Une soirée spa, bougies et douceur", product: "luxurious", points: 1 },
+        { text: "Un brunch entre copines puis une virée shopping", product: "miraculous", points: 1 },
+        { text: "Une escapade à la plage, sans réveil", product: "fabulous", points: 1 },
+        { text: "Un hôtel spa avec vue, peignoir et coupe de champagne", product: "luxurious", points: 1 },
       ],
     },
     {
       question: "Ce que tu aimes dans un soin ?",
       answers: [
-        { text: "Une belle texture et un parfum qui enveloppe", product: "luxurious", points: 1 },
-        { text: "Un vrai rituel intensif", product: "miraculous", points: 1 },
-        { text: "Qu'il soit simple et rapide", product: "fabulous", points: 1 },
+        { text: "Un parfum gourmand qui reste sur mes cheveux toute la journée", product: "luxurious", points: 1 },
+        { text: "Un vrai rituel, que je suis avec régularité", product: "miraculous", points: 1 },
+        { text: "Quelques gouttes, et je file", product: "fabulous", points: 1 },
       ],
     },
     {
       question: "L'expérience que tu recherches ?",
       answers: [
-        { text: "Fraîcheur et légèreté", product: "fabulous", points: 1 },
-        { text: "Plaisir et glamour", product: "luxurious", points: 1 },
-        { text: "Énergie et transformation", product: "miraculous", points: 1 },
+        { text: "Un vent de fraîcheur, comme un matin d'été", product: "fabulous", points: 1 },
+        { text: "Un moment glamour, rien que pour moi", product: "luxurious", points: 1 },
+        { text: "Un nouveau départ pour mes cheveux", product: "miraculous", points: 1 },
       ],
     },
     {
       question: "Ta priorité pour tes cheveux ?",
       answers: [
-        { text: "Qu'ils soient plus forts, avec un soin suivi sur la durée", product: "miraculous", points: 2 },
-        { text: "Qu'ils brillent et aient du volume", product: "luxurious", points: 1 },
-        { text: "Qu'ils soient doux et équilibrés au quotidien", product: "fabulous", points: 1 },
+        { text: "Des cheveux plus forts, avec un soin suivi sur la durée", product: "miraculous", points: 2 },
+        { text: "Une brillance miroir et du volume", product: "luxurious", points: 1 },
+        { text: "Des cheveux gainés, hydratés et en pleine forme", product: "fabulous", points: 1 },
       ],
     },
     {

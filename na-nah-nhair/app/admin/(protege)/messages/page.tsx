@@ -9,7 +9,7 @@ export default async function AdminMessagesPage() {
   return (
     <div>
       <div className="flex flex-wrap items-end justify-between gap-4">
-        <h1 className="text-6xl text-deep-violet">{t.messages.title}</h1>
+        <h1 className="titre-h1">{t.messages.title}</h1>
         {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- téléchargement d'un fichier */}
         <a href="/admin/messages-export" className="inline-flex min-h-11 items-center rounded-full border-2 border-deep-violet px-5 text-sm font-bold text-deep-violet">
           {t.messages.export}
@@ -20,7 +20,7 @@ export default async function AdminMessagesPage() {
       ) : (
         <ul className="mt-8 grid gap-4">
           {messages.map((m) => (
-            <li key={m.id} className="rounded-3xl border-2 border-lavender-mist p-5">
+            <li key={m.id} className="rounded-3xl border-2 border-lavender p-5">
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
                   <p className="font-bold text-deep-violet">

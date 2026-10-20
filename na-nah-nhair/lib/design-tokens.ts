@@ -2,33 +2,28 @@
 // Les mêmes valeurs sont exposées en variables CSS dans app/globals.css.
 
 export const colors = {
-  // Repris du premier site
-  white: "#FFFFFF",
-  lavender: "#AAA1C8", // Pantone 15-3817 TCX, hex à valider visuellement
-  lavenderSoft: "#F3F0FA",
-  lavenderMist: "#E8E2F2",
-  // Violet foncé : même teinte que le logo (250°), lisible partout (WCAG AA)
-  deepViolet: "#342B64",
-  plum: "#504587", // violet intermédiaire, même teinte que le logo
-  ink: "#211A2E",
-  blush: "#FFF5F7",
-  gold: "#D8A24A",
-  yellow: "#F1E6B2", // Pantone 7499
+  // Marque (validé le 20/10/2026, modification 9)
+  logoViolet: "#8076B3", // violet du logo : logo et nom de marque
+  deepViolet: "#342B64", // violet foncé : textes, titres, boutons, sections sombres
+  plum: "#504587", // survol des boutons foncés uniquement
+  logoYellow: "#F1E1B0", // crème du logo : bandeau, sticker, étiquettes À COMPLÉTER
+  white: "#FFFFFF", // fond du site
+  lavenderSoft: "#F3F0FA", // lavande très claire : fonds de sections
+  lavender: "#AAA1C8", // lavande des cartes et encadrés (Pantone 15-3817 TCX), contours
 
-  // Couleurs prélevées dans le logo (assets/logo/logo-na-nah-nhair.jpg)
-  logoViolet: "#8076B3",
-  logoYellow: "#F1E1B0",
-
-  // Nouveaux : couleurs produits (à valider en phase 2)
-  fabulous: "#8FD3AE",
-  fabulousSoft: "#E8F7EE",
-  fabulousDeep: "#1D5A3C",
-  miraculous: "#C7B2EC",
-  miraculousSoft: "#F4EEFC",
+  // Produits = couleurs des flacons (modification 10). VALEURS PROVISOIRES, Pantone exacts à venir.
+  fabulousSoft: "#E4F3ED", // clair : fonds secondaires
+  fabulous: "#B2DCCB", // moyen : fond du cadre (couleur du flacon)
+  fabulousDeep: "#1D5A3C", // foncé : textes et boutons dans le cadre
+  fabulousName: "#1B8FE8", // nom du produit (texte du flacon), sur bande blanche
+  miraculousSoft: "#E6E0F5",
+  miraculous: "#B9A5E2",
   miraculousDeep: "#342B64",
-  luxurious: "#F5A9C6",
-  luxuriousSoft: "#FDECF2",
+  miraculousName: "#342B64", // À COMPLÉTER : couleur du texte du flacon
+  luxuriousSoft: "#F8EAF3",
+  luxurious: "#EBC4DE",
   luxuriousDeep: "#8A2453",
+  luxuriousName: "#8A2453", // À COMPLÉTER : couleur du texte du flacon
 } as const;
 
 export type ColorName = keyof typeof colors;
@@ -43,22 +38,20 @@ export type ProductTheme = "fabulous" | "miraculous" | "luxurious";
 
 // Grands textes uniquement (≥ 19 px gras ou ≥ 24 px) : WCAG AA exige 3:1
 export const largeTextPairs: Array<[text: ColorName, background: ColorName]> = [
-  ["logoViolet", "logoYellow"], // logo de l'en-tête (fichier fourni)
-  ["logoViolet", "white"], // titre de l'accueil (logo)
+  ["logoViolet", "logoYellow"], // logo de l'en-tête (fichier fourni), nom de marque dans le bandeau
+  ["logoViolet", "white"], // titre de l'accueil (logo), nom de marque en grand
+  ["logoViolet", "lavenderSoft"], // numéros des cartes « Mon histoire »
+  ["fabulousName", "white"], // nom Fabulous sur sa bande blanche
 ];
 
-// Paires texte / fond réellement utilisées : vérifiées WCAG AA par tests/design-tokens.test.ts
+// Paires texte / fond réellement utilisées : vérifiées WCAG AA par tests/unit/design-tokens.test.ts
 export const contrastPairs: Array<[text: ColorName, background: ColorName]> = [
-  ["deepViolet", "logoYellow"], // bandeau d'annonce
-  ["ink", "white"],
   ["deepViolet", "white"],
-  ["plum", "white"],
-  ["deepViolet", "lavender"],
-  ["ink", "lavender"],
+  ["deepViolet", "logoYellow"],
   ["deepViolet", "lavenderSoft"],
+  ["deepViolet", "lavender"],
   ["white", "deepViolet"],
   ["white", "plum"],
-  ["deepViolet", "yellow"],
   ["fabulousDeep", "fabulous"],
   ["fabulousDeep", "fabulousSoft"],
   ["white", "fabulousDeep"],

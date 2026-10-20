@@ -52,7 +52,7 @@ export default function CartView() {
 
   return (
     <Shell>
-      <ul className="divide-y divide-lavender-mist border-y border-lavender-mist">
+      <ul className="divide-y divide-lavender border-y border-lavender">
         {quote.lines.map((line) => {
           const name = productName(line.id);
           const err = errorFor(line.id);
@@ -96,7 +96,7 @@ export default function CartView() {
               <button
                 type="button"
                 onClick={() => remove(line.id)}
-                className="min-h-11 px-2 text-sm font-bold text-plum underline underline-offset-4"
+                className="min-h-11 px-2 text-sm font-bold text-deep-violet underline underline-offset-4"
               >
                 {t.remove}
                 <span className="sr-only"> {name}</span>
@@ -113,8 +113,8 @@ export default function CartView() {
         </dd>
         <dt>{t.shipping}</dt>
         <dd className="text-right font-bold">{quote.freeShipping ? t.shippingFree : t.shippingTbd}</dd>
-        <dt className="border-t border-lavender-mist pt-2 text-lg font-bold">{t.total}</dt>
-        <dd className="border-t border-lavender-mist pt-2 text-right text-lg font-bold" data-testid="total">
+        <dt className="border-t border-lavender pt-2 text-lg font-bold">{t.total}</dt>
+        <dd className="border-t border-lavender pt-2 text-right text-lg font-bold" data-testid="total">
           {formatPrice(quote.totalCents)}
         </dd>
       </dl>
@@ -124,7 +124,7 @@ export default function CartView() {
           {t.continue}
         </ButtonLink>
         {blocked ? (
-          <button type="button" disabled className="min-h-12 rounded-full bg-deep-violet px-6 py-3 text-sm font-bold uppercase text-white opacity-50">
+          <button type="button" disabled className="bouton bouton--principal opacity-50">
             {t.checkout}
           </button>
         ) : (
@@ -137,8 +137,8 @@ export default function CartView() {
 
 function Shell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="mx-auto max-w-4xl px-4 py-14 sm:px-6">
-      <h1 className="mb-8 text-7xl text-deep-violet sm:text-8xl">{t.title}</h1>
+    <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-24">
+      <h1 className="mb-8 titre-h1">{t.title}</h1>
       {children}
     </div>
   );

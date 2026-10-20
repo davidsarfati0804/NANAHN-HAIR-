@@ -41,7 +41,7 @@ export default function AddToCart({
   return (
     <div className={className}>
       {soldOut ? (
-        <p className="inline-block rounded-full bg-ink px-6 py-3 text-sm font-bold uppercase text-white">{shop.soldOut}</p>
+        <p className="inline-block rounded-full bg-deep-violet px-6 py-3 text-sm font-bold uppercase text-white">{shop.soldOut}</p>
       ) : (
         <form
           className="flex flex-wrap items-end gap-3"
@@ -64,14 +64,14 @@ export default function AddToCart({
                 max={Math.max(1, max)}
                 value={quantity}
                 onChange={(e) => setQuantity(Math.max(1, Math.min(Number(e.target.value) || 1, Math.max(1, max))))}
-                className="mt-1 h-12 w-20 rounded-full border-2 border-deep-violet bg-white px-3 text-center text-ink"
+                className="mt-1 h-12 w-20 rounded-full border-2 border-deep-violet bg-white px-3 text-center text-deep-violet"
               />
             </label>
           )}
           <button
             type="submit"
             disabled={!canAdd}
-            className={`min-h-12 rounded-full px-8 py-3 text-sm font-bold uppercase tracking-wide transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${buttonClassName}`}
+            className={`bouton disabled:cursor-not-allowed disabled:opacity-50 ${buttonClassName}`}
           >
             {shop.addToCart}
             <span className="sr-only"> : {name}</span>

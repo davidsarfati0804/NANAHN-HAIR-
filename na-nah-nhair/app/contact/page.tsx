@@ -9,15 +9,15 @@ export const metadata: Metadata = { title: t.title, description: t.intro, altern
 
 export default function ContactPage() {
   return (
-    <div className="mx-auto grid max-w-5xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-[1.4fr_1fr]">
+    <div className="mx-auto grid max-w-5xl gap-10 px-4 py-16 sm:px-6 sm:py-24 md:grid-cols-[1.4fr_1fr]">
       <div>
-        <h1 className="text-7xl text-deep-violet sm:text-8xl">{t.title}</h1>
-        <p className="mb-8 mt-3 text-lg">{t.intro}</p>
+        <h1 className="titre-h1">{t.title}</h1>
+        <p className="mb-8 mt-3 accroche">{t.intro}</p>
         <ContactForm />
       </div>
       <aside className="md:pt-32">
         <LavenderBox>
-          <h2 className="font-body text-xl font-bold">{t.coordinatesTitle}</h2>
+          <h2 className="titre-h3">{t.coordinatesTitle}</h2>
           <address className="mt-3 space-y-1 not-italic">
             <p>
               <BrandText text={legal.brand} />
@@ -34,7 +34,7 @@ export default function ContactPage() {
               </a>
             </p>
           </address>
-          <h2 className="mt-6 font-body text-xl font-bold">{t.instagramTitle}</h2>
+          <h2 className="mt-6 titre-h3">{t.instagramTitle}</h2>
           <div className="mt-2">
             {legal.instagram ? (
               <a href={legal.instagram} className="underline underline-offset-4" rel="noopener noreferrer" target="_blank">

@@ -9,7 +9,7 @@ const euros = (c: number | null) => (c === null ? "" : (c / 100).toFixed(2).repl
 
 export default function ShippingForm({ settings }: { settings: ShopSettings }) {
   const [state, action, pending] = useActionState<FormState, FormData>(updateShipping, null);
-  const field = "h-11 rounded-2xl border-2 border-deep-violet bg-white px-3 text-ink";
+  const field = "h-11 rounded-2xl border-2 border-deep-violet bg-white px-3 text-deep-violet";
   return (
     <form
       // Soumission manuelle : en cas d'erreur, les saisies restent affichées (pas de remise à zéro du formulaire)
@@ -25,7 +25,7 @@ export default function ShippingForm({ settings }: { settings: ShopSettings }) {
         <span className="font-normal">{t.shipping.thresholdHelp}</span>
       </label>
       {(Object.entries(settings.carriers) as Array<[CarrierId, ShopSettings["carriers"][CarrierId]]>).map(([id, c]) => (
-        <fieldset key={id} className="rounded-3xl border-2 border-lavender-mist p-5">
+        <fieldset key={id} className="rounded-3xl border-2 border-lavender p-5">
           <legend className="px-2 font-bold text-deep-violet">{c.label}</legend>
           <div className="grid gap-4 sm:grid-cols-2">
             <label className="grid gap-1 text-sm font-bold">

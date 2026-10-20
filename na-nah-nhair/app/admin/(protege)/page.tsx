@@ -12,7 +12,7 @@ export default async function AdminHome() {
   const name = (id: string) => (id === "pack" ? pack.name : products.find((p) => p.slug === id)!.name);
   return (
     <div>
-      <h1 className="text-6xl text-deep-violet">{t.title}</h1>
+      <h1 className="titre-h1">{t.title}</h1>
       <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {PRODUCT_IDS.map((id) => {
           const available = availableQuantity(catalog, id);
@@ -37,7 +37,7 @@ export default async function AdminHome() {
           Modifier
         </Link>
       </p>
-      <p className="mt-6 rounded-3xl border-2 border-dashed border-gold bg-yellow p-4 text-sm font-bold">
+      <p className="mt-6 rounded-3xl border-2 border-dashed border-deep-violet bg-logo-yellow p-4 text-sm font-bold">
         Commandes, codes promo et factures : phase 6 (avec Stripe).
       </p>
     </div>

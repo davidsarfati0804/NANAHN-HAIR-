@@ -2,28 +2,28 @@
 
 /* Mêmes valeurs que lib/design-tokens.ts */
 @theme {
-  --color-white: #ffffff;
-  --color-lavender: #aaa1c8;
-  --color-lavender-soft: #f3f0fa;
-  --color-lavender-mist: #e8e2f2;
+  /* Marque */
+  --color-logo-violet: #8076b3;
   --color-deep-violet: #342b64;
   --color-plum: #504587;
-  --color-ink: #211a2e;
-  --color-blush: #fff5f7;
-  --color-gold: #d8a24a;
-  --color-yellow: #f1e6b2;
-  --color-logo-violet: #8076b3;
   --color-logo-yellow: #f1e1b0;
+  --color-white: #ffffff;
+  --color-lavender-soft: #f3f0fa;
+  --color-lavender: #aaa1c8;
 
-  --color-fabulous: #8fd3ae;
-  --color-fabulous-soft: #e8f7ee;
+  /* Produits = flacons (valeurs provisoires) */
+  --color-fabulous-soft: #e4f3ed;
+  --color-fabulous: #b2dccb;
   --color-fabulous-deep: #1d5a3c;
-  --color-miraculous: #c7b2ec;
-  --color-miraculous-soft: #f4eefc;
+  --color-fabulous-name: #1b8fe8;
+  --color-miraculous-soft: #e6e0f5;
+  --color-miraculous: #b9a5e2;
   --color-miraculous-deep: #342b64;
-  --color-luxurious: #f5a9c6;
-  --color-luxurious-soft: #fdecf2;
+  --color-miraculous-name: #342b64;
+  --color-luxurious-soft: #f8eaf3;
+  --color-luxurious: #ebc4de;
   --color-luxurious-deep: #8a2453;
+  --color-luxurious-name: #8a2453;
 
   --font-display: "Bebas Kai", var(--font-bebas), Impact, sans-serif;
   --font-body: var(--font-montserrat), Arial, sans-serif;
@@ -40,8 +40,10 @@
   body {
     margin: 0;
     background: var(--color-white);
-    color: var(--color-ink);
+    color: var(--color-deep-violet);
     font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.6;
   }
 
   h1,
@@ -63,6 +65,135 @@
   :focus-visible {
     outline: 3px solid var(--color-deep-violet);
     outline-offset: 3px;
+  }
+
+  /* Sur fond violet foncé : contour blanc (sinon invisible) */
+  .bg-deep-violet :focus-visible,
+  footer :focus-visible {
+    outline-color: var(--color-white);
+  }
+
+  a.bg-deep-violet:focus-visible,
+  button.bg-deep-violet:focus-visible,
+  .bouton--principal:focus-visible {
+    outline: 3px solid var(--color-white);
+    outline-offset: -6px;
+  }
+}
+
+/* ===== Système de design : un style par rôle (modification 9, page /guide-de-style) ===== */
+@layer components {
+  .titre-h1 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(2.75rem, 10vw, 6rem);
+    line-height: 0.95;
+    /* couleur héritée : violet foncé par défaut, ton foncé du produit dans un cadre produit, blanc sur fond foncé */
+    color: inherit;
+  }
+  .titre-h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(2.5rem, 7vw, 4.5rem);
+    line-height: 0.95;
+    /* couleur héritée : violet foncé par défaut, ton foncé du produit dans un cadre produit, blanc sur fond foncé */
+    color: inherit;
+  }
+  .titre-h3 {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: 1.3;
+    letter-spacing: 0;
+    /* couleur héritée : violet foncé par défaut, ton foncé du produit dans un cadre produit, blanc sur fond foncé */
+    color: inherit;
+  }
+  .surtitre {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    /* couleur héritée : violet foncé par défaut, ton foncé du produit dans un cadre produit, blanc sur fond foncé */
+    color: inherit;
+  }
+  .accroche {
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 1.25rem;
+    line-height: 1.5;
+  }
+  .nom-produit {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 2.5rem;
+    line-height: 1;
+  }
+  .nom-produit-grand {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(3rem, 12vw, 4rem);
+    line-height: 0.95;
+  }
+  /* Boutons : une forme, deux styles (principal, secondaire) ; dans un cadre produit, ton foncé du produit */
+  .bouton {
+    display: inline-flex;
+    min-height: 3rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    padding: 0.75rem 1.5rem;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: background-color 0.15s;
+  }
+  .bouton--principal {
+    background: var(--color-deep-violet);
+    color: var(--color-white);
+  }
+  .bouton--principal:hover {
+    background: var(--color-plum);
+  }
+  .bouton--secondaire {
+    border: 2px solid var(--color-deep-violet);
+    background: var(--color-white);
+    color: var(--color-deep-violet);
+  }
+  .bouton--secondaire:hover {
+    background: var(--color-lavender-soft);
+  }
+  .bouton--clair {
+    background: var(--color-white);
+    color: var(--color-deep-violet);
+  }
+  .bouton--clair:hover {
+    background: var(--color-lavender-soft);
+  }
+  /* Cartes et sections : mêmes arrondis, marges et espacements partout */
+  .carte {
+    border-radius: 2rem;
+    padding: 1.5rem;
+  }
+  @media (min-width: 640px) {
+    .carte {
+      padding: 2rem;
+    }
+  }
+  .section {
+    margin-inline: auto;
+    max-width: 72rem;
+    padding: 4rem 1rem;
+  }
+  @media (min-width: 640px) {
+    .section {
+      padding: 6rem 1.5rem;
+    }
   }
 }
 

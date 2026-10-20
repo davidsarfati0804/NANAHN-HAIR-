@@ -16,8 +16,7 @@ Toutes les informations manquantes. Chacune apparaît sur le site sous forme d'e
 ## Visuels et identité
 
 
-- [ ] Couleurs des flacons (provisoires, `lib/palette-proposal.ts`) : Pantone exacts de Fabulous (cadre #B2DCCB, nom #1B8FE8), Miraculous (cadre #B9A5E2, couleur du nom), Luxurious (cadre #EBC4DE, couleur du nom)
-- [ ] Valider la palette et le guide de style (`/guide-de-style`) avant application à tout le site
+- [ ] Couleurs des flacons (provisoires, `lib/design-tokens.ts`, `app/globals.css` et `lib/palette.ts`) : Pantone exacts de Fabulous (cadre #B2DCCB, nom #1B8FE8), Miraculous (cadre #B9A5E2, couleur du nom À COMPLÉTER), Luxurious (cadre #EBC4DE, couleur du nom À COMPLÉTER)
 
 - [ ] `assets/images/histoire.jpg` : photo « Le bureau » (section Mon histoire de l'accueil)
 - [ ] Police du logo (nom ou fichier) : en attendant, logo vectorisé (SVG)

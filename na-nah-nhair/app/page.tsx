@@ -61,9 +61,9 @@ function Hero() {
             unoptimized
             className="h-auto w-full max-w-[560px]"
           />
-          <p className="mt-6 text-2xl font-bold text-plum sm:text-3xl"><BrandText text={hero.signature} tone="logo" />
+          <p className="mt-6 text-2xl font-bold text-deep-violet sm:text-3xl"><BrandText text={hero.signature} tone="logo" />
           </p>
-          <p className="mt-3 max-w-md text-lg">{hero.subtitle}</p>
+          <p className="mt-3 max-w-md accroche">{hero.subtitle}</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <ButtonLink href={hero.primaryCta.href}>
               <BrandText text={hero.primaryCta.label} />
@@ -84,7 +84,7 @@ function Hero() {
                   i === 1 ? "lg:ml-8 lg:-mr-2" : "lg:mr-6"
                 }`}
               >
-                <span className="block font-display text-4xl sm:text-5xl">{p.shortName}</span>
+                <span className={`nom-produit ${t.name}`}>{p.shortName}</span>
                 <span className="block text-sm font-bold">{p.phrase}</span>
               </li>
             );
@@ -98,8 +98,8 @@ function Hero() {
 function SectionTitle({ kicker, title, id }: { kicker: string; title: string; id?: string }) {
   return (
     <div className="mb-10">
-      <p className="text-sm font-bold uppercase tracking-[0.3em] text-plum">{kicker}</p>
-      <h2 id={id} className="mt-2 text-6xl text-deep-violet sm:text-7xl">
+      <p className="surtitre">{kicker}</p>
+      <h2 id={id} className="mt-2 titre-h2">
         {title}
       </h2>
     </div>
@@ -108,7 +108,7 @@ function SectionTitle({ kicker, title, id }: { kicker: string; title: string; id
 
 function Trio({ shop }: { shop: Shop }) {
   return (
-    <section aria-labelledby="trio" className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    <section aria-labelledby="trio" className="section">
       <SectionTitle kicker={home.trio.kicker} title={home.trio.title} id="trio" />
       <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {products.map((p) => (
@@ -124,7 +124,7 @@ function Trio({ shop }: { shop: Shop }) {
 function Concept() {
   const chips = ["fabulous", "miraculous", "luxurious"] as const;
   return (
-    <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    <section className="section">
       <LavenderBox as="div" className="px-6 py-14 text-center sm:px-12 sm:py-20">
         {/* Citation centrée, lignes équilibrées, marges égales même sur mobile */}
         <h2 className="mx-auto max-w-[18ch] text-center text-[clamp(2.5rem,10vw,5.5rem)] [text-wrap:balance]">
@@ -154,14 +154,14 @@ function Concept() {
 
 function Products({ shop }: { shop: Shop }) {
   return (
-    <section aria-labelledby="soins" className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    <section aria-labelledby="soins" className="section">
       <SectionTitle kicker={home.products.kicker} title={home.products.title} id="soins" />
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {products.map((p) => {
           const t = themeClasses[p.slug];
           return (
             <article key={p.slug} className={`rounded-[2rem] border-2 ${t.border} p-6`}>
-              <h3 className={`text-4xl ${t.text}`}>{p.name}</h3>
+              <h3 className={`nom-produit ${t.name}`}>{p.name}</h3>
               <ul className="mt-5 space-y-3">
                 {p.highlights.map((h) => (
                   <li key={h} className={`${t.soft} ${t.text} rounded-2xl px-4 py-3 font-bold`}>
@@ -191,14 +191,14 @@ function Products({ shop }: { shop: Shop }) {
 
 function Pack({ shop }: { shop: Shop }) {
   return (
-    <section aria-labelledby="pack" className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    <section aria-labelledby="pack" className="section">
       <div className="grid items-center gap-8 md:grid-cols-2">
         <PhotoSlot photo={pack.photo} src={shop.pack.photoUrl} className="aspect-square rounded-[2rem]" />
         <div>
           <SectionTitle kicker={home.pack.kicker} title={pack.name} id="pack" />
-          <p className="-mt-6 font-display text-5xl text-plum">{formatPrice(shop.pack.priceCents)}</p>
+          <p className="-mt-6 nom-produit">{formatPrice(shop.pack.priceCents)}</p>
           <LavenderBox className="mt-6">
-            <h3 className="font-body text-lg font-bold">{pack.contentTitle}</h3>
+            <h3 className="titre-h3">{pack.contentTitle}</h3>
             <ol className="mt-3 space-y-2">
               {pack.content.map((item) => (
                 <li key={item.product}>
@@ -206,7 +206,7 @@ function Pack({ shop }: { shop: Shop }) {
                 </li>
               ))}
             </ol>
-            <h3 className="mt-5 font-body text-lg font-bold">{pack.usageTitle}</h3>
+            <h3 className="mt-5 titre-h3">{pack.usageTitle}</h3>
             <p className="mt-2">{capitalize(pack.usage)}</p>
           </LavenderBox>
           <ButtonLink href="/pack" className="mt-6">
@@ -222,10 +222,10 @@ function StoryTeaser() {
   const s = home.story;
   return (
     <section aria-labelledby="histoire" className="overflow-hidden">
-      <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <div className="section">
         <div className="text-center">
-          <p className="text-sm font-bold uppercase tracking-[0.3em] text-plum">{s.kicker}</p>
-          <h2 id="histoire" className="mt-3 text-6xl text-deep-violet sm:text-7xl">
+          <p className="surtitre">{s.kicker}</p>
+          <h2 id="histoire" className="mt-3 titre-h2">
             {s.titleLines.map((line) => (
               <span key={line} className="block">
                 {line}
@@ -240,7 +240,7 @@ function StoryTeaser() {
           <StoryCards />
         </div>
         <p className="mt-6 text-center">
-          <Link href={s.readMore.href} className="inline-block py-2 font-bold text-plum underline underline-offset-4">
+          <Link href={s.readMore.href} className="inline-block py-2 font-bold text-deep-violet underline underline-offset-4">
             {s.readMore.label}
           </Link>
         </p>
@@ -251,14 +251,14 @@ function StoryTeaser() {
 
 function Reasons() {
   return (
-    <section aria-labelledby="raisons" className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-      <h2 id="raisons" className="mb-10 text-5xl text-deep-violet sm:text-6xl">
+    <section aria-labelledby="raisons" className="section">
+      <h2 id="raisons" className="mb-10 titre-h2">
         <BrandText text={home.reasons.title} tone="logo" />
       </h2>
       <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
         {home.reasons.items.map((r) => (
           <li key={r.title} className="rounded-3xl bg-lavender p-5 text-deep-violet">
-            <h3 className="font-body text-lg font-bold leading-tight">{r.title}</h3>
+            <h3 className="titre-h3">{r.title}</h3>
             {r.text && <p className="mt-2 text-sm">{r.text}</p>}
             {r.lines && (
               <ul className="mt-2 space-y-1 text-sm">
@@ -280,10 +280,10 @@ function Reasons() {
 function FinalCta() {
   const { finalCta } = home;
   return (
-    <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    <section className="section">
       <div className="rounded-[2rem] bg-deep-violet px-6 py-16 text-center text-white">
-        <h2 className="text-6xl sm:text-8xl">{finalCta.title}</h2>
-        <p className="mt-4 text-xl font-bold">{finalCta.text}</p>
+        <h2 className="titre-h2 text-white">{finalCta.title}</h2>
+        <p className="mt-4 accroche">{finalCta.text}</p>
         <ButtonLink href={finalCta.cta.href} variant="light" className="mt-8">
           {finalCta.cta.label}
         </ButtonLink>

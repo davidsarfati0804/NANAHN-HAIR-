@@ -67,7 +67,7 @@ export default function Checkout() {
     <Shell>
       <div className="grid gap-10 md:grid-cols-[1.2fr_1fr]">
         <section aria-labelledby="livraison">
-          <h2 id="livraison" className="text-4xl text-deep-violet">
+          <h2 id="livraison" className="titre-h2">
             {t.carrierTitle}
           </h2>
           <p className="mt-1 text-sm">{t.delay}</p>
@@ -102,15 +102,15 @@ export default function Checkout() {
             </p>
           )}
           {carrier === "mondial-relay" && (
-            <div className="mt-4 rounded-3xl border-2 border-lavender-mist p-5">
-              <h3 className="font-body text-lg font-bold text-deep-violet">{t.relayTitle}</h3>
+            <div className="mt-4 rounded-3xl border-2 border-lavender p-5">
+              <h3 className="titre-h3">{t.relayTitle}</h3>
               <ToComplete label="sélection du point relais (identifiants du compte Mondial Relay)" className="mt-2" />
             </div>
           )}
         </section>
 
         <section aria-labelledby="recap" className="rounded-[2rem] bg-lavender p-6 text-deep-violet">
-          <h2 id="recap" className="text-4xl">
+          <h2 id="recap" className="titre-h2">
             {t.summaryTitle}
           </h2>
           {failed && <p role="alert">{t.quoteError}</p>}
@@ -155,7 +155,7 @@ export default function Checkout() {
             type="button"
             disabled
             aria-describedby="paiement-info"
-            className="mt-6 min-h-12 w-full cursor-not-allowed rounded-full bg-deep-violet px-6 py-3 text-sm font-bold uppercase text-white opacity-60"
+            className="mt-6 bouton bouton--principal w-full cursor-not-allowed opacity-60"
           >
             {t.pay}
           </button>
@@ -174,8 +174,8 @@ export default function Checkout() {
 
 function Shell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="mx-auto max-w-5xl px-4 py-14 sm:px-6">
-      <h1 className="mb-8 text-7xl text-deep-violet sm:text-8xl">{t.title}</h1>
+    <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-24">
+      <h1 className="mb-8 titre-h1">{t.title}</h1>
       {children}
     </div>
   );

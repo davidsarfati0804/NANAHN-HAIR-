@@ -8,7 +8,7 @@ import type { CatalogProduct } from "@/lib/catalog";
 export default function ProductForm({ product, name }: { product: CatalogProduct; name: string }) {
   const [state, action, pending] = useActionState<FormState, FormData>(updateProduct, null);
   const price = (product.priceCents / 100).toFixed(2).replace(".", ",");
-  const field = "h-11 rounded-2xl border-2 border-deep-violet bg-white px-3 text-ink";
+  const field = "h-11 rounded-2xl border-2 border-deep-violet bg-white px-3 text-deep-violet";
 
   return (
     <form
@@ -18,9 +18,9 @@ export default function ProductForm({ product, name }: { product: CatalogProduct
         const data = new FormData(e.currentTarget);
         startTransition(() => action(data));
       }}
-      className="rounded-3xl border-2 border-lavender-mist p-5" aria-label={name}>
+      className="rounded-3xl border-2 border-lavender p-5" aria-label={name}>
       <input type="hidden" name="id" value={product.id} />
-      <h2 className="font-body text-xl font-bold text-deep-violet">{name}</h2>
+      <h2 className="titre-h3">{name}</h2>
       <div className="mt-4 grid gap-4 sm:grid-cols-2">
         <label className="grid gap-1 text-sm font-bold">
           {t.products.price}

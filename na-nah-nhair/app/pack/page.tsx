@@ -24,18 +24,18 @@ export const metadata: Metadata = {
 export default async function PackPage() {
   const { products: shop } = await getShopData();
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 md:py-16">
+    <div className="section">
       <JsonLd
         data={productJsonLd({ name: pack.name, description: pack.content.map((c) => `${c.product} : ${c.text}`).join(" "), path: "/pack", shop: shop.pack })}
       />
       <div className="grid gap-10 md:grid-cols-2">
         <PhotoSlot photo={pack.photo} src={shop.pack.photoUrl} priority className="aspect-square rounded-[2rem]" />
         <div>
-          <h1 className="text-6xl text-deep-violet sm:text-7xl">{pack.name}</h1>
-          <p className="mt-2 font-display text-5xl text-plum">{formatPrice(shop.pack.priceCents)}</p>
-          <p className="mt-6 text-xl font-bold text-deep-violet">{emotionalConcept.lines.join(" ")}</p>
+          <h1 className="nom-produit-grand">{pack.name}</h1>
+          <p className="mt-2 nom-produit-grand">{formatPrice(shop.pack.priceCents)}</p>
+          <p className="mt-6 accroche">{emotionalConcept.lines.join(" ")}</p>
 
-          <h2 className="mt-8 font-body text-lg font-bold text-deep-violet">{pack.contentTitle}</h2>
+          <h2 className="mt-8 titre-h3">{pack.contentTitle}</h2>
           <ol className="mt-3 grid gap-3">
             {pack.content.map((c, i) => {
               const p = products.find((x) => x.shortName === c.product)!;
@@ -52,7 +52,7 @@ export default async function PackPage() {
           </ol>
 
           <LavenderBox className="mt-6">
-            <h2 className="font-body text-lg font-bold">{pack.usageTitle}</h2>
+            <h2 className="titre-h3">{pack.usageTitle}</h2>
             <p className="mt-2">{capitalize(pack.usage)}</p>
           </LavenderBox>
 

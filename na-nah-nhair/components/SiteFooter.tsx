@@ -6,7 +6,7 @@ import BrandName, { BrandText } from "@/components/BrandName";
 export default function SiteFooter() {
   return (
     <footer className="mt-16 bg-deep-violet text-white">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-3">
+      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 sm:py-24 md:grid-cols-3">
         <div>
           <p className="text-4xl">
             <BrandName />
@@ -18,7 +18,7 @@ export default function SiteFooter() {
         </div>
 
         <div>
-          <h2 className="text-2xl">{footer.contactTitle}</h2>
+          <h2 className="titre-h3 text-white">{footer.contactTitle}</h2>
           <address className="mt-3 space-y-1 text-sm not-italic">
             <p>{legal.address}</p>
             <p>
@@ -32,7 +32,7 @@ export default function SiteFooter() {
               </a>
             </p>
           </address>
-          <h2 className="mt-6 text-2xl">{footer.followTitle}</h2>
+          <h2 className="mt-6 titre-h3 text-white">{footer.followTitle}</h2>
           <div className="mt-2">
             {legal.instagram ? (
               <a href={legal.instagram} className="inline-block py-1.5 underline underline-offset-4">

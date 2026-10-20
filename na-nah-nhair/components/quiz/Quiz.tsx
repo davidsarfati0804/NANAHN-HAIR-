@@ -34,17 +34,17 @@ export default function Quiz() {
         <div className="absolute -right-10 top-0 h-80 w-80 rounded-full bg-miraculous opacity-50 blur-3xl" />
         <div className="absolute bottom-0 left-1/2 h-72 w-72 rounded-full bg-luxurious opacity-40 blur-3xl" />
       </div>
-      <div className="relative mx-auto max-w-3xl px-4 py-14 sm:px-6">
-        <h1 className="text-6xl text-deep-violet sm:text-8xl"><BrandText text={quiz.title} tone="logo" />
+      <div className="relative mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-24">
+        <h1 className="titre-h1"><BrandText text={quiz.title} tone="logo" />
         </h1>
-        <p className="mt-3 text-lg">{quiz.intro}</p>
+        <p className="mt-3 accroche">{quiz.intro}</p>
 
         <div className="mt-10">
-          <p className="text-sm font-bold uppercase tracking-[0.2em] text-plum" aria-live="polite">
+          <p className="surtitre" aria-live="polite">
             {quiz.progress(step + 1, total)}
           </p>
           <div
-            className="mt-3 h-2 overflow-hidden rounded-full bg-lavender-mist"
+            className="mt-3 h-2 overflow-hidden rounded-full bg-lavender-soft"
             role="progressbar"
             aria-label="Progression du quiz"
             aria-valuemin={0}
@@ -56,7 +56,7 @@ export default function Quiz() {
 
           <fieldset className="mt-8" disabled={done}>
             <legend>
-              <h2 ref={heading} tabIndex={-1} className="text-5xl text-deep-violet outline-none sm:text-6xl">
+              <h2 ref={heading} tabIndex={-1} className="titre-h2 outline-none">
                 {current.question}
               </h2>
             </legend>
@@ -82,7 +82,7 @@ export default function Quiz() {
                 setAnswers(answers.slice(0, -1));
                 requestAnimationFrame(() => heading.current?.focus());
               }}
-              className="mt-6 text-sm font-bold text-plum underline underline-offset-4"
+              className="mt-6 text-sm font-bold text-deep-violet underline underline-offset-4"
             >
               {quiz.previous}
             </button>

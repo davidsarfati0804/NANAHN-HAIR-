@@ -14,9 +14,9 @@ export const metadata: Metadata = {
 export default async function BoutiquePage() {
   const { products: shop, freeShipping, freeShippingThresholdCents } = await getShopData();
   return (
-    <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
-      <h1 className="text-7xl text-deep-violet sm:text-8xl">{texts.title}</h1>
-      <p className="mt-3 text-lg">{texts.intro}</p>
+    <div className="section">
+      <h1 className="titre-h1">{texts.title}</h1>
+      <p className="mt-3 accroche">{texts.intro}</p>
       <div className="mt-4 flex flex-wrap items-center gap-2">
         <p className="rounded-2xl bg-lavender px-4 py-2 text-sm font-bold text-deep-violet">
           {freeShipping ? texts.freeShipping : texts.freeShippingFrom(formatPrice(freeShippingThresholdCents))}
@@ -34,12 +34,12 @@ export default async function BoutiquePage() {
                 <PhotoSlot photo={p.photo} src={s.photoUrl} theme={p.slug} className="aspect-square rounded-[1.5rem]" />
               </Link>
               <div className="flex flex-1 flex-col p-3">
-                <h2 className="text-4xl">
+                <h2 className={`nom-produit ${t.name}`}>
                   <Link href={`/soins/${p.slug}`}>{p.shortName}</Link>
                 </h2>
                 <p className="text-xs font-bold uppercase">{p.name} · {p.volume}</p>
                 <p className="mt-2 text-sm font-bold">{p.phrase}</p>
-                <p className="mt-auto pt-4 font-display text-4xl">{formatPrice(s.priceCents)}</p>
+                <p className="mt-auto pt-4 nom-produit">{formatPrice(s.priceCents)}</p>
                 <AddToCart id={p.slug} name={p.name} available={s.available} className="mt-2" buttonClassName={`${t.button} w-full`} />
               </div>
             </li>
@@ -50,11 +50,11 @@ export default async function BoutiquePage() {
             <PhotoSlot photo={pack.photo} src={shop.pack.photoUrl} className="aspect-square rounded-[1.5rem] bg-white" />
           </Link>
           <div className="flex flex-1 flex-col p-3">
-            <h2 className="text-4xl">
+            <h2 className="nom-produit">
               <Link href="/pack">{pack.name}</Link>
             </h2>
             <p className="mt-2 text-sm font-bold">{pack.contentShort}</p>
-            <p className="mt-auto pt-4 font-display text-4xl">{formatPrice(shop.pack.priceCents)}</p>
+            <p className="mt-auto pt-4 nom-produit">{formatPrice(shop.pack.priceCents)}</p>
             <AddToCart id="pack" name={pack.name} available={shop.pack.available} className="mt-2" buttonClassName="w-full bg-deep-violet text-white hover:bg-plum" />
           </div>
         </li>

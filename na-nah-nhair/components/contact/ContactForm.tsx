@@ -19,7 +19,7 @@ export default function ContactForm() {
   }, [state]);
 
   const err = state?.fieldErrors ?? {};
-  const field = "mt-1 w-full rounded-2xl border-2 border-deep-violet bg-white px-4 py-3 text-ink aria-[invalid=true]:border-luxurious-deep";
+  const field = "mt-1 w-full rounded-2xl border-2 border-deep-violet bg-white px-4 py-3 text-deep-violet aria-[invalid=true]:border-luxurious-deep";
 
   return (
     <form
@@ -83,7 +83,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={pending || !startedAt}
-        className="min-h-12 rounded-full bg-deep-violet px-8 py-3 text-sm font-bold uppercase text-white hover:bg-plum disabled:opacity-60 sm:justify-self-start"
+        className="bouton bouton--principal disabled:opacity-60 sm:justify-self-start"
       >
         {pending ? t.sending : t.submit}
       </button>

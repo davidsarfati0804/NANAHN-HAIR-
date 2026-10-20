@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import BrandName from "@/components/BrandName";
-import { brandPalette, contrast, layoutRules, productPalette, typeRoles } from "@/lib/palette-proposal";
+import { brandPalette, contrast, layoutRules, productPalette, typeRoles } from "@/lib/palette";
 
 // Page cachée : guide de style (modification 9). Non référencée, absente du plan du site.
 export const metadata: Metadata = { title: "Guide de style", robots: { index: false, follow: false } };
@@ -15,10 +15,10 @@ const verdict = (a: string, b: string, large = false) => {
 export default function StyleGuidePage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6" style={{ color: V }}>
-      <p className="text-sm font-bold uppercase tracking-[0.3em]">Proposition à valider</p>
+      <p className="surtitre">Validé le 20/10/2026</p>
       <h1 className="mt-2 text-[clamp(3.5rem,10vw,6rem)]">Guide de style</h1>
       <p className="mt-3 max-w-2xl">
-        Palette unique et styles proposés (modifications 9 et 10). Rien n&apos;est encore appliqué au reste du site.
+        Palette unique et styles du site (modifications 9 et 10), appliqués à toutes les pages. Couleurs des flacons provisoires.
       </p>
 
       <h2 className="mt-14 text-[clamp(2.75rem,7vw,4.5rem)]">Palette de la marque</h2>
@@ -69,11 +69,11 @@ export default function StyleGuidePage() {
         ))}
       </div>
 
-      <h3 className="mt-10 text-xl font-bold">Fabulous : lisibilité du nom bleu (à choisir)</h3>
+      <h3 className="mt-10 titre-h3">Fabulous : lisibilité du nom bleu</h3>
       <div className="mt-4 grid gap-6 sm:grid-cols-2">
         <div className="rounded-[2rem] p-6" style={{ background: "#B2DCCB" }}>
           <p className="text-xs font-bold uppercase" style={{ color: "#1D5A3C" }}>
-            Option A : bleu sur menthe (demandé)
+            Option A : bleu sur menthe (non retenue)
           </p>
           <p className="mt-3 font-display text-6xl" style={{ color: "#1B8FE8" }}>
             Fabulous
@@ -84,7 +84,7 @@ export default function StyleGuidePage() {
         </div>
         <div className="rounded-[2rem] p-6" style={{ background: "#B2DCCB" }}>
           <p className="text-xs font-bold uppercase" style={{ color: "#1D5A3C" }}>
-            Option B : bande blanche dans le cadre
+            Option B : bande blanche dans le cadre (retenue)
           </p>
           <p className="mt-3 rounded-2xl bg-white px-4 py-2 font-display text-6xl" style={{ color: "#1B8FE8" }}>
             Fabulous

@@ -44,3 +44,13 @@ test.describe("accessibilité du bandeau cookies", () => {
     expect(results.violations.map((v) => v.id)).toEqual([]);
   });
 });
+
+test("contour de focus visible sur fond violet foncé (pied de page, bouton principal)", async ({ page }) => {
+  await page.goto("/");
+  const footerLink = page.locator("footer a").first();
+  await footerLink.focus();
+  await expect(footerLink).toHaveCSS("outline-color", "rgb(255, 255, 255)");
+  const button = page.locator("a.bouton--principal").first();
+  await button.focus();
+  await expect(button).toHaveCSS("outline-color", "rgb(255, 255, 255)");
+});

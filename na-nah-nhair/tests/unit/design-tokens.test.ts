@@ -39,3 +39,28 @@ describe("tokens CSS synchronisés", () => {
     }
   });
 });
+
+describe("guide de style = variables du site", () => {
+  it("chaque couleur du guide (/guide-de-style) est une variable de design", async () => {
+    const { brandPalette, productPalette } = await import("@/lib/palette");
+    const values = Object.values(colors).map((v) => v.toUpperCase());
+    for (const s of brandPalette) expect(values, s.token).toContain(s.hex.toUpperCase());
+    for (const p of productPalette)
+      for (const v of [p.clair, p.moyen, p.fonce, p.nom]) expect(values, `${p.product} ${v}`).toContain(v.toUpperCase());
+  });
+
+  it("aucune couleur écrite en dur dans les composants (hors guide de style)", async () => {
+    const { readdirSync, readFileSync, statSync } = await import("node:fs");
+    const { join } = await import("node:path");
+    const walk = (dir: string): string[] =>
+      readdirSync(dir).flatMap((f) => {
+        const p = join(dir, f);
+        return statSync(p).isDirectory() ? walk(p) : p.endsWith(".tsx") ? [p] : [];
+      });
+    const root = new URL("../../", import.meta.url).pathname;
+    const offenders = [...walk(join(root, "app")), ...walk(join(root, "components"))]
+      .filter((f) => !f.includes("guide-de-style"))
+      .filter((f) => /#[0-9a-fA-F]{6}\b|rgb\(/.test(readFileSync(f, "utf8")));
+    expect(offenders).toEqual([]);
+  });
+});

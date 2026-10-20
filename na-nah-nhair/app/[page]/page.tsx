@@ -27,11 +27,11 @@ export default async function LegalPage({ params }: { params: Promise<{ page: st
   if (!p) notFound();
 
   return (
-    <article className="mx-auto max-w-3xl px-4 py-14 sm:px-6">
-      <h1 className="text-[clamp(2.75rem,10vw,5rem)] text-deep-violet">{p.title}</h1>
+    <article className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-24">
+      <h1 className="titre-h1">{p.title}</h1>
       {p.sections.map((s) => (
         <section key={s.title} className="mt-10">
-          <h2 className="font-body text-2xl font-bold text-deep-violet">{s.title}</h2>
+          <h2 className="titre-h3">{s.title}</h2>
           {s.paragraphs?.map((para) => (
             <p key={para} className="mt-3">
               <BrandText text={para} />
@@ -64,7 +64,7 @@ export default async function LegalPage({ params }: { params: Promise<{ page: st
         </LavenderBox>
       )}
       <p className="mt-10">
-        <Link href="/contact" className="inline-block py-2 font-bold text-plum underline underline-offset-4">
+        <Link href="/contact" className="inline-block py-2 font-bold text-deep-violet underline underline-offset-4">
           {legalTexts.contactLink}
         </Link>
       </p>

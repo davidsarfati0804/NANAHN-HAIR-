@@ -22,13 +22,15 @@ export default function ProductCard({
     <article className={`${t.base} ${t.text} flex h-full flex-col overflow-hidden rounded-[2rem]`}>
       <PhotoSlot photo={p.photo} src={shop.photoUrl} theme={p.slug} className="m-3 aspect-[4/5] rounded-[1.5rem]" />
       <div className="flex flex-1 flex-col p-6 pt-3">
-        <H className="text-5xl">{p.shortName}</H>
+        <H>
+          <span className={`nom-produit ${t.name}`}>{p.shortName}</span>
+        </H>
         <p className="mt-1 text-sm font-bold uppercase tracking-wide">{p.name}</p>
         <p className="mt-4">{p.iAm}</p>
-        <p className="mt-4 text-lg font-bold">{p.phrase}</p>
+        <p className="mt-4 accroche">{p.phrase}</p>
         <div className="mt-auto flex items-center justify-between gap-4 pt-6">
-          <span className="font-display text-4xl">{formatPrice(shop.priceCents)}</span>
-          <Link href={`/soins/${p.slug}`} className={`${t.button} rounded-full px-5 py-3 text-sm font-bold uppercase`}>
+          <span className="nom-produit">{formatPrice(shop.priceCents)}</span>
+          <Link href={`/soins/${p.slug}`} className={`${t.button}`}>
             {cta}
             <span className="sr-only"> {p.shortName}</span>
           </Link>

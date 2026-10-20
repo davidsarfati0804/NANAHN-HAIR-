@@ -18,9 +18,9 @@ export const metadata: Metadata = {
 export default async function SoinsPage() {
   const { products: shop } = await getShopData();
   return (
-    <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
-      <h1 className="text-7xl text-deep-violet sm:text-8xl">{soinsPage.title}</h1>
-      <p className="mt-4 max-w-xl text-lg">{soinsPage.intro}</p>
+    <div className="section">
+      <h1 className="titre-h1">{soinsPage.title}</h1>
+      <p className="mt-4 max-w-xl accroche">{soinsPage.intro}</p>
       <ButtonLink href={soinsPage.quizCta.href} className="mt-6">
         <BrandText text={soinsPage.quizCta.label} />
       </ButtonLink>
@@ -36,11 +36,11 @@ export default async function SoinsPage() {
       <section aria-labelledby="pack" className="mt-16 grid items-center gap-8 rounded-[2rem] bg-lavender p-6 text-deep-violet sm:p-10 md:grid-cols-[1fr_1.4fr]">
         <PhotoSlot photo={pack.photo} src={shop.pack.photoUrl} className="aspect-square rounded-[1.5rem] bg-white" />
         <div>
-          <p className="text-sm font-bold uppercase tracking-[0.3em]">{productPage.packTitle}</p>
-          <h2 id="pack" className="mt-2 text-6xl">
+          <p className="surtitre">{productPage.packTitle}</p>
+          <h2 id="pack" className="mt-2 titre-h2">
             {pack.name}
           </h2>
-          <p className="mt-2 font-display text-5xl">{formatPrice(shop.pack.priceCents)}</p>
+          <p className="mt-2 nom-produit">{formatPrice(shop.pack.priceCents)}</p>
           <ul className="mt-4 space-y-1">
             {pack.content.map((c) => (
               <li key={c.product}>

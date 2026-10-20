@@ -16,7 +16,7 @@ Aucun ne contient de promesse de résultat, d'allégation ou d'ingrédient inven
 
 ### Boutique, pack, fiches
 - Boutique : « Trois soins et le pack. »
-- Pack : « Fabulous + Miraculous + Luxurious »
+- Pack : « Fabulous + Miraculous + Luxurious » (boutique)
 - Fiches : « Questions fréquentes », « Points clés », « Description », « Découvre aussi », « Mon produit fondateur » (repris de « c'est mon produit fondateur », INFOS §5)
 - « Plus que N en stock », « Épuisé », « Ajouté au panier », « Voir le panier »
 - Textes alternatifs des photos : « Flacon du Fabulous Hair Serum, 30 ml » (idem Miraculous, Luxurious), « Les trois sérums NA NAH N'HAIR ensemble, au spa à Maurice »
@@ -45,6 +45,19 @@ Aucun ne contient de promesse de résultat, d'allégation ou d'ingrédient inven
 
 ### Bandeau cookies
 - « Ce site n'utilise que le stockage nécessaire à son fonctionnement (ton panier). Aucun cookie publicitaire ni de mesure d'audience. » + « Accepter », « Refuser », « En savoir plus », « Modifier mon choix »
+
+### Ajoutés le 20/10/2026
+- Section Mon histoire : « Mon histoire en trois cartes » (lu par les lecteurs d'écran), « Afficher la carte 1/2/3 » (points indicateurs), texte alternatif de la photo « Mes premières préparations sur mon bureau »
+- Commande : « Le paiement en ligne (carte, Apple Pay, Google Pay) arrive bientôt. » (remplace la mention « phase 6 »)
+
+### Retirés le 20/10/2026 (consignes ou textes internes, plus jamais affichés)
+- « Les personnalités ne sont pas des catégories exclusives : une cliente peut être les trois. » (accueil)
+- « Document à faire relire avant la mise en ligne. » (mentions légales, confidentialité, cookies)
+- « Projet de CGV : ce document n'est pas définitif. Il sera relu et validé avant la mise en ligne (INFOS §11). » (CGV)
+- « Politique de retours à valider avant la mise en ligne (INFOS §11). » (retours)
+- « … sera activé à la phase 6. » (commande) et « (phase 6) » (politique cookies)
+- « Montants recalculés par le serveur à partir des prix en vigueur. » (commande)
+- « (politique de retours à valider) » dans un emplacement À COMPLÉTER de la FAQ
 
 ## 2. Pages juridiques (à faire relire de toute façon)
 

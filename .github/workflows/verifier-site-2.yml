@@ -1,0 +1,39 @@
+# Vérifie le site publié par Netlify depuis la branche site-2 (la session de développement n'a pas accès à Netlify).
+name: Vérifier site-2 sur Netlify
+
+on:
+  push:
+    branches: [site-2]
+  workflow_dispatch:
+
+jobs:
+  verifier:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Statut du dernier déploiement Netlify (badge public)
+        run: |
+          curl -sS "https://api.netlify.com/api/v1/badges/1c82ca70-81d1-4e3e-81b5-35e4a64ac638/deploy-status?branch=site-2" -o badge-site2.svg || true
+          curl -sS "https://api.netlify.com/api/v1/badges/1c82ca70-81d1-4e3e-81b5-35e4a64ac638/deploy-status" -o badge-main.svg || true
+          echo "site-2 : $(grep -oiE 'success|failed|building|enqueued|canceled|skipped|not found|unknown' badge-site2.svg | head -1)"
+          echo "main   : $(grep -oiE 'success|failed|building|enqueued|canceled|skipped|not found|unknown' badge-main.svg | head -1)"
+      - name: Attendre que site-2 réponde (jusqu'à 12 minutes)
+        run: |
+          URL="https://site-2--nanahnhair.netlify.app"
+          for i in $(seq 1 48); do
+            code=$(curl -s -o page.html -m 20 -w "%{http_code} %{time_total}" "$URL/" || echo "000 0")
+            echo "essai $i : accueil $code"
+            if [ "${code%% *}" = "200" ] && grep -q "Quel" page.html; then break; fi
+            sleep 15
+          done
+          echo "--- en-têtes de l'accueil"
+          curl -sS -I -m 20 "$URL/" | grep -iE "^HTTP|x-nf-request-id|server|cache-status|age" || true
+          echo "--- /api/sante"
+          curl -sS -m 30 "$URL/api/sante" || true
+          echo
+          echo "--- pages (code, durée)"
+          for p in / /soins /soins/fabulous /pack /boutique /quiz /mon-histoire /faq /contact /cgv /panier /admin/connexion /api/catalog /images/logo-na-nah-nhair.svg; do
+            curl -s -o /dev/null -m 30 -w "$p %{http_code} %{time_total}s\n" "$URL$p" || echo "$p erreur"
+          done
+          echo "--- début de l'accueil"
+          head -c 600 page.html || true

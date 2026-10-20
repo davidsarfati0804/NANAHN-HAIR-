@@ -3,7 +3,9 @@ import type { KeyValueStore } from "./types";
 
 // Stockage Netlify Blobs : fourni par Netlify, sans compte externe
 export function createNetlifyStore(name: string): KeyValueStore {
-  const store = getStore({ name, consistency: "strong" });
+  // Cohérence « éventuelle » (par défaut) : lecture rapide via le CDN de Netlify ; une modification
+  // faite dans le back-office est visible sur le site en quelques secondes
+  const store = getStore({ name });
   return {
     async getJSON<T>(key: string) {
       return ((await store.get(key, { type: "json" })) as T | null) ?? null;

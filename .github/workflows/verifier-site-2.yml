@@ -40,6 +40,17 @@ jobs:
           for p in / /soins /soins/fabulous /pack /boutique /quiz /mon-histoire /faq /contact /cgv /panier /admin/connexion /api/catalog /images/logo-na-nah-nhair.svg; do
             curl -s -o /dev/null -m 30 -w "$p %{http_code} %{time_total}s\n" "$URL$p" || echo "$p erreur"
           done
+          echo "--- images (code, type, taille)"
+          for p in "/images/logo-na-nah-nhair.jpg" "/images/logo-na-nah-nhair.svg" "/images/mode-emploi/etape1-application.png" \
+                   "/_next/image?url=%2Fimages%2Flogo-na-nah-nhair.jpg&w=96&q=75" \
+                   "/_next/image?url=%2Fimages%2Fmode-emploi%2Fetape1-application.png&w=384&q=75" \
+                   "/_next/image?url=%2Fimages%2Fmode-emploi-fabulous%2Ficone-yeux.png&w=48&q=75"; do
+            curl -s -o img.bin -m 30 -w "$p %{http_code} %{content_type} %{size_download}o\n" "$URL$p" || echo "$p erreur"
+          done
+          echo "--- balises img de /soins/miraculous"
+          curl -s -m 30 "$URL/soins/miraculous" | grep -oE '<img[^>]*>' | grep -oE 'src="[^"]*"' | head -8
+          echo "--- en-tête CSP"
+          curl -sS -I -m 20 "$URL/" | grep -i content-security-policy || true
           echo "--- début de l'accueil"
           head -c 600 page.html || true
       - name: Publier le rapport (annotation)

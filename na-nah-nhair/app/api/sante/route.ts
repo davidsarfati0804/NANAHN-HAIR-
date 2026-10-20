@@ -14,6 +14,12 @@ export async function GET() {
       branche: process.env.BRANCH ?? null,
       noeud: process.version,
       stockage: store,
+      // Présence (oui/non) des variables fournies par Netlify, sans leur valeur
+      environnementNetlify: {
+        NETLIFY_BLOBS_CONTEXT: Boolean(process.env.NETLIFY_BLOBS_CONTEXT),
+        contexteGlobal: Boolean((globalThis as { netlifyBlobsContext?: unknown }).netlifyBlobsContext),
+        SITE_ID: Boolean(process.env.SITE_ID),
+      },
       backOfficeConfigure: Boolean(process.env.ADMIN_PASSWORD_HASH && process.env.ADMIN_SESSION_SECRET),
       dureeTotaleMs: Date.now() - started,
       date: new Date().toISOString(),

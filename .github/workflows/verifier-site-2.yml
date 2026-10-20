@@ -13,12 +13,14 @@ jobs:
     steps:
       - name: Statut du dernier déploiement Netlify (badge public)
         run: |
+          exec > >(tee -a rapport.txt) 2>&1
           curl -sS "https://api.netlify.com/api/v1/badges/1c82ca70-81d1-4e3e-81b5-35e4a64ac638/deploy-status?branch=site-2" -o badge-site2.svg || true
           curl -sS "https://api.netlify.com/api/v1/badges/1c82ca70-81d1-4e3e-81b5-35e4a64ac638/deploy-status" -o badge-main.svg || true
           echo "site-2 : $(grep -oiE 'success|failed|building|enqueued|canceled|skipped|not found|unknown' badge-site2.svg | head -1)"
           echo "main   : $(grep -oiE 'success|failed|building|enqueued|canceled|skipped|not found|unknown' badge-main.svg | head -1)"
       - name: Attendre que site-2 réponde (jusqu'à 12 minutes)
         run: |
+          exec > >(tee -a rapport.txt) 2>&1
           URL="https://site-2--nanahnhair.netlify.app"
           for i in $(seq 1 48); do
             code=$(curl -s -o page.html -m 20 -w "%{http_code} %{time_total}" "$URL/" || echo "000 0")
@@ -37,3 +39,8 @@ jobs:
           done
           echo "--- début de l'accueil"
           head -c 600 page.html || true
+      - name: Publier le rapport (annotation)
+        if: always()
+        run: |
+          r=$(tr -d '\r' < rapport.txt | sed 's/%/%25/g' | awk 'BEGIN{ORS="%0A"}{print}')
+          echo "::notice title=Rapport site-2::${r:0:60000}"

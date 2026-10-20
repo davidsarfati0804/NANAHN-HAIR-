@@ -187,19 +187,11 @@ export async function storeDeepCheck() {
     }
   };
   const direct = getStore({ name: "na-nah-nhair" });
-  const strong = getStore({ name: "na-nah-nhair", consistency: "strong" });
-  const auto = getStore({ name: "na-nah-nhair", experimentalRegion: "auto" } as Parameters<typeof getStore>[0]);
-  const ctx = getStore({ name: "na-nah-nhair", experimentalRegion: "context" } as Parameters<typeof getStore>[0]);
-  const sansCache = kvRaw();
+  const store = kvRaw();
   return [
     await timed("écriture", () => direct.setJSON("diagnostic", { at: Date.now() })),
-    await timed("métadonnées", () => direct.getMetadata("diagnostic")),
-    await timed("liste", () => direct.list()),
-    await timed("lecture texte", () => direct.get("diagnostic")),
-    await timed("lecture forte", () => strong.get("diagnostic")),
-    await timed("lecture région auto", () => auto.get("diagnostic")),
-    await timed("lecture région contexte", () => ctx.get("diagnostic")),
-    await timed("lecture sans cache Next", () => sansCache.getJSON("diagnostic")),
+    await timed("lecture d'une clé existante", () => store.getJSON("diagnostic")),
+    await timed("lecture d'une clé absente", () => store.getJSON("cle-absente-diagnostic")),
   ];
 }
 

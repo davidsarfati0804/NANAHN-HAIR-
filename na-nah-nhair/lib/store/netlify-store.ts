@@ -19,14 +19,22 @@ export function createNetlifyStore(name: string): KeyValueStore {
   // Cohérence « éventuelle » (par défaut) : lecture rapide ; une modification faite dans le
   // back-office est visible sur le site en quelques secondes
   const store = getStore({ name, fetch: originalFetch });
+  // Sur Netlify, lire une clé qui n'existe pas encore reste bloqué (constaté le 20/10/2026 via
+  // /api/sante?detail=1) : on vérifie d'abord son existence avec list(), qui répond en ~30 ms.
+  const exists = async (key: string) => {
+    const { blobs } = await store.list({ prefix: key });
+    return blobs.some((b) => b.key === key);
+  };
   return {
     async getJSON<T>(key: string) {
+      if (!(await exists(key))) return null;
       return ((await store.get(key, { type: "json" })) as T | null) ?? null;
     },
     async setJSON(key, value) {
       await store.setJSON(key, value);
     },
     async getBinary(key) {
+      if (!(await exists(key))) return null;
       const res = await store.getWithMetadata(key, { type: "arrayBuffer" });
       if (!res) return null;
       return { data: res.data, contentType: String(res.metadata.contentType ?? "application/octet-stream") };

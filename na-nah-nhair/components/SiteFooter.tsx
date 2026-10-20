@@ -1,15 +1,19 @@
 import Link from "next/link";
 import { brand, footer, legal } from "@/content/site";
 import ToComplete from "@/components/ToComplete";
-import Wordmark from "@/components/Wordmark";
+import BrandName, { BrandText } from "@/components/BrandName";
 
 export default function SiteFooter() {
   return (
     <footer className="mt-16 bg-deep-violet text-white">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-3">
         <div>
-          <Wordmark className="text-5xl" />
-          <p className="mt-4 font-bold">{brand.signature}</p>
+          <p className="text-4xl">
+            <BrandName />
+          </p>
+          <p className="mt-4 font-bold">
+            <BrandText text={brand.signature} />
+          </p>
           <p className="mt-2 text-sm uppercase tracking-widest">{brand.madeIn}</p>
         </div>
 
@@ -53,7 +57,7 @@ export default function SiteFooter() {
         </nav>
       </div>
       <p className="border-t border-white/20 px-4 py-4 text-center text-xs">
-        © {new Date().getFullYear()} {legal.brand} · SIRET {legal.siret}
+        © {new Date().getFullYear()} <BrandText text={legal.brand} /> · SIRET {legal.siret}
       </p>
     </footer>
   );

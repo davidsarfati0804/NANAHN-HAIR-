@@ -143,7 +143,6 @@ export default function Checkout() {
                   {formatPrice(quote.totalCents)}
                 </dd>
               </dl>
-              <p className="mt-2 text-xs">{t.serverNote}</p>
               {lineErrors.map((msg) => (
                 <p key={msg} role="alert" className="mt-3 font-bold">
                   {msg}

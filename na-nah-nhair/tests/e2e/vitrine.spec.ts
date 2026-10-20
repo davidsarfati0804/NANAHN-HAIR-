@@ -40,7 +40,7 @@ for (const path of pages) {
       expect(overflow, `${path} à ${vp.name}px`).toBeLessThanOrEqual(0);
       // Aucun titre ne dépasse de son bloc
       const wide = await page.evaluate(() =>
-        [...document.querySelectorAll("h1, h2")]
+        [...document.querySelectorAll("h1:not(.sr-only), h2:not(.sr-only)")]
           .filter((h) => h.scrollWidth > (h as HTMLElement).clientWidth + 1)
           .map((h) => h.textContent),
       );

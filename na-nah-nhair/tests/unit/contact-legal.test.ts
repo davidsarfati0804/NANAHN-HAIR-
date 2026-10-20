@@ -49,9 +49,9 @@ describe("pages juridiques", () => {
     expect(text).toContain("responsable de la publication");
   });
 
-  it("CGV : présentées comme un projet à relire (INFOS §11)", () => {
-    expect(legalPages[1].notice).toMatch(/Projet de CGV/);
-    expect(legalPages[1].notice).toMatch(/pas définitif/);
+  it("aucune consigne de BRIEF/INFOS affichée sur les pages juridiques", () => {
+    const text = JSON.stringify(legalPages);
+    for (const consigne of ["INFOS", "BRIEF", "phase 6", "à faire relire", "Claude"]) expect(text).not.toContain(consigne);
   });
 
   it("retours : règles d'INFOS §11 mot pour mot", () => {

@@ -4,15 +4,17 @@ import ButtonLink from "@/components/ButtonLink";
 import JsonLd from "@/components/JsonLd";
 import LavenderBox from "@/components/LavenderBox";
 import PhotoSlot from "@/components/PhotoSlot";
+import StoryCards from "@/components/home/StoryCards";
 import ProductCard from "@/components/ProductCard";
 import ToComplete from "@/components/ToComplete";
-import { brand, emotionalConcept, home, pack, products, story } from "@/content/site";
+import { brand, emotionalConcept, home, pack, products } from "@/content/site";
 import type { ProductId, PublicProduct } from "@/lib/catalog";
 import { formatPrice } from "@/lib/money";
 import { getShopData } from "@/lib/shop-data";
 import { organizationJsonLd } from "@/lib/structured-data";
 import { capitalize } from "@/lib/typography";
 import { themeClasses } from "@/lib/theme-classes";
+import { BrandText } from "@/components/BrandName";
 
 export const dynamic = "force-dynamic";
 
@@ -48,22 +50,24 @@ function Hero() {
 
       <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 pb-20 pt-14 sm:px-6 lg:grid-cols-[1.2fr_1fr] md:pt-20">
         <div>
-          {/* Titre : le logo fourni (même police et même violet), texte « Na Nah N’hair ! » pour les lecteurs d'écran */}
-          <h1>
-            <Image
-              src={brand.logo.src}
-              width={brand.logo.width}
-              height={brand.logo.height}
-              alt={brand.logo.alt}
-              priority
-              sizes="(max-width: 640px) 90vw, 560px"
-              className="h-auto w-full max-w-[560px]"
-            />
-          </h1>
-          <p className="mt-6 text-2xl font-bold text-plum sm:text-3xl">{hero.signature}</p>
+          {/* Police du logo non identifiable : logo vectorisé (SVG) + vrai titre h1 masqué pour le référencement */}
+          <h1 className="sr-only">{brand.logo.alt}</h1>
+          <Image
+            src={brand.logoSvg.src}
+            width={brand.logoSvg.width}
+            height={brand.logoSvg.height}
+            alt={brand.logo.alt}
+            priority
+            unoptimized
+            className="h-auto w-full max-w-[560px]"
+          />
+          <p className="mt-6 text-2xl font-bold text-plum sm:text-3xl"><BrandText text={hero.signature} tone="logo" />
+          </p>
           <p className="mt-3 max-w-md text-lg">{hero.subtitle}</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <ButtonLink href={hero.primaryCta.href}>{hero.primaryCta.label}</ButtonLink>
+            <ButtonLink href={hero.primaryCta.href}>
+              <BrandText text={hero.primaryCta.label} />
+            </ButtonLink>
             <ButtonLink href={hero.secondaryCta.href} variant="secondary">
               {hero.secondaryCta.label}
             </ButtonLink>
@@ -122,7 +126,10 @@ function Concept() {
   return (
     <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
       <LavenderBox as="div" className="px-6 py-14 text-center sm:px-12 sm:py-20">
-        <h2 className="text-6xl sm:text-8xl">{emotionalConcept.title}</h2>
+        {/* Citation centrée, lignes équilibrées, marges égales même sur mobile */}
+        <h2 className="mx-auto max-w-[18ch] text-center text-[clamp(2.5rem,10vw,5.5rem)] [text-wrap:balance]">
+          {emotionalConcept.title}
+        </h2>
         <ul className="mt-10 flex flex-wrap justify-center gap-3">
           {emotionalConcept.lines.map((line, i) => {
             const theme = chips[i];
@@ -140,7 +147,6 @@ function Concept() {
             );
           })}
         </ul>
-        <p className="mx-auto mt-8 max-w-xl">{emotionalConcept.note}</p>
       </LavenderBox>
     </section>
   );
@@ -213,17 +219,31 @@ function Pack({ shop }: { shop: Shop }) {
 }
 
 function StoryTeaser() {
+  const s = home.story;
   return (
-    <section aria-labelledby="histoire" className="bg-lavender-soft">
-      <div className="mx-auto max-w-4xl px-4 py-20 text-center sm:px-6">
-        <p className="text-sm font-bold uppercase tracking-[0.3em] text-plum">{home.story.kicker}</p>
-        <h2 id="histoire" className="mt-3 text-5xl text-deep-violet sm:text-6xl">
-          {story.paragraphs[0]}
-        </h2>
-        <p className="mx-auto mt-6 max-w-2xl text-lg">{story.paragraphs[1]}</p>
-        <ButtonLink href="/mon-histoire" variant="secondary" className="mt-8">
-          {home.story.cta}
-        </ButtonLink>
+    <section aria-labelledby="histoire" className="overflow-hidden">
+      <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+        <div className="text-center">
+          <p className="text-sm font-bold uppercase tracking-[0.3em] text-plum">{s.kicker}</p>
+          <h2 id="histoire" className="mt-3 text-6xl text-deep-violet sm:text-7xl">
+            {s.titleLines.map((line) => (
+              <span key={line} className="block">
+                {line}
+              </span>
+            ))}
+          </h2>
+          <p className="mt-4 inline-block -rotate-2 rounded-md bg-logo-yellow px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-deep-violet">
+            {s.sticker}
+          </p>
+        </div>
+        <div className="mt-10">
+          <StoryCards />
+        </div>
+        <p className="mt-6 text-center">
+          <Link href={s.readMore.href} className="inline-block py-2 font-bold text-plum underline underline-offset-4">
+            {s.readMore.label}
+          </Link>
+        </p>
       </div>
     </section>
   );
@@ -233,13 +253,22 @@ function Reasons() {
   return (
     <section aria-labelledby="raisons" className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
       <h2 id="raisons" className="mb-10 text-5xl text-deep-violet sm:text-6xl">
-        {home.reasons.title}
+        <BrandText text={home.reasons.title} tone="logo" />
       </h2>
       <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
         {home.reasons.items.map((r) => (
           <li key={r.title} className="rounded-3xl bg-lavender p-5 text-deep-violet">
             <h3 className="font-body text-lg font-bold leading-tight">{r.title}</h3>
             {r.text && <p className="mt-2 text-sm">{r.text}</p>}
+            {r.lines && (
+              <ul className="mt-2 space-y-1 text-sm">
+                {r.lines.map((l) => (
+                  <li key={l.product}>
+                    <span className="font-bold">{l.product}</span> : {l.text}
+                  </li>
+                ))}
+              </ul>
+            )}
             {r.todo && <ToComplete label={r.todo} className="mt-2 text-xs" />}
           </li>
         ))}

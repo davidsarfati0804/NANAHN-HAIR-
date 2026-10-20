@@ -31,7 +31,7 @@ export default function SiteHeader() {
             alt={`${brand.logo.alt} – accueil`}
             priority
             sizes="80px"
-            className="h-12 w-auto sm:h-14"
+            className="h-16 w-16 sm:h-[4.5rem] sm:w-[4.5rem]"
           />
         </Link>
 

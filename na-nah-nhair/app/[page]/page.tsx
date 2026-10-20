@@ -6,6 +6,7 @@ import LavenderBox from "@/components/LavenderBox";
 import ToComplete from "@/components/ToComplete";
 import { legalBySlug, legalPages } from "@/content/legal";
 import { legalTexts } from "@/content/site";
+import { BrandText } from "@/components/BrandName";
 
 // Pages juridiques : mentions légales, CGV, confidentialité, cookies, retours
 export const dynamicParams = false;
@@ -28,21 +29,20 @@ export default async function LegalPage({ params }: { params: Promise<{ page: st
   return (
     <article className="mx-auto max-w-3xl px-4 py-14 sm:px-6">
       <h1 className="text-[clamp(2.75rem,10vw,5rem)] text-deep-violet">{p.title}</h1>
-      <p role="note" className="mt-6 rounded-2xl border-2 border-dashed border-gold bg-yellow p-4 text-sm font-bold text-ink">
-        {p.notice}
-      </p>
       {p.sections.map((s) => (
         <section key={s.title} className="mt-10">
           <h2 className="font-body text-2xl font-bold text-deep-violet">{s.title}</h2>
           {s.paragraphs?.map((para) => (
             <p key={para} className="mt-3">
-              {para}
+              <BrandText text={para} />
             </p>
           ))}
           {s.items && (
             <ul className="mt-3 list-disc space-y-1 pl-6">
               {s.items.map((item) => (
-                <li key={item}>{item}</li>
+                <li key={item}>
+                  <BrandText text={item} />
+                </li>
               ))}
             </ul>
           )}

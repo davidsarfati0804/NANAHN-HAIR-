@@ -5,6 +5,7 @@ import { emotionalConcept, productBySlug, story, storyPage } from "@/content/sit
 import { formatPrice } from "@/lib/money";
 import { getShopData } from "@/lib/shop-data";
 import { capitalize } from "@/lib/typography";
+import { BrandText } from "@/components/BrandName";
 
 export const dynamic = "force-dynamic";
 
@@ -32,13 +33,17 @@ export default async function StoryPage() {
 
       <div className="mx-auto max-w-2xl space-y-8 px-4 py-16 text-lg leading-relaxed sm:px-6 sm:text-xl">
         {rest.map((para) => (
-          <p key={para}>{para}</p>
+          <p key={para}>
+            <BrandText text={para} />
+          </p>
         ))}
       </div>
 
       <section className="mx-auto max-w-4xl px-4 sm:px-6">
         <blockquote className="rounded-[2rem] bg-deep-violet px-6 py-14 text-center text-white sm:px-12">
-          <p className="font-display text-4xl leading-none sm:text-6xl">{last}</p>
+          <p className="font-display text-4xl leading-none sm:text-6xl">
+            <BrandText text={last} />
+          </p>
         </blockquote>
       </section>
 

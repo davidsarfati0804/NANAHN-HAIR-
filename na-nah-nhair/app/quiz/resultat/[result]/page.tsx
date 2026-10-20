@@ -12,6 +12,7 @@ import { isQuizResult, QUIZ_RESULTS } from "@/lib/quiz";
 import { getShopData } from "@/lib/shop-data";
 import { capitalize } from "@/lib/typography";
 import { themeClasses } from "@/lib/theme-classes";
+import { BrandText } from "@/components/BrandName";
 
 export const dynamic = "force-dynamic";
 export const dynamicParams = false;
@@ -35,7 +36,9 @@ export default async function QuizResultPage({ params }: { params: Promise<{ res
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-14 sm:px-6">
-      <p className="text-sm font-bold uppercase tracking-[0.3em] text-plum">{r.kicker}</p>
+      <p className="text-sm font-bold uppercase tracking-[0.3em] text-plum">
+        <BrandText text={r.kicker} />
+      </p>
 
       {result === "pack" ? (
         <section className="mt-4 grid gap-8 rounded-[2rem] bg-lavender p-6 text-deep-violet sm:p-10 md:grid-cols-2 [&>*]:min-w-0">

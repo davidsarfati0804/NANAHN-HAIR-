@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import { quiz } from "@/content/site";
 import type { SerumId } from "@/lib/catalog";
 import { quizResult } from "@/lib/quiz";
+import { BrandText } from "@/components/BrandName";
 
 export default function Quiz() {
   const router = useRouter();
@@ -34,7 +35,8 @@ export default function Quiz() {
         <div className="absolute bottom-0 left-1/2 h-72 w-72 rounded-full bg-luxurious opacity-40 blur-3xl" />
       </div>
       <div className="relative mx-auto max-w-3xl px-4 py-14 sm:px-6">
-        <h1 className="text-6xl text-deep-violet sm:text-8xl">{quiz.title}</h1>
+        <h1 className="text-6xl text-deep-violet sm:text-8xl"><BrandText text={quiz.title} tone="logo" />
+        </h1>
         <p className="mt-3 text-lg">{quiz.intro}</p>
 
         <div className="mt-10">

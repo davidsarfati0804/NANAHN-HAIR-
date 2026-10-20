@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import ButtonLink from "@/components/ButtonLink";
 import AddToCart from "@/components/cart/AddToCart";
 import JsonLd from "@/components/JsonLd";
 import LavenderBox from "@/components/LavenderBox";
 import PhotoSlot from "@/components/PhotoSlot";
-import { emotionalConcept, pack, products } from "@/content/site";
+import { emotionalConcept, pack, productPage, products } from "@/content/site";
 import { formatPrice } from "@/lib/money";
 import { productJsonLd } from "@/lib/structured-data";
 import { getShopData } from "@/lib/shop-data";
 import { capitalize } from "@/lib/typography";
 import { themeClasses } from "@/lib/theme-classes";
+import { BrandText } from "@/components/BrandName";
 
 export const dynamic = "force-dynamic";
 
@@ -55,6 +57,9 @@ export default async function PackPage() {
           </LavenderBox>
 
           <AddToCart id="pack" name={pack.name} available={shop.pack.available} withQuantity className="mt-8" />
+          <ButtonLink href={productPage.quizCta.href} variant="secondary" className="mt-3">
+            <BrandText text={productPage.quizCta.label} />
+          </ButtonLink>
         </div>
       </div>
     </div>

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import AddToCart from "@/components/cart/AddToCart";
 import PhotoSlot from "@/components/PhotoSlot";
-import ToComplete from "@/components/ToComplete";
 import { brand, pack, products, shop as texts } from "@/content/site";
 import { formatPrice } from "@/lib/money";
 import { getShopData } from "@/lib/shop-data";
@@ -23,7 +22,6 @@ export default async function BoutiquePage() {
           {freeShipping ? texts.freeShipping : texts.freeShippingFrom(formatPrice(freeShippingThresholdCents))}
         </p>
         <p className="rounded-2xl bg-lavender px-4 py-2 text-sm font-bold text-deep-violet">{brand.madeIn}</p>
-        <ToComplete label={texts.deliveryTodo} className="text-xs" />
       </div>
 
       <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">

@@ -3,6 +3,7 @@ import ContactForm from "@/components/contact/ContactForm";
 import LavenderBox from "@/components/LavenderBox";
 import ToComplete from "@/components/ToComplete";
 import { contactTexts as t, legal } from "@/content/site";
+import { BrandText } from "@/components/BrandName";
 
 export const metadata: Metadata = { title: t.title, description: t.intro, alternates: { canonical: "/contact" } };
 
@@ -18,7 +19,9 @@ export default function ContactPage() {
         <LavenderBox>
           <h2 className="font-body text-xl font-bold">{t.coordinatesTitle}</h2>
           <address className="mt-3 space-y-1 not-italic">
-            <p>{legal.brand}</p>
+            <p>
+              <BrandText text={legal.brand} />
+            </p>
             <p>{legal.address}</p>
             <p>
               <a href={`tel:${legal.phone.replace(/\s/g, "")}`} className="inline-block py-1 underline underline-offset-4">

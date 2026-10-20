@@ -60,7 +60,7 @@ test("commande : total recalculé par le serveur, transporteurs, paiement en att
   await page.getByLabel("Mondial Relay (point relais)").check();
   await expect(page.getByText(/À COMPLÉTER : sélection du point relais/)).toBeVisible();
   await expect(page.getByRole("button", { name: "Payer" })).toBeDisabled();
-  await expect(page.getByText(/sera activé à la phase 6/)).toBeVisible();
+  await expect(page.getByText(/Le paiement en ligne .* arrive bientôt/)).toBeVisible();
 });
 
 test("commande avec panier vide", async ({ page }) => {

@@ -76,8 +76,14 @@ RICINUS COMMUNIS SEED OIL\*, OLEA EUROPAEA FRUIT OIL\*, COCOS NUCIFERA OIL\*, PE
 \* Ingrédients issus de l'agriculture biologique
 \*\* Allergènes dus à la présence de parfum
 
-- **Mode d'emploi** : `À COMPLÉTER`
-- **Précautions d'emploi** : `À COMPLÉTER`
+- **Mode d'emploi** (fourni le 20/10/2026) :
+  - Étape 1 : Appliquer Fabulous Hair Serum des racines vers les pointes. Pour un soin complet, 3 pipettes sont nécessaires : sur le cuir chevelu, les longueurs et les pointes.
+  - Étape 2 : Laver les cheveux avec un shampoing classique. Pour un résultat optimal, utiliser le soin 3 fois par semaine.
+  - Nuit & jour
+- **Précautions d'emploi** (fournies avec le mode d'emploi) :
+  - Ne pas utiliser le soin les 2 jours qui précèdent et qui suivent une coloration.
+  - Éviter tout contact avec les yeux.
+  - Usage externe uniquement.
 - **Contenance** : 30 ml
 
 ---
@@ -119,8 +125,14 @@ RICINUS COMMUNIS SEED OIL\*, OLEA EUROPAEA FRUIT OIL\*, COCOS NUCIFERA OIL\*, PE
 \* Ingrédients issus de l'agriculture biologique
 \*\* Allergènes dus à la présence de parfum
 
-- **Mode d'emploi** : `À COMPLÉTER`
-- **Précautions d'emploi** : `À COMPLÉTER`
+- **Mode d'emploi** (fourni le 20/10/2026) :
+  - Étape 1 : Appliquer Miraculous Hair Serum des racines vers les pointes. Pour un soin complet, 3 pipettes sont nécessaires : sur le cuir chevelu, les longueurs et les pointes.
+  - Étape 2 : Laver les cheveux avec un shampoing classique. Pour un résultat optimal, utiliser le soin 3 fois par semaine.
+  - Nuit & jour
+- **Précautions d'emploi** (fournies avec le mode d'emploi) :
+  - Ne pas utiliser le soin les 2 jours qui précèdent et qui suivent une coloration.
+  - Éviter tout contact avec les yeux.
+  - Usage externe uniquement.
 - **Contenance** : 30 ml
 
 ---
@@ -206,27 +218,27 @@ Quiz interactif de 5 questions, qui doit fonctionner réellement (logique de poi
 
 ### 1. Ton rituel idéal du week-end ?
 
-- Un petit-déj en terrasse, sans prise de tête → Fabulous (1 point)
-- Une soirée spa, bougies et douceur → Luxurious (1 point)
-- Une séance de sport et mes objectifs de la semaine → Miraculous (1 point)
+- Un brunch entre copines puis une virée shopping → Miraculous (1 point)
+- Une escapade à la plage, sans réveil → Fabulous (1 point)
+- Un hôtel spa avec vue, peignoir et coupe de champagne → Luxurious (1 point)
 
 ### 2. Ce que tu aimes dans un soin ?
 
-- Qu'il soit simple et rapide → Fabulous (1 point)
-- Une belle texture et un parfum qui enveloppe → Luxurious (1 point)
-- Un vrai rituel intensif → Miraculous (1 point)
+- Un parfum gourmand qui reste sur mes cheveux toute la journée → Luxurious (1 point)
+- Un vrai rituel, que je suis avec régularité → Miraculous (1 point)
+- Quelques gouttes, et je file → Fabulous (1 point)
 
 ### 3. L'expérience que tu recherches ?
 
-- Fraîcheur et légèreté → Fabulous (1 point)
-- Plaisir et glamour → Luxurious (1 point)
-- Énergie et transformation → Miraculous (1 point)
+- Un vent de fraîcheur, comme un matin d'été → Fabulous (1 point)
+- Un moment glamour, rien que pour moi → Luxurious (1 point)
+- Un nouveau départ pour mes cheveux → Miraculous (1 point)
 
 ### 4. Ta priorité pour tes cheveux ?
 
-- Qu'ils soient doux et équilibrés au quotidien → Fabulous (1 point)
-- Qu'ils brillent et aient du volume → Luxurious (1 point)
-- Qu'ils soient plus forts, avec un soin suivi sur la durée → Miraculous (2 points)
+- Des cheveux plus forts, avec un soin suivi sur la durée → Miraculous (2 points)
+- Une brillance miroir et du volume → Luxurious (1 point)
+- Des cheveux gainés, hydratés et en pleine forme → Fabulous (1 point)
 
 ### 5. Ta phrase préférée ?
 
@@ -288,4 +300,6 @@ Ces décisions de la propriétaire de la marque complètent et remplacent les pa
 - **Accueil, section « Mon histoire »** : trois cartes « Le défi », « Le bureau », « Les trois soins » (textes dans `content/site.ts`), titre « De mon bureau à ta routine », sticker « Naturopathe · Aromathérapie », photo `assets/images/histoire.jpg` à fournir.
 - **Fiches produits et pack** : bouton « Quel soin est le tien ? » vers le quiz.
 - **Nom de marque** affiché « Na Nah N’hair », dans la typographie du logo.
+- **Quiz** : nouvelles réponses aux questions 1 à 4 (section 10) ; question 5 et règles de calcul inchangées.
+- **Mode d'emploi** de Fabulous et Miraculous fourni (étapes, précautions, « Nuit & jour ») ; Luxurious : À COMPLÉTER.
 - La phrase « Les personnalités ne sont pas des catégories exclusives… » est une consigne : elle n'est pas affichée.

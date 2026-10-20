@@ -8,10 +8,7 @@ Toutes les informations manquantes. Chacune apparaît sur le site sous forme d'e
 
 ## Produits
 
-- [ ] Fabulous : mode d'emploi
-- [ ] Fabulous : précautions d'emploi
-- [ ] Miraculous : mode d'emploi
-- [ ] Miraculous : précautions d'emploi
+- [x] Fabulous et Miraculous : mode d'emploi et précautions (fournis le 20/10/2026)
 - [ ] Luxurious : mode d'emploi
 - [ ] Luxurious : précautions d'emploi
 - [ ] Validation des allégations avant mise en ligne (en particulier Miraculous et le pack : pousse, chute)
@@ -19,6 +16,9 @@ Toutes les informations manquantes. Chacune apparaît sur le site sous forme d'e
 - [ ] FAQ générale : frais de retour, procédure en cas de produit défectueux
 
 ## Visuels et identité
+
+- [ ] Icônes distinctes pour « Éviter tout contact avec les yeux » et « Usage externe uniquement » (une seule icône triangle fournie)
+- [ ] Illustrations du mode d'emploi Fabulous en vert (recolorées automatiquement à partir des versions violettes en attendant)
 
 - [ ] Couleurs des flacons (provisoires, `lib/palette-proposal.ts`) : Pantone exacts de Fabulous (cadre #B2DCCB, nom #1B8FE8), Miraculous (cadre #B9A5E2, couleur du nom), Luxurious (cadre #EBC4DE, couleur du nom)
 - [ ] Valider la palette et le guide de style (`/guide-de-style`) avant application à tout le site

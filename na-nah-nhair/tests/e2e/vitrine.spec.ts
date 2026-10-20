@@ -60,8 +60,13 @@ test("fiche Miraculous : contenu INFOS, INCI, emplacements À COMPLÉTER", async
   await expect(page.getByText("Mon produit fondateur", { exact: true })).toBeVisible();
   await expect(page.getByText("vanille patchouli")).toBeVisible();
   await expect(page.getByText(/CITRAL\*\*, COUMARIN\*\*, BENZYL BENZOATE\*\*/)).toBeVisible();
-  await expect(page.getByText("À COMPLÉTER : mode d'emploi Miraculous")).toBeVisible();
-  await expect(page.getByText("À COMPLÉTER : précautions d'emploi Miraculous")).toBeVisible();
+  // Mode d'emploi fourni (les précautions en font partie)
+  await expect(page.getByText(/Appliquer Miraculous Hair Serum des racines vers les pointes/)).toBeVisible();
+  await expect(page.getByText("Usage externe uniquement.")).toBeVisible();
+  await page.goto("/soins/luxurious");
+  await expect(page.getByText("À COMPLÉTER : mode d'emploi Luxurious")).toBeVisible();
+  await expect(page.getByText("À COMPLÉTER : précautions d'emploi Luxurious")).toBeVisible();
+  await page.goto("/soins/miraculous");
   await expect(page.getByRole("button", { name: /Ajouter au panier/ })).toBeEnabled();
 });
 
@@ -80,4 +85,37 @@ test("FAQ : les questions s'ouvrent et affichent la réponse", async ({ page }) 
   await expect(page.getByText("France uniquement.")).toBeVisible();
   await page.getByText("Comment utiliser les sérums ?").click();
   await expect(page.getByText("À COMPLÉTER : mode d'emploi de chaque sérum")).toBeVisible();
+});
+
+test.describe("mode d'emploi (Fabulous, Miraculous)", () => {
+  for (const slug of ["miraculous", "fabulous"]) {
+    test(`${slug} : étapes, précautions, mise en page mobile et ordinateur`, async ({ page }) => {
+      const name = slug === "fabulous" ? "Fabulous" : "Miraculous";
+      for (const vp of [
+        { w: 375, h: 812, n: "375" },
+        { w: 768, h: 1024, n: "768" },
+        { w: 1280, h: 900, n: "1280" },
+      ]) {
+        await page.setViewportSize({ width: vp.w, height: vp.h });
+        await page.goto(`/soins/${slug}`);
+        const guide = page.locator(".mode-emploi");
+        await guide.scrollIntoViewIfNeeded();
+        await expect(guide.getByRole("heading", { name: "Étape 1" })).toBeVisible();
+        await expect(guide.locator("strong")).toHaveText(`${name} Hair Serum`);
+        await expect(guide.getByText(/utiliser le soin 3 fois par semaine/)).toBeVisible();
+        await expect(guide.getByText("Nuit & jour")).toBeVisible();
+        await expect(guide.locator(".mode-emploi__precautions li")).toHaveCount(3);
+        // Illustrations décoratives chargées
+        for (const img of await guide.locator("img").all()) {
+          expect(await img.evaluate((i: HTMLImageElement) => i.complete && i.naturalWidth > 0)).toBe(true);
+          await expect(img).toHaveAttribute("alt", "");
+        }
+        const steps = await guide.locator(".mode-emploi__etape").evaluateAll((els) => els.map((e) => e.getBoundingClientRect()));
+        if (vp.w >= 760) expect(Math.round(steps[0].top)).toBe(Math.round(steps[1].top)); // côte à côte
+        else expect(steps[1].top).toBeGreaterThan(steps[0].bottom - 1); // l'une sous l'autre
+        expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(0);
+        await guide.screenshot({ path: `captures/mode-emploi-${slug}-${vp.n}.png` });
+      }
+    });
+  }
 });

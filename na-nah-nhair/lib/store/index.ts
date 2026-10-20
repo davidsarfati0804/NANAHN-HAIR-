@@ -180,18 +180,26 @@ export async function storeDeepCheck() {
   const timed = async (label: string, run: () => Promise<unknown>) => {
     const t0 = Date.now();
     try {
-      const r = await Promise.race([run(), new Promise((_, rej) => setTimeout(() => rej(new Error("délai 8 s dépassé")), 8000))]);
+      const r = await Promise.race([run(), new Promise((_, rej) => setTimeout(() => rej(new Error("délai 3 s dépassé")), 3000))]);
       return { etape: label, ok: true, ms: Date.now() - t0, resultat: r === null ? "vide" : typeof r };
     } catch (e) {
       return { etape: label, ok: false, ms: Date.now() - t0, erreur: e instanceof Error ? `${e.name}: ${e.message}` : String(e) };
     }
   };
   const direct = getStore({ name: "na-nah-nhair" });
+  const strong = getStore({ name: "na-nah-nhair", consistency: "strong" });
+  const auto = getStore({ name: "na-nah-nhair", experimentalRegion: "auto" } as Parameters<typeof getStore>[0]);
+  const ctx = getStore({ name: "na-nah-nhair", experimentalRegion: "context" } as Parameters<typeof getStore>[0]);
   const sansCache = kvRaw();
   return [
-    await timed("lecture (fetch standard)", () => direct.get("diagnostic")),
-    await timed("écriture (fetch standard)", () => direct.setJSON("diagnostic", { at: Date.now() })),
-    await timed("lecture (fetch sans cache Next)", () => sansCache.getJSON("diagnostic")),
+    await timed("écriture", () => direct.setJSON("diagnostic", { at: Date.now() })),
+    await timed("métadonnées", () => direct.getMetadata("diagnostic")),
+    await timed("liste", () => direct.list()),
+    await timed("lecture texte", () => direct.get("diagnostic")),
+    await timed("lecture forte", () => strong.get("diagnostic")),
+    await timed("lecture région auto", () => auto.get("diagnostic")),
+    await timed("lecture région contexte", () => ctx.get("diagnostic")),
+    await timed("lecture sans cache Next", () => sansCache.getJSON("diagnostic")),
   ];
 }
 

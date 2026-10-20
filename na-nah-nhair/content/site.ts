@@ -37,6 +37,8 @@ export const navigation = fr([
 ]);
 
 export const emotionalConcept = fr({
+  // Citation sans guillemets, pour le manifeste de la page Mon histoire (manifeste.html fourni)
+  quote: "Je ne suis pas qu’une seule femme.",
   title: "« Je ne suis pas qu’une seule femme. »",
   lines: ["Je suis Fabulous.", "Je suis Miraculous.", "Je suis Luxurious.", "Je suis les trois."],
 });
@@ -71,7 +73,7 @@ export type Product = {
   founder?: boolean;
 };
 
-// Mode d'emploi (textes fournis le 20/10/2026 : mode-emploi-miraculous.html, mode-emploi-fabulous.html)
+// Mode d'emploi (textes et illustrations fournis le 20/10/2026 : assets/sources/mode-emploi-*/)
 export type UsageGuide = {
   steps: Array<{
     title: string;
@@ -108,9 +110,8 @@ function usageGuide(productName: string, folder: string): UsageGuide {
     ],
     precautions: [
       { icon: img("icone-coloration"), text: "Ne pas utiliser le soin les 2 jours qui précèdent et qui suivent une coloration." },
-      // Une seule icône fournie (triangle) pour ces deux précautions
-      { icon: img("icone-avertissement"), text: "Éviter tout contact avec les yeux." },
-      { icon: img("icone-avertissement"), text: "Usage externe uniquement." },
+      { icon: img("icone-yeux"), text: "Éviter tout contact avec les yeux." },
+      { icon: img("icone-externe"), text: "Usage externe uniquement." },
     ],
     badge: { icon: img("icone-nuit-jour"), label: "Nuit & jour" },
   };
@@ -242,7 +243,7 @@ export const products: Product[] = fr([
     },
     inci: "RICINUS COMMUNIS SEED OIL*, OLEA EUROPAEA FRUIT OIL*, COCOS NUCIFERA OIL*, PERSEA GRATISSIMA OIL*, BRASSICA NIGRA SEED OIL*, SIMMONDSIA CHINENSIS SEED OIL*, BRASSICA OLERACEA ITALICA SEED OIL*, VITIS VINIFERA SEED OIL, EMBLICA OFFICINALIS FRUIT POWDER*, FRAGRANCE, TOCOPHEROL, HELIANTHUS ANNUUS SEED OIL, ALPHA-HEXYLCINNAMALDEHYDE**, CITRAL**, D-LIMONENE**, GERANIOL**",
     inciNotes,
-    usage: null,
+    usage: usageGuide("Luxurious Hair Serum", "mode-emploi-luxurious"),
     precautions: null,
     volume: "30 ml",
   },

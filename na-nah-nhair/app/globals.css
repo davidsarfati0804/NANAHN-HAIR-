@@ -202,6 +202,84 @@
   }
 }
 
+/* ===== Manifeste – fin de la page « Mon histoire » (manifeste.css fourni, couleurs du site) ===== */
+@layer components {
+  .manifeste {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-family: var(--font-body);
+    color: var(--color-deep-violet);
+  }
+  .manifeste__cadre {
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid var(--color-deep-violet);
+    border-radius: 32px;
+    padding: 36px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .manifeste__citation {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(2.6rem, 9vw, 4.6rem);
+    line-height: 0.95;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+  .manifeste__soins {
+    list-style: none;
+    margin: 28px 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  .manifeste__soin {
+    border-radius: 999px;
+    padding: 10px 20px;
+    font-weight: 700;
+    font-size: 1.02rem;
+    white-space: nowrap;
+  }
+  /* Ton sur ton, mêmes couleurs que les modes d'emploi */
+  .manifeste__soin--fabulous {
+    background: var(--color-fabulous-soft);
+    color: var(--color-fabulous-deep);
+  }
+  .manifeste__soin--miraculous {
+    background: var(--color-miraculous-soft);
+    color: var(--color-miraculous-deep);
+  }
+  .manifeste__soin--luxurious {
+    background: var(--color-luxurious-soft);
+    color: var(--color-luxurious-deep);
+  }
+  .manifeste__trois {
+    margin: 20px 0 0;
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+  @media (max-width: 420px) {
+    .manifeste__soins {
+      flex-direction: column;
+      align-items: center;
+    }
+    .manifeste__cadre {
+      padding: 30px 18px;
+    }
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

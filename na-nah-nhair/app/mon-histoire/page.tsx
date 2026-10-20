@@ -58,12 +58,24 @@ export default async function StoryPage() {
         </div>
       </section>
 
-      <section className="mx-auto mt-16 max-w-4xl px-4 text-center sm:px-6">
-        <h2 className="text-5xl text-deep-violet sm:text-6xl">{emotionalConcept.title}</h2>
-        <p className="mt-4 text-lg font-bold">{emotionalConcept.lines.join(" ")}</p>
-        <ButtonLink href={storyPage.shopCta.href} className="mt-8">
-          {storyPage.shopCta.label}
-        </ButtonLink>
+      {/* Manifeste (manifeste.html / manifeste.css fournis) */}
+      <section className="mt-16 px-4 sm:px-6">
+        <div className="manifeste">
+          <div className="manifeste__cadre">
+            <h2 className="manifeste__citation">{emotionalConcept.quote}</h2>
+          </div>
+          <ul className="manifeste__soins">
+            {emotionalConcept.lines.slice(0, 3).map((line, i) => (
+              <li key={line} className={`manifeste__soin manifeste__soin--${["fabulous", "miraculous", "luxurious"][i]}`}>
+                {line}
+              </li>
+            ))}
+          </ul>
+          <p className="manifeste__trois">{emotionalConcept.lines[3]}</p>
+          <ButtonLink href={storyPage.shopCta.href} className="mt-7">
+            {storyPage.shopCta.label}
+          </ButtonLink>
+        </div>
       </section>
     </article>
   );

@@ -173,8 +173,14 @@ RICINUS COMMUNIS SEED OIL\*, OLEA EUROPAEA FRUIT OIL\*, COCOS NUCIFERA OIL\*, PE
 \* Ingrédients issus de l'agriculture biologique
 \*\* Allergènes dus à la présence de parfum
 
-- **Mode d'emploi** : `À COMPLÉTER`
-- **Précautions d'emploi** : `À COMPLÉTER`
+- **Mode d'emploi** (fourni le 20/10/2026) :
+  - Étape 1 : Appliquer Luxurious Hair Serum des racines vers les pointes. Pour un soin complet, 3 pipettes sont nécessaires : sur le cuir chevelu, les longueurs et les pointes.
+  - Étape 2 : Laver les cheveux avec un shampoing classique. Pour un résultat optimal, utiliser le soin 3 fois par semaine.
+  - Nuit & jour
+- **Précautions d'emploi** (fournies avec le mode d'emploi) :
+  - Ne pas utiliser le soin les 2 jours qui précèdent et qui suivent une coloration.
+  - Éviter tout contact avec les yeux.
+  - Usage externe uniquement.
 - **Contenance** : 30 ml
 
 ---
@@ -301,5 +307,6 @@ Ces décisions de la propriétaire de la marque complètent et remplacent les pa
 - **Fiches produits et pack** : bouton « Quel soin est le tien ? » vers le quiz.
 - **Nom de marque** affiché « Na Nah N’hair », dans la typographie du logo.
 - **Quiz** : nouvelles réponses aux questions 1 à 4 (section 10) ; question 5 et règles de calcul inchangées.
-- **Mode d'emploi** de Fabulous et Miraculous fourni (étapes, précautions, « Nuit & jour ») ; Luxurious : À COMPLÉTER.
+- **Mode d'emploi** des trois soins fourni (étapes, précautions, « Nuit & jour »), avec les illustrations aux couleurs de chaque soin.
+- **Page Mon histoire** : fin de page remplacée par le manifeste (citation encadrée sans guillemets, trois pastilles, « Je suis les trois. », bouton « Découvrir les trois soins »).
 - La phrase « Les personnalités ne sont pas des catégories exclusives… » est une consigne : elle n'est pas affichée.

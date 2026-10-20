@@ -63,10 +63,7 @@ test("fiche Miraculous : contenu INFOS, INCI, emplacements À COMPLÉTER", async
   // Mode d'emploi fourni (les précautions en font partie)
   await expect(page.getByText(/Appliquer Miraculous Hair Serum des racines vers les pointes/)).toBeVisible();
   await expect(page.getByText("Usage externe uniquement.")).toBeVisible();
-  await page.goto("/soins/luxurious");
-  await expect(page.getByText("À COMPLÉTER : mode d'emploi Luxurious")).toBeVisible();
-  await expect(page.getByText("À COMPLÉTER : précautions d'emploi Luxurious")).toBeVisible();
-  await page.goto("/soins/miraculous");
+  await expect(page.getByText(/À COMPLÉTER\s: (mode|précautions) d/)).toHaveCount(0);
   await expect(page.getByRole("button", { name: /Ajouter au panier/ })).toBeEnabled();
 });
 
@@ -87,10 +84,10 @@ test("FAQ : les questions s'ouvrent et affichent la réponse", async ({ page }) 
   await expect(page.getByText("À COMPLÉTER : mode d'emploi de chaque sérum")).toBeVisible();
 });
 
-test.describe("mode d'emploi (Fabulous, Miraculous)", () => {
-  for (const slug of ["miraculous", "fabulous"]) {
+test.describe("mode d'emploi (Fabulous, Miraculous, Luxurious)", () => {
+  for (const slug of ["miraculous", "fabulous", "luxurious"]) {
     test(`${slug} : étapes, précautions, mise en page mobile et ordinateur`, async ({ page }) => {
-      const name = slug === "fabulous" ? "Fabulous" : "Miraculous";
+      const name = slug.charAt(0).toUpperCase() + slug.slice(1);
       for (const vp of [
         { w: 375, h: 812, n: "375" },
         { w: 768, h: 1024, n: "768" },
@@ -105,6 +102,11 @@ test.describe("mode d'emploi (Fabulous, Miraculous)", () => {
         await expect(guide.getByText(/utiliser le soin 3 fois par semaine/)).toBeVisible();
         await expect(guide.getByText("Nuit & jour")).toBeVisible();
         await expect(guide.locator(".mode-emploi__precautions li")).toHaveCount(3);
+        // Icônes fournies, une par précaution, dans le dossier du soin
+        const icons = await guide.locator(".mode-emploi__precautions img").evaluateAll((imgs) => imgs.map((i) => (i as HTMLImageElement).src));
+        expect(new Set(icons).size).toBe(3);
+        expect(icons.join(" ")).toMatch(/icone-coloration.*icone-yeux.*icone-externe/);
+        if (slug !== "miraculous") expect(icons[0]).toContain(`mode-emploi-${slug}`);
         // Illustrations décoratives chargées
         for (const img of await guide.locator("img").all()) {
           expect(await img.evaluate((i: HTMLImageElement) => i.complete && i.naturalWidth > 0)).toBe(true);
@@ -116,6 +118,39 @@ test.describe("mode d'emploi (Fabulous, Miraculous)", () => {
         expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(0);
         await guide.screenshot({ path: `captures/mode-emploi-${slug}-${vp.n}.png` });
       }
+    });
+  }
+});
+
+test.describe("manifeste (fin de la page Mon histoire)", () => {
+  for (const vp of [
+    { w: 375, h: 812, n: "375" },
+    { w: 768, h: 1024, n: "768" },
+    { w: 1280, h: 900, n: "1280" },
+  ]) {
+    test(`citation encadrée et centrée, pastilles, bouton (${vp.n} px)`, async ({ page }) => {
+      await page.setViewportSize({ width: vp.w, height: vp.h });
+      await page.goto("/mon-histoire");
+      const frame = page.locator(".manifeste__cadre");
+      const quote = frame.locator(".manifeste__citation");
+      await quote.scrollIntoViewIfNeeded();
+      // Sans guillemets
+      await expect(quote).toHaveText("Je ne suis pas qu’une seule femme.");
+      // Centrée horizontalement et verticalement dans son cadre
+      const f = (await frame.boundingBox())!;
+      const q = (await quote.boundingBox())!;
+      expect(Math.abs(q.x - f.x - (f.x + f.width - q.x - q.width))).toBeLessThanOrEqual(2);
+      expect(Math.abs(q.y - f.y - (f.y + f.height - q.y - q.height))).toBeLessThanOrEqual(2);
+      await expect(quote).toHaveCSS("text-align", "center");
+      const chips = page.locator(".manifeste__soin");
+      await expect(chips).toHaveText(["Je suis Fabulous.", "Je suis Miraculous.", "Je suis Luxurious."]);
+      await expect(page.locator(".manifeste__trois")).toHaveText("Je suis les trois.");
+      const boxes = await chips.evaluateAll((els) => els.map((e) => e.getBoundingClientRect()));
+      if (vp.w <= 420) for (let i = 1; i < 3; i++) expect(boxes[i].top).toBeGreaterThan(boxes[i - 1].bottom - 1); // empilées
+      const button = page.locator(".manifeste").getByRole("link", { name: "Découvrir les trois soins" });
+      await expect(button).toHaveAttribute("href", "/soins");
+      expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(0);
+      await page.locator(".manifeste").screenshot({ path: `captures/manifeste-${vp.n}.png` });
     });
   }
 });

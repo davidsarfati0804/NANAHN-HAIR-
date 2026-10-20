@@ -18,7 +18,8 @@ function kv(): KeyValueStore {
     const base = onNetlify
       ? createNetlifyStore("na-nah-nhair")
       : createFileStore(process.env.NNH_DATA_DIR ?? path.join(process.cwd(), ".data"));
-    store = withTimeout(base, 8000);
+    // Délai court : une page ne doit jamais dépasser la limite de 10 s des fonctions Netlify
+    store = withTimeout(base, 2500);
   }
   return store;
 }
@@ -151,4 +152,23 @@ export async function getContactAttempts(): Promise<AttemptLog> {
 
 export async function saveContactAttempts(log: AttemptLog) {
   await kv().setJSON("contact-attempts", log);
+}
+
+// Diagnostic (page /api/sante) : type de stockage et temps de lecture, sans aucune donnée sensible
+export async function storeHealth() {
+  const started = Date.now();
+  let ok = true;
+  let error: string | null = null;
+  try {
+    await kv().getJSON("catalog");
+  } catch (e) {
+    ok = false;
+    error = e instanceof Error ? e.message : String(e);
+  }
+  return {
+    stockage: process.env.NETLIFY_BLOBS_CONTEXT || process.env.NETLIFY === "true" || process.env.SITE_ID ? "netlify-blobs" : "fichiers",
+    lectureOk: ok,
+    lectureMs: Date.now() - started,
+    erreur: error,
+  };
 }

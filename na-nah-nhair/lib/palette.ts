@@ -1,5 +1,5 @@
-// PROPOSITION de palette unique (modifications 9 et 10), en attente de validation.
-// Une fois validée, ces valeurs remplaceront celles de lib/design-tokens.ts et app/globals.css.
+// Palette unique (modifications 9 et 10), validée le 20/10/2026 et appliquée dans
+// lib/design-tokens.ts et app/globals.css. Ce fichier alimente la page /guide-de-style.
 
 export type Swatch = { token: string; hex: string; role: string; replaces?: string };
 

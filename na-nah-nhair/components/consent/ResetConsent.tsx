@@ -12,7 +12,7 @@ export default function ResetConsent() {
       <button
         type="button"
         onClick={() => writeConsent(null)}
-        className="mt-3 min-h-11 rounded-full bg-deep-violet px-5 text-sm font-bold uppercase text-white hover:bg-plum"
+        className="mt-3 bouton bouton--principal"
       >
         {t.reset}
       </button>

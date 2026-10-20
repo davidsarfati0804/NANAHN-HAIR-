@@ -15,7 +15,7 @@ export default function LoginForm({ withTotp }: { withTotp: boolean }) {
           type="password"
           required
           autoComplete="current-password"
-          className="h-12 rounded-2xl border-2 border-deep-violet px-4 font-normal text-ink"
+          className="h-12 rounded-2xl border-2 border-deep-violet px-4 font-normal text-deep-violet"
         />
       </label>
       {withTotp && (
@@ -27,7 +27,7 @@ export default function LoginForm({ withTotp }: { withTotp: boolean }) {
             pattern="[0-9 ]{6,7}"
             required
             autoComplete="one-time-code"
-            className="h-12 rounded-2xl border-2 border-deep-violet px-4 font-normal tracking-[0.3em] text-ink"
+            className="h-12 rounded-2xl border-2 border-deep-violet px-4 font-normal tracking-[0.3em] text-deep-violet"
           />
         </label>
       )}

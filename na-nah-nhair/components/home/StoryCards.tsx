@@ -76,7 +76,7 @@ export default function StoryCards() {
                 </ul>
                 <Link
                   href={s.cta.href}
-                  className="mt-5 inline-flex min-h-12 items-center justify-center rounded-full bg-deep-violet px-6 py-3 text-sm font-bold uppercase tracking-wide text-white hover:bg-plum"
+                  className="mt-5 bouton bouton--principal"
                 >
                   {s.cta.label}
                 </Link>

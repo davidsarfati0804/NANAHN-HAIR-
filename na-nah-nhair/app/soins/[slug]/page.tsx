@@ -57,14 +57,14 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 {l.founderBadge}
               </p>
             )}
-            <h1 className="mt-4 text-6xl sm:text-7xl">{p.name}</h1>
-            <p className="mt-2 font-display text-5xl">
+            <h1 className={`mt-4 nom-produit-grand ${t.name}`}>{p.name}</h1>
+            <p className="mt-2 nom-produit-grand">
               <span className="sr-only">{l.priceLabel} : </span>
               {formatPrice(shop[p.slug].priceCents)}
             </p>
-            <p className="mt-6 text-xl font-bold">{p.phrase}</p>
+            <p className="mt-6 accroche">{p.phrase}</p>
 
-            <p className="mt-6 text-lg">{p.iAm}</p>
+            <p className="mt-6">{p.iAm}</p>
             <dl className="mt-4 grid grid-cols-[auto_1fr] gap-x-4 gap-y-2">
               <dt className="font-bold">{l.scentLabel}</dt>
               <dd>{p.scent}</dd>
@@ -73,7 +73,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             </dl>
             <p className="mt-4">{capitalize(p.text)}</p>
 
-            <h2 className="mt-8 font-body text-lg font-bold">{l.highlightsTitle}</h2>
+            <h2 className="mt-8 titre-h3">{l.highlightsTitle}</h2>
             <ul className="mt-3 grid gap-3">
               {p.highlights.map((h) => (
                 <li key={h} className={`${t.base} rounded-2xl px-4 py-3 font-bold`}>
@@ -97,9 +97,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         </div>
       </div>
 
-      <div className="mx-auto grid max-w-6xl gap-6 px-4 py-14 sm:px-6 md:grid-cols-2">
+      <div className="mx-auto grid max-w-6xl gap-6 px-4 py-16 sm:px-6 sm:py-24 md:grid-cols-2">
         <LavenderBox as="section" className="md:col-span-2">
-          <h2 className="font-body text-2xl font-bold">{l.descriptionTitle}</h2>
+          <h2 className="titre-h3">{l.descriptionTitle}</h2>
           <p className="mt-3">{p.description.intro}</p>
           <p className="mt-3">{p.description.vitamins}</p>
           <p className="mt-3 font-bold">{p.description.helpsTitle}</p>
@@ -111,8 +111,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           {p.description.outro && <p className="mt-3">{p.description.outro}</p>}
         </LavenderBox>
 
-        <section className="rounded-3xl border-2 border-lavender-mist p-6 sm:p-8 md:col-span-2">
-          <h2 className="font-body text-2xl font-bold text-deep-violet">{l.inciTitle}</h2>
+        <section className="rounded-3xl border-2 border-lavender p-6 sm:p-8 md:col-span-2">
+          <h2 className="titre-h3">{l.inciTitle}</h2>
           <p className="mt-3 text-sm leading-relaxed">{p.inci}</p>
           <ul className="mt-3 text-sm">
             {p.inciNotes.map((n) => (
@@ -122,24 +122,24 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         </section>
 
         {/* Mode d'emploi fourni : il contient aussi les précautions, affiché sur toute la largeur */}
-        <section className={`rounded-3xl border-2 border-lavender-mist p-6 sm:p-8 ${p.usage ? "md:col-span-2" : ""}`}>
-          <h2 className="font-body text-2xl font-bold text-deep-violet">{l.usageTitle}</h2>
+        <section className={`rounded-3xl border-2 border-lavender p-6 sm:p-8 ${p.usage ? "md:col-span-2" : ""}`}>
+          <h2 className="titre-h3">{l.usageTitle}</h2>
           <div className="mt-4">
             {p.usage ? <UsageGuide guide={p.usage} theme={p.slug} /> : <ToComplete label={`mode d'emploi ${p.shortName}`} />}
           </div>
         </section>
 
         {!p.usage && (
-          <section className="rounded-3xl border-2 border-lavender-mist p-6 sm:p-8">
-            <h2 className="font-body text-2xl font-bold text-deep-violet">{l.precautionsTitle}</h2>
+          <section className="rounded-3xl border-2 border-lavender p-6 sm:p-8">
+            <h2 className="titre-h3">{l.precautionsTitle}</h2>
             <div className="mt-3">
               {p.precautions ? <p>{p.precautions}</p> : <ToComplete label={`précautions d'emploi ${p.shortName}`} />}
             </div>
           </section>
         )}
 
-        <section className="rounded-3xl border-2 border-lavender-mist p-6 sm:p-8 md:col-span-2">
-          <h2 className="font-body text-2xl font-bold text-deep-violet">{l.faqTitle}</h2>
+        <section className="rounded-3xl border-2 border-lavender p-6 sm:p-8 md:col-span-2">
+          <h2 className="titre-h3">{l.faqTitle}</h2>
           <div className="mt-3">
             <ToComplete label={`FAQ ${p.shortName} (questions et réponses)`} />
           </div>
@@ -147,7 +147,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       </div>
 
       <section aria-labelledby="autres" className="mx-auto max-w-6xl px-4 sm:px-6">
-        <h2 id="autres" className="text-5xl text-deep-violet">
+        <h2 id="autres" className="titre-h2">
           {l.othersTitle}
         </h2>
         <ul className="mt-6 grid gap-4 sm:grid-cols-3">
@@ -156,17 +156,17 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             return (
               <li key={o.slug}>
                 <Link href={`/soins/${o.slug}`} className={`${ot.base} ${ot.text} block h-full rounded-3xl p-6`}>
-                  <span className="block font-display text-4xl">{o.shortName}</span>
+                  <span className={`nom-produit ${themeClasses[o.slug].name}`}>{o.shortName}</span>
                   <span className="mt-1 block text-sm font-bold">{o.phrase}</span>
-                  <span className="mt-4 block font-display text-3xl">{formatPrice(shop[o.slug].priceCents)}</span>
+                  <span className="mt-4 block nom-produit">{formatPrice(shop[o.slug].priceCents)}</span>
                 </Link>
               </li>
             );
           })}
           <li>
             <Link href="/pack" className="block h-full rounded-3xl bg-deep-violet p-6 text-white">
-              <span className="block font-display text-4xl">{pack.name}</span>
-              <span className="mt-4 block font-display text-3xl">{formatPrice(shop.pack.priceCents)}</span>
+              <span className="block nom-produit">{pack.name}</span>
+              <span className="mt-4 block nom-produit">{formatPrice(shop.pack.priceCents)}</span>
             </Link>
           </li>
         </ul>

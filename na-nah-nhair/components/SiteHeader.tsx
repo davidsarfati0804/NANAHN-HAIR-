@@ -21,7 +21,7 @@ export default function SiteHeader() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-lavender-mist bg-white/95 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-lavender bg-white/95 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
         <Link href="/" className="shrink-0">
           <Image
@@ -42,7 +42,7 @@ export default function SiteHeader() {
                 <Link
                   href={item.href}
                   aria-current={isCurrent(item.href) ? "page" : undefined}
-                  className="text-ink hover:text-plum aria-[current=page]:text-plum aria-[current=page]:underline aria-[current=page]:underline-offset-8"
+                  className="text-deep-violet hover:underline aria-[current=page]:text-deep-violet aria-[current=page]:underline aria-[current=page]:underline-offset-8"
                 >
                   {item.label}
                 </Link>
@@ -66,7 +66,7 @@ export default function SiteHeader() {
       </div>
 
       {open && (
-        <nav id="menu-mobile" aria-label="Navigation mobile" className="border-t border-lavender-mist lg:hidden">
+        <nav id="menu-mobile" aria-label="Navigation mobile" className="border-t border-lavender lg:hidden">
           <ul className="mx-auto max-w-6xl px-4 py-2 sm:px-6">
             {navigation.map((item) => (
               <li key={item.href}>
@@ -74,7 +74,7 @@ export default function SiteHeader() {
                   href={item.href}
                   onClick={() => setOpen(false)}
                   aria-current={isCurrent(item.href) ? "page" : undefined}
-                  className="block py-3 font-display text-3xl text-deep-violet aria-[current=page]:text-plum"
+                  className="block py-3 font-display text-3xl text-deep-violet aria-[current=page]:text-deep-violet"
                 >
                   {item.label}
                 </Link>

@@ -66,6 +66,10 @@ jobs:
           check /faq "Usage externe uniquement"
           check /faq "3 pipettes"
           check /guide-de-style "Les 4 choix"
+          check / "snap-mandatory"
+          check /boutique "grid-cols-2 gap-3"
+          check /soins/fabulous "fixed inset-x-0 bottom-0"
+          check /soins/fabulous "<details"
           for p in /story/luxurious.png /images/produits/pack-800.webp /quiz/resultat/fabulous /quiz/resultat/miraculous; do
             curl -s -o /dev/null -m 30 -w "$p %{http_code} %{content_type}\n" "$URL$p" || echo "$p erreur"
           done

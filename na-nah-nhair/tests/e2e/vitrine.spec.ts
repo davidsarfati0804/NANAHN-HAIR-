@@ -110,6 +110,8 @@ test.describe("mode d'emploi (Fabulous, Miraculous, Luxurious)", () => {
       ]) {
         await page.setViewportSize({ width: vp.w, height: vp.h });
         await page.goto(`/soins/${slug}`);
+        // Sur téléphone, le mode d'emploi est replié : on l'ouvre
+        if (vp.w < 768) await page.locator("summary", { hasText: "Mode d'emploi" }).click();
         const guide = page.locator(".mode-emploi");
         await guide.scrollIntoViewIfNeeded();
         await expect(guide.getByRole("heading", { name: "Étape 1" })).toBeVisible();
@@ -168,4 +170,46 @@ test.describe("manifeste (fin de la page Mon histoire)", () => {
       await page.locator(".manifeste").screenshot({ path: `captures/manifeste-${vp.n}.png` });
     });
   }
+});
+
+test.describe("rendu mobile (audit du 21/10/2026)", () => {
+  test.use({ viewport: { width: 375, height: 667 } });
+
+  test("fiche : blocs repliés sur téléphone, barre d'achat fixe en bas", async ({ page }) => {
+    await page.goto("/soins/fabulous");
+    for (const title of ["Ingrédients (INCI)", "Mode d'emploi", "Questions fréquentes"])
+      await expect(page.locator("details").filter({ has: page.locator("summary", { hasText: title }) })).not.toHaveAttribute("open");
+    const bar = page.locator("div.fixed.bottom-0").filter({ hasText: "Fabulous" });
+    await expect(bar).toHaveAttribute("aria-hidden", "true");
+    await page.evaluate(() => window.scrollTo(0, 1400));
+    await expect(bar).toHaveAttribute("aria-hidden", "false");
+    await bar.getByRole("button", { name: "Ajouter au panier" }).click();
+    await expect(page.getByTestId("cart-count")).toHaveText("(1)");
+    await page.screenshot({ path: "captures/mobile-fiche-barre.png" });
+  });
+
+  test("ordinateur : blocs de la fiche ouverts, pas de barre fixe", async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto("/soins/fabulous");
+    await expect(page.locator("details").filter({ has: page.locator("summary", { hasText: "Mode d'emploi" }) })).toHaveAttribute("open", "");
+    await expect(page.locator("div.fixed.bottom-0")).toBeHidden();
+  });
+
+  test("boutique en deux colonnes, accueil en carrousels, quiz dans un écran", async ({ page }) => {
+    await page.goto("/boutique");
+    const cards = page.locator("main ul > li");
+    const [a, b] = [(await cards.nth(0).boundingBox())!, (await cards.nth(1).boundingBox())!];
+    expect(Math.round(a.y)).toBe(Math.round(b.y));
+    await page.goto("/");
+    const trio = page.getByRole("list", { name: "Quel soin est le tien ?" });
+    expect(await trio.evaluate((el) => el.scrollWidth > el.clientWidth)).toBe(true);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(0);
+    await page.goto("/quiz");
+    for (const radio of await page.getByRole("radio").all()) expect((await radio.boundingBox())!.y + 56).toBeLessThanOrEqual(667);
+  });
+
+  test("champ quantité en 16 px (pas de zoom automatique sur iPhone)", async ({ page }) => {
+    await page.goto("/soins/miraculous");
+    await expect(page.getByLabel("Quantité")).toHaveCSS("font-size", "16px");
+  });
 });

@@ -8,7 +8,7 @@ import type { CatalogProduct } from "@/lib/catalog";
 export default function ProductForm({ product, name }: { product: CatalogProduct; name: string }) {
   const [state, action, pending] = useActionState<FormState, FormData>(updateProduct, null);
   const price = (product.priceCents / 100).toFixed(2).replace(".", ",");
-  const field = "h-11 rounded-2xl border-2 border-deep-violet bg-white px-3 text-deep-violet";
+  const field = "h-11 rounded-2xl border-2 border-deep-violet bg-white px-3 text-base text-deep-violet";
 
   return (
     <form

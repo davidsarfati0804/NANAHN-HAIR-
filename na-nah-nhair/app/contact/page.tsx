@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: t.title, description: t.intro, altern
 
 export default function ContactPage() {
   return (
-    <div className="mx-auto grid max-w-5xl gap-10 px-4 py-16 sm:px-6 sm:py-24 md:grid-cols-[1.4fr_1fr]">
+    <div className="mx-auto grid max-w-5xl gap-8 px-4 py-10 sm:gap-10 sm:px-6 sm:py-24 md:grid-cols-[1.4fr_1fr]">
       <div>
         <h1 className="titre-h1">{t.title}</h1>
         <p className="mb-8 mt-3 accroche">{t.intro}</p>
@@ -24,12 +24,12 @@ export default function ContactPage() {
             </p>
             <p>{legal.address}</p>
             <p>
-              <a href={`tel:${legal.phone.replace(/\s/g, "")}`} className="inline-block py-1 underline underline-offset-4">
+              <a href={`tel:${legal.phone.replace(/\s/g, "")}`} className="inline-block py-2.5 underline underline-offset-4">
                 {legal.phone}
               </a>
             </p>
             <p>
-              <a href={`mailto:${legal.email}`} className="inline-block py-1 underline underline-offset-4">
+              <a href={`mailto:${legal.email}`} className="inline-block py-2.5 underline underline-offset-4">
                 {legal.email}
               </a>
             </p>

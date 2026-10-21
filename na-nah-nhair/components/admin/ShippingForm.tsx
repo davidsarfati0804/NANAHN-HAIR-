@@ -9,7 +9,7 @@ const euros = (c: number | null) => (c === null ? "" : (c / 100).toFixed(2).repl
 
 export default function ShippingForm({ settings }: { settings: ShopSettings }) {
   const [state, action, pending] = useActionState<FormState, FormData>(updateShipping, null);
-  const field = "h-11 rounded-2xl border-2 border-deep-violet bg-white px-3 text-deep-violet";
+  const field = "h-11 rounded-2xl border-2 border-deep-violet bg-white px-3 text-base text-deep-violet";
   return (
     <form
       // Soumission manuelle : en cas d'erreur, les saisies restent affichées (pas de remise à zéro du formulaire)

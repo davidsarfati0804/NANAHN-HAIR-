@@ -8,6 +8,7 @@ import StoryCards from "@/components/home/StoryCards";
 import TrioHeading from "@/components/home/TrioHeading";
 import HeroBottles from "@/components/home/HeroBottles";
 import ProductCard from "@/components/ProductCard";
+import SwipeList from "@/components/SwipeList";
 import ToComplete from "@/components/ToComplete";
 import { brand, emotionalConcept, home, pack, products } from "@/content/site";
 import type { ProductId, PublicProduct } from "@/lib/catalog";
@@ -44,9 +45,9 @@ function Hero({ freeShipping }: { freeShipping: boolean }) {
   const { hero } = home;
   const reassurance = [...hero.reassurance, ...(freeShipping ? [hero.reassuranceShipping] : [])];
   return (
-    <section className="relative isolate overflow-hidden [contain:paint]">
-      {/* Fond dégradé : les couleurs des soins */}
-      <div aria-hidden className="pointer-events-none absolute inset-0">
+    <section className="relative isolate">
+      {/* Fond dégradé : les couleurs des soins (débordement coupé sur ce calque seulement : la page ne peut pas glisser) */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute -left-24 top-10 h-72 w-72 rounded-full bg-fabulous opacity-60 blur-3xl" />
         <div className="absolute right-0 top-0 h-80 w-80 rounded-full bg-miraculous opacity-60 blur-3xl" />
         <div className="absolute bottom-0 left-1/3 h-72 w-72 rounded-full bg-luxurious opacity-50 blur-3xl" />
@@ -66,7 +67,7 @@ function Hero({ freeShipping }: { freeShipping: boolean }) {
               unoptimized
               className="h-[min(18svh,9rem)] w-auto sm:h-40 lg:h-48"
             />
-            <p className="absolute -right-24 top-1 -rotate-[4deg] rounded-xl bg-logo-yellow px-2.5 py-1 text-[0.7rem] font-bold leading-tight text-deep-violet shadow-sm sm:-right-32 sm:text-xs">
+            <p className="absolute -right-[4.5rem] top-1 -rotate-[4deg] min-[390px]:-right-24 rounded-xl bg-logo-yellow px-2.5 py-1 text-[0.7rem] font-bold leading-tight text-deep-violet shadow-sm sm:-right-32 sm:text-xs">
               {hero.sticker}
             </p>
           </div>
@@ -83,13 +84,13 @@ function Hero({ freeShipping }: { freeShipping: boolean }) {
                 <ButtonLink href={hero.primaryCta.href} className="w-full sm:w-auto sm:whitespace-nowrap">
                   <BrandText text={hero.primaryCta.label} />
                 </ButtonLink>
-                <p className="mt-1 text-xs text-deep-violet">{hero.quizHint}</p>
+                <p className="mt-1 text-[0.8125rem] text-deep-violet">{hero.quizHint}</p>
               </div>
               <ButtonLink href={hero.secondaryCta.href} variant="secondary" className="w-full sm:w-auto sm:whitespace-nowrap">
                 {hero.secondaryCta.label}
               </ButtonLink>
             </div>
-            <p className="mt-4 text-center text-xs font-bold text-deep-violet">{reassurance.join(" · ")}</p>
+            <p className="mt-4 text-center text-[0.8125rem] font-bold text-deep-violet">{reassurance.join(" · ")}</p>
           </div>
         </div>
 
@@ -111,7 +112,7 @@ function Hero({ freeShipping }: { freeShipping: boolean }) {
 
 function SectionTitle({ kicker, title, id }: { kicker: string; title: string; id?: string }) {
   return (
-    <div className="mb-10">
+    <div className="mb-6 sm:mb-10">
       <p className="surtitre">{kicker}</p>
       <h2 id={id} className="mt-2 titre-h2">
         {title}
@@ -124,13 +125,11 @@ function Trio({ shop }: { shop: Shop }) {
   return (
     <section aria-labelledby="trio" className="section">
       <TrioHeading />
-      <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <SwipeList label={home.trio.title}>
         {products.map((p) => (
-          <li key={p.slug}>
-            <ProductCard product={p} shop={shop[p.slug]} cta={home.trio.cta} />
-          </li>
+          <ProductCard key={p.slug} product={p} shop={shop[p.slug]} cta={home.trio.cta} />
         ))}
-      </ul>
+      </SwipeList>
     </section>
   );
 }
@@ -139,18 +138,18 @@ function Concept() {
   const chips = ["fabulous", "miraculous", "luxurious"] as const;
   return (
     <section className="section">
-      <LavenderBox as="div" className="px-6 py-14 text-center sm:px-12 sm:py-20">
+      <LavenderBox as="div" className="px-5 py-10 text-center sm:px-12 sm:py-20">
         {/* Citation centrée, lignes équilibrées, marges égales même sur mobile */}
         <h2 className="mx-auto max-w-[18ch] text-center text-[clamp(2.5rem,10vw,5.5rem)] [text-wrap:balance]">
           {emotionalConcept.title}
         </h2>
-        <ul className="mt-10 flex flex-wrap justify-center gap-3">
+        <ul className="mt-6 flex flex-wrap justify-center gap-2 sm:mt-10 sm:gap-3">
           {emotionalConcept.lines.map((line, i) => {
             const theme = chips[i];
             return (
               <li
                 key={line}
-                className={`rounded-full px-6 py-3 text-lg font-bold sm:text-xl ${
+                className={`rounded-full px-5 py-2 text-base font-bold sm:px-6 sm:py-3 sm:text-xl ${
                   theme
                     ? `${themeClasses[theme].base} ${themeClasses[theme].text}`
                     : "bg-deep-violet text-white"
@@ -170,15 +169,15 @@ function Products({ shop }: { shop: Shop }) {
   return (
     <section aria-labelledby="soins" className="section">
       <SectionTitle kicker={home.products.kicker} title={home.products.title} id="soins" />
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <SwipeList label={home.products.title}>
         {products.map((p) => {
           const t = themeClasses[p.slug];
           return (
-            <article key={p.slug} className={`rounded-[2rem] border-2 ${t.border} p-6`}>
-              <h3 className={`nom-produit ${t.name}`}>{p.name}</h3>
-              <ul className="mt-5 space-y-3">
+            <article key={p.slug} className={`h-full rounded-[2rem] border-2 ${t.border} p-5 md:p-6`}>
+              <h3 className={`nom-produit max-sm:text-[2rem] ${t.name}`}>{p.name}</h3>
+              <ul className="mt-4 space-y-2 md:mt-5 md:space-y-3">
                 {p.highlights.map((h) => (
-                  <li key={h} className={`${t.soft} ${t.text} rounded-2xl px-4 py-3 font-bold`}>
+                  <li key={h} className={`${t.soft} ${t.text} rounded-2xl px-3 py-2 font-bold md:px-4 md:py-3`}>
                     {h}
                   </li>
                 ))}
@@ -191,14 +190,14 @@ function Products({ shop }: { shop: Shop }) {
               </dl>
               <Link
                 href={`/soins/${p.slug}`}
-                className={`mt-4 inline-block py-2 font-bold underline underline-offset-4 ${t.text}`}
+                className={`mt-3 inline-flex min-h-11 items-center font-bold underline underline-offset-4 ${t.text}`}
               >
                 {p.shortName} · {formatPrice(shop[p.slug].priceCents)}
               </Link>
             </article>
           );
         })}
-      </div>
+      </SwipeList>
     </section>
   );
 }
@@ -206,12 +205,12 @@ function Products({ shop }: { shop: Shop }) {
 function Pack({ shop }: { shop: Shop }) {
   return (
     <section aria-labelledby="pack" className="section">
-      <div className="grid items-center gap-8 md:grid-cols-2">
-        <PhotoSlot photo={pack.photo} src={shop.pack.photoUrl} className="mx-auto aspect-[4/5] w-full max-w-md rounded-[2rem]" sizes="(max-width: 768px) 100vw, 50vw" />
+      <div className="grid items-center gap-6 md:grid-cols-2 md:gap-8">
+        <PhotoSlot photo={pack.photo} src={shop.pack.photoUrl} className="mx-auto aspect-[4/5] w-full max-w-[14rem] rounded-[2rem] md:max-w-md" sizes="(max-width: 768px) 100vw, 50vw" />
         <div>
           <SectionTitle kicker={home.pack.kicker} title={pack.name} id="pack" />
-          <p className="-mt-6 nom-produit">{formatPrice(shop.pack.priceCents)}</p>
-          <LavenderBox className="mt-6">
+          <p className="-mt-3 nom-produit sm:-mt-6">{formatPrice(shop.pack.priceCents)}</p>
+          <LavenderBox className="mt-4 md:mt-6">
             <h3 className="titre-h3">{pack.contentTitle}</h3>
             <ol className="mt-3 space-y-2">
               {pack.content.map((item) => (
@@ -223,7 +222,7 @@ function Pack({ shop }: { shop: Shop }) {
             <h3 className="mt-5 titre-h3">{pack.usageTitle}</h3>
             <p className="mt-2">{capitalize(pack.usage)}</p>
           </LavenderBox>
-          <ButtonLink href="/pack" className="mt-6">
+          <ButtonLink href="/pack" className="mt-4 md:mt-6">
             {home.pack.cta}
           </ButtonLink>
         </div>
@@ -250,11 +249,11 @@ function StoryTeaser() {
             {s.sticker}
           </p>
         </div>
-        <div className="mt-10">
+        <div className="mt-6 sm:mt-10">
           <StoryCards />
         </div>
-        <p className="mt-6 text-center">
-          <Link href={s.readMore.href} className="inline-block py-2 font-bold text-deep-violet underline underline-offset-4">
+        <p className="mt-4 text-center sm:mt-6">
+          <Link href={s.readMore.href} className="inline-flex min-h-11 items-center font-bold text-deep-violet underline underline-offset-4">
             {s.readMore.label}
           </Link>
         </p>
@@ -266,12 +265,12 @@ function StoryTeaser() {
 function Reasons() {
   return (
     <section aria-labelledby="raisons" className="section">
-      <h2 id="raisons" className="mb-10 titre-h2">
+      <h2 id="raisons" className="mb-6 titre-h2 sm:mb-10">
         <BrandText text={home.reasons.title} tone="logo" />
       </h2>
-      <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+      <ul className="grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-5">
         {home.reasons.items.map((r) => (
-          <li key={r.title} className="rounded-3xl bg-lavender p-5 text-deep-violet">
+          <li key={r.title} className="rounded-3xl bg-lavender p-4 text-deep-violet sm:p-5">
             <h3 className="titre-h3">{r.title}</h3>
             {r.text && <p className="mt-2 text-sm">{r.text}</p>}
             {r.lines && (
@@ -295,10 +294,10 @@ function FinalCta() {
   const { finalCta } = home;
   return (
     <section className="section">
-      <div className="rounded-[2rem] bg-deep-violet px-6 py-16 text-center text-white">
+      <div className="rounded-[2rem] bg-deep-violet px-6 py-10 text-center text-white sm:py-16">
         <h2 className="titre-h2 text-white">{finalCta.title}</h2>
         <p className="mt-4 accroche">{finalCta.text}</p>
-        <ButtonLink href={finalCta.cta.href} variant="light" className="mt-8">
+        <ButtonLink href={finalCta.cta.href} variant="light" className="mt-6 sm:mt-8">
           {finalCta.cta.label}
         </ButtonLink>
       </div>

@@ -36,10 +36,10 @@ export default function SwipeList({ label, children, gridClass = "md:grid-cols-2
         ref={list}
         tabIndex={0}
         aria-label={label}
-        className={`-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-4 px-4 pb-3 [scrollbar-width:none] md:mx-0 md:grid md:gap-6 md:overflow-visible md:px-0 md:pb-0 ${gridClass}`}
+        className={`relative -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-4 px-4 pb-3 [scrollbar-width:none] md:mx-0 md:grid md:gap-6 md:overflow-visible md:px-0 md:pb-0 ${gridClass}`}
       >
         {items.map((child, i) => (
-          <li key={i} data-index={i} className="w-[84%] shrink-0 snap-center md:w-auto">
+          <li key={i} data-index={i} className="relative w-[84%] shrink-0 snap-center md:w-auto">
             {child}
           </li>
         ))}

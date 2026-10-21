@@ -189,9 +189,9 @@ test.describe("modifications du 20/10/2026", () => {
     await expect(list.locator(":scope > li")).toHaveCount(3);
     expect(await list.evaluate((el) => el.scrollWidth > el.clientWidth)).toBe(true);
     expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(0);
-    await expect(page.getByText("glisse pour la suite →")).toBeVisible();
-    await page.getByRole("button", { name: "Afficher la carte 3" }).click();
-    await expect(page.getByRole("button", { name: "Afficher la carte 3" })).toHaveAttribute("aria-current", "true");
+    await expect(page.locator("section[aria-labelledby=histoire]").getByText("glisse pour la suite →")).toBeVisible();
+    await page.locator("section[aria-labelledby=histoire]").getByRole("button", { name: "Afficher la carte 3" }).click();
+    await expect(page.locator("section[aria-labelledby=histoire]").getByRole("button", { name: "Afficher la carte 3" })).toHaveAttribute("aria-current", "true");
     await expect(page.getByText("À COMPLÉTER : photo").last()).toBeAttached();
     await page.screenshot({ path: "captures/modif-histoire-375.png" });
 
@@ -200,7 +200,7 @@ test.describe("modifications du 20/10/2026", () => {
     await list.scrollIntoViewIfNeeded();
     const tops = await list.locator(":scope > li").evaluateAll((lis) => lis.map((li) => li.getBoundingClientRect().top));
     expect(new Set(tops.map(Math.round)).size).toBe(1);
-    await expect(page.getByText("glisse pour la suite →")).toBeHidden();
+    await expect(page.locator("section[aria-labelledby=histoire]").getByText("glisse pour la suite →")).toBeHidden();
     await page.getByRole("link", { name: "Lire toute mon histoire" }).scrollIntoViewIfNeeded();
     await page.screenshot({ path: "captures/modif-histoire-1280.png" });
   });

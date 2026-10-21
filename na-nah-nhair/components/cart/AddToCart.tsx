@@ -64,7 +64,7 @@ export default function AddToCart({
                 max={Math.max(1, max)}
                 value={quantity}
                 onChange={(e) => setQuantity(Math.max(1, Math.min(Number(e.target.value) || 1, Math.max(1, max))))}
-                className="mt-1 h-12 w-20 rounded-full border-2 border-deep-violet bg-white px-3 text-center text-deep-violet"
+                className="mt-1 h-12 w-20 rounded-full border-2 border-deep-violet bg-white px-3 text-center text-base text-deep-violet"
               />
             </label>
           )}

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function FaqPage() {
   return (
-    <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-24">
+    <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-24">
       <h1 className="titre-h1">{faq.title}</h1>
       <nav aria-label="Rubriques de la FAQ" className="mt-6 flex flex-wrap gap-2">
         {faq.groups.map((g) => (
@@ -24,7 +24,7 @@ export default function FaqPage() {
         ))}
       </nav>
       {faq.groups.map((g) => (
-        <section key={g.title} aria-labelledby={slugify(g.title)} className="mt-12 scroll-mt-32">
+        <section key={g.title} aria-labelledby={slugify(g.title)} className="mt-8 scroll-mt-24 sm:mt-12">
           <h2 id={slugify(g.title)} className="mb-4 titre-h2">
             {g.title}
           </h2>

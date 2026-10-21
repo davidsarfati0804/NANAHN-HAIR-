@@ -5,7 +5,7 @@ export default function FaqList({ items }: { items: FaqItem[] }) {
   return (
     <div className="divide-y divide-lavender rounded-3xl border-2 border-lavender">
       {items.map((item) => (
-        <details key={item.question} className="group px-5 py-4">
+        <details key={item.question} className="group px-5 py-2 sm:py-4">
           <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 font-bold text-deep-violet">
             <span>
               {item.question}
@@ -19,7 +19,7 @@ export default function FaqList({ items }: { items: FaqItem[] }) {
               +
             </span>
           </summary>
-          <div className="mt-3 space-y-2">
+          <div className="mt-2 space-y-2 pb-2 sm:mt-3 sm:pb-0">
             {item.answer?.map((line) => <p key={line}>{line}</p>)}
             {item.list && (
               <ul className="list-disc space-y-1 pl-5">

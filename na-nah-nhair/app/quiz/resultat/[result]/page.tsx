@@ -28,32 +28,32 @@ export default async function QuizResultPage({ params }: { params: Promise<{ res
 
   return (
     <div className={`${t.base} ${t.text}`}>
-      <div className="mx-auto flex min-h-[calc(100svh-8rem)] max-w-3xl flex-col items-center justify-center px-4 py-14 text-center sm:px-6 sm:py-20">
+      <div className="mx-auto flex min-h-[calc(100svh-8rem)] max-w-3xl flex-col items-center justify-center px-4 py-10 text-center sm:px-6 sm:py-20">
         <p className="surtitre">{r.kicker}</p>
-        <h1 className={`apparition mt-4 font-display text-[clamp(4rem,17vw,8.5rem)] leading-[0.9] ${t.name}`}>{r.iAm(p.shortName)}</h1>
+        <h1 className={`apparition mt-4 font-display text-[clamp(3.25rem,15vw,8.5rem)] leading-[0.9] ${t.name}`}>{r.iAm(p.shortName)}</h1>
         <p className="mt-6 max-w-xl accroche">{p.phrase}</p>
 
-        <div className="mt-10 flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row">
+        <div className="mt-8 flex w-full sm:mt-10 flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row">
           <Link href={`/soins/${p.slug}`} className={t.button}>
             {r.discoverCta(p.shortName)}
           </Link>
           <StoryShare slug={p.slug} name={p.shortName} />
         </div>
 
-        <p className="mt-12 max-w-md text-lg font-bold">
+        <p className="mt-8 max-w-md text-lg font-bold sm:mt-12">
           <Link href={r.finalHref} className="underline underline-offset-4">
             {r.finalMessage}
           </Link>
         </p>
 
-        <section className="mt-8 w-full max-w-md rounded-[2rem] bg-white/70 px-6 py-6">
+        <section className="mt-6 w-full max-w-md rounded-[2rem] bg-white/70 px-6 py-5 sm:mt-8 sm:py-6">
           <h2 className="titre-h3">{r.founderTitle}</h2>
-          <Link href="/soins/miraculous" className="mt-2 inline-block py-2 font-bold underline underline-offset-4">
+          <Link href="/soins/miraculous" className="mt-1 inline-block py-3 font-bold underline underline-offset-4">
             {r.founderCta}
           </Link>
         </section>
 
-        <Link href="/quiz" className="mt-6 inline-block py-2 text-sm font-bold uppercase tracking-wide underline underline-offset-4">
+        <Link href="/quiz" className="mt-4 inline-block py-3 text-sm font-bold uppercase sm:mt-6 tracking-wide underline underline-offset-4">
           {quiz.restart}
         </Link>
       </div>

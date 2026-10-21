@@ -5,8 +5,8 @@ import BrandName, { BrandText } from "@/components/BrandName";
 
 export default function SiteFooter() {
   return (
-    <footer className="mt-16 bg-deep-violet text-white">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 sm:py-24 md:grid-cols-3">
+    <footer className="mt-10 bg-deep-violet sm:mt-16 text-white">
+      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:gap-10 sm:px-6 sm:py-24 md:grid-cols-3">
         <div>
           <p className="text-4xl">
             <BrandName />
@@ -45,10 +45,10 @@ export default function SiteFooter() {
         </div>
 
         <nav aria-label="Informations légales">
-          <ul className="space-y-1 text-sm">
+          <ul className="flex flex-wrap gap-x-4 text-sm md:block md:space-y-1">
             {footer.legalLinks.map((link) => (
               <li key={link.href}>
-                <Link href={link.href} className="inline-block py-1.5 underline-offset-4 hover:underline">
+                <Link href={link.href} className="inline-flex min-h-11 items-center underline-offset-4 hover:underline md:inline-block md:min-h-0 md:py-1.5">
                   {link.label}
                 </Link>
               </li>
@@ -56,7 +56,7 @@ export default function SiteFooter() {
           </ul>
         </nav>
       </div>
-      <p className="border-t border-white/20 px-4 py-4 text-center text-xs">
+      <p className="border-t border-white/20 px-4 py-4 text-center text-sm">
         © {new Date().getFullYear()} <BrandText text={legal.brand} /> · SIRET {legal.siret}
       </p>
     </footer>

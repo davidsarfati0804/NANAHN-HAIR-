@@ -23,15 +23,17 @@ export default async function StoryPage() {
 
   return (
     <article>
-      <header className="relative isolate overflow-hidden bg-lavender-soft [contain:paint]">
-        <div aria-hidden className="pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full bg-miraculous opacity-70 blur-3xl" />
-        <div className="relative mx-auto max-w-4xl px-4 py-20 sm:px-6 sm:py-28">
+      <header className="relative isolate bg-lavender-soft">
+        <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-miraculous opacity-70 blur-3xl" />
+        </div>
+        <div className="relative mx-auto max-w-4xl px-4 py-12 sm:px-6 sm:py-28">
           <p className="surtitre">{storyPage.kicker}</p>
           <h1 className="mt-4 titre-h1">{first}</h1>
         </div>
       </header>
 
-      <div className="mx-auto max-w-2xl space-y-8 px-4 py-16 text-lg leading-relaxed sm:px-6 sm:text-xl">
+      <div className="mx-auto max-w-2xl space-y-6 px-4 py-10 text-lg sm:space-y-8 sm:py-16 leading-relaxed sm:px-6 sm:text-xl">
         {rest.map((para) => (
           <p key={para}>
             <BrandText text={para} />
@@ -40,15 +42,15 @@ export default async function StoryPage() {
       </div>
 
       <section className="mx-auto max-w-4xl px-4 sm:px-6">
-        <blockquote className="rounded-[2rem] bg-deep-violet px-6 py-14 text-center text-white sm:px-12">
-          <p className="font-display text-4xl leading-none sm:text-6xl">
+        <blockquote className="rounded-[2rem] bg-deep-violet px-6 py-10 text-center text-white sm:px-12 sm:py-14">
+          <p className="font-display text-[2rem] leading-none sm:text-6xl">
             <BrandText text={last} />
           </p>
         </blockquote>
       </section>
 
-      <section className="mx-auto mt-16 max-w-4xl px-4 sm:px-6">
-        <div className="rounded-[2rem] bg-miraculous p-8 text-miraculous-deep sm:p-12">
+      <section className="mx-auto mt-10 max-w-4xl sm:mt-16 px-4 sm:px-6">
+        <div className="rounded-[2rem] bg-miraculous p-6 text-miraculous-deep sm:p-12">
           <h2 className="titre-h2">{storyPage.founderTitle}</h2>
           <p className="mt-4">{capitalize(miraculous.text)}</p>
           <p className="mt-4 accroche">{miraculous.phrase}</p>
@@ -59,7 +61,7 @@ export default async function StoryPage() {
       </section>
 
       {/* Manifeste (manifeste.html / manifeste.css fournis) */}
-      <section className="mt-16 px-4 sm:px-6">
+      <section className="mt-10 px-4 sm:mt-16 sm:px-6">
         <div className="manifeste">
           <div className="manifeste__cadre">
             <h2 className="manifeste__citation">{emotionalConcept.quote}</h2>

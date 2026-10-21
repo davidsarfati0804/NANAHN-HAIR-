@@ -21,12 +21,12 @@ export default function SiteHeader() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-lavender bg-white/95 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+    <header className="sticky top-0 z-40 border-b border-lavender bg-white">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-1.5 sm:px-6 sm:py-3">
         {/* Logo transparent (SVG) centré dans un encadré crème aux coins arrondis (modification 18) */}
         <Link
           href="/"
-          className="flex h-16 shrink-0 items-center justify-center rounded-[1.25rem] border border-lavender-soft bg-logo-yellow px-2.5 py-2 sm:h-[4.5rem] sm:rounded-[1.5rem] sm:px-3 sm:py-2.5"
+          className="flex h-[3.25rem] shrink-0 items-center justify-center rounded-[1.125rem] border border-lavender-soft bg-logo-yellow px-2 py-1.5 sm:h-[4.5rem] sm:rounded-[1.5rem] sm:px-3 sm:py-2.5"
         >
           <Image
             src={brand.logoSvg.src}
@@ -70,7 +70,7 @@ export default function SiteHeader() {
       </div>
 
       {open && (
-        <nav id="menu-mobile" aria-label="Navigation mobile" className="border-t border-lavender lg:hidden">
+        <nav id="menu-mobile" aria-label="Navigation mobile" className="max-h-[calc(100dvh-5rem)] overflow-y-auto overscroll-contain border-t border-lavender lg:hidden">
           <ul className="mx-auto max-w-6xl px-4 py-2 sm:px-6">
             {navigation.map((item) => (
               <li key={item.href}>

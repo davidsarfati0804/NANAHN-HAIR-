@@ -1,20 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import AddToCart from "@/components/cart/AddToCart";
-import ButtonLink from "@/components/ButtonLink";
-import LavenderBox from "@/components/LavenderBox";
-import PhotoSlot from "@/components/PhotoSlot";
-import ShareButton from "@/components/ShareButton";
-import { pack, productBySlug, productPage, quiz } from "@/content/site";
-import { formatPrice } from "@/lib/money";
+import StoryShare from "@/components/quiz/StoryShare";
+import { productBySlug, quiz } from "@/content/site";
 import { isQuizResult, QUIZ_RESULTS } from "@/lib/quiz";
-import { getShopData } from "@/lib/shop-data";
-import { capitalize } from "@/lib/typography";
 import { themeClasses } from "@/lib/theme-classes";
-import { BrandText } from "@/components/BrandName";
 
-export const dynamic = "force-dynamic";
 export const dynamicParams = false;
 
 export function generateStaticParams() {
@@ -23,104 +14,49 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ result: string }> }): Promise<Metadata> {
   const { result } = await params;
-  const name = result === "pack" ? pack.name : productBySlug(result)?.shortName;
-  return { title: `${quiz.result.kicker} : ${name}`, robots: { index: false } };
+  const p = productBySlug(result);
+  return { title: `${quiz.result.kicker} : ${p?.shortName ?? ""}`, robots: { index: false } };
 }
 
+// Écran résultat (modification 20) : fond de la couleur du soin, aucune photo de flacon
 export default async function QuizResultPage({ params }: { params: Promise<{ result: string }> }) {
   const { result } = await params;
   if (!isQuizResult(result)) notFound();
-  const { products: shop } = await getShopData();
-  const miraculous = productBySlug("miraculous")!;
+  const p = productBySlug(result)!;
+  const t = themeClasses[result];
   const { result: r } = quiz;
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-24">
-      <p className="surtitre">
-        <BrandText text={r.kicker} />
-      </p>
+    <div className={`${t.base} ${t.text}`}>
+      <div className="mx-auto flex min-h-[calc(100svh-8rem)] max-w-3xl flex-col items-center justify-center px-4 py-14 text-center sm:px-6 sm:py-20">
+        <p className="surtitre">{r.kicker}</p>
+        <h1 className={`apparition mt-4 font-display text-[clamp(4rem,17vw,8.5rem)] leading-[0.9] ${t.name}`}>{r.iAm(p.shortName)}</h1>
+        <p className="mt-6 max-w-xl accroche">{p.phrase}</p>
 
-      {result === "pack" ? (
-        <section className="mt-4 grid gap-8 rounded-[2rem] bg-lavender p-6 text-deep-violet sm:p-10 md:grid-cols-2 [&>*]:min-w-0">
-          <PhotoSlot photo={pack.photo} src={shop.pack.photoUrl} className="aspect-square rounded-[1.5rem] bg-white" />
-          <div>
-            <h1 className="titre-h1">{r.packTitle}</h1>
-            <p className="mt-4 accroche">{r.packText}</p>
-            <h2 className="mt-6 nom-produit">{pack.name}</h2>
-            <p className="nom-produit">{formatPrice(shop.pack.priceCents)}</p>
-            <ul className="mt-3 space-y-1">
-              {pack.content.map((c) => (
-                <li key={c.product}>
-                  <span className="font-bold">{c.product}</span> : {c.text}
-                </li>
-              ))}
-            </ul>
-            <AddToCart id="pack" name={pack.name} available={shop.pack.available} className="mt-6" />
-            <Link href="/pack" className="mt-2 inline-block py-2 font-bold underline underline-offset-4">
-              {r.productCta}
-            </Link>
-          </div>
-        </section>
-      ) : (
-        <ProductResult slug={result} shop={shop} />
-      )}
-
-      <LavenderBox as="section" className="mt-10">
-        <h2 className="titre-h2">{r.founderTitle}</h2>
-        <p className="mt-3">{capitalize(miraculous.text)}</p>
-        <p className="mt-2 font-bold">{miraculous.phrase}</p>
-        <ButtonLink href="/soins/miraculous" className="mt-5">
-          {r.founderCta}
-        </ButtonLink>
-      </LavenderBox>
-
-      <section className="mt-10 rounded-[2rem] bg-deep-violet px-6 py-14 text-center text-white">
-        <p className="font-display text-5xl leading-none sm:text-7xl">{r.finalMessage}</p>
-        <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-          <ButtonLink href={r.finalCta.href} variant="light">
-            {r.finalCta.label}
-          </ButtonLink>
-          <ButtonLink href="/quiz" variant="custom" className="border-2 border-white text-white hover:bg-plum">
-            {quiz.restart}
-          </ButtonLink>
+        <div className="mt-10 flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row">
+          <Link href={`/soins/${p.slug}`} className={t.button}>
+            {r.discoverCta(p.shortName)}
+          </Link>
+          <StoryShare slug={p.slug} name={p.shortName} />
         </div>
-        <ShareButton name={result === "pack" ? pack.name : productBySlug(result)!.shortName} className="mt-6" />
-      </section>
-    </div>
-  );
-}
 
-async function ProductResult({
-  slug,
-  shop,
-}: {
-  slug: "fabulous" | "miraculous" | "luxurious";
-  shop: Awaited<ReturnType<typeof getShopData>>["products"];
-}) {
-  const p = productBySlug(slug)!;
-  const t = themeClasses[slug];
-  return (
-    <section className={`${t.base} ${t.text} mt-4 grid gap-8 rounded-[2rem] p-6 sm:p-10 md:grid-cols-2 [&>*]:min-w-0`}>
-      <PhotoSlot photo={p.photo} src={shop[slug].photoUrl} theme={slug} className="aspect-[4/5] rounded-[1.5rem]" />
-      <div>
-        <h1 className={`nom-produit-grand ${t.name}`}>{p.shortName}</h1>
-        <p className="mt-1 text-sm font-bold uppercase tracking-wide">{p.name}</p>
-        <p className="mt-6 accroche">{p.phrase}</p>
-        <p className="mt-4">
-          <span className="font-bold">{productPage.personalityPrefix}</span>
-          {p.personality}
+        <p className="mt-12 max-w-md text-lg font-bold">
+          <Link href={r.finalHref} className="underline underline-offset-4">
+            {r.finalMessage}
+          </Link>
         </p>
-        <p className="mt-1">
-          <span className="font-bold">{productPage.universePrefix}</span>
-          {p.universe}
-        </p>
-        <p className="mt-4">{capitalize(p.text)}</p>
-        <p className="mt-6 nom-produit">{formatPrice(shop[slug].priceCents)}</p>
-        <AddToCart id={slug} name={p.name} available={shop[slug].available} className="mt-4" buttonClassName={t.button} />
-        <Link href={`/soins/${slug}`} className="mt-2 inline-block py-2 font-bold underline underline-offset-4">
-          {quiz.result.productCta}
+
+        <section className="mt-8 w-full max-w-md rounded-[2rem] bg-white/70 px-6 py-6">
+          <h2 className="titre-h3">{r.founderTitle}</h2>
+          <Link href="/soins/miraculous" className="mt-2 inline-block py-2 font-bold underline underline-offset-4">
+            {r.founderCta}
+          </Link>
+        </section>
+
+        <Link href="/quiz" className="mt-6 inline-block py-2 text-sm font-bold uppercase tracking-wide underline underline-offset-4">
+          {quiz.restart}
         </Link>
       </div>
-    </section>
+    </div>
   );
 }

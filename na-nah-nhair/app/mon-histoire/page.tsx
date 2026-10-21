@@ -23,7 +23,7 @@ export default async function StoryPage() {
 
   return (
     <article>
-      <header className="relative overflow-hidden bg-lavender-soft">
+      <header className="relative isolate overflow-hidden bg-lavender-soft [contain:paint]">
         <div aria-hidden className="pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full bg-miraculous opacity-70 blur-3xl" />
         <div className="relative mx-auto max-w-4xl px-4 py-20 sm:px-6 sm:py-28">
           <p className="surtitre">{storyPage.kicker}</p>

@@ -12,7 +12,6 @@ const pages = [
   "/faq",
   "/quiz",
   "/quiz/resultat/miraculous",
-  "/quiz/resultat/pack",
   "/boutique",
   "/panier",
   "/commande",

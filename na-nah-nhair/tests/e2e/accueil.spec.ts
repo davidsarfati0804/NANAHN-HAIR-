@@ -54,12 +54,16 @@ test("aucun lien interne cassé depuis l'accueil", async ({ page, request }) => 
   }
 });
 
-test("les photos manquantes sont signalées, pas inventées", async ({ page }) => {
+test("photos : flacons et pack fournis, photos détourées et « Le bureau » signalées", async ({ page }) => {
   await page.goto("/");
-  // 3 flacons, le pack et la photo « Le bureau » (section Mon histoire)
-  await expect(page.getByText("À COMPLÉTER : photo")).toHaveCount(5);
-  // Seules images : le logo (en-tête et titre). Aucun faux visuel de flacon.
-  await expect(page.locator('img:not([alt^="Na Nah N’hair"])')).toHaveCount(0);
+  // Photos fournies (21/10/2026), textes alternatifs exacts
+  for (const name of ["Fabulous", "Miraculous", "Luxurious"])
+    await expect(page.locator(`main img[alt="Flacon ${name} Hair Serum, sérum capillaire de 30 ml"]`)).toBeVisible();
+  await expect(page.locator('main img[alt^="Pack des 3 soins"]')).toBeVisible();
+  // Premier écran : photos détourées pas encore fournies → 3 emplacements visibles
+  await expect(page.getByText("À COMPLÉTER : photo détourée").filter({ visible: true })).toHaveCount(3);
+  // Photo « Le bureau » (section Mon histoire)
+  await expect(page.getByText("À COMPLÉTER : photo", { exact: true })).toHaveCount(1);
 });
 
 test("menu mobile au clavier", async ({ page }) => {
@@ -120,9 +124,9 @@ test.describe("modifications du 20/10/2026", () => {
     { name: "1280", width: 1280, height: 900 },
   ];
 
-  test("en-tête : logo fourni tel quel ; titre : logo SVG + h1 masqué", async ({ page }) => {
+  test("en-tête : logo transparent (SVG) ; titre : logo SVG + h1 masqué", async ({ page }) => {
     await page.goto("/");
-    await expect(page.locator('header img[src*="logo-na-nah-nhair.jpg"]')).toBeVisible();
+    await expect(page.locator('header img[src$="logo-na-nah-nhair.svg"]')).toHaveAttribute("alt", "Na Nah N’hair\u00a0! — retour à l'accueil");
     await expect(page.locator('main img[src$="logo-na-nah-nhair.svg"]')).toHaveAttribute("alt", "Na Nah N’hair\u00a0!");
     await expect(page.getByRole("heading", { level: 1 })).toHaveClass(/sr-only/);
   });
@@ -157,7 +161,7 @@ test.describe("modifications du 20/10/2026", () => {
     await page.goto("/soins/luxurious");
     await expect(page.getByText("Fleur d’oranger", { exact: true })).toBeVisible();
     await page.goto("/pack");
-    await expect(page.getByText(/Pour stimuler la pousse et la repousse du cheveu et ralentir la chute\./)).toBeVisible();
+    await expect(page.getByText(/Pour stimuler la pousse, la repousse et ralentir la chute\./)).toBeVisible();
     await expect(page.getByText(/^Alterne les sérums selon tes besoins ou crée ta propre routine\s: Miraculous en cure, Fabulous au quotidien et Luxurious pour briller en sortie\.$/)).toBeVisible();
     await expect(page.getByRole("heading", { name: "Mode d’emploi du pack" })).toBeVisible();
     await page.goto("/");
@@ -212,6 +216,114 @@ test.describe("modifications du 20/10/2026", () => {
       });
       expect(text, path).not.toMatch(/na nah n['’]hair/i);
       expect(await page.locator("svg[data-brand-name]").count(), path).toBeGreaterThan(0);
+    }
+  });
+});
+
+test.describe("modifications du 21/10/2026", () => {
+  for (const vp of [
+    { name: "375x667", width: 375, height: 667 },
+    { name: "390x844", width: 390, height: 844 },
+  ]) {
+    test(`premier écran ${vp.name} : bandeau, en-tête, titre, accroche, trois flacons et bouton principal sans défiler`, async ({ page }) => {
+      await page.setViewportSize({ width: vp.width, height: vp.height });
+      await page.goto("/");
+      // Fin de l'animation d'arrivée des flacons (0,5 s chacun)
+      await page.waitForTimeout(1700);
+      const inView = async (locator: ReturnType<typeof page.locator>) => {
+        const box = (await locator.boundingBox())!;
+        expect(box.y, await locator.evaluate((e) => e.outerHTML.slice(0, 60))).toBeGreaterThanOrEqual(0);
+        expect(box.y + box.height).toBeLessThanOrEqual(vp.height);
+        return box;
+      };
+      await inView(page.getByRole("link", { name: /^Quel Na Nah N’hair es-tu\s\?$/ }).first());
+      await inView(page.locator("header").first());
+      const title = await inView(page.locator('main img[src$="logo-na-nah-nhair.svg"]'));
+      // Titre : au plus un quart de la hauteur de l'écran
+      expect(title.height).toBeLessThanOrEqual(vp.height / 4);
+      await inView(page.locator("main p", { hasText: "Révèle ton" }).first());
+      await inView(page.getByText(/^Trois soins\. Trois personnalités\./));
+      for (const name of ["Fabulous", "Miraculous", "Luxurious"]) {
+        const bottle = page.locator(`main a[href="/soins/${name.toLowerCase()}"]`).filter({ has: page.locator(`[aria-label^="Flacon ${name} Hair Serum"]`) }).filter({ visible: true });
+        await inView(bottle);
+      }
+      await inView(page.getByRole("link", { name: "Je découvre mon Na Nah N’hair" }));
+      expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(0);
+      await page.screenshot({ path: `captures/premier-ecran-${vp.name}.png` });
+    });
+  }
+
+  test("premier écran : petits textes, sticker, lien vers la section suivante", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.getByText("5 questions · 1 résultat")).toBeVisible();
+    await expect(page.getByText("Créés par une naturopathe").first()).toBeVisible();
+    // Livraison offerte active par défaut dans le back-office
+    await expect(page.getByText("Made in France · 30 ml · Livraison offerte en France")).toBeVisible();
+    await page.getByRole("link", { name: /Découvre les trois soins/ }).click();
+    await expect(page).toHaveURL(/#trio$/);
+  });
+
+  test("section des trois soins : petit titre, accroche, titre (accueil et Les trois soins)", async ({ page }) => {
+    for (const path of ["/", "/soins"]) {
+      await page.goto(path);
+      const h2 = page.getByRole("heading", { level: 2, name: "Quel soin est le tien ?" });
+      await expect(h2).toBeVisible();
+      await expect(page.getByText("Trois soins, trois personnalités", { exact: true })).toBeVisible();
+      await expect(page.getByText("À chaque personnalité, son soin.", { exact: true })).toBeVisible();
+      await expect(page.locator("main")).not.toContainText("Lequel est le tien ?");
+    }
+  });
+
+  test("citation sans guillemets, espaces égaux au-dessus et en dessous", async ({ page }) => {
+    for (const vp of [375, 390, 768, 1280]) {
+      await page.setViewportSize({ width: vp, height: 900 });
+      await page.goto("/");
+      const h2 = page.getByRole("heading", { level: 2, name: "Je ne suis pas qu’une seule femme." });
+      await expect(h2).toHaveText("Je ne suis pas qu’une seule femme.");
+      const frame = (await h2.locator("..").boundingBox())!;
+      const title = (await h2.boundingBox())!;
+      const chips = (await h2.locator("xpath=following-sibling::ul").boundingBox())!;
+      expect(Math.abs(title.y - frame.y - (frame.y + frame.height - chips.y - chips.height)), `${vp}`).toBeLessThanOrEqual(2);
+      // Cadre centré dans la page
+      expect(Math.abs(frame.x - (vp - frame.x - frame.width)), `${vp}`).toBeLessThanOrEqual(1);
+    }
+  });
+
+  test("logo de l'en-tête : encadré crème arrondi, logo centré, ≤ 64 px sur mobile", async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 812 });
+    await page.goto("/");
+    const link = page.locator("header a").first();
+    await expect(link).toHaveAttribute("href", "/");
+    await expect(link).toHaveCSS("background-color", "rgb(241, 225, 176)");
+    const box = (await link.boundingBox())!;
+    const img = (await link.locator("img").boundingBox())!;
+    expect(box.height).toBeLessThanOrEqual(64);
+    expect(Math.abs(img.x - box.x - (box.x + box.width - img.x - img.width))).toBeLessThanOrEqual(1);
+    expect(Math.abs(img.y - box.y - (box.y + box.height - img.y - img.height))).toBeLessThanOrEqual(1);
+    const menu = (await page.getByRole("button", { name: "Menu" }).boundingBox())!;
+    expect(Math.abs(box.y + box.height / 2 - (menu.y + menu.height / 2))).toBeLessThanOrEqual(2);
+  });
+
+  test("nom Fabulous ton sur ton, sans bande blanche", async ({ page }) => {
+    await page.goto("/soins/fabulous");
+    const name = page.getByRole("heading", { level: 1 });
+    await expect(name).toHaveCSS("color", "rgb(29, 90, 60)");
+    await expect(name).toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
+  });
+
+  test("« vitamine » au singulier sur toutes les pages", async ({ page }) => {
+    for (const path of ["/", "/soins", "/soins/fabulous", "/soins/miraculous", "/soins/luxurious", "/pack", "/boutique", "/faq"]) {
+      await page.goto(path);
+      expect(await page.content(), path).not.toMatch(/vitamines/i);
+    }
+    await page.goto("/soins/miraculous");
+    await expect(page.getByText(/^Formulé à base d’huiles végétales riches en vitamine B, il agit comme un véritable boost/)).toBeVisible();
+  });
+
+  test("contenu du pack : nouvelle ligne Miraculous (accueil, Les trois soins, pack)", async ({ page }) => {
+    for (const path of ["/", "/soins", "/pack"]) {
+      await page.goto(path);
+      await expect(page.locator("main li").filter({ hasText: /Miraculous\s:\sPour stimuler la pousse, la repousse et ralentir la chute\./ }).first()).toBeVisible();
     }
   });
 });

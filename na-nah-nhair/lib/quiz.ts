@@ -2,7 +2,7 @@
 import { quiz } from "@/content/site";
 import type { SerumId } from "@/lib/catalog";
 
-export type QuizResult = SerumId | "pack";
+export type QuizResult = SerumId;
 export type Scores = Record<SerumId, number>;
 
 // answers[i] = produit choisi à la question i
@@ -17,20 +17,20 @@ export function scoreAnswers(answers: SerumId[]): Scores {
   return scores;
 }
 
-// Égalité : Miraculous l'emporte s'il est à égalité ; égalité Fabulous / Luxurious seule = pack
+// Égalité : Miraculous l'emporte s'il est à égalité ; égalité Fabulous / Luxurious seule = Luxurious
 export function resultFromScores(scores: Scores): QuizResult {
   const max = Math.max(scores.fabulous, scores.miraculous, scores.luxurious);
   const leaders = (Object.keys(scores) as SerumId[]).filter((k) => scores[k] === max);
   if (leaders.length === 1) return leaders[0];
   if (leaders.includes("miraculous")) return "miraculous";
-  return "pack";
+  return "luxurious";
 }
 
 export function quizResult(answers: SerumId[]): QuizResult {
   return resultFromScores(scoreAnswers(answers));
 }
 
-export const QUIZ_RESULTS: QuizResult[] = ["fabulous", "miraculous", "luxurious", "pack"];
+export const QUIZ_RESULTS: QuizResult[] = ["fabulous", "miraculous", "luxurious"];
 export function isQuizResult(v: string): v is QuizResult {
   return (QUIZ_RESULTS as string[]).includes(v);
 }

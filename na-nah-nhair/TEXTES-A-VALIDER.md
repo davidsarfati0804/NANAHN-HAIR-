@@ -7,8 +7,7 @@ Aucun ne contient de promesse de résultat, d'allégation ou d'ingrédient inven
 ## 1. Textes visibles par les clientes (priorité)
 
 ### Accueil
-- « Trois soins, trois personnalités » (petit titre au-dessus des trois soins)
-- « Lequel est le tien ? » (titre de la section des trois soins, repris du sous-titre du BRIEF)
+- « Trois soins, trois personnalités », « À chaque personnalité, son soin. », « Quel soin est le tien ? » : validés le 21/10/2026
 - « Les soins » (petit titre) / « Les trois soins »
 - « Pourquoi découvrir NA NAH N'HAIR » et les intitulés des cartes : « Made in France », « Créés par une naturopathe », « Huiles végétales », « Trois parfums », « Livraison offerte en France ». Les textes des cartes viennent d'INFOS/BRIEF.
 - Boutons : « Voir la fiche », « Découvrir le pack », « Lire mon histoire », « Aller à la boutique »
@@ -19,16 +18,16 @@ Aucun ne contient de promesse de résultat, d'allégation ou d'ingrédient inven
 - Pack : « Fabulous + Miraculous + Luxurious » (boutique)
 - Fiches : « Questions fréquentes », « Points clés », « Description », « Découvre aussi », « Mon produit fondateur » (repris de « c'est mon produit fondateur », INFOS §5)
 - « Plus que N en stock », « Épuisé », « Ajouté au panier », « Voir le panier »
-- Textes alternatifs des photos : « Flacon du Fabulous Hair Serum, 30 ml » (idem Miraculous, Luxurious), « Les trois sérums NA NAH N'HAIR ensemble, au spa à Maurice »
+- Texte alternatif de la photo du pack : « Pack des 3 soins : les flacons Miraculous, Luxurious et Fabulous » (ceux des flacons sont fournis)
 
 ### Quiz
 - « 5 questions, une seule réponse par question. »
-- « Question précédente », « Refaire le quiz », « Voir Miraculous », « Découvrir toute la collection », « Partager mon résultat », « Lien copié ! »
-- **Résultat « pack »** : « Fabulous et Luxurious à égalité » et « Tu as autant de Fabulous que de Luxurious en toi : le pack réunit les trois soins. »
+- « Refaire le quiz », « Voir Miraculous », « Progression du quiz » (lu par les lecteurs d'écran)
+- Le résultat « pack » et ses textes sont supprimés (21/10/2026)
 
 ### FAQ
 - Les **intitulés des questions** sont de moi (les réponses viennent d'INFOS) : « Comment utiliser les sérums ? », « Comment utiliser le pack des 3 soins ? », « Quelle est la composition des sérums ? », « Quel est le parfum de chaque sérum ? », « Quelle est la contenance d'un flacon ? », « Y a-t-il des précautions d'emploi ? », « Où livrez-vous ? », « Combien coûte la livraison ? », « Quel est le délai de livraison ? », « Quels transporteurs proposez-vous ? », « Puis-je retourner un produit ? », « Que faire si mon produit est défectueux ou erroné ? », « Comment vous contacter au sujet d'une commande ? »
-- Réponses reformulées à partir d'INFOS : « La liste complète des ingrédients (INCI) est affichée sur la fiche de chaque soin. », « Chaque sérum est présenté en flacon de 30 ml. », « Par email à … ou par téléphone au … »
+- Réponses reformulées à partir d'INFOS : « La liste complète des ingrédients (INCI) est affichée sur la fiche de chaque soin. », « Chaque sérum est présenté en flacon de 30 ml. » (utilisation, précautions et contact commande : textes fournis le 21/10/2026)
 
 ### Contact
 - « Une question sur un soin, une commande ou la livraison ? Écris-nous. »
@@ -58,6 +57,11 @@ Aucun ne contient de promesse de résultat, d'allégation ou d'ingrédient inven
 - « … sera activé à la phase 6. » (commande) et « (phase 6) » (politique cookies)
 - « Montants recalculés par le serveur à partir des prix en vigueur. » (commande)
 - « (politique de retours à valider) » dans un emplacement À COMPLÉTER de la FAQ
+
+### Ajoutés le 21/10/2026
+- Panier : miniature de la photo de chaque article (sans texte)
+- Image story : la mention de l'adresse du site et l'identifiant Instagram restent « À COMPLÉTER »
+- Guide de style (page cachée) : présentation des 4 choix à valider
 
 ## 2. Pages juridiques (à faire relire de toute façon)
 

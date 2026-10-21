@@ -31,9 +31,9 @@ describe("contenu du quiz (INFOS §10)", () => {
 });
 
 describe("calcul du résultat", () => {
-  it("les 3 soins et le pack sont atteignables", () => {
+  it("les 3 soins sont atteignables, jamais le pack", () => {
     const results = new Set(ALL.map(quizResult));
-    expect([...results].sort()).toEqual(["fabulous", "luxurious", "miraculous", "pack"]);
+    expect([...results].sort()).toEqual(["fabulous", "luxurious", "miraculous"]);
   });
 
   it("scores extrêmes : 5 réponses identiques", () => {
@@ -44,11 +44,13 @@ describe("calcul du résultat", () => {
     expect(scoreAnswers(Array(5).fill("fabulous"))).toEqual({ fabulous: 5, miraculous: 0, luxurious: 0 });
   });
 
-  it("égalités : Miraculous l'emporte dès qu'il est à égalité, Fabulous = Luxurious seuls → pack", () => {
+  it("égalités : Miraculous l'emporte dès qu'il est à égalité, Fabulous = Luxurious seuls → Luxurious", () => {
     expect(resultFromScores({ fabulous: 2, miraculous: 2, luxurious: 1 })).toBe("miraculous");
     expect(resultFromScores({ fabulous: 1, miraculous: 2, luxurious: 2 })).toBe("miraculous");
     expect(resultFromScores({ fabulous: 2, miraculous: 2, luxurious: 2 })).toBe("miraculous");
-    expect(resultFromScores({ fabulous: 2, miraculous: 1, luxurious: 2 })).toBe("pack");
+    expect(resultFromScores({ fabulous: 2, miraculous: 1, luxurious: 2 })).toBe("luxurious");
+    expect(resultFromScores({ fabulous: 3, miraculous: 0, luxurious: 3 })).toBe("luxurious");
+    expect(resultFromScores({ fabulous: 3, miraculous: 3, luxurious: 0 })).toBe("miraculous");
   });
 
   it("chaque combinaison respecte la règle (vérification exhaustive des 243 cas)", () => {
@@ -58,7 +60,7 @@ describe("calcul du résultat", () => {
       expect(s.fabulous + s.miraculous + s.luxurious).toBe(5 + answers.slice(3).filter((a) => a === "miraculous").length);
       const max = Math.max(s.fabulous, s.miraculous, s.luxurious);
       const leaders = SERUMS.filter((k) => s[k] === max);
-      const expected = leaders.length === 1 ? leaders[0] : leaders.includes("miraculous") ? "miraculous" : "pack";
+      const expected = leaders.length === 1 ? leaders[0] : leaders.includes("miraculous") ? "miraculous" : "luxurious";
       if (leaders.length > 1) ties++;
       expect(quizResult(answers), answers.join(",")).toBe(expected);
     }

@@ -8,7 +8,7 @@ import { fr } from "@/lib/typography";
 export const brand = fr({
   name: "NA NAH N'HAIR",
   // Logo fourni (assets/logo/logo-na-nah-nhair.jpg), utilisé tel quel dans l'en-tête
-  logo: { src: "/images/logo-na-nah-nhair.jpg", width: 1772, height: 1772, alt: "Na Nah N’hair !" },
+  logo: { src: "/images/logo-na-nah-nhair.jpg", width: 1772, height: 1772, alt: "Na Nah N’hair !", headerAlt: "Na Nah N’hair ! — retour à l'accueil" },
   // Même logo vectorisé (scripts/vectoriser-logo.py), pour le grand titre de l'accueil
   logoSvg: { src: "/images/logo-na-nah-nhair.svg", width: 1403, height: 987 },
   // Nom de marque tel qu'écrit sur le logo
@@ -39,7 +39,7 @@ export const navigation = fr([
 export const emotionalConcept = fr({
   // Citation sans guillemets, pour le manifeste de la page Mon histoire (manifeste.html fourni)
   quote: "Je ne suis pas qu’une seule femme.",
-  title: "« Je ne suis pas qu’une seule femme. »",
+  title: "Je ne suis pas qu’une seule femme.",
   lines: ["Je suis Fabulous.", "Je suis Miraculous.", "Je suis Luxurious.", "Je suis les trois."],
 });
 
@@ -49,7 +49,9 @@ export type Product = {
   shortName: string;
   // Prix INFOS.md : valeur initiale du catalogue (le prix affiché vient du back-office)
   infosPrice: string;
-  photo: { file: string; alt: string; available: boolean };
+  photo: { file: string; alt: string; available: boolean; responsive?: string };
+  // Photo détourée (fond transparent) du premier écran de l'accueil (modification 22)
+  cutout: { file: string; alt: string; available: boolean };
   personality: string;
   // Phrase à la première personne affichée sur les cartes et les fiches (modification 1, 20/10/2026)
   iAm: string;
@@ -130,9 +132,11 @@ export const products: Product[] = fr([
     infosPrice: "19,90 €",
     photo: {
       file: "fabulous.jpg",
-      alt: "Flacon du Fabulous Hair Serum, 30 ml",
-      available: false,
+      alt: "Flacon Fabulous Hair Serum, sérum capillaire de 30 ml",
+      available: true,
+      responsive: "fabulous",
     },
+    cutout: { file: "fabulous.png", alt: "Flacon Fabulous Hair Serum", available: false },
     personality: "la fraîche, naturelle et spontanée.",
     iAm: "Je suis fraîche, naturelle et spontanée.",
     universe: "vert, frais, positif, accessible et pétillant.",
@@ -148,7 +152,7 @@ export const products: Product[] = fr([
       intro:
         "Le Fabulous Hair Serum est le soin quotidien essentiel pour des cheveux en pleine santé, doux et équilibrés.",
       vitamins:
-        "Formulé à base d'huiles végétales riches en vitamines E, il agit en profondeur pour réconforter le cuir chevelu et renforcer la fibre capillaire jour après jour.",
+        "Formulé à base d’huiles végétales riches en vitamine E, il agit en profondeur pour réconforter le cuir chevelu et renforcer la fibre capillaire jour après jour.",
       helpsTitle: "Ce sérum aide à :",
       helps: [
         "Gainer, hydrater et fortifier le cheveu",
@@ -171,9 +175,11 @@ export const products: Product[] = fr([
     infosPrice: "39,90 €",
     photo: {
       file: "miraculous.jpg",
-      alt: "Flacon du Miraculous Hair Serum, 30 ml",
-      available: false,
+      alt: "Flacon Miraculous Hair Serum, sérum capillaire de 30 ml",
+      available: true,
+      responsive: "miraculous",
     },
+    cutout: { file: "miraculous.png", alt: "Flacon Miraculous Hair Serum", available: false },
     personality: "la déterminée, ambitieuse et audacieuse.",
     iAm: "Je suis déterminée, ambitieuse et audacieuse.",
     universe: "violet, confiance, force, ambition et transformation.",
@@ -189,7 +195,7 @@ export const products: Product[] = fr([
       intro:
         "Le Miraculous Hair Serum est une cure capillaire intensive pensée pour accompagner les cheveux en phase de fragilité, de chute ou de ralentissement de pousse.",
       vitamins:
-        "Formulé à base d'huiles végétales riches en vitamines B, il agit comme un véritable boost naturel pour le cuir chevelu et la fibre capillaire.",
+        "Formulé à base d’huiles végétales riches en vitamine B, il agit comme un véritable boost naturel pour le cuir chevelu et la fibre capillaire.",
       helpsTitle: "Ce sérum aide à :",
       helps: [
         "Stimuler la pousse et la repousse des cheveux",
@@ -213,9 +219,11 @@ export const products: Product[] = fr([
     infosPrice: "29,90 €",
     photo: {
       file: "luxurious.jpg",
-      alt: "Flacon du Luxurious Hair Serum, 30 ml",
-      available: false,
+      alt: "Flacon Luxurious Hair Serum, sérum capillaire de 30 ml",
+      available: true,
+      responsive: "luxurious",
     },
+    cutout: { file: "luxurious.png", alt: "Flacon Luxurious Hair Serum", available: false },
     personality: "la féminine, élégante et sensorielle.",
     iAm: "Je suis féminine, élégante et sensorielle.",
     universe: "rose, beauté, plaisir, sophistication et douceur.",
@@ -231,7 +239,7 @@ export const products: Product[] = fr([
       intro:
         "Le Luxurious Hair Serum est le soin éclat par excellence, pensé pour sublimer les cheveux ternes, secs et abîmés.",
       vitamins:
-        "Formulé à base d'huiles végétales riches en vitamines C, il nourrit la fibre capillaire en profondeur et révèle une chevelure plus forte, souple et éclatante.",
+        "Formulé à base d’huiles végétales riches en vitamine C, il nourrit la fibre capillaire en profondeur et révèle une chevelure plus forte, souple et éclatante.",
       helpsTitle: "Ce sérum aide à :",
       helps: [
         "Renforcer le cheveu terne, sec et abîmé",
@@ -258,15 +266,16 @@ export const pack = fr({
   infosPrice: "69,90 €",
   photo: {
     file: "pack.jpg",
-    alt: "Les trois sérums NA NAH N'HAIR ensemble, au spa à Maurice",
-    available: false,
+    alt: "Pack des 3 soins : les flacons Miraculous, Luxurious et Fabulous",
+    available: true,
+    responsive: "pack",
   },
   contentTitle: "Contenu du pack",
   contentShort: "Fabulous + Miraculous + Luxurious",
   content: [
     // Textes de la modification 4 (20/10/2026)
     { product: "Fabulous", text: "Pour gainer, hydrater et fortifier le cheveu." },
-    { product: "Miraculous", text: "Pour stimuler la pousse et la repousse du cheveu et ralentir la chute." },
+    { product: "Miraculous", text: "Pour stimuler la pousse, la repousse et ralentir la chute." },
     { product: "Luxurious", text: "Pour la touche finale, le volume et la brillance miroir." },
   ],
   usageTitle: "Mode d’emploi du pack",
@@ -291,10 +300,16 @@ export const home = fr({
     subtitle: "Trois soins. Trois personnalités. Une seule question : lequel est le tien ?",
     primaryCta: { label: "Je découvre mon Na Nah N'Hair", href: "/quiz" },
     secondaryCta: { label: "Découvrir les trois soins", href: "/soins" },
+    quizHint: "5 questions · 1 résultat",
+    sticker: "Créés par une naturopathe",
+    reassurance: ["Made in France", "30 ml"],
+    reassuranceShipping: "Livraison offerte en France",
+    scrollCta: { label: "Découvre les trois soins", href: "#trio" },
   },
   trio: {
     kicker: "Trois soins, trois personnalités",
-    title: "Lequel est le tien ?",
+    accroche: "À chaque personnalité, son soin.",
+    title: "Quel soin est le tien ?",
     cta: "Voir la fiche",
   },
   products: {
@@ -346,9 +361,9 @@ export const home = fr({
         title: "Huiles végétales",
         text: null,
         lines: [
-          { product: "Fabulous", text: "Huiles végétales riches en vitamines E." },
-          { product: "Miraculous", text: "Huiles végétales riches en vitamines B." },
-          { product: "Luxurious", text: "Huiles végétales riches en vitamines C." },
+          { product: "Fabulous", text: "Huiles végétales riches en vitamine E." },
+          { product: "Miraculous", text: "Huiles végétales riches en vitamine B." },
+          { product: "Luxurious", text: "Huiles végétales riches en vitamine C." },
         ],
       },
       {
@@ -442,12 +457,6 @@ export const contactTexts = fr({
   },
 });
 
-export const shareTexts = fr({
-  share: "Partager mon résultat",
-  copied: "Lien copié !",
-  shareTitle: (name: string) => `Mon Na Nah N'Hair : ${name}`,
-});
-
 // Libellés communs des pages produits
 export const productPage = fr({
   priceLabel: "Prix",
@@ -485,7 +494,17 @@ export const storyPage = fr({
 });
 
 // FAQ : questions = structure ; réponses = INFOS.md uniquement, sinon À COMPLÉTER
-export type FaqItem = { question: string; answer: string[] | null; todo?: string };
+export type FaqItem = {
+  question: string;
+  answer: string[] | null;
+  // Liste à puces sous les paragraphes
+  list?: string[];
+  // Un bloc par soin : nom en petit titre gras, étapes « Étape 1 », « Étape 2 »
+  blocks?: { title: string; steps: { label: string; text: string }[] }[];
+  // Réponse « Par email à … » avec lien mailto
+  mailto?: { before: string; email: string };
+  todo?: string;
+};
 export type FaqGroup = { title: string; items: FaqItem[] };
 
 export const faq: { title: string; groups: FaqGroup[] } = fr({
@@ -497,7 +516,19 @@ export const faq: { title: string; groups: FaqGroup[] } = fr({
         {
           question: "Comment utiliser les sérums ?",
           answer: null,
-          todo: "mode d'emploi de chaque sérum",
+          blocks: products.map((p) => ({
+            title: p.shortName,
+            steps: [
+              {
+                label: "Étape 1",
+                text: `Utiliser ${p.shortName} Hair Serum des racines vers les pointes. Pour un soin complet : 3 pipettes sont nécessaires, à appliquer sur le cuir chevelu, les longueurs et les pointes.`,
+              },
+              {
+                label: "Étape 2",
+                text: "Laver les cheveux avec un shampoing classique. Pour un résultat optimisé, utiliser le soin 3 fois par semaine.",
+              },
+            ],
+          })),
         },
         {
           question: "Comment utiliser le pack des 3 soins ?",
@@ -533,8 +564,12 @@ export const faq: { title: string; groups: FaqGroup[] } = fr({
       items: [
         {
           question: "Y a-t-il des précautions d'emploi ?",
-          answer: null,
-          todo: "précautions d'emploi de chaque sérum",
+          answer: ["Ces précautions sont identiques pour Fabulous, Miraculous et Luxurious."],
+          list: [
+            "Ne pas utiliser le soin les 2 jours qui précèdent et suivent la coloration.",
+            "Éviter tout contact avec les yeux.",
+            "Usage externe uniquement.",
+          ],
         },
       ],
     },
@@ -582,7 +617,8 @@ export const faq: { title: string; groups: FaqGroup[] } = fr({
       items: [
         {
           question: "Comment vous contacter au sujet d'une commande ?",
-          answer: [`Par email à ${legal.email} ou par téléphone au ${legal.phone}.`],
+          answer: null,
+          mailto: { before: "Par email à", email: "Contact@nanahnhair.com" },
         },
       ],
     },
@@ -598,7 +634,7 @@ export const quiz = fr({
   intro: "5 questions, une seule réponse par question.",
   start: "Commencer le quiz",
   progress: (n: number, total: number) => `Question ${n} sur ${total}`,
-  previous: "Question précédente",
+  previous: "Retour",
   restart: "Refaire le quiz",
   questions: [
     // Questions 1 à 4 : réponses fournies le 20/10/2026 (ordre d'affichage tel que fourni) ; question 5 inchangée
@@ -643,15 +679,25 @@ export const quiz = fr({
       ],
     },
   ] as Array<{ question: string; answers: QuizAnswer[] }>,
+  // Écran résultat (modification 20) : aucune photo de flacon
   result: {
-    kicker: "Ton Na Nah N'Hair",
-    packTitle: "Fabulous et Luxurious à égalité",
-    packText: "Tu as autant de Fabulous que de Luxurious en toi : le pack réunit les trois soins.",
+    kicker: "Ton résultat",
+    iAm: (name: string) => `Je suis ${name}.`,
+    discoverCta: (name: string) => `Découvrir ${name}`,
     founderTitle: "Découvre aussi Miraculous, mon produit fondateur",
     founderCta: "Voir Miraculous",
     finalMessage: "Et si tu étais les trois ? Découvre toute la collection.",
-    finalCta: { label: "Découvrir toute la collection", href: "/boutique" },
-    productCta: "Voir la fiche",
+    finalHref: "/boutique",
+  },
+  // Image story 1080 x 1920 (assets/story/, scripts/generer-stories.mjs)
+  story: {
+    kicker: "Quel Na Nah N’hair es-tu ?",
+    share: "Partager en story",
+    download: "Télécharger l'image",
+    shareTitle: (name: string) => `Je suis ${name}.`,
+    quizAt: "Fais le quiz sur",
+    siteTodo: "À COMPLÉTER : adresse du site",
+    instagramTodo: "À COMPLÉTER : identifiant Instagram",
   },
 });
 

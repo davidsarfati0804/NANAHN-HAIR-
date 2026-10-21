@@ -19,6 +19,7 @@ export const metadata: Metadata = {
   title: pack.name,
   alternates: { canonical: "/pack" },
   description: `${pack.contentTitle} : Fabulous, Miraculous et Luxurious.`,
+  openGraph: { images: [{ url: "/images/produits/pack-1200.jpg", width: 1200, height: 1500, alt: pack.photo.alt }] },
 };
 
 export default async function PackPage() {
@@ -29,7 +30,7 @@ export default async function PackPage() {
         data={productJsonLd({ name: pack.name, description: pack.content.map((c) => `${c.product} : ${c.text}`).join(" "), path: "/pack", shop: shop.pack })}
       />
       <div className="grid gap-10 md:grid-cols-2">
-        <PhotoSlot photo={pack.photo} src={shop.pack.photoUrl} priority className="aspect-square rounded-[2rem]" />
+        <PhotoSlot photo={pack.photo} src={shop.pack.photoUrl} priority className="mx-auto aspect-[4/5] w-full max-w-md rounded-[2rem]" sizes="(max-width: 768px) 100vw, 50vw" />
         <div>
           <h1 className="nom-produit-grand">{pack.name}</h1>
           <p className="mt-2 nom-produit-grand">{formatPrice(shop.pack.priceCents)}</p>

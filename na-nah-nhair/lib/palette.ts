@@ -21,8 +21,8 @@ export const productPalette = [
     clair: "#E4F3ED",
     moyen: "#B2DCCB", // fond du cadre = flacon
     fonce: "#1D5A3C", // textes, boutons
-    nom: "#1B8FE8", // couleur du texte imprimé sur le flacon
-    nomProvisoire: true,
+    nom: "#1D5A3C", // ton sur ton : vert foncé de la même teinte (modification 14)
+    nomProvisoire: false,
   },
   { product: "Miraculous", clair: "#E6E0F5", moyen: "#B9A5E2", fonce: "#342B64", nom: "#342B64", nomProvisoire: false },
   { product: "Luxurious", clair: "#F8EAF3", moyen: "#EBC4DE", fonce: "#8A2453", nom: "#8A2453", nomProvisoire: false },
@@ -59,3 +59,41 @@ export function contrast(a: string, b: string) {
   const [hi, lo] = [lum(a), lum(b)].sort((x, y) => y - x);
   return (hi + 0.05) / (lo + 0.05);
 }
+
+// Les 4 choix de style à valider (modifications 9 et 10) : appliqués depuis le 20/10/2026,
+// présentés côte à côte sur /guide-de-style pour une réponse choix par choix.
+export type StyleOption = { label: string; applied: boolean; swatches: string[]; sample: "titre" | "surtitre" | "bouton" | "fonds"; color: string; hover?: string };
+export const styleChoices: Array<{ title: string; question: string; options: StyleOption[] }> = [
+  {
+    title: "Choix 1 · Couleur des grands titres (H1, H2)",
+    question: "Les grands titres en Bebas : violet foncé ou violet du logo ?",
+    options: [
+      { label: "A · Violet foncé #342B64", applied: true, swatches: ["#342B64"], sample: "titre", color: "#342B64" },
+      { label: "B · Violet du logo #8076B3", applied: false, swatches: ["#8076B3"], sample: "titre", color: "#8076B3" },
+    ],
+  },
+  {
+    title: "Choix 2 · Couleur des petits titres (surtitres)",
+    question: "Les petits titres en majuscules espacées : violet foncé ou violet du logo ?",
+    options: [
+      { label: "A · Violet foncé #342B64", applied: true, swatches: ["#342B64"], sample: "surtitre", color: "#342B64" },
+      { label: "B · Violet du logo #8076B3", applied: false, swatches: ["#8076B3"], sample: "surtitre", color: "#8076B3" },
+    ],
+  },
+  {
+    title: "Choix 3 · Survol des boutons foncés",
+    question: "Au survol, le bouton violet foncé devient prune ou reste identique ?",
+    options: [
+      { label: "A · Prune #504587 au survol", applied: true, swatches: ["#342B64", "#504587"], sample: "bouton", color: "#342B64", hover: "#504587" },
+      { label: "B · Pas de changement de couleur", applied: false, swatches: ["#342B64"], sample: "bouton", color: "#342B64", hover: "#342B64" },
+    ],
+  },
+  {
+    title: "Choix 4 · Couleurs secondaires regroupées",
+    question: "Une seule crème et une seule lavande claire, ou garder les anciennes nuances ?",
+    options: [
+      { label: "A · Crème #F1E1B0 + lavande #F3F0FA", applied: true, swatches: ["#F1E1B0", "#F3F0FA"], sample: "fonds", color: "#342B64" },
+      { label: "B · Anciennes nuances : jaune #F1E6B2, or #D8A24A, lavandes #E8E2F2 et #FFF5F7", applied: false, swatches: ["#F1E6B2", "#D8A24A", "#E8E2F2", "#FFF5F7"], sample: "fonds", color: "#342B64" },
+    ],
+  },
+];

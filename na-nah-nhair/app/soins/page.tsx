@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import ButtonLink from "@/components/ButtonLink";
 import PhotoSlot from "@/components/PhotoSlot";
 import ProductCard from "@/components/ProductCard";
+import TrioHeading from "@/components/home/TrioHeading";
 import { pack, products, productPage, soinsPage } from "@/content/site";
 import { formatPrice } from "@/lib/money";
 import { getShopData } from "@/lib/shop-data";
@@ -25,16 +26,19 @@ export default async function SoinsPage() {
         <BrandText text={soinsPage.quizCta.label} />
       </ButtonLink>
 
-      <ul className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <section aria-labelledby="trio" className="mt-16">
+        <TrioHeading />
+      <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {products.map((p) => (
           <li key={p.slug}>
-            <ProductCard product={p} shop={shop[p.slug]} cta={soinsPage.cta} headingLevel="h2" />
+            <ProductCard product={p} shop={shop[p.slug]} cta={soinsPage.cta} />
           </li>
         ))}
       </ul>
+      </section>
 
       <section aria-labelledby="pack" className="mt-16 grid items-center gap-8 rounded-[2rem] bg-lavender p-6 text-deep-violet sm:p-10 md:grid-cols-[1fr_1.4fr]">
-        <PhotoSlot photo={pack.photo} src={shop.pack.photoUrl} className="aspect-square rounded-[1.5rem] bg-white" />
+        <PhotoSlot photo={pack.photo} src={shop.pack.photoUrl} className="aspect-[4/5] rounded-[1.5rem] bg-white" sizes="(max-width: 640px) 100vw, 25vw" />
         <div>
           <p className="surtitre">{productPage.packTitle}</p>
           <h2 id="pack" className="mt-2 titre-h2">

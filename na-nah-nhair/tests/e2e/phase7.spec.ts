@@ -115,11 +115,3 @@ test("SEO : sitemap, robots (non indexé avant la mise en ligne), données produ
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", /\/soins\/fabulous$/);
 });
-
-test("résultat du quiz : bouton de partage", async ({ page, context }) => {
-  await context.grantPermissions(["clipboard-read", "clipboard-write"]);
-  await page.goto("/quiz/resultat/fabulous");
-  await page.evaluate(() => Object.defineProperty(navigator, "share", { value: undefined }));
-  await page.getByRole("button", { name: "Partager mon résultat" }).click();
-  await expect(page.getByText("Lien copié !")).toBeVisible();
-});

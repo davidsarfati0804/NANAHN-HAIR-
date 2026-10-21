@@ -13,7 +13,6 @@ const pages = [
   "/faq",
   "/quiz",
   "/quiz/resultat/fabulous",
-  "/quiz/resultat/pack",
   "/boutique",
   "/panier",
   "/commande",
@@ -80,8 +79,24 @@ test("FAQ : les questions s'ouvrent et affichent la réponse", async ({ page }) 
   await page.goto("/faq");
   await page.getByText("Où livrez-vous ?").click();
   await expect(page.getByText("France uniquement.")).toBeVisible();
+  // Utilisation : un bloc par soin, étapes 1 et 2 (21/10/2026)
   await page.getByText("Comment utiliser les sérums ?").click();
-  await expect(page.getByText("À COMPLÉTER : mode d'emploi de chaque sérum")).toBeVisible();
+  for (const name of ["Fabulous", "Miraculous", "Luxurious"]) {
+    await expect(page.getByRole("heading", { level: 3, name, exact: true })).toBeVisible();
+    await expect(page.getByText(new RegExp(`Utiliser ${name} Hair Serum des racines vers les pointes\\. Pour un soin complet\\s: 3 pipettes`))).toBeVisible();
+  }
+  await expect(page.getByText(/Laver les cheveux avec un shampoing classique\. Pour un résultat optimisé, utiliser le soin 3 fois par semaine\./)).toHaveCount(3);
+  // Précautions : phrase + 3 puces, plus d'À COMPLÉTER
+  await page.getByText("Y a-t-il des précautions d'emploi ?").click();
+  await expect(page.getByText("Ces précautions sont identiques pour Fabulous, Miraculous et Luxurious.")).toBeVisible();
+  for (const line of ["Ne pas utiliser le soin les 2 jours qui précèdent et suivent la coloration.", "Éviter tout contact avec les yeux.", "Usage externe uniquement."])
+    await expect(page.getByRole("listitem").filter({ hasText: line })).toBeVisible();
+  // Contact commande : email seul, lien mailto
+  await page.getByText("Comment vous contacter au sujet d'une commande ?").click();
+  await expect(page.getByRole("link", { name: "Contact@nanahnhair.com" }).last()).toHaveAttribute("href", "mailto:Contact@nanahnhair.com");
+  await expect(page.locator("details").filter({ hasText: "Comment vous contacter" })).not.toContainText("téléphone");
+  for (const q of ["Comment utiliser les sérums", "précautions"]) await expect(page.locator("details").filter({ hasText: q })).not.toContainText("À COMPLÉTER");
+  await page.screenshot({ path: "captures/faq-21-10.png", fullPage: true });
 });
 
 test.describe("mode d'emploi (Fabulous, Miraculous, Luxurious)", () => {

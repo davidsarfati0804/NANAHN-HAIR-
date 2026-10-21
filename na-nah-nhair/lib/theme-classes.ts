@@ -2,7 +2,7 @@ import type { ProductTheme } from "@/lib/design-tokens";
 
 // Classes Tailwind écrites en entier pour que Tailwind les détecte.
 // base = fond du cadre (couleur du flacon) ; soft = fond clair ; text = ton foncé (textes, boutons) ;
-// name = nom du produit (couleur du texte du flacon ; Fabulous sur bande blanche pour rester lisible)
+// name = nom du produit (couleur du texte du flacon  ; ton sur ton, lisible AA)
 export const themeClasses: Record<
   ProductTheme,
   { base: string; soft: string; text: string; border: string; button: string; name: string }
@@ -13,7 +13,7 @@ export const themeClasses: Record<
     text: "text-fabulous-deep",
     border: "border-fabulous-deep",
     button: "bouton bg-fabulous-deep text-white hover:opacity-90",
-    name: "inline-block rounded-2xl bg-white px-3 pt-1 text-fabulous-name",
+    name: "text-fabulous-name",
   },
   miraculous: {
     base: "bg-miraculous",

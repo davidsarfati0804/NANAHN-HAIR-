@@ -59,7 +59,7 @@ Les personnalités ne sont pas des catégories exclusives : une cliente peut êt
 
 Le Fabulous Hair Serum est le soin quotidien essentiel pour des cheveux en pleine santé, doux et équilibrés.
 
-Formulé à base d'huiles végétales riches en vitamines E, il agit en profondeur pour réconforter le cuir chevelu et renforcer la fibre capillaire jour après jour.
+Formulé à base d’huiles végétales riches en vitamine E, il agit en profondeur pour réconforter le cuir chevelu et renforcer la fibre capillaire jour après jour.
 
 Ce sérum aide à :
 
@@ -108,7 +108,7 @@ RICINUS COMMUNIS SEED OIL\*, OLEA EUROPAEA FRUIT OIL\*, COCOS NUCIFERA OIL\*, PE
 
 Le Miraculous Hair Serum est une cure capillaire intensive pensée pour accompagner les cheveux en phase de fragilité, de chute ou de ralentissement de pousse.
 
-Formulé à base d'huiles végétales riches en vitamines B, il agit comme un véritable boost naturel pour le cuir chevelu et la fibre capillaire.
+Formulé à base d’huiles végétales riches en vitamine B, il agit comme un véritable boost naturel pour le cuir chevelu et la fibre capillaire.
 
 Ce sérum aide à :
 
@@ -157,7 +157,7 @@ RICINUS COMMUNIS SEED OIL\*, OLEA EUROPAEA FRUIT OIL\*, COCOS NUCIFERA OIL\*, PE
 
 Le Luxurious Hair Serum est le soin éclat par excellence, pensé pour sublimer les cheveux ternes, secs et abîmés.
 
-Formulé à base d'huiles végétales riches en vitamines C, il nourrit la fibre capillaire en profondeur et révèle une chevelure plus forte, souple et éclatante.
+Formulé à base d’huiles végétales riches en vitamine C, il nourrit la fibre capillaire en profondeur et révèle une chevelure plus forte, souple et éclatante.
 
 Ce sérum aide à :
 
@@ -187,10 +187,10 @@ RICINUS COMMUNIS SEED OIL\*, OLEA EUROPAEA FRUIT OIL\*, COCOS NUCIFERA OIL\*, PE
 
 ## 7. PACK DES 3 SOINS — 69,90 €
 
-- **Photos** : les trois produits ensemble, au spa à Maurice : `À COMPLÉTER` (`assets/images/pack.jpg`)
+- **Photos** : `assets/images/pack.jpg` (fournie le 21/10/2026)
 - **Contenu du pack** :
   1. Fabulous : Pour gainer, hydrater et fortifier le cheveu.
-  2. Miraculous : Pour stimuler la pousse et la repousse du cheveu et ralentir la chute.
+  2. Miraculous : Pour stimuler la pousse, la repousse et ralentir la chute.
   3. Luxurious : Pour la touche finale, le volume et la brillance miroir.
 - **Mode d’emploi du pack** : Alterne les sérums selon tes besoins ou crée ta propre routine : Miraculous en cure, Fabulous au quotidien et Luxurious pour briller en sortie.
 
@@ -200,7 +200,7 @@ RICINUS COMMUNIS SEED OIL\*, OLEA EUROPAEA FRUIT OIL\*, COCOS NUCIFERA OIL\*, PE
 
 - **INCI** : reproduire exactement les listes ci-dessus, sans les corriger ni les reformuler. Elles ont été vérifiées et correspondent à mes étiquettes.
 - **Allégations** : les textes ci-dessus sont ceux que je souhaite pour l'instant. Ils doivent rester faciles à modifier car ils seront validés avant la mise en ligne. Ne pas en ajouter d'autres ni promettre de résultat garanti.
-- Les mentions « huiles végétales riches en vitamines E / B / C » sont validées avec mon laboratoire : ne pas les reformuler.
+- Les mentions « huiles végétales riches en vitamine E / B / C » sont validées avec mon laboratoire : ne pas les reformuler.
 
 ---
 
@@ -214,7 +214,7 @@ RICINUS COMMUNIS SEED OIL\*, OLEA EUROPAEA FRUIT OIL\*, COCOS NUCIFERA OIL\*, PE
 - Email de réception : fourni (voir section 11)
 - Lien Instagram de la marque
 - Quiz : questions et règles validées (voir section 10)
-- Photos des flacons, photos du pack (spa à Maurice), polices, logo
+- Photos des flacons et du pack : fournies le 21/10/2026 ; photos détourées pour l’accueil (`fabulous.png`, `miraculous.png`, `luxurious.png`), polices, logo
 
 ---
 
@@ -255,7 +255,7 @@ Quiz interactif de 5 questions, qui doit fonctionner réellement (logique de poi
 ### Calcul du résultat
 
 - Le soin qui a le plus de points est affiché, avec une présentation personnalisée (personnalité, phrase, prix, bouton « Ajouter au panier »).
-- **Égalité** : si Miraculous fait partie des soins à égalité, le résultat est Miraculous (mon produit fondateur). Si l'égalité est seulement entre Fabulous et Luxurious, proposer le pack.
+- **Égalité** : si Miraculous fait partie des soins à égalité, le résultat est Miraculous (mon produit fondateur). Si l'égalité est seulement entre Fabulous et Luxurious, le résultat est Luxurious (modification du 21/10/2026).
 - Sur toutes les pages résultat, ajouter un bloc « Découvre aussi Miraculous, mon produit fondateur », avec un lien vers sa fiche.
 - Message final obligatoire : « Et si tu étais les trois ? Découvre toute la collection. »
 - Les textes de résultat ne doivent contenir aucune promesse de résultat garanti.
@@ -310,3 +310,14 @@ Ces décisions de la propriétaire de la marque complètent et remplacent les pa
 - **Mode d'emploi** des trois soins fourni (étapes, précautions, « Nuit & jour »), avec les illustrations aux couleurs de chaque soin.
 - **Page Mon histoire** : fin de page remplacée par le manifeste (citation encadrée sans guillemets, trois pastilles, « Je suis les trois. », bouton « Découvrir les trois soins »).
 - La phrase « Les personnalités ne sont pas des catégories exclusives… » est une consigne : elle n'est pas affichée.
+
+## 13. Modifications validées (21/10/2026)
+
+- **Accueil, section des trois soins** (et page Les trois soins) : surtitre « Trois soins, trois personnalités », accroche « À chaque personnalité, son soin. », titre « Quel soin est le tien ? ».
+- **Concept** : « Je ne suis pas qu’une seule femme. » affichée sans guillemets.
+- **Pack** : ligne Miraculous « Pour stimuler la pousse, la repousse et ralentir la chute. ».
+- **« vitamine »** au singulier partout (« huiles végétales riches en vitamine E / B / C »).
+- **Quiz** : égalité seulement entre Fabulous et Luxurious → Luxurious ; plus de résultat « pack ». Nouvelle présentation (une question par écran, écran résultat, image story à partager).
+- **FAQ** : précautions d'emploi, utilisation des sérums et contact commande renseignés (textes dans `content/site.ts`).
+- **Photos** des trois flacons et du pack intégrées.
+- **Nom Fabulous** : ton sur ton (vert foncé sur le vert du flacon), sans bande blanche.

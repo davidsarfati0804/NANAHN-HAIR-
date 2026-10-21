@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import * as site from "@/content/site";
 
@@ -61,8 +61,26 @@ describe("produits conformes à INFOS.md", () => {
     expect(pack.infosPrice).toBe("69,90 €");
   });
 
-  it("aucune photo n'est marquée disponible tant que le Drive n'est pas livré", () => {
-    expect([...products.map((p) => p.photo), pack.photo].every((ph) => !ph.available)).toBe(true);
+  it("photos des flacons et du pack : fichiers fournis, versions responsives et textes alternatifs", () => {
+    for (const ph of [...products.map((p) => p.photo), pack.photo]) {
+      expect(ph.available).toBe(true);
+      expect(existsSync(new URL(`../../assets/images/${ph.file}`, import.meta.url))).toBe(true);
+      for (const w of [400, 800, 1200])
+        for (const ext of ["webp", "jpg"])
+          expect(existsSync(new URL(`../../public/images/produits/${ph.responsive}-${w}.${ext}`, import.meta.url))).toBe(true);
+    }
+    expect(products.map((p) => p.photo.alt.replaceAll("\u00a0", " "))).toEqual([
+      "Flacon Fabulous Hair Serum, sérum capillaire de 30 ml",
+      "Flacon Miraculous Hair Serum, sérum capillaire de 30 ml",
+      "Flacon Luxurious Hair Serum, sérum capillaire de 30 ml",
+    ]);
+  });
+
+  it("photos détourées de l'accueil : emplacement À COMPLÉTER tant qu'elles ne sont pas fournies", () => {
+    for (const p of products) {
+      const there = existsSync(new URL(`../../assets/images/${p.cutout.file}`, import.meta.url));
+      expect(p.cutout.available).toBe(there);
+    }
   });
 });
 
@@ -110,7 +128,41 @@ describe("FAQ : réponses issues d'INFOS.md", () => {
 
   it("les questions sans réponse fournie affichent un À COMPLÉTER", async () => {
     const faq = plain(site.faq);
-    for (const g of faq.groups) for (const item of g.items) if (!item.answer) expect(item.todo).toBeTruthy();
+    for (const g of faq.groups)
+      for (const item of g.items)
+        if (!item.answer && !item.blocks && !item.mailto) expect(item.todo).toBeTruthy();
+  });
+
+  it("précautions, utilisation et contact commande : textes du 21/10/2026", async () => {
+    const faq = plain(site.faq);
+    const all = faq.groups.flatMap((g) => g.items);
+    const precautions = all.find((i) => i.question.startsWith("Y a-t-il des précautions"))!;
+    expect(precautions.todo).toBeUndefined();
+    expect(precautions.answer).toEqual(["Ces précautions sont identiques pour Fabulous, Miraculous et Luxurious."]);
+    expect(precautions.list).toEqual([
+      "Ne pas utiliser le soin les 2 jours qui précèdent et suivent la coloration.",
+      "Éviter tout contact avec les yeux.",
+      "Usage externe uniquement.",
+    ]);
+    const usage = all.find((i) => i.question === "Comment utiliser les sérums ?")!;
+    expect(usage.todo).toBeUndefined();
+    expect(usage.blocks!.map((b) => b.title)).toEqual(["Fabulous", "Miraculous", "Luxurious"]);
+    expect(usage.blocks![1].steps[0]).toEqual({
+      label: "Étape 1",
+      text: "Utiliser Miraculous Hair Serum des racines vers les pointes. Pour un soin complet : 3 pipettes sont nécessaires, à appliquer sur le cuir chevelu, les longueurs et les pointes.",
+    });
+    expect(usage.blocks![2].steps[1].text).toBe(
+      "Laver les cheveux avec un shampoing classique. Pour un résultat optimisé, utiliser le soin 3 fois par semaine.",
+    );
+    const contact = all.find((i) => i.question.startsWith("Comment vous contacter"))!;
+    expect(contact.mailto).toEqual({ before: "Par email à", email: "Contact@nanahnhair.com" });
+    expect(JSON.stringify(contact)).not.toMatch(/téléphone/);
+  });
+
+  it("« vitamine » au singulier partout", async () => {
+    expect(JSON.stringify(plain(site.products))).not.toMatch(/vitamines/);
+    expect(JSON.stringify(plain(site.home))).not.toMatch(/vitamines/);
+    expect(infos).not.toMatch(/vitamines/);
   });
 });
 

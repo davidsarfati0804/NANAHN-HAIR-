@@ -15,7 +15,7 @@ export const colors = {
   fabulousSoft: "#E4F3ED", // clair : fonds secondaires
   fabulous: "#B2DCCB", // moyen : fond du cadre (couleur du flacon)
   fabulousDeep: "#1D5A3C", // foncé : textes et boutons dans le cadre
-  fabulousName: "#1B8FE8", // nom du produit (texte du flacon), sur bande blanche
+  fabulousName: "#1D5A3C", // nom du produit : ton sur ton, vert foncé sur le vert du flacon (modification 14)
   miraculousSoft: "#E6E0F5",
   miraculous: "#B9A5E2",
   miraculousDeep: "#342B64",
@@ -24,6 +24,7 @@ export const colors = {
   luxurious: "#EBC4DE",
   luxuriousDeep: "#8A2453",
   luxuriousName: "#8A2453", // À COMPLÉTER : couleur du texte du flacon
+  luxuriousVivid: "#E48FC0", // rose plus soutenu que le flacon : forme décorative derrière le flacon (accueil)
 } as const;
 
 export type ColorName = keyof typeof colors;
@@ -41,7 +42,7 @@ export const largeTextPairs: Array<[text: ColorName, background: ColorName]> = [
   ["logoViolet", "logoYellow"], // logo de l'en-tête (fichier fourni), nom de marque dans le bandeau
   ["logoViolet", "white"], // titre de l'accueil (logo), nom de marque en grand
   ["logoViolet", "lavenderSoft"], // numéros des cartes « Mon histoire »
-  ["fabulousName", "white"], // nom Fabulous sur sa bande blanche
+  ["fabulousName", "fabulous"], // nom Fabulous ton sur ton dans son cadre
 ];
 
 // Paires texte / fond réellement utilisées : vérifiées WCAG AA par tests/unit/design-tokens.test.ts

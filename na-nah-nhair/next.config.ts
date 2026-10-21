@@ -31,6 +31,9 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  // Images servies telles quelles (pas d'optimiseur Netlify) : les photos produits ont leurs propres
+  // versions responsives (scripts/preparer-photos.py)
+  images: { unoptimized: true },
   turbopack: {
     root: projectRoot,
   },

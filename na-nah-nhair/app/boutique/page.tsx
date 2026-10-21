@@ -31,7 +31,7 @@ export default async function BoutiquePage() {
           return (
             <li key={p.slug} className={`${t.base} ${t.text} flex flex-col rounded-[2rem] p-3`}>
               <Link href={`/soins/${p.slug}`} className="block">
-                <PhotoSlot photo={p.photo} src={s.photoUrl} theme={p.slug} className="aspect-square rounded-[1.5rem]" />
+                <PhotoSlot photo={p.photo} src={s.photoUrl} theme={p.slug} className="aspect-[4/5] rounded-[1.5rem]" sizes="(max-width: 640px) 100vw, 25vw" />
               </Link>
               <div className="flex flex-1 flex-col p-3">
                 <h2 className={`nom-produit ${t.name}`}>
@@ -47,7 +47,7 @@ export default async function BoutiquePage() {
         })}
         <li className="flex flex-col rounded-[2rem] bg-lavender p-3 text-deep-violet">
           <Link href="/pack" className="block">
-            <PhotoSlot photo={pack.photo} src={shop.pack.photoUrl} className="aspect-square rounded-[1.5rem] bg-white" />
+            <PhotoSlot photo={pack.photo} src={shop.pack.photoUrl} className="aspect-[4/5] rounded-[1.5rem] bg-white" sizes="(max-width: 640px) 100vw, 25vw" />
           </Link>
           <div className="flex flex-1 flex-col p-3">
             <h2 className="nom-produit">

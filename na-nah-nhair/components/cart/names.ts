@@ -8,3 +8,7 @@ export function productName(id: ProductId): string {
 export function productHref(id: ProductId): string {
   return id === "pack" ? "/pack" : `/soins/${id}`;
 }
+
+export function productPhoto(id: ProductId) {
+  return id === "pack" ? pack.photo : products.find((p) => p.slug === id)!.photo;
+}

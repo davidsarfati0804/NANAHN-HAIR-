@@ -23,15 +23,19 @@ export default function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-lavender bg-white/95 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-        <Link href="/" className="shrink-0">
+        {/* Logo transparent (SVG) centré dans un encadré crème aux coins arrondis (modification 18) */}
+        <Link
+          href="/"
+          className="flex h-16 shrink-0 items-center justify-center rounded-[1.25rem] border border-lavender-soft bg-logo-yellow px-2.5 py-2 sm:h-[4.5rem] sm:rounded-[1.5rem] sm:px-3 sm:py-2.5"
+        >
           <Image
-            src={brand.logo.src}
-            width={brand.logo.width}
-            height={brand.logo.height}
-            alt={`${brand.logo.alt} – accueil`}
+            src={brand.logoSvg.src}
+            width={brand.logoSvg.width}
+            height={brand.logoSvg.height}
+            alt={brand.logo.headerAlt}
             priority
-            sizes="80px"
-            className="h-16 w-16 sm:h-[4.5rem] sm:w-[4.5rem]"
+            unoptimized
+            className="h-full w-auto"
           />
         </Link>
 

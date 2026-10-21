@@ -21,6 +21,34 @@ export default function FaqList({ items }: { items: FaqItem[] }) {
           </summary>
           <div className="mt-3 space-y-2">
             {item.answer?.map((line) => <p key={line}>{line}</p>)}
+            {item.list && (
+              <ul className="list-disc space-y-1 pl-5">
+                {item.list.map((line) => (
+                  <li key={line}>{line}</li>
+                ))}
+              </ul>
+            )}
+            {item.blocks?.map((block) => (
+              <div key={block.title} className="pt-2">
+                <h3 className="text-sm font-bold uppercase tracking-wide">{block.title}</h3>
+                <ol className="mt-1 space-y-1">
+                  {block.steps.map((step) => (
+                    <li key={step.label}>
+                      <span className="font-bold">{step.label}</span> : {step.text}
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            ))}
+            {item.mailto && (
+              <p>
+                {item.mailto.before}{" "}
+                <a href={`mailto:${item.mailto.email}`} className="font-bold underline underline-offset-4">
+                  {item.mailto.email}
+                </a>
+                .
+              </p>
+            )}
             {item.todo && <ToComplete label={item.todo} />}
           </div>
         </details>

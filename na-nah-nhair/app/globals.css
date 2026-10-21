@@ -15,7 +15,7 @@
   --color-fabulous-soft: #e4f3ed;
   --color-fabulous: #b2dccb;
   --color-fabulous-deep: #1d5a3c;
-  --color-fabulous-name: #1b8fe8;
+  --color-fabulous-name: #1d5a3c;
   --color-miraculous-soft: #e6e0f5;
   --color-miraculous: #b9a5e2;
   --color-miraculous-deep: #342b64;
@@ -24,6 +24,7 @@
   --color-luxurious: #ebc4de;
   --color-luxurious-deep: #8a2453;
   --color-luxurious-name: #8a2453;
+  --color-luxurious-vivid: #e48fc0;
 
   --font-display: "Bebas Kai", var(--font-bebas), Impact, sans-serif;
   --font-body: var(--font-montserrat), Arial, sans-serif;
@@ -35,6 +36,12 @@
     scroll-behavior: smooth;
     /* Les ancres ne passent pas sous l'en-tête collant */
     scroll-padding-top: 8rem;
+  }
+
+  /* Filet de sécurité : rien ne doit créer de défilement horizontal (clip ne gêne pas l'en-tête collant) */
+  html,
+  body {
+    overflow-x: clip;
   }
 
   body {
@@ -411,8 +418,65 @@
   }
 }
 
+/* ===== Animations (désactivées si l'utilisateur demande moins de mouvement) ===== */
+@keyframes quiz-slide-next {
+  from {
+    opacity: 0;
+    transform: translateX(2.5rem);
+  }
+}
+@keyframes quiz-slide-back {
+  from {
+    opacity: 0;
+    transform: translateX(-2.5rem);
+  }
+}
+@keyframes apparition {
+  from {
+    opacity: 0;
+    transform: translateY(1rem) scale(0.97);
+  }
+}
+@keyframes monte {
+  from {
+    opacity: 0;
+    transform: translateY(3rem);
+  }
+}
+@keyframes rebond {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(0.35rem);
+  }
+}
+.quiz-slide-next {
+  animation: quiz-slide-next 0.3s ease-out;
+}
+.quiz-slide-back {
+  animation: quiz-slide-back 0.3s ease-out;
+}
+.apparition {
+  animation: apparition 0.6s ease-out both;
+}
+.fleche-rebond {
+  animation: rebond 1.6s ease-in-out infinite;
+}
+.flacon-monte {
+  animation: monte 0.5s ease-out both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+  .quiz-slide-next,
+  .quiz-slide-back,
+  .apparition,
+  .fleche-rebond,
+  .flacon-monte {
+    animation: none !important;
   }
 }

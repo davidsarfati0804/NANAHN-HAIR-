@@ -26,7 +26,14 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const p = productBySlug(slug);
-  return p ? { title: p.name, description: p.description.intro, alternates: { canonical: `/soins/${p.slug}` } } : {};
+  return p
+    ? {
+        title: p.name,
+        description: p.description.intro,
+        alternates: { canonical: `/soins/${p.slug}` },
+        openGraph: { images: [{ url: `/images/produits/${p.slug}-1200.jpg`, width: 1200, height: 1500, alt: p.photo.alt }] },
+      }
+    : {};
 }
 
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {

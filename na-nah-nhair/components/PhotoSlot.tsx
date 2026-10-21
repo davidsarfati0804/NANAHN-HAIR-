@@ -1,10 +1,13 @@
-import Image from "next/image";
 import type { ProductTheme } from "@/lib/design-tokens";
 import { themeClasses } from "@/lib/theme-classes";
 
-type Photo = { file: string; alt: string; available: boolean };
+// photo.file : nom de la photo dans assets/images/ ; si « responsive », versions générées par
+// scripts/preparer-photos.py dans public/images/produits/ (400, 800, 1200 px, WebP + JPG, format 4:5)
+type Photo = { file: string; alt: string; available: boolean; responsive?: string };
 
-// Emplacement pour une vraie photo de assets/images/. Aucun faux visuel de flacon.
+const WIDTHS = [400, 800, 1200];
+
+// Photo réelle (jamais de faux visuel de flacon) ou emplacement « À COMPLÉTER »
 export default function PhotoSlot({
   photo,
   theme,
@@ -22,18 +25,37 @@ export default function PhotoSlot({
   src?: string | null;
 }) {
   const t = theme ? themeClasses[theme] : null;
+  const loading = priority ? "eager" : "lazy";
 
-  if (src || photo.available) {
+  if (src) {
     return (
-      <div className={`relative overflow-hidden ${className}`}>
-        <Image
-          src={src ?? `/images/${photo.file}`}
-          alt={photo.alt}
-          fill
-          sizes={sizes}
-          priority={priority}
-          className="object-cover"
-        />
+      <div className={`relative overflow-hidden bg-white ${className}`}>
+        {/* eslint-disable-next-line @next/next/no-img-element -- photo du back-office, servie telle quelle */}
+        <img src={src} alt={photo.alt} loading={loading} className="absolute inset-0 h-full w-full object-contain" />
+      </div>
+    );
+  }
+
+  if (photo.available && photo.responsive) {
+    const set = (ext: string) => WIDTHS.map((w) => `/images/produits/${photo.responsive}-${w}.${ext} ${w}w`).join(", ");
+    return (
+      // Panneau blanc arrondi : la photo (fond blanc) n'a pas de bord dur dans le cadre coloré
+      <div className={`relative overflow-hidden bg-white ${className}`}>
+        <picture>
+          <source type="image/webp" srcSet={set("webp")} sizes={sizes} />
+          <img
+            src={`/images/produits/${photo.responsive}-800.jpg`}
+            srcSet={set("jpg")}
+            sizes={sizes}
+            width={1200}
+            height={1500}
+            alt={photo.alt}
+            loading={loading}
+            fetchPriority={priority ? "high" : "auto"}
+            decoding="async"
+            className="absolute inset-0 h-full w-full object-contain"
+          />
+        </picture>
       </div>
     );
   }

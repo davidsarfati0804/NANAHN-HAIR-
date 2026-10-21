@@ -3,7 +3,8 @@
 import Link from "next/link";
 import ButtonLink from "@/components/ButtonLink";
 import { useCart } from "@/components/cart/CartProvider";
-import { productHref, productName } from "@/components/cart/names";
+import { productHref, productName, productPhoto } from "@/components/cart/names";
+import PhotoSlot from "@/components/PhotoSlot";
 import { useCatalog } from "@/components/cart/useCatalog";
 import { cartTexts as t } from "@/content/site";
 import { formatPrice } from "@/lib/money";
@@ -59,6 +60,9 @@ export default function CartView() {
           const canIncrease = maxAddable(catalog, items, line.id) > 0;
           return (
             <li key={line.id} className="flex flex-wrap items-center gap-4 py-5" data-testid={`ligne-${line.id}`}>
+              <Link href={productHref(line.id)} tabIndex={-1} aria-hidden className="shrink-0">
+                <PhotoSlot photo={productPhoto(line.id)} className="aspect-[4/5] w-16 rounded-xl text-[0] sm:w-20" sizes="80px" />
+              </Link>
               <div className="min-w-48 flex-1">
                 <Link href={productHref(line.id)} className="inline-block py-2 font-bold text-deep-violet underline-offset-4 hover:underline">
                   {name}

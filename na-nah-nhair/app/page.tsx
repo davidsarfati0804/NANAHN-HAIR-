@@ -5,6 +5,8 @@ import JsonLd from "@/components/JsonLd";
 import LavenderBox from "@/components/LavenderBox";
 import PhotoSlot from "@/components/PhotoSlot";
 import StoryCards from "@/components/home/StoryCards";
+import TrioHeading from "@/components/home/TrioHeading";
+import HeroBottles from "@/components/home/HeroBottles";
 import ProductCard from "@/components/ProductCard";
 import ToComplete from "@/components/ToComplete";
 import { brand, emotionalConcept, home, pack, products } from "@/content/site";
@@ -21,11 +23,11 @@ export const dynamic = "force-dynamic";
 type Shop = Record<ProductId, PublicProduct>;
 
 export default async function HomePage() {
-  const { products: shop } = await getShopData();
+  const { products: shop, freeShipping } = await getShopData();
   return (
     <>
       <JsonLd data={organizationJsonLd()} />
-      <Hero />
+      <Hero freeShipping={freeShipping} />
       <Trio shop={shop} />
       <Concept />
       <Products shop={shop} />
@@ -37,59 +39,71 @@ export default async function HomePage() {
   );
 }
 
-function Hero() {
+// Premier écran (modification 22) : titre réduit, trois flacons, bouton principal visibles sans défiler
+function Hero({ freeShipping }: { freeShipping: boolean }) {
   const { hero } = home;
+  const reassurance = [...hero.reassurance, ...(freeShipping ? [hero.reassuranceShipping] : [])];
   return (
-    <section className="relative overflow-hidden">
-      {/* Effet graphique : les trois couleurs des soins */}
+    <section className="relative isolate overflow-hidden [contain:paint]">
+      {/* Fond dégradé : les couleurs des soins */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div className="absolute -left-24 top-10 h-72 w-72 rounded-full bg-fabulous opacity-60 blur-3xl" />
         <div className="absolute right-0 top-0 h-80 w-80 rounded-full bg-miraculous opacity-60 blur-3xl" />
         <div className="absolute bottom-0 left-1/3 h-72 w-72 rounded-full bg-luxurious opacity-50 blur-3xl" />
       </div>
 
-      <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 pb-20 pt-14 sm:px-6 lg:grid-cols-[1.2fr_1fr] md:pt-20">
-        <div>
-          {/* Police du logo non identifiable : logo vectorisé (SVG) + vrai titre h1 masqué pour le référencement */}
-          <h1 className="sr-only">{brand.logo.alt}</h1>
-          <Image
-            src={brand.logoSvg.src}
-            width={brand.logoSvg.width}
-            height={brand.logoSvg.height}
-            alt={brand.logo.alt}
-            priority
-            unoptimized
-            className="h-auto w-full max-w-[560px]"
-          />
-          <p className="mt-6 text-2xl font-bold text-deep-violet sm:text-3xl"><BrandText text={hero.signature} tone="logo" />
+      <div className="relative mx-auto grid max-w-6xl items-center gap-6 px-4 pb-6 pt-5 text-center sm:px-6 sm:pt-10 lg:grid-cols-2 lg:gap-12 lg:pb-10 lg:pt-14 lg:text-left">
+        <div className="flex flex-col items-center lg:items-start">
+          <div className="relative">
+            {/* Police du logo non identifiable : logo vectorisé (SVG) + vrai titre h1 masqué pour le référencement */}
+            <h1 className="sr-only">{brand.logo.alt}</h1>
+            <Image
+              src={brand.logoSvg.src}
+              width={brand.logoSvg.width}
+              height={brand.logoSvg.height}
+              alt={brand.logo.alt}
+              priority
+              unoptimized
+              className="h-[min(18svh,9rem)] w-auto sm:h-40 lg:h-48"
+            />
+            <p className="absolute -right-24 top-1 -rotate-[4deg] rounded-xl bg-logo-yellow px-2.5 py-1 text-[0.7rem] font-bold leading-tight text-deep-violet shadow-sm sm:-right-32 sm:text-xs">
+              {hero.sticker}
+            </p>
+          </div>
+          <p className="mt-3 text-lg font-bold text-deep-violet sm:text-2xl">
+            <BrandText text={hero.signature} tone="logo" />
           </p>
-          <p className="mt-3 max-w-md accroche">{hero.subtitle}</p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <ButtonLink href={hero.primaryCta.href}>
-              <BrandText text={hero.primaryCta.label} />
-            </ButtonLink>
-            <ButtonLink href={hero.secondaryCta.href} variant="secondary">
-              {hero.secondaryCta.label}
-            </ButtonLink>
+          <p className="mt-1 max-w-md text-sm font-light leading-snug sm:text-lg">{hero.subtitle}</p>
+
+          <HeroBottles className="mt-3 w-full max-w-[15rem] sm:max-w-xs lg:hidden" />
+
+          <div className="mt-5 flex w-full flex-col items-center sm:w-auto">
+            <div className="flex w-full flex-col items-center gap-3 sm:w-auto sm:flex-row sm:items-start">
+              <div className="flex w-full flex-col items-center sm:w-auto">
+                <ButtonLink href={hero.primaryCta.href} className="w-full sm:w-auto sm:whitespace-nowrap">
+                  <BrandText text={hero.primaryCta.label} />
+                </ButtonLink>
+                <p className="mt-1 text-xs text-deep-violet">{hero.quizHint}</p>
+              </div>
+              <ButtonLink href={hero.secondaryCta.href} variant="secondary" className="w-full sm:w-auto sm:whitespace-nowrap">
+                {hero.secondaryCta.label}
+              </ButtonLink>
+            </div>
+            <p className="mt-4 text-center text-xs font-bold text-deep-violet">{reassurance.join(" · ")}</p>
           </div>
         </div>
 
-        <ul className="grid gap-4">
-          {products.map((p, i) => {
-            const t = themeClasses[p.slug];
-            return (
-              <li
-                key={p.slug}
-                className={`${t.base} ${t.text} rounded-full px-8 py-5 shadow-sm ${
-                  i === 1 ? "lg:ml-8 lg:-mr-2" : "lg:mr-6"
-                }`}
-              >
-                <span className={`nom-produit ${t.name}`}>{p.shortName}</span>
-                <span className="block text-sm font-bold">{p.phrase}</span>
-              </li>
-            );
-          })}
-        </ul>
+        <HeroBottles className="mx-auto hidden w-full max-w-md lg:flex" />
+
+        <a
+          href={hero.scrollCta.href}
+          className="mx-auto inline-flex min-h-11 items-center gap-2 text-sm font-bold text-deep-violet underline-offset-4 hover:underline lg:col-span-2"
+        >
+          {hero.scrollCta.label}
+          <span aria-hidden className="fleche-rebond inline-block">
+            ↓
+          </span>
+        </a>
       </div>
     </section>
   );
@@ -109,7 +123,7 @@ function SectionTitle({ kicker, title, id }: { kicker: string; title: string; id
 function Trio({ shop }: { shop: Shop }) {
   return (
     <section aria-labelledby="trio" className="section">
-      <SectionTitle kicker={home.trio.kicker} title={home.trio.title} id="trio" />
+      <TrioHeading />
       <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {products.map((p) => (
           <li key={p.slug}>
@@ -193,7 +207,7 @@ function Pack({ shop }: { shop: Shop }) {
   return (
     <section aria-labelledby="pack" className="section">
       <div className="grid items-center gap-8 md:grid-cols-2">
-        <PhotoSlot photo={pack.photo} src={shop.pack.photoUrl} className="aspect-square rounded-[2rem]" />
+        <PhotoSlot photo={pack.photo} src={shop.pack.photoUrl} className="mx-auto aspect-[4/5] w-full max-w-md rounded-[2rem]" sizes="(max-width: 768px) 100vw, 50vw" />
         <div>
           <SectionTitle kicker={home.pack.kicker} title={pack.name} id="pack" />
           <p className="-mt-6 nom-produit">{formatPrice(shop.pack.priceCents)}</p>

@@ -11,25 +11,26 @@ Toutes les informations manquantes. Chacune apparaît sur le site sous forme d'e
 - [x] Fabulous, Miraculous et Luxurious : mode d'emploi, précautions et illustrations (fournis le 20/10/2026)
 - [ ] Validation des allégations avant mise en ligne (en particulier Miraculous et le pack : pousse, chute)
 - [ ] FAQ de chaque produit : questions et réponses
-- [ ] FAQ générale : frais de retour, procédure en cas de produit défectueux
+- [ ] FAQ générale : frais de retour, procédure en cas de produit défectueux (mode d'emploi, précautions et contact commande : fournis le 21/10/2026)
 
 ## Visuels et identité
 
 
-- [ ] Couleurs des flacons (provisoires, `lib/design-tokens.ts`, `app/globals.css` et `lib/palette.ts`) : Pantone exacts de Fabulous (cadre #B2DCCB, nom #1B8FE8), Miraculous (cadre #B9A5E2, couleur du nom À COMPLÉTER), Luxurious (cadre #EBC4DE, couleur du nom À COMPLÉTER)
+- [ ] Couleurs des flacons (provisoires, `lib/design-tokens.ts`, `app/globals.css` et `lib/palette.ts`) : Pantone exacts de Fabulous (cadre #B2DCCB ; nom ton sur ton #1D5A3C validé le 21/10/2026), Miraculous (cadre #B9A5E2, couleur du nom À COMPLÉTER), Luxurious (cadre #EBC4DE, couleur du nom À COMPLÉTER)
 
 - [ ] `assets/images/histoire.jpg` : photo « Le bureau » (section Mon histoire de l'accueil)
 - [ ] Police du logo (nom ou fichier) : en attendant, logo vectorisé (SVG)
 - [ ] Police Bebas Kai (fichier) : en attendant, Bebas Neue
 
-- [ ] Lien Drive : photos des flacons, logo, polices
-- [ ] `assets/images/fabulous.jpg`, `miraculous.jpg`, `luxurious.jpg`
-- [ ] `assets/images/pack.jpg` : les trois produits au spa à Maurice
+- [ ] Lien Drive : logo, polices
+- [x] `assets/images/fabulous.jpg`, `miraculous.jpg`, `luxurious.jpg` : fournies le 21/10/2026 (versions web : `scripts/preparer-photos.py`)
+- [x] `assets/images/pack.jpg` : fournie le 21/10/2026
+- [ ] `assets/images/fabulous.png`, `miraculous.png`, `luxurious.png` : photos détourées (fond transparent) des trois flacons pour le premier écran de l'accueil
+- [ ] 4 choix de style à valider (A ou B) : section « Les 4 choix à valider » de `/guide-de-style`
 - [x] `assets/logo/` : logo fourni le 19/10/2026 (utilisé dans l'en-tête et comme titre de l'accueil)
 - [ ] Logo en version vectorielle (SVG) ou police du logo, pour un rendu encore plus net
 - [ ] `assets/fonts/` : polices des flacons (remplacement provisoire : Bebas Neue + Montserrat)
 - [ ] Hex exact du Pantone 15-3817 TCX Lavender (valeur actuelle `#AAA1C8`, à valider visuellement)
-- [ ] Validation des couleurs produits : vert Fabulous `#8FD3AE`, violet Miraculous `#C7B2EC`, rose Luxurious `#F5A9C6`
 - [ ] Icône d'onglet (favicon) à faire à partir du logo
 
 ## Code NNH27
@@ -63,8 +64,8 @@ Toutes les informations manquantes. Chacune apparaît sur le site sous forme d'e
 
 ## Boutique
 
-- [ ] Texte du résultat « pack » du quiz à valider
-- [ ] Bloc « Découvre aussi Miraculous » sur le résultat Miraculous : garder ou masquer
+- [x] Égalité Fabulous / Luxurious au quiz : résultat Luxurious (21/10/2026) ; bloc Miraculous gardé sur tous les résultats
+- [ ] Images story du quiz (`assets/story/`) : adresse du site et identifiant Instagram à ajouter, puis relancer `node scripts/generer-stories.mjs`
 - [ ] Stock initial de chaque sérum (à saisir dans le back-office ; vide = stock non suivi)
 
 ## Technique

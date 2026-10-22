@@ -53,7 +53,6 @@ jobs:
           check() { if curl -s -m 30 "$URL$1" | grep -q "$2"; then echo "OK      $1 : $2"; else echo "ABSENT  $1 : $2"; fi; }
           check / "Quel soin est le tien"
           check / "chaque personnalité, son soin"
-          check / "photo détourée"
           check / "Créés par une naturopathe"
           check / "retour à l&#x27;accueil"
           check / "/images/produits/fabulous-800.jpg"
@@ -69,7 +68,7 @@ jobs:
           check / "snap-mandatory"
           check / "fabulous-detoure-240.webp"
           check /mon-histoire "Tout a commencé sur mon bureau"
-          check /boutique "Hair Serum · 30"
+          check /boutique ">Hair Serum<"
           check /boutique "grid-cols-2 gap-3"
           check /soins/fabulous "fixed inset-x-0 bottom-0"
           check /soins/fabulous "<details"

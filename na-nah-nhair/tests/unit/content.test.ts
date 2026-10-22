@@ -166,11 +166,25 @@ describe("FAQ : réponses issues d'INFOS.md", () => {
   });
 });
 
-describe("histoire : texte du brief mot pour mot", () => {
-  it("les paragraphes recomposent le texte de BRIEF.md §3", async () => {
+describe("histoire : textes du 22/10/2026 (modification 31) mot pour mot", () => {
+  it("titre, cinq paragraphes, bloc final, carte « Le défi »", () => {
     const story = plain(site.story);
-    const brief = readFileSync(new URL("../../BRIEF.md", import.meta.url), "utf8");
-    expect(brief).toContain(story.paragraphs.join(" "));
+    expect(story.heading).toBe("Tout a commencé sur mon bureau.");
+    expect(story.paragraphs).toHaveLength(5);
+    expect(story.paragraphs[0]).toBe("Je suis naturopathe et diplômée en aromathérapie. Mais avant les diplômes, il y a eu une rencontre.");
+    expect(story.paragraphs[4]).toBe(
+      "Parce qu’une femme n’est jamais qu’une seule chose. Elle peut être fraîche et spontanée, déterminée et audacieuse, élégante et sensorielle, parfois tout ça dans la même journée.",
+    );
+    expect(story.closing).toMatch(/^C’est ainsi qu’est née Na Nah N’hair : trois soins, trois univers, une même envie, celle de te laisser prendre soin/);
+    expect(plain(site.home).story.cards[0].text).toBe(
+      "En première année de naturopathie, lors d’un stage, une femme souhaite prendre soin de ses cheveux et favoriser leur longueur. J’ai relevé le défi : une synergie sur mesure, rien que pour elle.",
+    );
+  });
+
+  it("apostrophes courbes uniquement, plus de « clinique »", () => {
+    const texts = JSON.stringify([site.story, site.home.story]);
+    expect(texts).not.toContain("'");
+    expect(texts.toLowerCase()).not.toContain("clinique");
   });
 });
 

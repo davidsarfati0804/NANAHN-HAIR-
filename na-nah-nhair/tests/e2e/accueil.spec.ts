@@ -54,16 +54,17 @@ test("aucun lien interne cassé depuis l'accueil", async ({ page, request }) => 
   }
 });
 
-test("photos : flacons et pack fournis, photos détourées et « Le bureau » signalées", async ({ page }) => {
+test("photos : flacons, pack et photos détourées fournis, plus aucun emplacement photo", async ({ page }) => {
   await page.goto("/");
   // Photos fournies (21/10/2026), textes alternatifs exacts
   for (const name of ["Fabulous", "Miraculous", "Luxurious"])
     await expect(page.locator(`main img[alt="Flacon ${name} Hair Serum, sérum capillaire de 30 ml"]`)).toBeVisible();
   await expect(page.locator('main img[alt^="Pack des 3 soins"]')).toBeVisible();
-  // Premier écran : photos détourées pas encore fournies → 3 emplacements visibles
-  await expect(page.getByText("À COMPLÉTER : photo détourée").filter({ visible: true })).toHaveCount(3);
-  // Photo « Le bureau » (section Mon histoire)
-  await expect(page.getByText("À COMPLÉTER : photo", { exact: true })).toHaveCount(1);
+  // Premier écran : photos détourées (22/10/2026), textes alternatifs exacts
+  for (const name of ["Fabulous", "Miraculous", "Luxurious"])
+    await expect(page.locator(`main img[alt="Flacon ${name} Hair Serum"]`).filter({ visible: true })).toHaveCount(1);
+  // Plus aucun emplacement photo (la carte « Le bureau » n'a pas de photo)
+  await expect(page.getByText(/À COMPLÉTER : photo/)).toHaveCount(0);
 });
 
 test("menu mobile au clavier", async ({ page }) => {
@@ -192,7 +193,6 @@ test.describe("modifications du 20/10/2026", () => {
     await expect(page.locator("section[aria-labelledby=histoire]").getByText("glisse pour la suite →")).toBeVisible();
     await page.locator("section[aria-labelledby=histoire]").getByRole("button", { name: "Afficher la carte 3" }).click();
     await expect(page.locator("section[aria-labelledby=histoire]").getByRole("button", { name: "Afficher la carte 3" })).toHaveAttribute("aria-current", "true");
-    await expect(page.getByText("À COMPLÉTER : photo").last()).toBeAttached();
     await page.screenshot({ path: "captures/modif-histoire-375.png" });
 
     await page.setViewportSize({ width: 1280, height: 900 });
@@ -244,7 +244,7 @@ test.describe("modifications du 21/10/2026", () => {
       await inView(page.locator("main p", { hasText: "Révèle ton" }).first());
       await inView(page.getByText(/^Trois soins\. Trois personnalités\./));
       for (const name of ["Fabulous", "Miraculous", "Luxurious"]) {
-        const bottle = page.locator(`main a[href="/soins/${name.toLowerCase()}"]`).filter({ has: page.locator(`[aria-label^="Flacon ${name} Hair Serum"]`) }).filter({ visible: true });
+        const bottle = page.locator(`main a[href="/soins/${name.toLowerCase()}"]`).filter({ has: page.locator(`img[alt="Flacon ${name} Hair Serum"]`) }).filter({ visible: true });
         await inView(bottle);
       }
       await inView(page.getByRole("link", { name: "Je découvre mon Na Nah N’hair" }));
@@ -253,10 +253,12 @@ test.describe("modifications du 21/10/2026", () => {
     });
   }
 
-  test("premier écran : petits textes, sticker, lien vers la section suivante", async ({ page }) => {
+  test("premier écran : petits textes, sans sticker, lien vers la section suivante", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByText("5 questions · 1 résultat")).toBeVisible();
-    await expect(page.getByText("Créés par une naturopathe").first()).toBeVisible();
+    // Sticker retiré (modification 28) ; la carte « Créés par une naturopathe » de « Pourquoi découvrir » reste
+    await expect(page.getByText("Créés par une naturopathe")).toHaveCount(1);
+    await expect(page.locator("section[aria-labelledby=raisons]").getByText("Créés par une naturopathe")).toBeVisible();
     // Livraison offerte active par défaut dans le back-office
     await expect(page.getByText("Made in France · 30 ml · Livraison offerte en France")).toBeVisible();
     await page.getByRole("link", { name: /Découvre les trois soins/ }).click();
@@ -325,5 +327,38 @@ test.describe("modifications du 21/10/2026", () => {
       await page.goto(path);
       await expect(page.locator("main li").filter({ hasText: /Miraculous\s:\sPour stimuler la pousse, la repousse et ralentir la chute\./ }).first()).toBeVisible();
     }
+  });
+});
+
+test.describe("modifications du 22/10/2026", () => {
+  test("flacons détourés : relief au survol, lien vers la fiche", async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto("/");
+    await page.waitForTimeout(1700);
+    const img = page.locator('main img[alt="Flacon Miraculous Hair Serum"]').filter({ visible: true });
+    await expect(img).toHaveCSS("filter", "none");
+    await img.hover();
+    await expect(img).toHaveCSS("scale", "1.08");
+    await expect(img).toHaveCSS("filter", /drop-shadow/);
+    await img.click();
+    await expect(page).toHaveURL(/\/soins\/miraculous$/);
+  });
+
+  test("« HAIR SERUM » sous le grand nom (cartes, boutique, fiches)", async ({ page }) => {
+    await page.goto("/boutique");
+    await expect(page.getByText(/^Hair Serum · 30\sml$/)).toHaveCount(3);
+    await page.goto("/soins/fabulous");
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(/^Fabulous\s+Hair Serum$/);
+    await expect(page).toHaveTitle(/Fabulous Hair Serum|FABULOUS HAIR SERUM/);
+  });
+
+  test("Mon histoire : nouveaux textes, nom de marque dans le bloc final", async ({ page }) => {
+    await page.goto("/mon-histoire");
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Tout a commencé sur mon bureau.");
+    await expect(page.getByText(/Sans artifice, sans filtre\.$/)).toBeVisible();
+    await expect(page.locator("blockquote svg[data-brand-name]")).toHaveCSS("color", "rgb(128, 118, 179)");
+    await expect(page.locator("main")).not.toContainText(/clinique/i);
+    await page.goto("/");
+    await expect(page.locator("section[aria-labelledby=histoire]")).not.toContainText(/clinique/i);
   });
 });

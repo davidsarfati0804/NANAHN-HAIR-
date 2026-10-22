@@ -1,6 +1,6 @@
 import Link from "next/link";
 import PhotoSlot from "@/components/PhotoSlot";
-import type { Product } from "@/content/site";
+import { productPage, type Product } from "@/content/site";
 import type { PublicProduct } from "@/lib/catalog";
 import { formatPrice } from "@/lib/money";
 import { themeClasses } from "@/lib/theme-classes";
@@ -25,7 +25,7 @@ export default function ProductCard({
         <H>
           <span className={`nom-produit ${t.name}`}>{p.shortName}</span>
         </H>
-        <p className="mt-1 text-sm font-bold uppercase tracking-wide">{p.name}</p>
+        <p className="mt-1 text-sm font-bold uppercase tracking-wide">{productPage.serumLabel}</p>
         <p className="mt-3 sm:mt-4">{p.iAm}</p>
         <p className="mt-3 accroche sm:mt-4">{p.phrase}</p>
         <div className="mt-auto flex items-center justify-between gap-4 pt-4 sm:pt-6">

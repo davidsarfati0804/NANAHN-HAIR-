@@ -10,7 +10,7 @@ import HeroBottles from "@/components/home/HeroBottles";
 import ProductCard from "@/components/ProductCard";
 import SwipeList from "@/components/SwipeList";
 import ToComplete from "@/components/ToComplete";
-import { brand, emotionalConcept, home, pack, products } from "@/content/site";
+import { brand, emotionalConcept, home, pack, productPage, products } from "@/content/site";
 import type { ProductId, PublicProduct } from "@/lib/catalog";
 import { formatPrice } from "@/lib/money";
 import { getShopData } from "@/lib/shop-data";
@@ -67,9 +67,6 @@ function Hero({ freeShipping }: { freeShipping: boolean }) {
               unoptimized
               className="h-[min(18svh,9rem)] w-auto sm:h-40 lg:h-48"
             />
-            <p className="absolute -right-[4.5rem] top-1 -rotate-[4deg] min-[390px]:-right-24 rounded-xl bg-logo-yellow px-2.5 py-1 text-[0.7rem] font-bold leading-tight text-deep-violet shadow-sm sm:-right-32 sm:text-xs">
-              {hero.sticker}
-            </p>
           </div>
           <p className="mt-3 text-lg font-bold text-deep-violet sm:text-2xl">
             <BrandText text={hero.signature} tone="logo" />
@@ -174,7 +171,10 @@ function Products({ shop }: { shop: Shop }) {
           const t = themeClasses[p.slug];
           return (
             <article key={p.slug} className={`h-full rounded-[2rem] border-2 ${t.border} p-5 md:p-6`}>
-              <h3 className={`nom-produit max-sm:text-[2rem] ${t.name}`}>{p.name}</h3>
+              <h3>
+                <span className={`block nom-produit max-sm:text-[2rem] ${t.name}`}>{p.shortName}</span>
+                <span className="mt-1 block font-body text-sm font-bold uppercase tracking-wide"> {productPage.serumLabel}</span>
+              </h3>
               <ul className="mt-4 space-y-2 md:mt-5 md:space-y-3">
                 {p.highlights.map((h) => (
                   <li key={h} className={`${t.soft} ${t.text} rounded-2xl px-3 py-2 font-bold md:px-4 md:py-3`}>

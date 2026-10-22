@@ -46,7 +46,7 @@ Aucun ne contient de promesse de résultat, d'allégation ou d'ingrédient inven
 - « Ce site n'utilise que le stockage nécessaire à son fonctionnement (ton panier). Aucun cookie publicitaire ni de mesure d'audience. » + « Accepter », « Refuser », « En savoir plus », « Modifier mon choix »
 
 ### Ajoutés le 20/10/2026
-- Section Mon histoire : « Mon histoire en trois cartes » (lu par les lecteurs d'écran), « Afficher la carte 1/2/3 » (points indicateurs), texte alternatif de la photo « Mes premières préparations sur mon bureau »
+- Section Mon histoire : « Mon histoire en trois cartes » (lu par les lecteurs d'écran), « Afficher la carte 1/2/3 » (points indicateurs) (aussi sous les carrousels de l’accueil)
 - Commande : « Le paiement en ligne (carte, Apple Pay, Google Pay) arrive bientôt. » (remplace la mention « phase 6 »)
 
 ### Retirés le 20/10/2026 (consignes ou textes internes, plus jamais affichés)

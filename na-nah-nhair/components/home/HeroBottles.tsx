@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { products } from "@/content/site";
 import type { ProductTheme } from "@/lib/design-tokens";
@@ -12,6 +11,9 @@ const layout: Record<ProductTheme, { order: number; tilt: string; size: string; 
   luxurious: { order: 2, tilt: "rotate-[5deg]", size: "w-[27%]", lift: "mt-6", blob: "bg-luxurious-vivid", delay: "1s" },
 };
 
+// Hauteur des versions 240 px (proportions des photos fournies), pour éviter les sauts de mise en page
+const cutoutHeight: Record<ProductTheme, number> = { fabulous: 632, miraculous: 622, luxurious: 650 };
+
 export default function HeroBottles({ className = "" }: { className?: string }) {
   const ordered = [...products].sort((a, b) => layout[a.slug].order - layout[b.slug].order);
   return (
@@ -20,20 +22,30 @@ export default function HeroBottles({ className = "" }: { className?: string }) 
         const l = layout[p.slug];
         const t = themeClasses[p.slug];
         return (
-          <li key={p.slug} className={`flacon-monte relative ${l.size} ${l.lift}`} style={{ animationDelay: l.delay }}>
-            {/* Forme douce dans la couleur du soin */}
-            <div aria-hidden className={`absolute inset-x-[-12%] bottom-[4%] top-[18%] rounded-full ${l.blob} opacity-80`} />
-            <Link href={`/soins/${p.slug}`} className={`relative block ${l.tilt}`}>
+          <li
+            key={p.slug}
+            className={`flacon-monte group relative hover:z-20 focus-within:z-20 ${l.size} ${l.lift}`}
+            style={{ animationDelay: l.delay }}
+          >
+            {/* Rond doux dans la couleur du soin, derrière le flacon */}
+            <div aria-hidden className={`absolute left-1/2 top-[34%] aspect-square w-[118%] -translate-x-1/2 rounded-full ${l.blob} opacity-80`} />
+            <Link href={`/soins/${p.slug}`} className={`relative block rounded-3xl ${l.tilt}`}>
               {p.cutout.available ? (
-                <Image
-                  src={`/images/produits/${p.cutout.file}`}
-                  alt={p.cutout.alt}
-                  width={400}
-                  height={1000}
-                  priority
-                  sizes="(max-width: 640px) 33vw, 220px"
-                  className="h-auto w-full"
-                />
+                // Au survol, au focus ou au toucher : le flacon se soulève, grossit et dépasse de son rond, avec une ombre qui suit sa forme
+                <picture>
+                  <source type="image/webp" srcSet={`/images/produits/${p.slug}-detoure-240.webp 240w, /images/produits/${p.slug}-detoure-480.webp 480w`} sizes="(max-width: 1023px) 30vw, 150px" />
+                  <img
+                    src={`/images/produits/${p.slug}-detoure-240.png`}
+                    srcSet={`/images/produits/${p.slug}-detoure-240.png 240w, /images/produits/${p.slug}-detoure-480.png 480w`}
+                    sizes="(max-width: 1023px) 30vw, 150px"
+                    width={240}
+                    height={cutoutHeight[p.slug]}
+                    alt={p.cutout.alt}
+                    loading="eager"
+                    fetchPriority="high"
+                    className="relative h-auto w-full transition-[translate,scale,filter] duration-300 ease-out group-hover:-translate-y-3 group-hover:scale-[1.08] group-hover:drop-shadow-[0_18px_20px_rgba(0,0,0,0.2)] group-focus-within:-translate-y-3 group-focus-within:scale-[1.08] group-focus-within:drop-shadow-[0_18px_20px_rgba(0,0,0,0.2)] group-active:-translate-y-3 group-active:scale-[1.08] group-active:drop-shadow-[0_18px_20px_rgba(0,0,0,0.2)] motion-reduce:transition-none"
+                  />
+                </picture>
               ) : (
                 <span
                   role="img"

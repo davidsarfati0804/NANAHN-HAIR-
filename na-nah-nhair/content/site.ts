@@ -136,7 +136,7 @@ export const products: Product[] = fr([
       available: true,
       responsive: "fabulous",
     },
-    cutout: { file: "fabulous.png", alt: "Flacon Fabulous Hair Serum", available: false },
+    cutout: { file: "fabulous.png", alt: "Flacon Fabulous Hair Serum", available: true },
     personality: "la fraîche, naturelle et spontanée.",
     iAm: "Je suis fraîche, naturelle et spontanée.",
     universe: "vert, frais, positif, accessible et pétillant.",
@@ -179,7 +179,7 @@ export const products: Product[] = fr([
       available: true,
       responsive: "miraculous",
     },
-    cutout: { file: "miraculous.png", alt: "Flacon Miraculous Hair Serum", available: false },
+    cutout: { file: "miraculous.png", alt: "Flacon Miraculous Hair Serum", available: true },
     personality: "la déterminée, ambitieuse et audacieuse.",
     iAm: "Je suis déterminée, ambitieuse et audacieuse.",
     universe: "violet, confiance, force, ambition et transformation.",
@@ -223,7 +223,7 @@ export const products: Product[] = fr([
       available: true,
       responsive: "luxurious",
     },
-    cutout: { file: "luxurious.png", alt: "Flacon Luxurious Hair Serum", available: false },
+    cutout: { file: "luxurious.png", alt: "Flacon Luxurious Hair Serum", available: true },
     personality: "la féminine, élégante et sensorielle.",
     iAm: "Je suis féminine, élégante et sensorielle.",
     universe: "rose, beauté, plaisir, sophistication et douceur.",
@@ -283,15 +283,19 @@ export const pack = fr({
     "Alterne les sérums selon tes besoins ou crée ta propre routine : Miraculous en cure, Fabulous au quotidien et Luxurious pour briller en sortie.",
 });
 
+// Page « Mon histoire » : textes fournis le 22/10/2026 (modification 31), mot pour mot
 export const story = fr({
   title: "Mon histoire",
+  heading: "Tout a commencé sur mon bureau.",
   paragraphs: [
-    "Je suis naturopathe et diplômée en aromathérapie.",
-    "En première année de naturopathie, lors d'un stage en clinique, j'accompagnais une femme qui souhaitait prendre soin de ses cheveux et favoriser leur longueur. J'ai relevé le défi en préparant une synergie personnalisée pour elle.",
-    "Cette expérience m'a donné envie d'aider d'autres personnes et de créer mes propres soins capillaires. J'ai commencé mes préparations dans ma chambre, sur mon bureau.",
-    "J'aime aider les autres, me rendre utile et savoir qu'une petite action de ma part peut apporter de la satisfaction à quelqu'un.",
-    "C'est ainsi qu'est née l'idée de NA NAH N'HAIR : trois soins, trois univers, une même envie de permettre aux femmes de prendre soin de leurs cheveux tout en révélant différentes facettes de leur personnalité.",
+    "Je suis naturopathe et diplômée en aromathérapie. Mais avant les diplômes, il y a eu une rencontre.",
+    "En première année de naturopathie, lors d’un stage, j’accompagnais une femme qui souhaitait prendre soin de ses cheveux et favoriser leur longueur. J’ai relevé le défi : préparer une synergie rien que pour elle.",
+    "Cette expérience m’a donné envie d’aider d’autres personnes et de créer mes propres soins capillaires. J’ai commencé mes préparations dans ma chambre, sur mon bureau. Sans artifice, sans filtre.",
+    "J’aime aider les autres, me rendre utile, et savoir qu’une petite action de ma part peut apporter de la satisfaction à quelqu’un. Ce que je voulais, au fond ? Que prendre soin de ses cheveux devienne un vrai moment pour soi : se faire plaisir, lâcher prise, être soi-même.",
+    "Parce qu’une femme n’est jamais qu’une seule chose. Elle peut être fraîche et spontanée, déterminée et audacieuse, élégante et sensorielle, parfois tout ça dans la même journée.",
   ],
+  closing:
+    "C’est ainsi qu’est née Na Nah N’hair : trois soins, trois univers, une même envie, celle de te laisser prendre soin de tes cheveux tout en révélant les différentes facettes de ta personnalité, telle que tu es, pour de vrai.",
 });
 
 export const home = fr({
@@ -301,7 +305,6 @@ export const home = fr({
     primaryCta: { label: "Je découvre mon Na Nah N'Hair", href: "/quiz" },
     secondaryCta: { label: "Découvrir les trois soins", href: "/soins" },
     quizHint: "5 questions · 1 résultat",
-    sticker: "Créés par une naturopathe",
     reassurance: ["Made in France", "30 ml"],
     reassuranceShipping: "Livraison offerte en France",
     scrollCta: { label: "Découvre les trois soins", href: "#trio" },
@@ -333,7 +336,7 @@ export const home = fr({
     cards: [
       {
         title: "Le défi",
-        text: "Première année de naturopathie, stage en clinique. Une femme souhaite prendre soin de ses cheveux et favoriser leur longueur. J’ai relevé le défi : une synergie sur mesure, rien que pour elle.",
+        text: "En première année de naturopathie, lors d’un stage, une femme souhaite prendre soin de ses cheveux et favoriser leur longueur. J’ai relevé le défi : une synergie sur mesure, rien que pour elle.",
       },
       {
         title: "Le bureau",
@@ -344,7 +347,6 @@ export const home = fr({
         text: "Trois soins, trois univers, une même envie : prendre soin de tes cheveux.",
       },
     ],
-    photo: { file: "histoire.jpg", alt: "Mes premières préparations sur mon bureau", available: false },
     cta: { label: "Découvrir les trois soins", href: "/soins" },
     readMore: { label: "Lire toute mon histoire", href: "/mon-histoire" },
   },
@@ -460,6 +462,8 @@ export const contactTexts = fr({
 // Libellés communs des pages produits
 export const productPage = fr({
   priceLabel: "Prix",
+  // Petite ligne sous le grand nom (modification 29) ; le nom complet reste partout ailleurs
+  serumLabel: "Hair Serum",
   personalityPrefix: "Personnalité : ",
   universePrefix: "Univers : ",
   personalityLabel: "Personnalité",

@@ -54,7 +54,7 @@ for (const path of pages) {
 
 test("fiche Miraculous : contenu INFOS, INCI, emplacements À COMPLÉTER", async ({ page }) => {
   await page.goto("/soins/miraculous");
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText("MIRACULOUS HAIR SERUM");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(/^Miraculous\s+Hair Serum$/);
   await expect(page.getByText(/39,90\s€/).first()).toBeVisible();
   await expect(page.getByText("Mon produit fondateur", { exact: true })).toBeVisible();
   await expect(page.getByText("vanille patchouli")).toBeVisible();

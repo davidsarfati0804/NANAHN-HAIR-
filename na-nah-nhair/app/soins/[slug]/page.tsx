@@ -66,7 +66,10 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 {l.founderBadge}
               </p>
             )}
-            <h1 className={`mt-4 nom-produit-grand ${t.name}`}>{p.name}</h1>
+            <h1 className="mt-4">
+              <span className={`block nom-produit-grand ${t.name}`}>{p.shortName}</span>
+              <span className="mt-1 block font-body text-sm font-bold uppercase tracking-wide"> {l.serumLabel}</span>
+            </h1>
             <p className="mt-2 nom-produit-grand">
               <span className="sr-only">{l.priceLabel} : </span>
               {formatPrice(shop[p.slug].priceCents)}

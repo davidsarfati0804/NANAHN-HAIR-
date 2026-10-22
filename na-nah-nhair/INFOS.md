@@ -214,7 +214,7 @@ RICINUS COMMUNIS SEED OIL\*, OLEA EUROPAEA FRUIT OIL\*, COCOS NUCIFERA OIL\*, PE
 - Email de réception : fourni (voir section 11)
 - Lien Instagram de la marque
 - Quiz : questions et règles validées (voir section 10)
-- Photos des flacons et du pack : fournies le 21/10/2026 ; photos détourées pour l’accueil (`fabulous.png`, `miraculous.png`, `luxurious.png`), polices, logo
+- Photos des flacons, du pack et photos détourées : fournies (21 et 22/10/2026) ; polices, logo
 
 ---
 
@@ -303,7 +303,7 @@ Ces décisions de la propriétaire de la marque complètent et remplacent les pa
 - **Cartes et fiches produits** : la ligne « Personnalité » est remplacée par la phrase « Je suis… » ; la ligne « Univers » n'est plus affichée.
 - **Pack** : nouveau contenu et nouveau mode d'emploi (section 7).
 - **Livraison** : « Délai : 3 jours ouvrés, préparation incluse. »
-- **Accueil, section « Mon histoire »** : trois cartes « Le défi », « Le bureau », « Les trois soins » (textes dans `content/site.ts`), titre « De mon bureau à ta routine », sticker « Naturopathe · Aromathérapie », photo `assets/images/histoire.jpg` à fournir.
+- **Accueil, section « Mon histoire »** : trois cartes « Le défi », « Le bureau », « Les trois soins » (textes dans `content/site.ts`), titre « De mon bureau à ta routine », sticker « Naturopathe · Aromathérapie » ; pas de photo sur la carte « Le bureau » (22/10/2026).
 - **Fiches produits et pack** : bouton « Quel soin est le tien ? » vers le quiz.
 - **Nom de marque** affiché « Na Nah N’hair », dans la typographie du logo.
 - **Quiz** : nouvelles réponses aux questions 1 à 4 (section 10) ; question 5 et règles de calcul inchangées.
@@ -321,3 +321,11 @@ Ces décisions de la propriétaire de la marque complètent et remplacent les pa
 - **FAQ** : précautions d'emploi, utilisation des sérums et contact commande renseignés (textes dans `content/site.ts`).
 - **Photos** des trois flacons et du pack intégrées.
 - **Nom Fabulous** : ton sur ton (vert foncé sur le vert du flacon), sans bande blanche.
+
+## 14. Modifications validées (22/10/2026)
+
+- **Premier écran** : photos détourées des trois flacons (effet en relief au survol ou au toucher, lien vers la fiche) ; sticker « Créés par une naturopathe » retiré.
+- **Cartes et fiches produits** : petite ligne « HAIR SERUM » sous le grand nom (le nom complet reste dans les titres de page, le panier, la commande et le back-office).
+- **Carte « Le bureau »** : sans photo.
+- **Carte « Le défi »** : « En première année de naturopathie, lors d’un stage, une femme souhaite prendre soin de ses cheveux et favoriser leur longueur. J’ai relevé le défi : une synergie sur mesure, rien que pour elle. »
+- **Page Mon histoire** : titre « Tout a commencé sur mon bureau. », cinq paragraphes et bloc final (textes dans `content/site.ts`, mot pour mot). Le mot « clinique » n'apparaît plus sur le site (il reste seulement dans BRIEF.md, texte d'origine).

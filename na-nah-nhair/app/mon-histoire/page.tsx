@@ -18,8 +18,6 @@ export const metadata: Metadata = {
 export default async function StoryPage() {
   const { products: shop } = await getShopData();
   const miraculous = productBySlug("miraculous")!;
-  const [first, ...rest] = story.paragraphs;
-  const last = rest.pop()!;
 
   return (
     <article>
@@ -29,12 +27,12 @@ export default async function StoryPage() {
         </div>
         <div className="relative mx-auto max-w-4xl px-4 py-12 sm:px-6 sm:py-28">
           <p className="surtitre">{storyPage.kicker}</p>
-          <h1 className="mt-4 titre-h1">{first}</h1>
+          <h1 className="mt-4 titre-h1">{story.heading}</h1>
         </div>
       </header>
 
       <div className="mx-auto max-w-2xl space-y-6 px-4 py-10 text-lg sm:space-y-8 sm:py-16 leading-relaxed sm:px-6 sm:text-xl">
-        {rest.map((para) => (
+        {story.paragraphs.map((para) => (
           <p key={para}>
             <BrandText text={para} />
           </p>
@@ -43,8 +41,9 @@ export default async function StoryPage() {
 
       <section className="mx-auto max-w-4xl px-4 sm:px-6">
         <blockquote className="rounded-[2rem] bg-deep-violet px-6 py-10 text-center text-white sm:px-12 sm:py-14">
+          {/* Nom de marque dans la police et le violet du logo : contraste 3,1 sur violet foncé, AA en grand texte */}
           <p className="font-display text-[2rem] leading-none sm:text-6xl">
-            <BrandText text={last} />
+            <BrandText text={story.closing} tone="logo" />
           </p>
         </blockquote>
       </section>

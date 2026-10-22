@@ -18,14 +18,13 @@ Toutes les informations manquantes. Chacune apparaît sur le site sous forme d'e
 
 - [ ] Couleurs des flacons (provisoires, `lib/design-tokens.ts`, `app/globals.css` et `lib/palette.ts`) : Pantone exacts de Fabulous (cadre #B2DCCB ; nom ton sur ton #1D5A3C validé le 21/10/2026), Miraculous (cadre #B9A5E2, couleur du nom À COMPLÉTER), Luxurious (cadre #EBC4DE, couleur du nom À COMPLÉTER)
 
-- [ ] `assets/images/histoire.jpg` : photo « Le bureau » (section Mon histoire de l'accueil)
 - [ ] Police du logo (nom ou fichier) : en attendant, logo vectorisé (SVG)
 - [ ] Police Bebas Kai (fichier) : en attendant, Bebas Neue
 
 - [ ] Lien Drive : logo, polices
 - [x] `assets/images/fabulous.jpg`, `miraculous.jpg`, `luxurious.jpg` : fournies le 21/10/2026 (versions web : `scripts/preparer-photos.py`)
 - [x] `assets/images/pack.jpg` : fournie le 21/10/2026
-- [ ] `assets/images/fabulous.png`, `miraculous.png`, `luxurious.png` : photos détourées (fond transparent) des trois flacons pour le premier écran de l'accueil
+- [x] `assets/images/fabulous.png`, `miraculous.png`, `luxurious.png` : photos détourées fournies le 22/10/2026 (versions web : `scripts/preparer-detoures.py`)
 - [ ] 4 choix de style à valider (A ou B) : section « Les 4 choix à valider » de `/guide-de-style`
 - [x] `assets/logo/` : logo fourni le 19/10/2026 (utilisé dans l'en-tête et comme titre de l'accueil)
 - [ ] Logo en version vectorielle (SVG) ou police du logo, pour un rendu encore plus net

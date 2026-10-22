@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import AddToCart from "@/components/cart/AddToCart";
 import PhotoSlot from "@/components/PhotoSlot";
-import { brand, pack, products, shop as texts } from "@/content/site";
+import { brand, pack, productPage, products, shop as texts } from "@/content/site";
 import { formatPrice } from "@/lib/money";
 import { getShopData } from "@/lib/shop-data";
 import { themeClasses } from "@/lib/theme-classes";
@@ -37,7 +37,7 @@ export default async function BoutiquePage() {
                 <h2 className={`nom-produit max-sm:text-[1.75rem] ${t.name}`}>
                   <Link href={`/soins/${p.slug}`}>{p.shortName}</Link>
                 </h2>
-                <p className="text-[0.8125rem] font-bold uppercase leading-snug">{p.name} · {p.volume}</p>
+                <p className="text-[0.8125rem] font-bold uppercase leading-snug">{productPage.serumLabel} · {p.volume}</p>
                 <p className="mt-2 text-sm font-bold">{p.phrase}</p>
                 <p className="mt-auto pt-3 nom-produit max-sm:text-[1.75rem] sm:pt-4">{formatPrice(s.priceCents)}</p>
                 <AddToCart id={p.slug} name={p.name} available={s.available} className="mt-2" buttonClassName={`${t.button} w-full max-sm:px-2 max-sm:text-[0.75rem]`} />

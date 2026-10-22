@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import PhotoSlot from "@/components/PhotoSlot";
 import { home } from "@/content/site";
 import { themeClasses } from "@/lib/theme-classes";
 
@@ -48,7 +47,7 @@ export default function StoryCards() {
           <li
             key={card.title}
             data-index={i}
-            className={`relative flex w-[82%] shrink-0 snap-center flex-col rounded-[2.5rem] p-7 text-deep-violet sm:w-[60%] lg:w-auto ${cardStyles[i]}`}
+            className={`relative flex w-[82%] shrink-0 snap-center flex-col ${i === 1 ? "justify-center" : ""} rounded-[2.5rem] p-7 text-deep-violet sm:w-[60%] lg:w-auto ${cardStyles[i]}`}
           >
             <span aria-hidden className="font-display text-7xl leading-none text-logo-violet">
               {i + 1}
@@ -58,14 +57,6 @@ export default function StoryCards() {
               {card.title}
             </h3>
             <p className="mt-3 leading-relaxed">{card.text}</p>
-
-            {i === 1 && (
-              <div className="mt-auto flex justify-end pt-6">
-                <figure className="w-36 rotate-[5deg] bg-white p-2 pb-6 shadow-lg">
-                  <PhotoSlot photo={s.photo} className="aspect-square text-[0.65rem]" sizes="144px" />
-                </figure>
-              </div>
-            )}
 
             {i === 2 && (
               <div className="mt-auto pt-6">

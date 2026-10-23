@@ -1,4 +1,5 @@
 import Image from "next/image";
+import RichText from "@/components/RichText";
 import Link from "next/link";
 import ButtonLink from "@/components/ButtonLink";
 import JsonLd from "@/components/JsonLd";
@@ -6,8 +7,8 @@ import LavenderBox from "@/components/LavenderBox";
 import PhotoSlot from "@/components/PhotoSlot";
 import StoryCards from "@/components/home/StoryCards";
 import TrioHeading from "@/components/home/TrioHeading";
+import TrioSelector from "@/components/home/TrioSelector";
 import HeroBottles from "@/components/home/HeroBottles";
-import ProductCard from "@/components/ProductCard";
 import SwipeList from "@/components/SwipeList";
 import ToComplete from "@/components/ToComplete";
 import { brand, emotionalConcept, home, pack, productPage, products } from "@/content/site";
@@ -15,7 +16,6 @@ import type { ProductId, PublicProduct } from "@/lib/catalog";
 import { formatPrice } from "@/lib/money";
 import { getShopData } from "@/lib/shop-data";
 import { organizationJsonLd } from "@/lib/structured-data";
-import { capitalize } from "@/lib/typography";
 import { themeClasses } from "@/lib/theme-classes";
 import { BrandText } from "@/components/BrandName";
 
@@ -122,13 +122,13 @@ function Trio({ shop }: { shop: Shop }) {
   return (
     <section aria-labelledby="trio" className="section">
       <TrioHeading />
-      <SwipeList label={home.trio.title}>
-        {products.map((p) => (
-          <ProductCard key={p.slug} product={p} shop={shop[p.slug]} cta={home.trio.cta} />
-        ))}
-      </SwipeList>
+      <TrioSelector prices={trioPrices(shop)} />
     </section>
   );
+}
+
+function trioPrices(shop: Shop) {
+  return { fabulous: formatPrice(shop.fabulous.priceCents), miraculous: formatPrice(shop.miraculous.priceCents), luxurious: formatPrice(shop.luxurious.priceCents) };
 }
 
 function Concept() {
@@ -220,7 +220,9 @@ function Pack({ shop }: { shop: Shop }) {
               ))}
             </ol>
             <h3 className="mt-5 titre-h3">{pack.usageTitle}</h3>
-            <p className="mt-2">{capitalize(pack.usage)}</p>
+            <p className="mt-2">
+              <RichText text={pack.usage} />
+            </p>
           </LavenderBox>
           <ButtonLink href="/pack" className="mt-4 md:mt-6">
             {home.pack.cta}

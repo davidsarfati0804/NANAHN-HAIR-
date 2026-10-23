@@ -5,3 +5,7 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+# Garde-fou (modification 39) : build de production refusé tant qu'il reste des « À COMPLÉTER »
+[context.production]
+  command = "npm run verifier:mise-en-ligne && npm run build"

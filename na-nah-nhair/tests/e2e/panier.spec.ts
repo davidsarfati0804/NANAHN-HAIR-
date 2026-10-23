@@ -1,3 +1,5 @@
+import { existsSync, readFileSync } from "node:fs";
+import path from "node:path";
 import { expect, test } from "@playwright/test";
 import { clearCart } from "./helpers";
 
@@ -59,8 +61,46 @@ test("commande : total recalculé par le serveur, transporteurs, paiement en att
   await expect(page.getByTestId("total-serveur")).toHaveText(/39,90\s€/);
   await page.getByLabel("Mondial Relay (point relais)").check();
   await expect(page.getByText(/À COMPLÉTER : sélection du point relais/)).toBeVisible();
-  await expect(page.getByRole("button", { name: "Payer" })).toBeDisabled();
   await expect(page.getByText(/Le paiement en ligne .* arrive bientôt/)).toBeVisible();
+});
+
+test("commande (modification 39) : CGV à cocher, récapitulatif, preuve d'acceptation enregistrée", async ({ page }) => {
+  await page.goto("/soins/fabulous");
+  await page.getByRole("button", { name: /Ajouter au panier/ }).click();
+  await page.goto("/commande");
+  await page.getByLabel("Colissimo").check();
+  const pay = page.getByRole("button", { name: "Commander et payer" });
+  const box = page.getByRole("checkbox", { name: /J'ai lu et j'accepte les conditions générales de vente/ });
+  await expect(box).not.toBeChecked();
+  await expect(page.getByRole("link", { name: "conditions générales de vente" })).toHaveAttribute("target", "_blank");
+  await expect(page.getByText(/Droit de rétractation de 14 jours après réception\. Les frais de retour sont à ta charge\./)).toBeVisible();
+  await expect(page.getByText("3 jours ouvrés, préparation incluse", { exact: true })).toBeVisible();
+  // Case non cochée : paiement impossible, message clair
+  await pay.click();
+  await expect(page.getByText("Pour passer commande, accepte les conditions générales de vente.")).toBeVisible();
+  // Adresse incomplète refusée par le serveur
+  await box.check();
+  await pay.click();
+  await expect(page.getByText(/Vérifie ton adresse de livraison/)).toBeVisible();
+  for (const [label, value] of [["Prénom", "Inès"], ["Nom", "Martin"], ["Email", "ines@example.fr"], ["Adresse", "1 rue de la Paix"], ["Code postal", "75002"], ["Ville", "Paris"]])
+    await page.getByLabel(label, { exact: true }).fill(value);
+  await expect(page.getByTestId("recap-adresse")).toHaveText("Inès Martin, 1 rue de la Paix, 75002 Paris");
+  await pay.click();
+  const status = page.getByText(/Commande n° NNH-\d{8}-[0-9A-F]{6}\s: conditions générales de vente acceptées \(version v1\)\./);
+  await expect(status).toBeVisible();
+  await page.screenshot({ path: "captures/commande-cgv.png", fullPage: true });
+  // Preuve enregistrée : date et heure, version, numéro de commande, rien d'autre
+  const orderNumber = ((await status.textContent()) ?? "").match(/NNH-\d{8}-[0-9A-F]{6}/)![0];
+  const file = path.join(process.env.NNH_DATA_DIR!, `cgv-acceptations_${orderNumber}`);
+  const record = JSON.parse(readFileSync(existsSync(file) ? file : `${file}.json`, "utf8"));
+  expect(Object.keys(record).sort()).toEqual(["acceptedAt", "cgvVersion", "orderNumber"]);
+  expect(record).toMatchObject({ orderNumber, cgvVersion: "v1" });
+});
+
+test("API commande : refuse sans acceptation des CGV", async ({ request }) => {
+  const r = await request.post("/api/commande", { data: { items: [{ id: "fabulous", quantity: 1 }], carrier: "colissimo", acceptCgv: false } });
+  expect(r.status()).toBe(400);
+  expect((await r.json()).error).toBe("cgv");
 });
 
 test("commande avec panier vide", async ({ page }) => {

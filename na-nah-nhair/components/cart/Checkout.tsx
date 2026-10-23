@@ -11,12 +11,55 @@ import { formatPrice } from "@/lib/money";
 import type { Quote } from "@/lib/pricing";
 import type { CarrierId } from "@/lib/settings";
 
+const ADDRESS_FIELDS = ["firstName", "lastName", "email", "address", "postalCode", "city"] as const;
+type AddressField = (typeof ADDRESS_FIELDS)[number];
+const autoComplete: Record<AddressField, string> = {
+  firstName: "given-name",
+  lastName: "family-name",
+  email: "email",
+  address: "street-address",
+  postalCode: "postal-code",
+  city: "address-level2",
+};
+
 export default function Checkout() {
   const { items, ready } = useCart();
   const { data } = useCatalog();
   const [carrier, setCarrier] = useState<CarrierId | null>(null);
   const [quote, setQuote] = useState<Quote | null>(null);
   const [failed, setFailed] = useState(false);
+  const [address, setAddress] = useState<Record<AddressField, string>>({ firstName: "", lastName: "", email: "", address: "", postalCode: "", city: "" });
+  const [badFields, setBadFields] = useState<string[]>([]);
+  const [cgv, setCgv] = useState(false);
+  const [cgvError, setCgvError] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [result, setResult] = useState<{ orderNumber: string; cgvVersion: string } | null>(null);
+  const [submitError, setSubmitError] = useState(false);
+
+  const submit = async () => {
+    setSubmitError(false);
+    if (!cgv) {
+      setCgvError(true);
+      return;
+    }
+    setSubmitting(true);
+    try {
+      const r = await fetch("/api/commande", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ items, carrier, address, acceptCgv: cgv }),
+      });
+      const data = await r.json().catch(() => ({}));
+      if (r.ok) setResult({ orderNumber: data.orderNumber, cgvVersion: data.cgvVersion });
+      else if (data.error === "cgv") setCgvError(true);
+      else if (data.error === "adresse") setBadFields(data.fields ?? []);
+      else setSubmitError(true);
+    } catch {
+      setSubmitError(true);
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   // Le total affiché est celui calculé par le serveur
   useEffect(() => {
@@ -107,6 +150,36 @@ export default function Checkout() {
               <ToComplete label="sélection du point relais (identifiants du compte Mondial Relay)" className="mt-2" />
             </div>
           )}
+
+          <h2 id="adresse" className="mt-10 titre-h2">
+            {t.addressTitle}
+          </h2>
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+            {ADDRESS_FIELDS.map((k) => (
+              <label key={k} className={`flex flex-col text-sm font-bold ${k === "email" || k === "address" ? "sm:col-span-2" : ""}`}>
+                {t.fields[k]}
+                <input
+                  name={k}
+                  type={k === "email" ? "email" : "text"}
+                  inputMode={k === "postalCode" ? "numeric" : undefined}
+                  autoComplete={autoComplete[k]}
+                  required
+                  value={address[k]}
+                  aria-invalid={badFields.includes(k)}
+                  onChange={(e) => {
+                    setAddress({ ...address, [k]: e.target.value });
+                    setBadFields(badFields.filter((f) => f !== k));
+                  }}
+                  className="mt-1 h-12 rounded-2xl border-2 border-deep-violet bg-white px-4 text-base font-normal text-deep-violet aria-[invalid=true]:border-luxurious-deep"
+                />
+              </label>
+            ))}
+          </div>
+          {badFields.length > 0 && (
+            <p role="alert" className="mt-3 font-bold text-luxurious-deep">
+              {t.addressError}
+            </p>
+          )}
         </section>
 
         <section aria-labelledby="recap" className="rounded-[2rem] bg-lavender p-6 text-deep-violet">
@@ -151,18 +224,79 @@ export default function Checkout() {
             </>
           )}
 
+          {/* Récapitulatif avant paiement : adresse et délai de livraison */}
+          <dl className="mt-4 space-y-2 border-t border-deep-violet/30 pt-4 text-sm">
+            <div>
+              <dt className="font-bold">{t.addressTitle}</dt>
+              <dd data-testid="recap-adresse">
+                {ADDRESS_FIELDS.every((k) => address[k].trim())
+                  ? `${address.firstName} ${address.lastName}, ${address.address}, ${address.postalCode} ${address.city}`
+                  : "—"}
+              </dd>
+            </div>
+            <div>
+              <dt className="font-bold">{t.delayLabel}</dt>
+              <dd>{t.delayValue}</dd>
+            </div>
+          </dl>
+
+          {/* Case non pré-cochée, juste avant le bouton de paiement */}
+          <label className="mt-6 flex items-start gap-3 text-sm">
+            <input
+              type="checkbox"
+              checked={cgv}
+              onChange={(e) => {
+                setCgv(e.target.checked);
+                if (e.target.checked) setCgvError(false);
+              }}
+              aria-invalid={cgvError}
+              aria-describedby={cgvError ? "cgv-erreur" : undefined}
+              className="mt-0.5 h-6 w-6 shrink-0 accent-deep-violet"
+            />
+            <span>
+              {t.cgvBefore}
+              <a href="/cgv" target="_blank" rel="noopener" className="font-bold underline underline-offset-4">
+                {t.cgvLink}
+              </a>
+              {t.cgvAfter}
+            </span>
+          </label>
+          {cgvError && (
+            <p id="cgv-erreur" role="alert" className="mt-2 text-sm font-bold text-luxurious-deep">
+              {t.cgvError}
+            </p>
+          )}
+
+          <p className="mt-4 text-sm">
+            {t.withdrawal.text}
+            <a href="/cgv" target="_blank" rel="noopener" className="font-bold underline underline-offset-4">
+              {t.withdrawal.cgv}
+            </a>
+            {t.withdrawal.and}
+            <a href="/retractation" target="_blank" rel="noopener" className="font-bold underline underline-offset-4">
+              {t.withdrawal.page}
+            </a>
+            {t.withdrawal.end}
+          </p>
           <button
             type="button"
-            disabled
+            onClick={submit}
+            disabled={submitting || !quote || !carrier || lineErrors.length > 0 || !!result}
             aria-describedby="paiement-info"
-            className="mt-6 bouton bouton--principal w-full cursor-not-allowed opacity-60"
+            className="mt-4 bouton bouton--principal w-full disabled:cursor-not-allowed disabled:opacity-60"
           >
             {t.pay}
           </button>
-          <p id="paiement-info" className="mt-2 text-sm">
+          <p id="paiement-info" role="status" className="mt-2 text-sm">
             {!carrier && offered.length > 0 ? `${t.carrierRequired} ` : ""}
+            {result ? `${t.accepted(result.orderNumber, result.cgvVersion)} ` : ""}
             {t.paymentPending}
           </p>
+          {submitError && (
+            <p role="alert" className="mt-2 text-sm font-bold text-luxurious-deep">
+              {t.submitError}
+            </p>
+          )}
           <ButtonLink href="/panier" variant="secondary" className="mt-4 w-full">
             {t.backToCart}
           </ButtonLink>

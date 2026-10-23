@@ -1,4 +1,5 @@
 import type { FaqItem } from "@/content/site";
+import RichText from "@/components/RichText";
 import ToComplete from "@/components/ToComplete";
 
 export default function FaqList({ items }: { items: FaqItem[] }) {
@@ -20,7 +21,11 @@ export default function FaqList({ items }: { items: FaqItem[] }) {
             </span>
           </summary>
           <div className="mt-2 space-y-2 pb-2 sm:mt-3 sm:pb-0">
-            {item.answer?.map((line) => <p key={line}>{line}</p>)}
+            {item.answer?.map((line) => (
+              <p key={line}>
+                <RichText text={line} />
+              </p>
+            ))}
             {item.list && (
               <ul className="list-disc space-y-1 pl-5">
                 {item.list.map((line) => (

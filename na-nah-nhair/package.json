@@ -9,7 +9,10 @@
     "lint": "eslint",
     "test": "vitest run",
     "test:e2e": "playwright test",
-    "admin:setup": "node scripts/admin-setup.mjs"
+    "admin:setup": "node scripts/admin-setup.mjs",
+    "prebuild": "node scripts/juridique-vers-ts.mjs",
+    "verifier:mise-en-ligne": "node scripts/verifier-mise-en-ligne.mjs",
+    "pdf:juridique": "node scripts/generer-pdf-juridiques.mjs"
   },
   "dependencies": {
     "@netlify/blobs": "^11.1.4",

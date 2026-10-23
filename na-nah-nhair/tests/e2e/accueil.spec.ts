@@ -55,14 +55,15 @@ test("aucun lien interne cassé depuis l'accueil", async ({ page, request }) => 
 });
 
 test("photos : flacons, pack et photos détourées fournis, plus aucun emplacement photo", async ({ page }) => {
-  await page.goto("/");
-  // Photos fournies (21/10/2026), textes alternatifs exacts
+  // Photos fournies (21/10/2026), textes alternatifs exacts (boutique)
+  await page.goto("/boutique");
   for (const name of ["Fabulous", "Miraculous", "Luxurious"])
     await expect(page.locator(`main img[alt="Flacon ${name} Hair Serum, sérum capillaire de 30 ml"]`)).toBeVisible();
+  await page.goto("/");
   await expect(page.locator('main img[alt^="Pack des 3 soins"]')).toBeVisible();
   // Premier écran : photos détourées (22/10/2026), textes alternatifs exacts
   for (const name of ["Fabulous", "Miraculous", "Luxurious"])
-    await expect(page.locator(`main img[alt="Flacon ${name} Hair Serum"]`).filter({ visible: true })).toHaveCount(1);
+    await expect(page.getByRole("link", { name: `Flacon ${name} Hair Serum` }).locator("img").filter({ visible: true })).toHaveCount(1);
   // Plus aucun emplacement photo (la carte « Le bureau » n'a pas de photo)
   await expect(page.getByText(/À COMPLÉTER : photo/)).toHaveCount(0);
 });
@@ -135,6 +136,8 @@ test.describe("modifications du 20/10/2026", () => {
   test("cartes produits : « Je suis… », plus de Personnalité ni d'Univers", async ({ page }) => {
     for (const path of ["/", "/soins", "/soins/fabulous"]) {
       await page.goto(path);
+      // Accueil et Les trois soins : la phrase s'affiche quand on touche le flacon (modification 34)
+      if (path !== "/soins/fabulous") await page.locator("section[aria-labelledby=trio]").getByRole("button", { name: "Fabulous" }).click();
       await expect(page.getByText("Je suis fraîche, naturelle et spontanée.").first()).toBeVisible();
       await expect(page.locator("main")).not.toContainText(/Personnalité\s?:|Univers\s?:/);
     }
@@ -163,7 +166,7 @@ test.describe("modifications du 20/10/2026", () => {
     await expect(page.getByText("Fleur d’oranger", { exact: true })).toBeVisible();
     await page.goto("/pack");
     await expect(page.getByText(/Pour stimuler la pousse, la repousse et ralentir la chute\./)).toBeVisible();
-    await expect(page.getByText(/^Alterne les sérums selon tes besoins ou crée ta propre routine\s: Miraculous en cure, Fabulous au quotidien et Luxurious pour briller en sortie\.$/)).toBeVisible();
+    await expect(page.getByText(/^Alterne les sérums selon tes besoins ou crée ta propre routine\s: Miraculous pour ta cure, Fabulous pour prendre soin de toi, Luxurious pour briller en sortie\. Pour un résultat optimisé, utilise le soin 3 fois par semaine\.$/)).toBeVisible();
     await expect(page.getByRole("heading", { name: "Mode d’emploi du pack" })).toBeVisible();
     await page.goto("/");
     await expect(page.getByText(/^Délai\s: 3 jours ouvrés, préparation incluse\.$/)).toBeVisible();
@@ -325,7 +328,7 @@ test.describe("modifications du 21/10/2026", () => {
   test("contenu du pack : nouvelle ligne Miraculous (accueil, Les trois soins, pack)", async ({ page }) => {
     for (const path of ["/", "/soins", "/pack"]) {
       await page.goto(path);
-      await expect(page.locator("main li").filter({ hasText: /Miraculous\s:\sPour stimuler la pousse, la repousse et ralentir la chute\./ }).first()).toBeVisible();
+      await expect(page.locator("main li").filter({ hasText: /Miraculous Hair Serum\s:\sPour stimuler la pousse, la repousse et ralentir la chute\./ }).first()).toBeVisible();
     }
   });
 });
@@ -335,7 +338,7 @@ test.describe("modifications du 22/10/2026", () => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await page.goto("/");
     await page.waitForTimeout(1700);
-    const img = page.locator('main img[alt="Flacon Miraculous Hair Serum"]').filter({ visible: true });
+    const img = page.getByRole("link", { name: "Flacon Miraculous Hair Serum" }).locator("img").filter({ visible: true });
     await expect(img).toHaveCSS("filter", "none");
     await img.hover();
     await expect(img).toHaveCSS("scale", "1.08");

@@ -80,22 +80,21 @@ test.describe("bandeau cookies", () => {
   });
 });
 
-test("pages juridiques : contenu, À COMPLÉTER, avertissement de relecture", async ({ page }) => {
+test("pages juridiques (modification 39) : contenu fourni, À COMPLÉTER visibles", async ({ page }) => {
   for (const [path, title] of [
     ["/mentions-legales", "Mentions légales"],
     ["/cgv", "Conditions générales de vente"],
+    ["/retractation", "Droit de rétractation"],
     ["/confidentialite", "Politique de confidentialité"],
-    ["/cookies", "Politique cookies"],
-    ["/retours", "Retours et droit de rétractation"],
+    ["/cookies", "Politique de cookies"],
   ]) {
     await page.goto(path);
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(title);
-    // Aucune consigne interne (INFOS, relecture, phase) affichée
-    await expect(page.locator("main")).not.toContainText(/INFOS|à faire relire|phase \d/);
+    await expect(page.locator("main")).not.toContainText(/INFOS|phase \d|Claude/);
   }
   await page.goto("/mentions-legales");
   await expect(page.getByText(/SIRET\s:\s922 151 170 00011/)).toBeVisible();
-  await expect(page.getByText(/À COMPLÉTER\s:\sstatut de l'entreprise/)).toBeVisible();
+  await expect(page.locator("mark", { hasText: "À COMPLÉTER : par exemple micro-entreprise" })).toBeVisible();
   await page.goto("/cgv");
   await expect(page.getByText(/3 jours ouvrés, préparation incluse/)).toBeVisible();
 });
@@ -114,4 +113,34 @@ test("SEO : sitemap, robots (non indexé avant la mise en ligne), données produ
   expect(ld.offers.price).toMatch(/^\d+\.\d\d$/);
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", /\/soins\/fabulous$/);
+});
+
+test("pied de page : une ligne « Mentions légales · CGV · Rétractation · Confidentialité · Cookies »", async ({ page }) => {
+  await page.goto("/");
+  const nav = page.getByRole("navigation", { name: "Informations légales" });
+  await expect(nav).toHaveText(/^Mentions légales\s*·\s*CGV\s*·\s*Rétractation\s*·\s*Confidentialité\s*·\s*Cookies$/);
+  for (const [name, href] of [["Mentions légales", "/mentions-legales"], ["CGV", "/cgv"], ["Rétractation", "/retractation"], ["Confidentialité", "/confidentialite"], ["Cookies", "/cookies"]]) {
+    await nav.getByRole("link", { name, exact: true }).click();
+    await expect(page).toHaveURL(new RegExp(`${href}$`));
+    await page.goBack();
+  }
+  await page.goto("/retours");
+  await expect(page).toHaveURL(/\/retractation$/);
+});
+
+test("CGV : sommaire cliquable, version, PDF ; rétractation : formulaire et PDF", async ({ page, request }) => {
+  await page.goto("/cgv");
+  await expect(page.getByText(/Version\s: v1\./)).toBeVisible();
+  await page.getByRole("link", { name: "Droit de rétractation", exact: true }).click();
+  await expect(page).toHaveURL(/#7-droit-de-retractation$/);
+  await expect(page.getByRole("heading", { name: "7. Droit de rétractation" })).toBeInViewport();
+  await expect(page.getByRole("link", { name: "Télécharger les CGV" })).toHaveAttribute("href", "/documents/cgv-v1.pdf");
+  await page.goto("/retractation");
+  await expect(page.getByRole("heading", { name: "Modèle de formulaire de rétractation" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Télécharger le formulaire" })).toHaveAttribute("href", "/documents/formulaire-de-retractation.pdf");
+  for (const pdf of ["/documents/cgv-v1.pdf", "/documents/formulaire-de-retractation.pdf"]) {
+    const r = await request.get(pdf);
+    expect(r.status(), pdf).toBe(200);
+    expect((await r.body()).subarray(0, 4).toString()).toBe("%PDF");
+  }
 });

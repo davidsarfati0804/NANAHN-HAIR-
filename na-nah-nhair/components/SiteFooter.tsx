@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { brand, footer, legal } from "@/content/site";
 import ToComplete from "@/components/ToComplete";
+import ManageCookiesButton from "@/components/consent/ManageCookiesButton";
 import BrandName, { BrandText } from "@/components/BrandName";
 
 export default function SiteFooter() {
   return (
-    <footer className="mt-10 bg-deep-violet sm:mt-16 text-white">
+    <footer className="mt-10 bg-deep-violet sm:mt-16 text-white print:hidden">
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:gap-10 sm:px-6 sm:py-24 md:grid-cols-3">
         <div>
           <p className="text-4xl">
@@ -45,19 +46,26 @@ export default function SiteFooter() {
         </div>
 
         <nav aria-label="Informations légales">
-          <ul className="flex flex-wrap gap-x-4 text-sm md:block md:space-y-1">
-            {footer.legalLinks.map((link) => (
-              <li key={link.href}>
-                <Link href={link.href} className="inline-flex min-h-11 items-center underline-offset-4 hover:underline md:inline-block md:min-h-0 md:py-1.5">
+          {/* Une seule ligne de liens, séparés par « · » */}
+          <ul className="flex flex-wrap items-center text-sm">
+            {footer.legalLinks.map((link, i) => (
+              <li key={link.href} className="flex items-center">
+                <Link href={link.href} className="inline-flex min-h-11 items-center underline-offset-4 hover:underline">
                   {link.label}
                 </Link>
+                {/* Séparateur après le lien : jamais en début de ligne sur téléphone */}
+                {i < footer.legalLinks.length - 1 && (
+                  <span aria-hidden className="px-2">
+                    ·
+                  </span>
+                )}
               </li>
             ))}
           </ul>
         </nav>
       </div>
       <p className="border-t border-white/20 px-4 py-4 text-center text-sm">
-        © {new Date().getFullYear()} <BrandText text={legal.brand} /> · SIRET {legal.siret}
+        © {new Date().getFullYear()} <BrandText text={legal.brand} /> · SIRET {legal.siret} · <ManageCookiesButton />
       </p>
     </footer>
   );

@@ -41,6 +41,10 @@ const nextConfig: NextConfig = {
     // Photos produits envoyées depuis le back-office (4 Mo maximum, voir app/admin/actions.ts)
     serverActions: { bodySizeLimit: "5mb" },
   },
+  // Ancienne page « Retours » remplacée par la page Rétractation (modification 39)
+  async redirects() {
+    return [{ source: "/retours", destination: "/retractation", permanent: true }];
+  },
   async headers() {
     return [
       { source: "/:path*", headers: securityHeaders },

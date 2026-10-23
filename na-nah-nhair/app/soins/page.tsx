@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import ButtonLink from "@/components/ButtonLink";
 import PhotoSlot from "@/components/PhotoSlot";
-import ProductCard from "@/components/ProductCard";
+import TrioSelector from "@/components/home/TrioSelector";
 import TrioHeading from "@/components/home/TrioHeading";
-import { pack, products, productPage, soinsPage } from "@/content/site";
+import { pack, productPage, soinsPage } from "@/content/site";
 import { formatPrice } from "@/lib/money";
 import { getShopData } from "@/lib/shop-data";
 import { BrandText } from "@/components/BrandName";
@@ -28,13 +28,13 @@ export default async function SoinsPage() {
 
       <section aria-labelledby="trio" className="mt-16">
         <TrioHeading />
-      <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {products.map((p) => (
-          <li key={p.slug}>
-            <ProductCard product={p} shop={shop[p.slug]} cta={soinsPage.cta} />
-          </li>
-        ))}
-      </ul>
+        <TrioSelector
+          prices={{
+            fabulous: formatPrice(shop.fabulous.priceCents),
+            miraculous: formatPrice(shop.miraculous.priceCents),
+            luxurious: formatPrice(shop.luxurious.priceCents),
+          }}
+        />
       </section>
 
       <section aria-labelledby="pack" className="mt-16 grid items-center gap-8 rounded-[2rem] bg-lavender p-6 text-deep-violet sm:p-10 md:grid-cols-[1fr_1.4fr]">

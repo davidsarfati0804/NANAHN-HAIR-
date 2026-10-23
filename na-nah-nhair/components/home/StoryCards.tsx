@@ -26,7 +26,7 @@ export default function StoryCards() {
       },
       { root, threshold: 0.6 },
     );
-    root.querySelectorAll("li").forEach((li) => observer.observe(li));
+    root.querySelectorAll(":scope > li").forEach((li) => observer.observe(li));
     return () => observer.disconnect();
   }, []);
 
@@ -37,19 +37,20 @@ export default function StoryCards() {
 
   return (
     <div>
+      {/* Grille à lignes communes (numéro, titre, texte, compléments) : même alignement dans les trois cartes */}
       <ul
         ref={list}
         tabIndex={0}
         aria-label={s.regionLabel}
-        className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-4 px-4 pb-4 [scrollbar-width:none] lg:mx-0 lg:grid lg:grid-cols-3 lg:gap-6 lg:overflow-visible lg:px-0"
+        className="relative -mx-4 grid snap-x snap-mandatory auto-cols-[82%] grid-flow-col grid-rows-[auto_auto_auto_auto] gap-x-4 overflow-x-auto scroll-px-4 px-4 pb-4 [scrollbar-width:none] sm:auto-cols-[60%] lg:mx-0 lg:grid-flow-row lg:grid-cols-3 lg:gap-x-6 lg:overflow-visible lg:px-0"
       >
         {s.cards.map((card, i) => (
           <li
             key={card.title}
             data-index={i}
-            className={`relative flex w-[82%] shrink-0 snap-center flex-col ${i === 1 ? "justify-center" : ""} rounded-[2.5rem] p-7 text-deep-violet sm:w-[60%] lg:w-auto ${cardStyles[i]}`}
+            className={`relative row-span-4 grid snap-center grid-rows-subgrid content-start rounded-[2.5rem] p-7 text-deep-violet ${cardStyles[i]}`}
           >
-            <span aria-hidden className="font-display text-7xl leading-none text-logo-violet">
+            <span aria-hidden className="block font-display text-7xl leading-none text-logo-violet">
               {i + 1}
             </span>
             <h3 className="mt-2 text-4xl">
@@ -58,8 +59,8 @@ export default function StoryCards() {
             </h3>
             <p className="mt-3 leading-relaxed">{card.text}</p>
 
-            {i === 2 && (
-              <div className="mt-auto pt-6">
+            {i === 2 ? (
+              <div className="pt-6">
                 <ul aria-hidden className="flex gap-2">
                   {(["fabulous", "miraculous", "luxurious"] as const).map((p) => (
                     <li key={p} className={`h-6 w-6 rounded-full ${themeClasses[p].base}`} />
@@ -72,6 +73,8 @@ export default function StoryCards() {
                   {s.cta.label}
                 </Link>
               </div>
+            ) : (
+              <div aria-hidden />
             )}
           </li>
         ))}

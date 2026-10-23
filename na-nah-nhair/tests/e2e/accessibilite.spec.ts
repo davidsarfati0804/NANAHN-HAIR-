@@ -20,7 +20,7 @@ const pages = [
   "/cgv",
   "/confidentialite",
   "/cookies",
-  "/retours",
+  "/retractation",
   "/admin/connexion",
 ];
 

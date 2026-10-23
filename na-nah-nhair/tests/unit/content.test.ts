@@ -146,7 +146,7 @@ describe("FAQ : réponses issues d'INFOS.md", () => {
     ]);
     const usage = all.find((i) => i.question === "Comment utiliser les sérums ?")!;
     expect(usage.todo).toBeUndefined();
-    expect(usage.blocks!.map((b) => b.title)).toEqual(["Fabulous", "Miraculous", "Luxurious"]);
+    expect(usage.blocks!.map((b) => b.title)).toEqual(["Fabulous Hair Serum", "Miraculous Hair Serum", "Luxurious Hair Serum"]);
     expect(usage.blocks![1].steps[0]).toEqual({
       label: "Étape 1",
       text: "Utiliser Miraculous Hair Serum des racines vers les pointes. Pour un soin complet : 3 pipettes sont nécessaires, à appliquer sur le cuir chevelu, les longueurs et les pointes.",
@@ -220,5 +220,25 @@ describe("modifications du 20/10/2026", () => {
   it("aucune consigne de BRIEF/INFOS affichée", () => {
     const all = JSON.stringify(site);
     for (const consigne of ["catégories exclusives", "INFOS §", "phase 6", "Claude Code"]) expect(all).not.toContain(consigne);
+  });
+});
+
+describe("pack : modifications 32, 33 et 37", () => {
+  it("noms complets dans « Contenu du pack », nouveau mode d'emploi partout, ancienne phrase disparue", () => {
+    const p = plain(site.pack);
+    expect(p.content.map((c) => `${c.product} : ${c.text}`)).toEqual([
+      "Fabulous Hair Serum : Pour gainer, hydrater et fortifier le cheveu.",
+      "Miraculous Hair Serum : Pour stimuler la pousse, la repousse et ralentir la chute.",
+      "Luxurious Hair Serum : Pour la touche finale, le volume et la brillance miroir.",
+    ]);
+    expect(p.usage).toBe(
+      "Alterne les sérums selon tes besoins ou crée ta propre routine : **Miraculous** pour ta cure, **Fabulous** pour prendre soin de toi, **Luxurious** pour briller en sortie. Pour un résultat optimisé, utilise le soin 3 fois par semaine.",
+    );
+    const faqPack = plain(site.faq).groups.flatMap((g) => g.items).find((i) => i.question === "Comment utiliser le pack des 3 soins ?")!;
+    expect(faqPack.answer).toEqual([p.usage]);
+    for (const old of ["Miraculous en cure", "Fabulous au quotidien"]) {
+      expect(JSON.stringify(site)).not.toContain(old);
+      expect(infos).not.toContain(old);
+    }
   });
 });

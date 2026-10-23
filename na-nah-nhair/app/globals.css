@@ -446,6 +446,28 @@
     transform: translateY(1rem) scale(0.97);
   }
 }
+/* Sélecteur « Quel soin est le tien ? » (modification 34) : transform uniquement, sans rebond */
+.trio-flacon {
+  transition: transform 0.4s ease-out;
+}
+.trio-carte[aria-pressed="true"] .trio-flacon {
+  transform: translateY(-10px) scale(1.08) rotateY(-8deg) rotateX(3deg);
+}
+.trio-ombre {
+  transform: translateX(-50%);
+  transition: transform 0.4s ease-out;
+}
+.trio-carte[aria-pressed="true"] .trio-ombre {
+  transform: translateX(calc(-50% + 6px));
+}
+@keyframes fondu {
+  from {
+    opacity: 0;
+  }
+}
+.fondu {
+  animation: fondu 0.2s ease-out;
+}
 @keyframes monte {
   from {
     opacity: 0;
@@ -485,7 +507,18 @@
   .quiz-slide-back,
   .apparition,
   .fleche-rebond,
+  .fondu,
   .flacon-monte {
     animation: none !important;
+  }
+  .trio-flacon,
+  .trio-ombre {
+    transition: none;
+  }
+  .trio-carte[aria-pressed="true"] .trio-flacon {
+    transform: none;
+  }
+  .trio-carte[aria-pressed="true"] .trio-ombre {
+    transform: translateX(-50%);
   }
 }

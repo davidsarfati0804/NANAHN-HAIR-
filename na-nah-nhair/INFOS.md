@@ -189,10 +189,10 @@ RICINUS COMMUNIS SEED OIL\*, OLEA EUROPAEA FRUIT OIL\*, COCOS NUCIFERA OIL\*, PE
 
 - **Photos** : `assets/images/pack.jpg` (fournie le 21/10/2026)
 - **Contenu du pack** :
-  1. Fabulous : Pour gainer, hydrater et fortifier le cheveu.
-  2. Miraculous : Pour stimuler la pousse, la repousse et ralentir la chute.
-  3. Luxurious : Pour la touche finale, le volume et la brillance miroir.
-- **Mode d’emploi du pack** : Alterne les sérums selon tes besoins ou crée ta propre routine : Miraculous en cure, Fabulous au quotidien et Luxurious pour briller en sortie.
+  1. Fabulous Hair Serum : Pour gainer, hydrater et fortifier le cheveu.
+  2. Miraculous Hair Serum : Pour stimuler la pousse, la repousse et ralentir la chute.
+  3. Luxurious Hair Serum : Pour la touche finale, le volume et la brillance miroir.
+- **Mode d’emploi du pack** : Alterne les sérums selon tes besoins ou crée ta propre routine : **Miraculous** pour ta cure, **Fabulous** pour prendre soin de toi, **Luxurious** pour briller en sortie. Pour un résultat optimisé, utilise le soin 3 fois par semaine.
 
 ---
 
@@ -329,3 +329,13 @@ Ces décisions de la propriétaire de la marque complètent et remplacent les pa
 - **Carte « Le bureau »** : sans photo.
 - **Carte « Le défi »** : « En première année de naturopathie, lors d’un stage, une femme souhaite prendre soin de ses cheveux et favoriser leur longueur. J’ai relevé le défi : une synergie sur mesure, rien que pour elle. »
 - **Page Mon histoire** : titre « Tout a commencé sur mon bureau. », cinq paragraphes et bloc final (textes dans `content/site.ts`, mot pour mot). Le mot « clinique » n'apparaît plus sur le site (il reste seulement dans BRIEF.md, texte d'origine).
+
+## 15. Modifications validées (23/10/2026)
+
+- **Contenu du pack** : noms complets (Fabulous Hair Serum, Miraculous Hair Serum, Luxurious Hair Serum), voir section 7.
+- **Mode d’emploi du pack** : nouveau texte (section 7), aussi dans la FAQ (sans le préfixe « Mode d’emploi du pack : »).
+- **Accueil et page Les trois soins** : sélecteur de flacons « Quel soin est le tien ? » (cartes à toucher, panneau du soin).
+- **Cartes « De mon bureau à ta routine »** : même alignement dans les trois cartes.
+- **FAQ, utilisation des sérums** : titres des blocs en nom complet.
+- **Pages juridiques** (mentions légales, CGV v1, rétractation, confidentialité, cookies) : textes fournis le 23/10/2026 dans `content/juridique/`, projets à faire relire. Ils remplacent les passages de la section 11 sur les retours : rétractation de 14 jours, produit renvoyé neuf et non utilisé, frais de retour à la charge de la cliente.
+- **Commande** : case CGV non pré-cochée, bouton « Commander et payer », récapitulatif avec adresse et délai, preuve d'acceptation (date, version des CGV, numéro de commande).

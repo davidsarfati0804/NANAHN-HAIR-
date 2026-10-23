@@ -41,25 +41,33 @@ Toutes les informations manquantes. Chacune apparaît sur le site sous forme d'e
 - [ ] Tarifs Colissimo et Mondial Relay (utiles si la livraison redevient payante)
 - [ ] Compte Mondial Relay pour le choix du point relais
 
-## Retours
+## Pages juridiques (modification 39) — textes fournis le 23/10/2026, à faire relire
 
-- [ ] Qui paie le retour en cas de rétractation
-- [ ] Validation de la politique de retours
-- [ ] CGV définitives (relecture juridique)
+Le build de **production** est bloqué tant qu'un de ces points reste dans les pages légales, les emails ou le pied de page
+(`npm run verifier:mise-en-ligne` affiche la liste exacte). Après chaque changement : `npm run pdf:juridique` (PDF des CGV et du formulaire).
 
-## Informations légales
-
-- [ ] Médiateur de la consommation (CGV)
-- [ ] Droit applicable et juridiction (CGV)
-- [ ] Durée de conservation des messages et des commandes (confidentialité)
-- [ ] Modèle de formulaire de rétractation, procédure et adresse de retour
-- [ ] Relecture juridique de toutes les pages légales
-
-- [ ] Statut de l'entreprise
-- [ ] Numéro de TVA / statut fiscal (mention sur les factures)
-- [ ] Hébergeur : Netlify (décidé). Coordonnées légales à confirmer pour les mentions légales
-- [ ] Responsable de publication
-- [ ] Lien Instagram de la marque
+- [x] Frais de retour en cas de rétractation : à la charge de la cliente (CGV et page Rétractation)
+- [ ] **Forme juridique** de l'entreprise (micro-entreprise, EI, SASU, SAS…) et, si société : capital, RCS (mentions légales, CGV, confidentialité)
+- [ ] **Directeur de la publication** (mentions légales)
+- [ ] **Numéro de TVA** ou « TVA non applicable » (mentions légales, CGV)
+- [ ] **Hébergeur** : nom, adresse, site, téléphone (mentions légales)
+- [ ] **Médiateur de la consommation** : nom, adresse, site (mentions légales, CGV)
+- [ ] **Zone de livraison** : France métropolitaine seulement, ou Corse et DOM-TOM (CGV)
+- [ ] **Délai de livraison** à confirmer avec les transporteurs (CGV)
+- [ ] **Frais de livraison** : « livraison offerte » ou grille de tarifs (CGV)
+- [ ] **Plateforme européenne de règlement des litiges** si vente dans d'autres pays de l'UE (CGV)
+- [ ] **Sceau de garantie** sur les flacons : activer ou retirer l'option « produits descellés » (CGV, Rétractation)
+- [ ] Option « dépréciation du produit » : à valider par un professionnel (CGV, Rétractation)
+- [ ] **Dates de mise à jour** des CGV, de la confidentialité et des cookies
+- [ ] **Téléphone** demandé à la commande ou non (confidentialité ; aujourd'hui le formulaire de commande ne le demande pas)
+- [ ] **Durées de conservation** des données à valider (confidentialité)
+- [ ] **Prestataires** et transferts hors UE à vérifier (Stripe, Supabase, Resend, transporteurs, hébergeur) (confidentialité)
+- [ ] Cookie de session du **paiement** : à décrire quand Stripe sera activé (cookies)
+- [ ] Phrase « aucun outil de mesure ni de publicité » à confirmer / mettre à jour (cookies)
+- [ ] Mentions « Projet de texte à faire relire avant publication » à retirer après relecture
+- [ ] **Relecture professionnelle** : CGV, rétractation, mentions légales, confidentialité, cookies ; conformité cosmétique (étiquetage, INCI, allégations pousse / repousse / chute)
+- [ ] **Envoi des emails** : service d'envoi à choisir ; l'email de confirmation est prêt (`lib/emails/confirmation.ts`, CGV et formulaire en PDF joints)
+- [ ] Lien Instagram de la marque (pied de page)
 
 ## Boutique
 

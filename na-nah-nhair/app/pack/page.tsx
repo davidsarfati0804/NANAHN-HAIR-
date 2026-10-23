@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import RichText from "@/components/RichText";
 import Link from "next/link";
 import ButtonLink from "@/components/ButtonLink";
 import AddToCart from "@/components/cart/AddToCart";
@@ -9,7 +10,6 @@ import { emotionalConcept, pack, productPage, products } from "@/content/site";
 import { formatPrice } from "@/lib/money";
 import { productJsonLd } from "@/lib/structured-data";
 import { getShopData } from "@/lib/shop-data";
-import { capitalize } from "@/lib/typography";
 import { themeClasses } from "@/lib/theme-classes";
 import { BrandText } from "@/components/BrandName";
 
@@ -39,7 +39,7 @@ export default async function PackPage() {
           <h2 className="mt-8 titre-h3">{pack.contentTitle}</h2>
           <ol className="mt-3 grid gap-3">
             {pack.content.map((c, i) => {
-              const p = products.find((x) => x.shortName === c.product)!;
+              const p = products.find((x) => x.slug === c.slug)!;
               const t = themeClasses[p.slug];
               return (
                 <li key={c.product} className={`${t.base} ${t.text} rounded-2xl px-4 py-3`}>
@@ -54,7 +54,9 @@ export default async function PackPage() {
 
           <LavenderBox className="mt-6">
             <h2 className="titre-h3">{pack.usageTitle}</h2>
-            <p className="mt-2">{capitalize(pack.usage)}</p>
+            <p className="mt-2">
+              <RichText text={pack.usage} />
+            </p>
           </LavenderBox>
 
           <AddToCart id="pack" name={pack.name} available={shop.pack.available} withQuantity className="mt-8" />

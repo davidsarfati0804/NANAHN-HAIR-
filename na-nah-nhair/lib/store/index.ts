@@ -154,6 +154,17 @@ export async function saveContactAttempts(log: AttemptLog) {
   await kv().setJSON("contact-attempts", log);
 }
 
+// Preuve d'acceptation des CGV (modification 39) : date et heure, version, numéro de commande, rien d'autre
+export type CgvAcceptance = { orderNumber: string; acceptedAt: string; cgvVersion: string };
+
+export async function recordCgvAcceptance(record: CgvAcceptance) {
+  await kv().setJSON(`cgv-acceptations/${record.orderNumber}`, record);
+}
+
+export async function getCgvAcceptance(orderNumber: string): Promise<CgvAcceptance | null> {
+  return kv().getJSON<CgvAcceptance>(`cgv-acceptations/${orderNumber}`);
+}
+
 // Diagnostic (page /api/sante) : type de stockage et temps de lecture, sans aucune donnée sensible
 export async function storeHealth() {
   const started = Date.now();

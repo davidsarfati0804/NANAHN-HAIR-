@@ -1,7 +1,11 @@
+import { spawnSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { legalPages } from "@/content/legal";
+import { juridique } from "@/content/juridique/textes.generated";
+import { CGV_VERSION, legalDocBySlug, legalDocs, legalHeadings, legalText } from "@/content/juridique";
+import { slugifyHeading } from "@/components/legal/LegalMarkdown";
 import { validateContact } from "@/lib/contact";
+import { CONSENT_MAX_AGE_MS, parseConsent } from "@/lib/consent";
 
 describe("formulaire de contact : validation serveur", () => {
   const ok = { name: "Inès", email: "ines@example.fr", subject: "Les soins", message: "Bonjour, une question sur Miraculous." };
@@ -31,39 +35,57 @@ describe("formulaire de contact : validation serveur", () => {
   });
 });
 
-describe("pages juridiques", () => {
-  const infos = readFileSync(new URL("../../INFOS.md", import.meta.url), "utf8");
-  const plain = (s: string) => s.replaceAll("\u00a0", " ");
-
-  it("les 5 pages existent", () => {
-    expect(legalPages.map((p) => p.slug)).toEqual(["mentions-legales", "cgv", "confidentialite", "cookies", "retours"]);
+describe("pages juridiques (modification 39)", () => {
+  it("les 5 pages existent, dans l'ordre du pied de page", () => {
+    expect(legalDocs.map((d) => d.slug)).toEqual(["mentions-legales", "cgv", "retractation", "confidentialite", "cookies"]);
   });
 
-  it("mentions légales : informations d'INFOS.md et À COMPLÉTER", () => {
-    const text = plain(JSON.stringify(legalPages[0]));
-    for (const v of ["922 151 170 00011", "24 rue Octave Feuillet, 75016 Paris", "01 80 18 29 29", "Contact@nanahnhair.com"]) {
-      expect(text).toContain(v);
-      expect(infos).toContain(v);
+  it("textes fournis repris mot pour mot (fichiers .md) dans le module généré", () => {
+    for (const d of legalDocs) {
+      const md = readFileSync(new URL(`../../content/juridique/${d.file}.md`, import.meta.url), "utf8");
+      expect(juridique[d.file]).toBe(md);
     }
-    expect(text).toContain("statut de l'entreprise");
-    expect(text).toContain("responsable de la publication");
   });
 
-  it("aucune consigne de BRIEF/INFOS affichée sur les pages juridiques", () => {
-    const text = JSON.stringify(legalPages);
-    for (const consigne of ["INFOS", "BRIEF", "phase 6", "à faire relire", "Claude"]) expect(text).not.toContain(consigne);
+  it("CGV : version v1, sommaire de 15 articles, une ancre par article", () => {
+    expect(CGV_VERSION).toBe("v1");
+    const cgv = legalDocBySlug("cgv")!;
+    expect(legalText(cgv)).toContain("Version : v1.");
+    const h = legalHeadings(cgv).filter((t) => t !== "Sommaire");
+    expect(h).toHaveLength(15);
+    expect(new Set(h.map(slugifyHeading)).size).toBe(15);
   });
 
-  it("retours : règles d'INFOS §11 mot pour mot", () => {
-    const text = plain(JSON.stringify(legalPages[4]));
-    for (const rule of [
-      "Droit de rétractation de 14 jours pour les produits non ouverts, comme l'impose la loi pour la vente à distance.",
-      "Les produits ouverts ne sont pas repris (raison d'hygiène).",
-      "Garantie légale en cas de produit défectueux ou erroné.",
-    ]) {
-      expect(text).toContain(rule);
-      expect(infos).toContain(rule.replace(/\.$/, ""));
-    }
-    expect(text).toContain("qui paie le retour");
+  it("mentions légales : informations connues présentes, manques signalés", () => {
+    const text = legalText(legalDocBySlug("mentions-legales")!);
+    for (const v of ["922 151 170 00011", "24 rue Octave Feuillet, 75016 Paris", "Contact@nanahnhair.com"]) expect(text).toContain(v);
+    expect(text).toContain("[À COMPLÉTER");
+  });
+
+  it("cookies : décrit le stockage réellement utilisé par le site", () => {
+    const text = legalText(legalDocBySlug("cookies")!);
+    for (const key of ["nnh-panier-v1", "nnh-consentement", "nnh_admin"]) expect(text).toContain(key);
+  });
+});
+
+describe("choix de cookies conservé 6 mois", () => {
+  it("valide pendant 6 mois, puis redemandé", () => {
+    const now = Date.UTC(2026, 9, 23);
+    expect(parseConsent(`refuse|${now - 1000}`, now)).toBe("refuse");
+    expect(parseConsent(`accepte|${now - CONSENT_MAX_AGE_MS + 1000}`, now)).toBe("accepte");
+    expect(parseConsent(`accepte|${now - CONSENT_MAX_AGE_MS - 1000}`, now)).toBeNull();
+    expect(parseConsent("refuse", now)).toBe("refuse");
+    expect(parseConsent("autre", now)).toBeNull();
+    expect(parseConsent(null, now)).toBeNull();
+  });
+});
+
+describe("garde-fou avant la mise en production", () => {
+  it("bloque tant qu'il reste des À COMPLÉTER et liste les endroits", () => {
+    const r = spawnSync(process.execPath, ["scripts/verifier-mise-en-ligne.mjs"], { cwd: new URL("../..", import.meta.url).pathname, encoding: "utf8" });
+    expect(r.status).toBe(1);
+    expect(r.stderr).toContain("Mise en production bloquée");
+    expect(r.stderr).toContain("content/juridique/mentions-legales.md");
+    expect(r.stderr).toContain("pied de page");
   });
 });

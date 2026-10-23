@@ -63,6 +63,12 @@ Aucun ne contient de promesse de résultat, d'allégation ou d'ingrédient inven
 - Image story : la mention de l'adresse du site et l'identifiant Instagram restent « À COMPLÉTER »
 - Guide de style (page cachée) : présentation des 4 choix à valider
 
+### Ajoutés le 23/10/2026
+- Commande : libellés du formulaire d'adresse (« Adresse de livraison », « Prénom », « Nom », « Email », « Adresse », « Code postal », « Ville »), « Vérifie ton adresse de livraison : les champs signalés sont incomplets. », « Délai de livraison », « Commande n° … : conditions générales de vente acceptées (version v1). », « La commande n'a pas pu être enregistrée. Vérifie ton panier et réessaie. »
+- Pages juridiques : boutons « Télécharger les CGV », « Télécharger le formulaire » ; pied de page « Gérer mes cookies » (cité par la politique de cookies)
+- Politique de cookies : lignes du tableau décrivant le stockage réellement utilisé (« nnh-panier-v1 », « nnh-consentement » 6 mois, cookie « nnh_admin » 8 heures, espace d'administration uniquement)
+- Email de confirmation : lignes du récapitulatif (« Livraison : … », « Total TTC : … », « Adresse de livraison : … »)
+
 ## 2. Pages juridiques (à faire relire de toute façon)
 
 Les faits viennent d'INFOS ; la mise en forme et les phrases de liaison sont de moi. En particulier :

@@ -21,7 +21,7 @@ export default function SiteHeader() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-lavender bg-white">
+    <header className="sticky top-0 z-40 border-b border-lavender bg-white print:hidden">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-1.5 sm:px-6 sm:py-3">
         {/* Logo transparent (SVG) centré dans un encadré crème aux coins arrondis (modification 18) */}
         <Link

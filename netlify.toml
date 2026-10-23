@@ -10,3 +10,8 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+# Garde-fou (modification 39) : en production, le build est refusé tant qu'une information
+# « À COMPLÉTER » reste dans les pages légales, les emails ou le pied de page.
+[context.production]
+  command = "npm run verifier:mise-en-ligne && npm run build"

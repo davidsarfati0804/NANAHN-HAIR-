@@ -272,15 +272,16 @@ export const pack = fr({
   },
   contentTitle: "Contenu du pack",
   contentShort: "Fabulous + Miraculous + Luxurious",
+  // Noms complets dans cette carte (modification 32, exception à la modification 29)
   content: [
-    // Textes de la modification 4 (20/10/2026)
-    { product: "Fabulous", text: "Pour gainer, hydrater et fortifier le cheveu." },
-    { product: "Miraculous", text: "Pour stimuler la pousse, la repousse et ralentir la chute." },
-    { product: "Luxurious", text: "Pour la touche finale, le volume et la brillance miroir." },
-  ],
+    { slug: "fabulous", product: "Fabulous Hair Serum", text: "Pour gainer, hydrater et fortifier le cheveu." },
+    { slug: "miraculous", product: "Miraculous Hair Serum", text: "Pour stimuler la pousse, la repousse et ralentir la chute." },
+    { slug: "luxurious", product: "Luxurious Hair Serum", text: "Pour la touche finale, le volume et la brillance miroir." },
+  ] as Array<{ slug: ProductTheme; product: string; text: string }>,
   usageTitle: "Mode d’emploi du pack",
+  // Modification 33 (version finale) ; **…** = en gras (composant RichText)
   usage:
-    "Alterne les sérums selon tes besoins ou crée ta propre routine : Miraculous en cure, Fabulous au quotidien et Luxurious pour briller en sortie.",
+    "Alterne les sérums selon tes besoins ou crée ta propre routine : **Miraculous** pour ta cure, **Fabulous** pour prendre soin de toi, **Luxurious** pour briller en sortie. Pour un résultat optimisé, utilise le soin 3 fois par semaine.",
 });
 
 // Page « Mon histoire » : textes fournis le 22/10/2026 (modification 31), mot pour mot
@@ -314,6 +315,8 @@ export const home = fr({
     accroche: "À chaque personnalité, son soin.",
     title: "Quel soin est le tien ?",
     cta: "Voir la fiche",
+    // Sélecteur de flacons (modification 34)
+    touchHint: "Touche un flacon",
   },
   products: {
     kicker: "Les soins",
@@ -399,13 +402,15 @@ export const legal = fr({
 });
 
 export const footer = fr({
+  // Une seule ligne : « Mentions légales · CGV · Rétractation · Confidentialité · Cookies » (modification 39)
   legalLinks: [
     { label: "Mentions légales", href: "/mentions-legales" },
     { label: "CGV", href: "/cgv" },
-    { label: "Politique de confidentialité", href: "/confidentialite" },
-    { label: "Politique cookies", href: "/cookies" },
-    { label: "Retours et droit de rétractation", href: "/retours" },
+    { label: "Rétractation", href: "/retractation" },
+    { label: "Confidentialité", href: "/confidentialite" },
+    { label: "Cookies", href: "/cookies" },
   ],
+  manageCookies: "Gérer mes cookies",
   contactTitle: "Contact",
   followTitle: "Instagram",
 });
@@ -521,7 +526,7 @@ export const faq: { title: string; groups: FaqGroup[] } = fr({
           question: "Comment utiliser les sérums ?",
           answer: null,
           blocks: products.map((p) => ({
-            title: p.shortName,
+            title: `${p.shortName} Hair Serum`,
             steps: [
               {
                 label: "Étape 1",
@@ -536,7 +541,7 @@ export const faq: { title: string; groups: FaqGroup[] } = fr({
         },
         {
           question: "Comment utiliser le pack des 3 soins ?",
-          answer: [`${pack.usageTitle} : ${pack.usage}`],
+          answer: [pack.usage],
         },
       ],
     },
@@ -747,7 +752,26 @@ export const checkoutTexts = fr({
   carrierTitle: "Mode de livraison",
   relayTitle: "Point relais Mondial Relay",
   summaryTitle: "Récapitulatif",
-  pay: "Payer",
+  // Paiement conforme (modification 39, textes de content/juridique/textes-boutique.md)
+  pay: "Commander et payer",
+  cgvBefore: "J'ai lu et j'accepte les ",
+  cgvLink: "conditions générales de vente",
+  cgvAfter: ".",
+  cgvError: "Pour passer commande, accepte les conditions générales de vente.",
+  withdrawal: {
+    text: "Droit de rétractation de 14 jours après réception. Les frais de retour sont à ta charge. Détails dans les ",
+    cgv: "CGV",
+    and: " et sur la page ",
+    page: "Rétractation",
+    end: ".",
+  },
+  addressTitle: "Adresse de livraison",
+  fields: { firstName: "Prénom", lastName: "Nom", email: "Email", address: "Adresse", postalCode: "Code postal", city: "Ville" },
+  addressError: "Vérifie ton adresse de livraison : les champs signalés sont incomplets.",
+  delayLabel: "Délai de livraison",
+  delayValue: "3 jours ouvrés, préparation incluse",
+  accepted: (orderNumber: string, version: string) => `Commande n° ${orderNumber} : conditions générales de vente acceptées (version ${version}).`,
+  submitError: "La commande n'a pas pu être enregistrée. Vérifie ton panier et réessaie.",
   backToCart: "Modifier le panier",
   paymentPending: "Le paiement en ligne (carte, Apple Pay, Google Pay) arrive bientôt.",
   carrierRequired: "Choisis un mode de livraison.",

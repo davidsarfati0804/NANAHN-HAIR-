@@ -82,7 +82,7 @@ test("FAQ : les questions s'ouvrent et affichent la réponse", async ({ page }) 
   // Utilisation : un bloc par soin, étapes 1 et 2 (21/10/2026)
   await page.getByText("Comment utiliser les sérums ?").click();
   for (const name of ["Fabulous", "Miraculous", "Luxurious"]) {
-    await expect(page.getByRole("heading", { level: 3, name, exact: true })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 3, name: `${name} Hair Serum`, exact: true })).toBeVisible();
     await expect(page.getByText(new RegExp(`Utiliser ${name} Hair Serum des racines vers les pointes\\. Pour un soin complet\\s: 3 pipettes`))).toBeVisible();
   }
   await expect(page.getByText(/Laver les cheveux avec un shampoing classique\. Pour un résultat optimisé, utiliser le soin 3 fois par semaine\./)).toHaveCount(3);
@@ -201,7 +201,7 @@ test.describe("rendu mobile (audit du 21/10/2026)", () => {
     const [a, b] = [(await cards.nth(0).boundingBox())!, (await cards.nth(1).boundingBox())!];
     expect(Math.round(a.y)).toBe(Math.round(b.y));
     await page.goto("/");
-    const trio = page.getByRole("list", { name: "Quel soin est le tien ?" });
+    const trio = page.getByRole("list", { name: "Les trois soins" });
     expect(await trio.evaluate((el) => el.scrollWidth > el.clientWidth)).toBe(true);
     expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(0);
     await page.goto("/quiz");

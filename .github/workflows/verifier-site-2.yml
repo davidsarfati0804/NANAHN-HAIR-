@@ -69,10 +69,14 @@ jobs:
           check / "fabulous-detoure-240.webp"
           check /mon-histoire "Tout a commencé sur mon bureau"
           check /boutique ">Hair Serum<"
+          check /cgv "Version : v1"
+          check /retractation "Modèle de formulaire de rétractation"
+          check / "Touche un flacon"
+          check /commande "Commander et payer"
           check /boutique "grid-cols-2 gap-3"
           check /soins/fabulous "fixed inset-x-0 bottom-0"
           check /soins/fabulous "<details"
-          for p in /story/luxurious.png /images/produits/pack-800.webp /quiz/resultat/fabulous /quiz/resultat/miraculous; do
+          for p in /documents/cgv-v1.pdf /documents/formulaire-de-retractation.pdf /story/luxurious.png /images/produits/pack-800.webp /quiz/resultat/fabulous /quiz/resultat/miraculous; do
             curl -s -o /dev/null -m 30 -w "$p %{http_code} %{content_type}\n" "$URL$p" || echo "$p erreur"
           done
           echo "--- en-tête CSP"

@@ -55,7 +55,7 @@ jobs:
           check / "chaque personnalité, son soin"
           check / "Créés par une naturopathe"
           check / "retour à l&#x27;accueil"
-          check /boutique "/images/produits/fabulous-800.jpg"
+          check /boutique "fabulous-detoure-480.png"
           check / "la repousse et ralentir la chute"
           check /soins "Quel soin est le tien"
           check /soins/fabulous "vitamine E"

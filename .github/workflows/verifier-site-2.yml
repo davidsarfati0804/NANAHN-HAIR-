@@ -58,7 +58,7 @@ jobs:
           check /boutique "fabulous-detoure-480.png"
           check / "la repousse et ralentir la chute"
           check /soins "Quel soin est le tien"
-          check /soins/fabulous "vitamine E"
+          check /soins/fabulous "riches en vitamine"
           check /quiz/resultat/luxurious "Je suis Luxurious"
           check /quiz/resultat/luxurious "Ton résultat"
           check /faq "Contact@nanahnhair.com"
@@ -76,7 +76,7 @@ jobs:
           check /mon-histoire "Voici Miraculous"
           check / "trois personnalités, une même envie"
           check /commande "Commander et payer"
-          check /boutique "grid-cols-2 gap-3"
+          check /boutique "grid-cols-2 gap-x-3"
           check /soins/fabulous "fixed inset-x-0 bottom-0"
           check /soins/fabulous "<details"
           for p in /documents/cgv-v1.pdf /documents/formulaire-de-retractation.pdf /story/luxurious.png /images/produits/pack-800.webp /quiz/resultat/fabulous /quiz/resultat/miraculous; do

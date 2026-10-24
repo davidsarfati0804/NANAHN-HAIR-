@@ -11,7 +11,7 @@ Toutes les informations manquantes. Chacune apparaît sur le site sous forme d'e
 - [x] Fabulous, Miraculous et Luxurious : mode d'emploi, précautions et illustrations (fournis le 20/10/2026)
 - [ ] Validation des allégations avant mise en ligne (en particulier Miraculous et le pack : pousse, chute)
 - [ ] FAQ de chaque produit : questions et réponses
-- [ ] FAQ générale : frais de retour, procédure en cas de produit défectueux (mode d'emploi, précautions et contact commande : fournis le 21/10/2026)
+- [x] FAQ générale : retours et produit défectueux (fournis le 24/10/2026)
 
 ## Visuels et identité
 
@@ -68,12 +68,11 @@ Le build de **production** est bloqué tant qu'un de ces points reste dans les p
 - [ ] Mentions « Projet de texte à faire relire avant publication » à retirer après relecture
 - [ ] **Relecture professionnelle** : CGV, rétractation, mentions légales, confidentialité, cookies ; conformité cosmétique (étiquetage, INCI, allégations pousse / repousse / chute)
 - [ ] **Envoi des emails** : service d'envoi à choisir ; l'email de confirmation est prêt (`lib/emails/confirmation.ts`, CGV et formulaire en PDF joints)
-- [ ] Lien Instagram de la marque (pied de page)
 
 ## Boutique
 
 - [x] Égalité Fabulous / Luxurious au quiz : résultat Luxurious (21/10/2026) ; bloc Miraculous gardé sur tous les résultats
-- [ ] Images story du quiz (`assets/story/`) : adresse du site et identifiant Instagram à ajouter, puis relancer `node scripts/generer-stories.mjs`
+- [ ] Images story du quiz (`assets/story/`) : adresse du site à ajouter (Instagram @na.nah.nhair fait le 24/10/2026), puis relancer `node scripts/generer-stories.mjs`
 - [ ] Stock initial de chaque sérum (à saisir dans le back-office ; vide = stock non suivi)
 
 ## Technique

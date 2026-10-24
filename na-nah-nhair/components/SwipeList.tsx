@@ -1,14 +1,26 @@
 "use client";
 
-import { Children, type ReactNode, useEffect, useRef, useState } from "react";
+import { type ReactNode, useEffect, useRef, useState } from "react";
 import { home } from "@/content/site";
 
+export type SwipeCard = { key: string; className: string; content: ReactNode };
+
 // Cartes qui défilent au doigt sur téléphone (scroll-snap), en grille à partir de md.
-// Même principe que les cartes « Mon histoire » ; points indicateurs + aide au défilement sous md.
-export default function SwipeList({ label, children, gridClass = "md:grid-cols-2 lg:grid-cols-3" }: { label: string; children: ReactNode; gridClass?: string }) {
+// `rows` : nombre de lignes communes ; chaque enfant direct du contenu d'une carte occupe une ligne,
+// alignée sur la même ligne des autres cartes (CSS subgrid, modification 41).
+export default function SwipeList({
+  label,
+  cards,
+  rows,
+  gridClass = "md:grid-cols-3",
+}: {
+  label: string;
+  cards: SwipeCard[];
+  rows: number;
+  gridClass?: string;
+}) {
   const list = useRef<HTMLUListElement>(null);
   const [active, setActive] = useState(0);
-  const items = Children.toArray(children);
 
   useEffect(() => {
     const root = list.current;
@@ -36,19 +48,20 @@ export default function SwipeList({ label, children, gridClass = "md:grid-cols-2
         ref={list}
         tabIndex={0}
         aria-label={label}
-        className={`relative -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-4 px-4 pb-3 [scrollbar-width:none] md:mx-0 md:grid md:gap-6 md:overflow-visible md:px-0 md:pb-0 ${gridClass}`}
+        style={{ gridTemplateRows: `repeat(${rows}, auto)` }}
+        className={`relative -mx-4 grid snap-x snap-mandatory auto-cols-[84%] grid-flow-col gap-x-4 overflow-x-auto scroll-px-4 px-4 pb-3 [scrollbar-width:none] md:mx-0 md:grid-flow-row md:gap-x-6 md:gap-y-0 md:overflow-visible md:px-0 md:pb-0 ${gridClass}`}
       >
-        {items.map((child, i) => (
-          <li key={i} data-index={i} className="relative w-[84%] shrink-0 snap-center md:w-auto">
-            {child}
+        {cards.map((card, i) => (
+          <li key={card.key} data-index={i} style={{ gridRow: `span ${rows}` }} className={`relative grid snap-center grid-rows-subgrid md:mb-6 ${card.className}`}>
+            {card.content}
           </li>
         ))}
       </ul>
       <div className="mt-1 flex items-center justify-center gap-4 md:hidden">
         <div className="flex gap-1">
-          {items.map((_, i) => (
+          {cards.map((card, i) => (
             <button
-              key={i}
+              key={card.key}
               type="button"
               onClick={() => goTo(i)}
               aria-label={home.story.dotLabel(i + 1)}

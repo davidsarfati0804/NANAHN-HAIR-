@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import ButtonLink from "@/components/ButtonLink";
 import AddToCart from "@/components/cart/AddToCart";
 import JsonLd from "@/components/JsonLd";
-import LavenderBox from "@/components/LavenderBox";
 import PhotoSlot from "@/components/PhotoSlot";
 import UsageGuide from "@/components/product/UsageGuide";
 import Fold from "@/components/product/Fold";
@@ -45,9 +44,13 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   const { products: shop } = await getShopData();
   const t = themeClasses[p.slug];
   const others = products.filter((o) => o.slug !== p.slug);
+  // Blocs encadrés : ton moyen du soin (plus soutenu que le fond clair de la page), texte foncé du soin
+  const block = `${t.base} ${t.text} rounded-3xl p-6 sm:p-8`;
+  const foldTone = `${t.base} ${t.text}`;
 
   return (
-    <article className="pb-20 md:pb-0">
+    <article className={`${t.soft} ${t.text} pb-20 md:pb-0`}>
+      {/* Toute la fiche aux couleurs du soin, ton sur ton (modification 46) */}
       <JsonLd data={productJsonLd({ name: p.name, description: p.description.intro, path: `/soins/${p.slug}`, shop: shop[p.slug] })} />
       <div className={`${t.soft}`}>
         <div className="mx-auto grid max-w-6xl gap-6 px-4 py-6 sm:px-6 md:grid-cols-2 md:gap-10 md:py-16">
@@ -111,7 +114,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       </div>
 
       <div className="mx-auto grid max-w-6xl gap-4 px-4 py-8 sm:gap-6 sm:px-6 sm:py-24 md:grid-cols-2">
-        <LavenderBox as="section" className="md:col-span-2">
+        <section className={`${block} md:col-span-2`}>
           <h2 className="titre-h3">{l.descriptionTitle}</h2>
           <p className="mt-3">{p.description.intro}</p>
           <p className="mt-3">{p.description.vitamins}</p>
@@ -122,9 +125,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             ))}
           </ul>
           {p.description.outro && <p className="mt-3">{p.description.outro}</p>}
-        </LavenderBox>
+        </section>
 
-        <Fold title={l.inciTitle} className="md:col-span-2">
+        <Fold title={l.inciTitle} tone={foldTone} className="md:col-span-2">
           <p className="text-sm leading-relaxed">{p.inci}</p>
           <ul className="mt-3 text-sm">
             {p.inciNotes.map((n) => (
@@ -134,12 +137,12 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         </Fold>
 
         {/* Mode d'emploi fourni : il contient aussi les précautions, affiché sur toute la largeur */}
-        <Fold title={l.usageTitle} className={p.usage ? "md:col-span-2" : ""}>
+        <Fold title={l.usageTitle} tone={foldTone} className={p.usage ? "md:col-span-2" : ""}>
           {p.usage ? <UsageGuide guide={p.usage} theme={p.slug} /> : <ToComplete label={`mode d'emploi ${p.shortName}`} />}
         </Fold>
 
         {!p.usage && (
-          <section className="rounded-3xl border-2 border-lavender p-6 sm:p-8">
+          <section className={block}>
             <h2 className="titre-h3">{l.precautionsTitle}</h2>
             <div className="mt-3">
               {p.precautions ? <p>{p.precautions}</p> : <ToComplete label={`précautions d'emploi ${p.shortName}`} />}
@@ -147,7 +150,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           </section>
         )}
 
-        <Fold title={l.faqTitle} className="md:col-span-2">
+        <Fold title={l.faqTitle} tone={foldTone} className="md:col-span-2">
           <ToComplete label={`FAQ ${p.shortName} (questions et réponses)`} />
         </Fold>
       </div>

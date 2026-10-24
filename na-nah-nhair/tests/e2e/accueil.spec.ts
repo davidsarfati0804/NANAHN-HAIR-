@@ -322,7 +322,7 @@ test.describe("modifications du 21/10/2026", () => {
       expect(await page.content(), path).not.toMatch(/vitamines/i);
     }
     await page.goto("/soins/miraculous");
-    await expect(page.getByText(/^Formulé à base d’huiles végétales riches en vitamine B, il agit comme un véritable boost/)).toBeVisible();
+    await expect(page.getByText(/^Formulé à base d’huiles végétales riches en vitamine\sB, il agit comme un véritable boost/)).toBeVisible();
   });
 
   test("contenu du pack : nouvelle ligne Miraculous (accueil, Les trois soins, pack)", async ({ page }) => {
@@ -342,7 +342,8 @@ test.describe("modifications du 22/10/2026", () => {
     await expect(img).toHaveCSS("filter", "none");
     await img.hover();
     await expect(img).toHaveCSS("scale", "1.08");
-    await expect(img).toHaveCSS("filter", /drop-shadow/);
+    // Aucune ombre sur l'image du flacon (modification 42)
+    await expect(img).toHaveCSS("filter", "none");
     await img.click();
     await expect(page).toHaveURL(/\/soins\/miraculous$/);
   });
@@ -363,5 +364,62 @@ test.describe("modifications du 22/10/2026", () => {
     await expect(page.locator("main")).not.toContainText(/clinique/i);
     await page.goto("/");
     await expect(page.locator("section[aria-labelledby=histoire]")).not.toContainText(/clinique/i);
+  });
+});
+
+test.describe("modifications du 24/10/2026", () => {
+  test("premier écran : plus de ronds de couleur, ombre douce sous chaque flacon", async ({ page }) => {
+    await page.goto("/");
+    const hero = page.locator("main section").first();
+    // Le fond dégradé (formes floues blur-3xl) reste ; les ronds derrière les flacons sont supprimés
+    await expect(hero.locator("ul .rounded-full")).toHaveCount(0);
+    for (const name of ["Fabulous", "Miraculous", "Luxurious"]) {
+      const link = page.getByRole("link", { name: `Flacon ${name} Hair Serum` }).filter({ visible: true });
+      await expect(link.locator("span[aria-hidden].blur-\\[8px\\]")).toHaveCount(1);
+    }
+  });
+
+  for (const w of [375, 390, 768, 1280]) {
+    test(`cartes alignées sur des lignes communes (${w} px)`, async ({ page }) => {
+      await page.setViewportSize({ width: w, height: 900 });
+      await page.goto("/");
+      // « Les trois soins » : odeur, contenance et lien prix à la même hauteur dans les trois cartes
+      const cards = page.getByRole("list", { name: "Les trois soins" }).locator(":scope > li");
+      const tops = async (sel: string) => cards.evaluateAll((lis, s) => lis.map((li) => Math.round(li.querySelector(s)!.getBoundingClientRect().top - li.getBoundingClientRect().top)), sel);
+      for (const sel of ["dl div:nth-child(1)", "dl div:nth-child(2)", "a"]) expect(new Set(await tops(sel)).size, sel).toBe(1);
+      const heights = await cards.evaluateAll((lis) => lis.map((li) => Math.round(li.getBoundingClientRect().height)));
+      expect(new Set(heights).size).toBe(1);
+      // « De mon bureau à ta routine » : pastilles juste sous le texte de la carte 3
+      const story = page.getByRole("list", { name: "Mon histoire en trois cartes" }).locator(":scope > li");
+      const gap = await story.nth(2).evaluate((li) => {
+        const p = li.querySelector("p")!.getBoundingClientRect();
+        const dots = li.querySelector("ul")!.getBoundingClientRect();
+        return dots.top - p.bottom;
+      });
+      expect(gap).toBeLessThanOrEqual(30);
+      expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(0);
+    });
+  }
+
+  test("fiches produits aux couleurs du soin (aucun bloc violet)", async ({ page }) => {
+    for (const [slug, bg] of [["fabulous", "rgb(178, 220, 203)"], ["miraculous", "rgb(185, 165, 226)"], ["luxurious", "rgb(235, 196, 222)"]]) {
+      await page.goto(`/soins/${slug}`);
+      const description = page.locator("section").filter({ has: page.getByRole("heading", { name: "Description" }) });
+      await expect(description).toHaveCSS("background-color", bg);
+      await expect(page.locator("details").first()).toHaveCSS("background-color", bg);
+    }
+    await page.goto("/soins/luxurious");
+    await expect(page.getByText(/^Son parfum de fleur d’oranger transforme ta routine capillaire/)).toBeVisible();
+  });
+
+  test("Instagram : lien sur la page Contact et dans le pied de page", async ({ page }) => {
+    await page.goto("/contact");
+    const link = page.locator("main").getByRole("link", { name: "Instagram de Na Nah N’hair (s'ouvre dans un nouvel onglet)" });
+    await expect(link).toHaveAttribute("href", "https://www.instagram.com/na.nah.nhair/");
+    await expect(link).toHaveAttribute("target", "_blank");
+    await expect(link).toHaveAttribute("rel", "noopener noreferrer");
+    await expect(link).toHaveText("@na.nah.nhair");
+    await expect(page.locator("footer").getByRole("link", { name: /Instagram de Na Nah/ })).toHaveAttribute("href", "https://www.instagram.com/na.nah.nhair/");
+    await expect(page.getByText("À COMPLÉTER : lien Instagram")).toHaveCount(0);
   });
 });

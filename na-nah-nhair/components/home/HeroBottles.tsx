@@ -6,10 +6,10 @@ import { themeClasses } from "@/lib/theme-classes";
 
 // Trois flacons du premier écran (modification 22) : Fabulous à gauche, Miraculous au centre
 // (plus grand, plus haut), Luxurious à droite ; légèrement superposés, inclinés vers l'extérieur.
-const layout: Record<ProductTheme, { order: number; tilt: string; size: string; lift: string; blob: string; delay: string }> = {
-  fabulous: { order: 0, tilt: "-rotate-[5deg]", size: "w-[27%]", lift: "mt-6", blob: "bg-fabulous", delay: "0s" },
-  miraculous: { order: 1, tilt: "", size: "w-[33%] z-10 -mx-[3%]", lift: "", blob: "bg-miraculous", delay: "0.5s" },
-  luxurious: { order: 2, tilt: "rotate-[5deg]", size: "w-[27%]", lift: "mt-6", blob: "bg-luxurious-vivid", delay: "1s" },
+const layout: Record<ProductTheme, { order: number; tilt: string; size: string; lift: string; delay: string }> = {
+  fabulous: { order: 0, tilt: "-rotate-[5deg]", size: "w-[27%]", lift: "mt-6", delay: "0s" },
+  miraculous: { order: 1, tilt: "", size: "w-[33%] z-10 -mx-[3%]", lift: "", delay: "0.5s" },
+  luxurious: { order: 2, tilt: "rotate-[5deg]", size: "w-[27%]", lift: "mt-6", delay: "1s" },
 };
 
 
@@ -26,11 +26,9 @@ export default function HeroBottles({ className = "" }: { className?: string }) 
             className={`flacon-monte group relative hover:z-20 focus-within:z-20 ${l.size} ${l.lift}`}
             style={{ animationDelay: l.delay }}
           >
-            {/* Rond doux dans la couleur du soin, derrière le flacon */}
-            <div aria-hidden className={`absolute left-1/2 top-[34%] aspect-square w-[118%] -translate-x-1/2 rounded-full ${l.blob} opacity-80`} />
             <Link href={`/soins/${p.slug}`} className={`relative block rounded-3xl ${l.tilt}`}>
               {p.cutout.available ? (
-                // Au survol, au focus ou au toucher : le flacon se soulève, grossit et dépasse de son rond, avec une ombre qui suit sa forme
+                // Au survol, au focus ou au toucher : le flacon se soulève et grossit (aucune ombre sur l'image : modification 42)
                 <picture>
                   <source type="image/webp" srcSet={cutoutSrcSet(p.slug, "webp")} sizes="(max-width: 1023px) 30vw, 150px" />
                   <img
@@ -42,7 +40,7 @@ export default function HeroBottles({ className = "" }: { className?: string }) 
                     alt={p.cutout.alt}
                     loading="eager"
                     fetchPriority="high"
-                    className="relative h-auto w-full transition-[translate,scale,filter] duration-300 ease-out group-hover:-translate-y-3 group-hover:scale-[1.08] group-hover:drop-shadow-[0_18px_20px_rgba(0,0,0,0.2)] group-focus-within:-translate-y-3 group-focus-within:scale-[1.08] group-focus-within:drop-shadow-[0_18px_20px_rgba(0,0,0,0.2)] group-active:-translate-y-3 group-active:scale-[1.08] group-active:drop-shadow-[0_18px_20px_rgba(0,0,0,0.2)] motion-reduce:transition-none"
+                    className="relative z-10 h-auto w-full transition-[translate,scale] duration-300 ease-out group-hover:-translate-y-3 group-hover:scale-[1.08] group-focus-within:-translate-y-3 group-focus-within:scale-[1.08] group-active:-translate-y-3 group-active:scale-[1.08] motion-reduce:transition-none"
                   />
                 </picture>
               ) : (
@@ -55,6 +53,8 @@ export default function HeroBottles({ className = "" }: { className?: string }) 
                   <span className="mt-1 text-[0.5rem] sm:text-[0.65rem]">{p.shortName}</span>
                 </span>
               )}
+              {/* Ombre au sol sous la base du flacon (décorative), inclinée avec lui */}
+              <span aria-hidden className="pointer-events-none absolute -bottom-1 left-1/2 h-2.5 w-[70%] -translate-x-1/2 rounded-[50%] bg-deep-violet/[0.18] blur-[8px]" />
             </Link>
           </li>
         );

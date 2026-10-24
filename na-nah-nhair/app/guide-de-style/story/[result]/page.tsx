@@ -49,7 +49,7 @@ export default async function StoryTemplate({ params }: { params: Promise<{ resu
             </span>
           </p>
           <p className="mt-4 font-bold" style={{ fontSize: 34 }}>
-            <span className="whitespace-nowrap rounded-lg bg-logo-yellow px-2 text-deep-violet">{s.instagramTodo}</span>
+            <span className="whitespace-nowrap">{s.instagram}</span>
           </p>
         </div>
       </div>

@@ -24,39 +24,37 @@ export default async function BoutiquePage() {
         <p className="rounded-2xl bg-lavender px-4 py-2 text-sm font-bold text-deep-violet">{brand.madeIn}</p>
       </div>
 
-      <ul className="mt-6 grid grid-cols-2 gap-3 sm:mt-10 sm:gap-6 lg:grid-cols-4">
+      {/* 6 lignes communes à toutes les cartes (photo, nom, HAIR SERUM, phrase, prix, bouton) : modification 41 */}
+      <ul className="mt-6 grid grid-cols-2 gap-x-3 sm:mt-10 sm:gap-x-6 lg:grid-cols-4">
         {products.map((p) => {
           const t = themeClasses[p.slug];
           const s = shop[p.slug];
           return (
-            <li key={p.slug} className={`${t.base} ${t.text} flex flex-col rounded-3xl p-2 sm:rounded-[2rem] sm:p-3`}>
+            <li key={p.slug} className={`${t.base} ${t.text} row-span-6 mb-3 grid grid-rows-subgrid rounded-3xl p-2 sm:mb-6 sm:rounded-[2rem] sm:p-3`}>
               <Link href={`/soins/${p.slug}`} className="block">
                 <PhotoSlot photo={p.photo} src={s.photoUrl} theme={p.slug} className="aspect-[4/5] rounded-[1.5rem]" sizes="(max-width: 640px) 50vw, 25vw" />
               </Link>
-              <div className="flex flex-1 flex-col p-2 sm:p-3">
-                <h2 className={`nom-produit max-sm:text-[1.75rem] ${t.name}`}>
-                  <Link href={`/soins/${p.slug}`}>{p.shortName}</Link>
-                </h2>
-                <p className="text-[0.8125rem] font-bold uppercase leading-snug">{productPage.serumLabel} · {p.volume.replace(" ", "\u00a0")}</p>
-                <p className="mt-2 text-sm font-bold">{p.phrase}</p>
-                <p className="mt-auto pt-3 nom-produit max-sm:text-[1.75rem] sm:pt-4">{formatPrice(s.priceCents)}</p>
-                <AddToCart id={p.slug} name={p.name} available={s.available} className="mt-2" buttonClassName={`${t.button} w-full max-sm:px-2 max-sm:text-[0.75rem]`} />
-              </div>
+              <h2 className={`px-2 pt-2 nom-produit max-sm:text-[1.75rem] sm:px-3 sm:pt-3 ${t.name}`}>
+                <Link href={`/soins/${p.slug}`}>{p.shortName}</Link>
+              </h2>
+              <p className="px-2 text-[0.8125rem] font-bold uppercase leading-snug sm:px-3">{productPage.serumLabel} · {p.volume.replace(" ", "\u00a0")}</p>
+              <p className="mt-2 px-2 text-sm font-bold sm:px-3">{p.phrase}</p>
+              <p className="px-2 pt-3 nom-produit max-sm:text-[1.75rem] sm:px-3 sm:pt-4">{formatPrice(s.priceCents)}</p>
+              <AddToCart id={p.slug} name={p.name} available={s.available} className="mt-2 px-2 pb-2 sm:px-3 sm:pb-3" buttonClassName={`${t.button} w-full max-sm:px-2 max-sm:text-[0.75rem]`} />
             </li>
           );
         })}
-        <li className="flex flex-col rounded-3xl bg-lavender p-2 text-deep-violet sm:rounded-[2rem] sm:p-3">
+        <li className="row-span-6 mb-3 grid grid-rows-subgrid rounded-3xl bg-lavender p-2 text-deep-violet sm:mb-6 sm:rounded-[2rem] sm:p-3">
           <Link href="/pack" className="block">
             <PhotoSlot photo={pack.photo} src={shop.pack.photoUrl} className="aspect-[4/5] rounded-[1.5rem] bg-white" sizes="(max-width: 640px) 50vw, 25vw" />
           </Link>
-          <div className="flex flex-1 flex-col p-2 sm:p-3">
-            <h2 className="nom-produit max-sm:text-[1.75rem]">
-              <Link href="/pack">{pack.name}</Link>
-            </h2>
-            <p className="mt-2 text-sm font-bold">{pack.contentShort}</p>
-            <p className="mt-auto pt-3 nom-produit max-sm:text-[1.75rem] sm:pt-4">{formatPrice(shop.pack.priceCents)}</p>
-            <AddToCart id="pack" name={pack.name} available={shop.pack.available} className="mt-2" buttonClassName="w-full bg-deep-violet text-white hover:bg-plum max-sm:px-2 max-sm:text-[0.75rem]" />
-          </div>
+          <h2 className="px-2 pt-2 nom-produit max-sm:text-[1.75rem] sm:px-3 sm:pt-3">
+            <Link href="/pack">{pack.name}</Link>
+          </h2>
+          <div aria-hidden />
+          <p className="mt-2 px-2 text-sm font-bold sm:px-3">{pack.contentShort}</p>
+          <p className="px-2 pt-3 nom-produit max-sm:text-[1.75rem] sm:px-3 sm:pt-4">{formatPrice(shop.pack.priceCents)}</p>
+          <AddToCart id="pack" name={pack.name} available={shop.pack.available} className="mt-2 px-2 pb-2 sm:px-3 sm:pb-3" buttonClassName="w-full bg-deep-violet text-white hover:bg-plum max-sm:px-2 max-sm:text-[0.75rem]" />
         </li>
       </ul>
     </div>

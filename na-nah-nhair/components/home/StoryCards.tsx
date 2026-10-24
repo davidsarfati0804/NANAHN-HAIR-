@@ -22,7 +22,9 @@ export default function StoryCards() {
     if (!root) return;
     const observer = new IntersectionObserver(
       (entries) => {
-        for (const e of entries) if (e.isIntersecting) setActive(Number((e.target as HTMLElement).dataset.index));
+        for (const e of entries)
+          if (e.isIntersecting)
+            setActive(Number((e.target as HTMLElement).dataset.index));
       },
       { root, threshold: 0.6 },
     );
@@ -32,50 +34,62 @@ export default function StoryCards() {
 
   const goTo = (i: number) => {
     const li = list.current?.children[i] as HTMLElement | undefined;
-    li?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    li?.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
+    });
   };
 
   return (
     <div>
-      {/* Grille à lignes communes (numéro, titre, texte, compléments) : même alignement dans les trois cartes */}
+      {/* Grille à lignes communes (numéro, titre, texte) : même alignement dans les trois cartes ;
+          dans la carte 3, pastilles et bouton suivent le texte (modification 44), sans ancrage en bas */}
       <ul
         ref={list}
         tabIndex={0}
         aria-label={s.regionLabel}
-        className="relative -mx-4 grid snap-x snap-mandatory auto-cols-[82%] grid-flow-col grid-rows-[auto_auto_auto_auto] gap-x-4 overflow-x-auto scroll-px-4 px-4 pb-4 [scrollbar-width:none] sm:auto-cols-[60%] lg:mx-0 lg:grid-flow-row lg:grid-cols-3 lg:gap-x-6 lg:overflow-visible lg:px-0"
+        className="relative -mx-4 grid snap-x snap-mandatory auto-cols-[82%] grid-flow-col grid-rows-[auto_auto_auto] gap-x-4 overflow-x-auto scroll-px-4 px-4 pb-4 [scrollbar-width:none] sm:auto-cols-[60%] lg:mx-0 lg:grid-flow-row lg:grid-cols-3 lg:gap-x-6 lg:overflow-visible lg:px-0"
       >
         {s.cards.map((card, i) => (
           <li
             key={card.title}
             data-index={i}
-            className={`relative row-span-4 grid snap-center grid-rows-subgrid content-start rounded-[2.5rem] p-7 text-deep-violet ${cardStyles[i]}`}
+            className={`relative row-span-3 grid snap-center grid-rows-subgrid content-start rounded-[2.5rem] p-7 text-deep-violet ${cardStyles[i]}`}
           >
-            <span aria-hidden className="block font-display text-7xl leading-none text-logo-violet">
+            <span
+              aria-hidden
+              className="block font-display text-7xl leading-none text-logo-violet"
+            >
               {i + 1}
             </span>
             <h3 className="mt-2 text-4xl">
               <span className="sr-only">{i + 1}. </span>
               {card.title}
             </h3>
-            <p className="mt-3 leading-relaxed">{card.text}</p>
-
-            {i === 2 ? (
-              <div className="pt-6">
-                <ul aria-hidden className="flex gap-2">
-                  {(["fabulous", "miraculous", "luxurious"] as const).map((p) => (
-                    <li key={p} className={`h-6 w-6 rounded-full ${themeClasses[p].base}`} />
-                  ))}
-                </ul>
-                <Link
-                  href={s.cta.href}
-                  className="mt-5 bouton bouton--principal"
-                >
-                  {s.cta.label}
-                </Link>
-              </div>
-            ) : (
-              <div aria-hidden />
-            )}
+            <div className="mt-3">
+              <p className="leading-relaxed">{card.text}</p>
+              {i === 2 && (
+                <div className="pt-6">
+                  <ul aria-hidden className="flex gap-2">
+                    {(["fabulous", "miraculous", "luxurious"] as const).map(
+                      (p) => (
+                        <li
+                          key={p}
+                          className={`h-6 w-6 rounded-full ${themeClasses[p].base}`}
+                        />
+                      ),
+                    )}
+                  </ul>
+                  <Link
+                    href={s.cta.href}
+                    className="mt-5 bouton bouton--principal"
+                  >
+                    {s.cta.label}
+                  </Link>
+                </div>
+              )}
+            </div>
           </li>
         ))}
       </ul>
@@ -92,7 +106,9 @@ export default function StoryCards() {
               aria-current={active === i}
               className="flex h-11 w-11 items-center justify-center"
             >
-              <span className={`block h-3 w-3 rounded-full ${active === i ? "bg-deep-violet" : "bg-lavender"}`} />
+              <span
+                className={`block h-3 w-3 rounded-full ${active === i ? "bg-deep-violet" : "bg-lavender"}`}
+              />
             </button>
           ))}
         </div>

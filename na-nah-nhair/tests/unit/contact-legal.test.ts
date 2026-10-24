@@ -86,6 +86,7 @@ describe("garde-fou avant la mise en production", () => {
     expect(r.status).toBe(1);
     expect(r.stderr).toContain("Mise en production bloquée");
     expect(r.stderr).toContain("content/juridique/mentions-legales.md");
-    expect(r.stderr).toContain("pied de page");
+    // Instagram renseigné le 24/10/2026 : plus rien à compléter dans le pied de page
+    expect(r.stderr).not.toContain("pied de page");
   });
 });

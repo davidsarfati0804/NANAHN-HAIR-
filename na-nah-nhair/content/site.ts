@@ -49,7 +49,8 @@ export type Product = {
   shortName: string;
   // Prix INFOS.md : valeur initiale du catalogue (le prix affiché vient du back-office)
   infosPrice: string;
-  photo: { file: string; alt: string; available: boolean; responsive?: string };
+  // cutout : flacon détouré affiché à la place de la photo à fond blanc (modification 40)
+  photo: { file: string; alt: string; available: boolean; responsive?: string; cutout?: ProductTheme };
   // Photo détourée (fond transparent) du premier écran de l'accueil (modification 22)
   cutout: { file: string; alt: string; available: boolean };
   personality: string;
@@ -135,6 +136,7 @@ export const products: Product[] = fr([
       alt: "Flacon Fabulous Hair Serum, sérum capillaire de 30 ml",
       available: true,
       responsive: "fabulous",
+      cutout: "fabulous",
     },
     cutout: { file: "fabulous.png", alt: "Flacon Fabulous Hair Serum", available: true },
     personality: "la fraîche, naturelle et spontanée.",
@@ -178,6 +180,7 @@ export const products: Product[] = fr([
       alt: "Flacon Miraculous Hair Serum, sérum capillaire de 30 ml",
       available: true,
       responsive: "miraculous",
+      cutout: "miraculous",
     },
     cutout: { file: "miraculous.png", alt: "Flacon Miraculous Hair Serum", available: true },
     personality: "la déterminée, ambitieuse et audacieuse.",
@@ -222,6 +225,7 @@ export const products: Product[] = fr([
       alt: "Flacon Luxurious Hair Serum, sérum capillaire de 30 ml",
       available: true,
       responsive: "luxurious",
+      cutout: "luxurious",
     },
     cutout: { file: "luxurious.png", alt: "Flacon Luxurious Hair Serum", available: true },
     personality: "la féminine, élégante et sensorielle.",

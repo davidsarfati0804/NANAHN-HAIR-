@@ -25,6 +25,7 @@ Toutes les informations manquantes. Chacune apparaît sur le site sous forme d'e
 - [x] `assets/images/fabulous.jpg`, `miraculous.jpg`, `luxurious.jpg` : fournies le 21/10/2026 (versions web : `scripts/preparer-photos.py`)
 - [x] `assets/images/pack.jpg` : fournie le 21/10/2026
 - [x] `assets/images/fabulous.png`, `miraculous.png`, `luxurious.png` : photos détourées fournies le 22/10/2026 (versions web : `scripts/preparer-detoures.py`)
+- [ ] Détourage manuel des flacons (mêmes noms de fichiers) : la version du 24/10/2026 laisse des restes blancs irréguliers au bas du flacon, surtout Fabulous (capture `captures/mod-40/`)
 - [ ] 4 choix de style à valider (A ou B) : section « Les 4 choix à valider » de `/guide-de-style`
 - [x] `assets/logo/` : logo fourni le 19/10/2026 (utilisé dans l'en-tête et comme titre de l'accueil)
 - [ ] Logo en version vectorielle (SVG) ou police du logo, pour un rendu encore plus net

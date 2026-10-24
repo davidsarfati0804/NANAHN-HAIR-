@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { home, productPage, products } from "@/content/site";
 import type { ProductTheme } from "@/lib/design-tokens";
+import { cutoutHeight, cutoutSrcSet } from "@/lib/cutouts";
 import { themeClasses } from "@/lib/theme-classes";
 
 // Sélecteur « Quel soin est le tien ? » (modification 34) : trois cartes-boutons, le flacon touché
@@ -14,8 +15,6 @@ const cardColor: Record<ProductTheme, string> = {
   miraculous: "bg-miraculous",
   luxurious: "bg-luxurious-vivid", // rose plus soutenu que le flacon
 };
-// Hauteur des versions 240 px des photos détourées (proportions des fichiers fournis)
-const cutoutHeight: Record<ProductTheme, number> = { fabulous: 632, miraculous: 622, luxurious: 650 };
 
 export default function TrioSelector({ prices }: { prices: Record<ProductTheme, string> }) {
   const [selected, setSelected] = useState<ProductTheme | null>(null);
@@ -44,14 +43,16 @@ export default function TrioSelector({ prices }: { prices: Record<ProductTheme, 
                 {/* Ombre au sol : se décale de 6 px quand le flacon se soulève */}
                 <span
                   aria-hidden
-                  className="trio-ombre absolute bottom-[8%] left-1/2 h-3 w-[55%] rounded-[50%] bg-deep-violet/20 blur-[3px]"
+                  className="trio-ombre absolute bottom-[4.5%] left-1/2 h-3 w-[55%] rounded-[50%] bg-deep-violet/20 blur-[3px]"
                 />
-                <span className="absolute inset-x-0 bottom-[10%] -top-[22%] flex justify-center">
+                <span className="absolute inset-x-0 bottom-[6%] -top-[22%] flex justify-center">
                   {p.cutout.available ? (
                     <picture className="h-full">
-                      <source type="image/webp" srcSet={`/images/produits/${p.slug}-detoure-240.webp`} />
+                      <source type="image/webp" srcSet={cutoutSrcSet(p.slug, "webp")} sizes="(max-width: 640px) 25vw, 180px" />
                       <img
                         src={`/images/produits/${p.slug}-detoure-240.png`}
+                        srcSet={cutoutSrcSet(p.slug, "png")}
+                        sizes="(max-width: 640px) 25vw, 180px"
                         width={240}
                         height={cutoutHeight[p.slug]}
                         alt={p.cutout.alt}

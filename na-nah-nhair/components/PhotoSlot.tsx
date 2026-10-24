@@ -1,9 +1,10 @@
 import type { ProductTheme } from "@/lib/design-tokens";
+import { cutoutHeight, cutoutSrcSet } from "@/lib/cutouts";
 import { themeClasses } from "@/lib/theme-classes";
 
 // photo.file : nom de la photo dans assets/images/ ; si « responsive », versions générées par
 // scripts/preparer-photos.py dans public/images/produits/ (400, 800, 1200 px, WebP + JPG, format 4:5)
-type Photo = { file: string; alt: string; available: boolean; responsive?: string };
+type Photo = { file: string; alt: string; available: boolean; responsive?: string; cutout?: ProductTheme };
 
 const WIDTHS = [400, 800, 1200];
 
@@ -32,6 +33,29 @@ export default function PhotoSlot({
       <div className={`relative overflow-hidden bg-white ${className}`}>
         {/* eslint-disable-next-line @next/next/no-img-element -- photo du back-office, servie telle quelle */}
         <img src={src} alt={photo.alt} loading={loading} className="absolute inset-0 h-full w-full object-contain" />
+      </div>
+    );
+  }
+
+  // Flacon détouré (modification 40) : posé sur le panneau blanc arrondi, sans ombre ni bord ajoutés
+  if (photo.available && photo.cutout) {
+    return (
+      <div className={`relative overflow-hidden bg-white ${className}`}>
+        <picture>
+          <source type="image/webp" srcSet={cutoutSrcSet(photo.cutout, "webp")} sizes={sizes} />
+          <img
+            src={`/images/produits/${photo.cutout}-detoure-480.png`}
+            srcSet={cutoutSrcSet(photo.cutout, "png")}
+            sizes={sizes}
+            width={240}
+            height={cutoutHeight[photo.cutout]}
+            alt={photo.alt}
+            loading={loading}
+            fetchPriority={priority ? "high" : "auto"}
+            decoding="async"
+            className="absolute inset-x-0 bottom-[7%] mx-auto h-[84%] w-auto"
+          />
+        </picture>
       </div>
     );
   }

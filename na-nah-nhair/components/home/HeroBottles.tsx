@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { products } from "@/content/site";
 import type { ProductTheme } from "@/lib/design-tokens";
+import { cutoutHeight, cutoutSrcSet } from "@/lib/cutouts";
 import { themeClasses } from "@/lib/theme-classes";
 
 // Trois flacons du premier écran (modification 22) : Fabulous à gauche, Miraculous au centre
@@ -11,8 +12,6 @@ const layout: Record<ProductTheme, { order: number; tilt: string; size: string; 
   luxurious: { order: 2, tilt: "rotate-[5deg]", size: "w-[27%]", lift: "mt-6", blob: "bg-luxurious-vivid", delay: "1s" },
 };
 
-// Hauteur des versions 240 px (proportions des photos fournies), pour éviter les sauts de mise en page
-const cutoutHeight: Record<ProductTheme, number> = { fabulous: 632, miraculous: 622, luxurious: 650 };
 
 export default function HeroBottles({ className = "" }: { className?: string }) {
   const ordered = [...products].sort((a, b) => layout[a.slug].order - layout[b.slug].order);
@@ -33,10 +32,10 @@ export default function HeroBottles({ className = "" }: { className?: string }) 
               {p.cutout.available ? (
                 // Au survol, au focus ou au toucher : le flacon se soulève, grossit et dépasse de son rond, avec une ombre qui suit sa forme
                 <picture>
-                  <source type="image/webp" srcSet={`/images/produits/${p.slug}-detoure-240.webp 240w, /images/produits/${p.slug}-detoure-480.webp 480w`} sizes="(max-width: 1023px) 30vw, 150px" />
+                  <source type="image/webp" srcSet={cutoutSrcSet(p.slug, "webp")} sizes="(max-width: 1023px) 30vw, 150px" />
                   <img
                     src={`/images/produits/${p.slug}-detoure-240.png`}
-                    srcSet={`/images/produits/${p.slug}-detoure-240.png 240w, /images/produits/${p.slug}-detoure-480.png 480w`}
+                    srcSet={cutoutSrcSet(p.slug, "png")}
                     sizes="(max-width: 1023px) 30vw, 150px"
                     width={240}
                     height={cutoutHeight[p.slug]}

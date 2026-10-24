@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import ContactForm from "@/components/contact/ContactForm";
 import LavenderBox from "@/components/LavenderBox";
-import ToComplete from "@/components/ToComplete";
 import { contactTexts as t, legal } from "@/content/site";
 import { BrandText } from "@/components/BrandName";
 
@@ -36,13 +35,15 @@ export default function ContactPage() {
           </address>
           <h2 className="mt-6 titre-h3">{t.instagramTitle}</h2>
           <div className="mt-2">
-            {legal.instagram ? (
-              <a href={legal.instagram} className="underline underline-offset-4" rel="noopener noreferrer" target="_blank">
-                Instagram
-              </a>
-            ) : (
-              <ToComplete label="lien Instagram" />
-            )}
+            <a
+              href={legal.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={t.instagramLabel}
+              className="inline-block py-2.5 underline underline-offset-4"
+            >
+              {legal.instagramHandle}
+            </a>
           </div>
         </LavenderBox>
       </aside>

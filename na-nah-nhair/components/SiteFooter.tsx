@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { brand, footer, legal } from "@/content/site";
-import ToComplete from "@/components/ToComplete";
+import { brand, contactTexts, footer, legal } from "@/content/site";
 import ManageCookiesButton from "@/components/consent/ManageCookiesButton";
 import BrandName, { BrandText } from "@/components/BrandName";
 
@@ -35,13 +34,15 @@ export default function SiteFooter() {
           </address>
           <h2 className="mt-6 titre-h3 text-white">{footer.followTitle}</h2>
           <div className="mt-2">
-            {legal.instagram ? (
-              <a href={legal.instagram} className="inline-block py-1.5 underline underline-offset-4">
-                Instagram
-              </a>
-            ) : (
-              <ToComplete label="lien Instagram" />
-            )}
+            <a
+              href={legal.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={contactTexts.instagramLabel}
+              className="inline-block py-1.5 underline underline-offset-4"
+            >
+              {legal.instagramHandle}
+            </a>
           </div>
         </div>
 

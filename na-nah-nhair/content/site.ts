@@ -154,7 +154,7 @@ export const products: Product[] = fr([
       intro:
         "Le Fabulous Hair Serum est le soin quotidien essentiel pour des cheveux en pleine santé, doux et équilibrés.",
       vitamins:
-        "Formulé à base d’huiles végétales riches en vitamine E, il agit en profondeur pour réconforter le cuir chevelu et renforcer la fibre capillaire jour après jour.",
+        "Formulé à base d’huiles végétales riches en vitamine E, il agit en profondeur pour réconforter le cuir chevelu et renforcer la fibre capillaire jour après jour.",
       helpsTitle: "Ce sérum aide à :",
       helps: [
         "Gainer, hydrater et fortifier le cheveu",
@@ -198,7 +198,7 @@ export const products: Product[] = fr([
       intro:
         "Le Miraculous Hair Serum est une cure capillaire intensive pensée pour accompagner les cheveux en phase de fragilité, de chute ou de ralentissement de pousse.",
       vitamins:
-        "Formulé à base d’huiles végétales riches en vitamine B, il agit comme un véritable boost naturel pour le cuir chevelu et la fibre capillaire.",
+        "Formulé à base d’huiles végétales riches en vitamine B, il agit comme un véritable boost naturel pour le cuir chevelu et la fibre capillaire.",
       helpsTitle: "Ce sérum aide à :",
       helps: [
         "Stimuler la pousse et la repousse des cheveux",
@@ -243,7 +243,7 @@ export const products: Product[] = fr([
       intro:
         "Le Luxurious Hair Serum est le soin éclat par excellence, pensé pour sublimer les cheveux ternes, secs et abîmés.",
       vitamins:
-        "Formulé à base d’huiles végétales riches en vitamine C, il nourrit la fibre capillaire en profondeur et révèle une chevelure plus forte, souple et éclatante.",
+        "Formulé à base d’huiles végétales riches en vitamine C, il nourrit la fibre capillaire en profondeur et révèle une chevelure plus forte, souple et éclatante.",
       helpsTitle: "Ce sérum aide à :",
       helps: [
         "Renforcer le cheveu terne, sec et abîmé",
@@ -251,7 +251,9 @@ export const products: Product[] = fr([
         "Donner de la brillance",
         "Donner du volume",
       ],
-      outro: null,
+      // Modification 47
+      outro:
+        "Son parfum de fleur d’oranger transforme ta routine capillaire en un vrai moment de plaisir. Utilisé comme touche finale, le Luxurious Hair Serum devient ce petit luxe que tu mérites, pour des cheveux élégants et lumineux.",
     },
     inci: "RICINUS COMMUNIS SEED OIL*, OLEA EUROPAEA FRUIT OIL*, COCOS NUCIFERA OIL*, PERSEA GRATISSIMA OIL*, BRASSICA NIGRA SEED OIL*, SIMMONDSIA CHINENSIS SEED OIL*, BRASSICA OLERACEA ITALICA SEED OIL*, VITIS VINIFERA SEED OIL, EMBLICA OFFICINALIS FRUIT POWDER*, FRAGRANCE, TOCOPHEROL, HELIANTHUS ANNUUS SEED OIL, ALPHA-HEXYLCINNAMALDEHYDE**, CITRAL**, D-LIMONENE**, GERANIOL**",
     inciNotes,
@@ -300,7 +302,7 @@ export const story = fr({
     "Parce qu’une femme n’est jamais qu’une seule chose. Elle peut être fraîche et spontanée, déterminée et audacieuse, élégante et sensorielle, parfois tout ça dans la même journée.",
   ],
   closing:
-    "C’est ainsi qu’est née Na Nah N’hair : trois soins, trois univers, une même envie, celle de te laisser prendre soin de tes cheveux tout en révélant les différentes facettes de ta personnalité, telle que tu es, pour de vrai.",
+    "C’est ainsi qu’est née Na Nah N’hair : trois soins, trois personnalités, une même envie, celle de te laisser prendre soin de tes cheveux tout en révélant tes différentes facettes, telle que tu es, pour de vrai.",
 });
 
 export const home = fr({
@@ -351,7 +353,7 @@ export const home = fr({
       },
       {
         title: "Les trois soins",
-        text: "Trois soins, trois univers, une même envie : prendre soin de tes cheveux.",
+        text: "Trois soins, trois personnalités, une même envie : prendre soin de tes cheveux.",
       },
     ],
     cta: { label: "Découvrir les trois soins", href: "/soins" },
@@ -370,9 +372,9 @@ export const home = fr({
         title: "Huiles végétales",
         text: null,
         lines: [
-          { product: "Fabulous", text: "Huiles végétales riches en vitamine E." },
-          { product: "Miraculous", text: "Huiles végétales riches en vitamine B." },
-          { product: "Luxurious", text: "Huiles végétales riches en vitamine C." },
+          { product: "Fabulous Hair Serum", text: "Huiles végétales riches en vitamine E." },
+          { product: "Miraculous Hair Serum", text: "Huiles végétales riches en vitamine B." },
+          { product: "Luxurious Hair Serum", text: "Huiles végétales riches en vitamine C." },
         ],
       },
       {
@@ -402,7 +404,9 @@ export const legal = fr({
   vat: null,
   host: "Netlify", // coordonnées à confirmer
   publicationManager: null,
-  instagram: null,
+  // Modification 50 : lien sortant simple, sans suivi
+  instagram: "https://www.instagram.com/na.nah.nhair/",
+  instagramHandle: "@na.nah.nhair",
 });
 
 export const footer = fr({
@@ -457,6 +461,7 @@ export const contactTexts = fr({
   privacy: "Tes informations servent uniquement à te répondre. Voir la politique de confidentialité.",
   coordinatesTitle: "Coordonnées",
   instagramTitle: "Instagram",
+  instagramLabel: "Instagram de Na Nah N’hair (s'ouvre dans un nouvel onglet)",
   errors: {
     name: "Indique ton nom (2 à 100 caractères).",
     email: "Indique une adresse email valide.",
@@ -502,7 +507,10 @@ export const soinsPage = fr({
 
 export const storyPage = fr({
   kicker: "Mon histoire",
-  founderTitle: "Miraculous, mon produit fondateur",
+  // Carte Miraculous (modification 49)
+  founderTitle: "Voici Miraculous.",
+  founderText: "Celui par lequel tout a commencé. Dans ma chambre, c’est lui que j’ai créé en premier : déterminé, ambitieux, un peu audacieux, comme celle qu’il accompagne.",
+  founderCta: "Découvrir Miraculous",
   shopCta: { label: "Découvrir les trois soins", href: "/soins" },
 });
 
@@ -612,16 +620,16 @@ export const faq: { title: string; groups: FaqGroup[] } = fr({
       items: [
         {
           question: "Puis-je retourner un produit ?",
+          // Modification 38 (version finale) ; l'adresse email devient un lien (RichText)
           answer: [
-            "Droit de rétractation de 14 jours pour les produits non ouverts, comme l'impose la loi pour la vente à distance.",
-            "Les produits ouverts ne sont pas repris (raison d'hygiène).",
+            "Oui. Tu disposes de 14 jours après réception pour te rétracter, sans avoir à te justifier. Pour cela, écris-nous à Contact@nanahnhair.com avant la fin de ce délai. Le soin doit être renvoyé neuf, non utilisé, dans son emballage d’origine. Les frais de retour sont à ta charge, et nous te conseillons de renvoyer ton colis avec suivi. Nous te remboursons dans les 14 jours suivant la réception du colis, par le même moyen de paiement que ta commande.",
           ],
-          todo: "qui paie les frais de retour",
         },
         {
           question: "Que faire si mon produit est défectueux ou erroné ?",
-          answer: ["Garantie légale en cas de produit défectueux ou erroné."],
-          todo: "procédure à suivre",
+          answer: [
+            "Écris-nous à Contact@nanahnhair.com avec ton numéro de commande et une photo du produit. Nous remplaçons ou remboursons le produit, et les frais de retour sont à notre charge. Tu bénéficies de la garantie légale de conformité.",
+          ],
         },
       ],
     },
@@ -710,7 +718,7 @@ export const quiz = fr({
     shareTitle: (name: string) => `Je suis ${name}.`,
     quizAt: "Fais le quiz sur",
     siteTodo: "À COMPLÉTER : adresse du site",
-    instagramTodo: "À COMPLÉTER : identifiant Instagram",
+    instagram: "@na.nah.nhair",
   },
 });
 

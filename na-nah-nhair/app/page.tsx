@@ -166,38 +166,52 @@ function Products({ shop }: { shop: Shop }) {
   return (
     <section aria-labelledby="soins" className="section">
       <SectionTitle kicker={home.products.kicker} title={home.products.title} id="soins" />
-      <SwipeList label={home.products.title}>
-        {products.map((p) => {
+      {/* 7 lignes communes aux trois cartes : nom, 3 bénéfices, odeur, contenance, lien prix (modification 41) */}
+      <SwipeList
+        label={home.products.title}
+        rows={7}
+        cards={products.map((p) => {
           const t = themeClasses[p.slug];
-          return (
-            <article key={p.slug} className={`h-full rounded-[2rem] border-2 ${t.border} p-5 md:p-6`}>
-              <h3>
-                <span className={`block nom-produit max-sm:text-[2rem] ${t.name}`}>{p.shortName}</span>
-                <span className="mt-1 block font-body text-sm font-bold uppercase tracking-wide"> {productPage.serumLabel}</span>
-              </h3>
-              <ul className="mt-4 space-y-2 md:mt-5 md:space-y-3">
-                {p.highlights.map((h) => (
-                  <li key={h} className={`${t.soft} ${t.text} rounded-2xl px-3 py-2 font-bold md:px-4 md:py-3`}>
-                    {h}
-                  </li>
-                ))}
-              </ul>
-              <dl className="mt-5 grid grid-cols-2 gap-2 text-sm">
-                <dt className="font-bold">{home.products.scentLabel}</dt>
-                <dd>{p.scent}</dd>
-                <dt className="font-bold">{home.products.volumeLabel}</dt>
-                <dd>{p.volume}</dd>
-              </dl>
-              <Link
-                href={`/soins/${p.slug}`}
-                className={`mt-3 inline-flex min-h-11 items-center font-bold underline underline-offset-4 ${t.text}`}
-              >
-                {p.shortName} · {formatPrice(shop[p.slug].priceCents)}
-              </Link>
-            </article>
-          );
+          return {
+            key: p.slug,
+            className: `rounded-[2rem] border-2 ${t.border} p-5 md:p-6`,
+            content: (
+              <>
+                <h3>
+                  <span className={`block nom-produit max-sm:text-[2rem] ${t.name}`}>{p.shortName}</span>
+                  <span className="mt-1 block font-body text-sm font-bold uppercase tracking-wide"> {productPage.serumLabel}</span>
+                </h3>
+                <ul className="contents">
+                  {p.highlights.map((h, i) => (
+                    <li
+                      key={h}
+                      className={`${t.soft} ${t.text} flex items-center rounded-2xl px-3 py-2 font-bold md:px-4 md:py-3 ${i === 0 ? "mt-4 md:mt-5" : "mt-2 md:mt-3"}`}
+                    >
+                      {h}
+                    </li>
+                  ))}
+                </ul>
+                <dl className="contents text-sm">
+                  <div className="mt-5 grid grid-cols-[6.5rem_1fr] gap-2 text-sm">
+                    <dt className="font-bold">{home.products.scentLabel}</dt>
+                    <dd>{p.scent}</dd>
+                  </div>
+                  <div className="mt-2 grid grid-cols-[6.5rem_1fr] gap-2 text-sm">
+                    <dt className="font-bold">{home.products.volumeLabel}</dt>
+                    <dd>{p.volume}</dd>
+                  </div>
+                </dl>
+                <Link
+                  href={`/soins/${p.slug}`}
+                  className={`mt-3 inline-flex min-h-11 items-center self-start font-bold underline underline-offset-4 ${t.text}`}
+                >
+                  {p.shortName} · {formatPrice(shop[p.slug].priceCents)}
+                </Link>
+              </>
+            ),
+          };
         })}
-      </SwipeList>
+      />
     </section>
   );
 }

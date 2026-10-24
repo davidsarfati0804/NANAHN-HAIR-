@@ -175,7 +175,9 @@ describe("histoire : textes du 22/10/2026 (modification 31) mot pour mot", () =>
     expect(story.paragraphs[4]).toBe(
       "Parce qu’une femme n’est jamais qu’une seule chose. Elle peut être fraîche et spontanée, déterminée et audacieuse, élégante et sensorielle, parfois tout ça dans la même journée.",
     );
-    expect(story.closing).toMatch(/^C’est ainsi qu’est née Na Nah N’hair : trois soins, trois univers, une même envie, celle de te laisser prendre soin/);
+    expect(story.closing).toBe(
+      "C’est ainsi qu’est née Na Nah N’hair : trois soins, trois personnalités, une même envie, celle de te laisser prendre soin de tes cheveux tout en révélant tes différentes facettes, telle que tu es, pour de vrai.",
+    );
     expect(plain(site.home).story.cards[0].text).toBe(
       "En première année de naturopathie, lors d’un stage, une femme souhaite prendre soin de ses cheveux et favoriser leur longueur. J’ai relevé le défi : une synergie sur mesure, rien que pour elle.",
     );
@@ -240,5 +242,30 @@ describe("pack : modifications 32, 33 et 37", () => {
       expect(JSON.stringify(site)).not.toContain(old);
       expect(infos).not.toContain(old);
     }
+  });
+});
+
+describe("modifications 38 à 50", () => {
+  it("plus aucune formule « trois univers » dans les textes du site", () => {
+    expect(JSON.stringify(site).toLowerCase()).not.toContain("trois univers");
+  });
+
+  it("« vitamine » + lettre insécables ; noms complets dans la carte Huiles végétales", () => {
+    const raw = JSON.stringify(site);
+    expect(raw).not.toMatch(/vitamine [EBC]\b/);
+    const oils = site.home.reasons.items.find((r) => r.lines)!;
+    expect(oils.lines!.map((l) => l.product)).toEqual(["Fabulous Hair Serum", "Miraculous Hair Serum", "Luxurious Hair Serum"]);
+  });
+
+  it("carte Miraculous de Mon histoire et Instagram", () => {
+    expect(plain(site.storyPage).founderTitle).toBe("Voici Miraculous.");
+    expect(plain(site.storyPage).founderCta).toBe("Découvrir Miraculous");
+    expect(site.legal.instagram).toBe("https://www.instagram.com/na.nah.nhair/");
+    expect(site.legal.instagramHandle).toBe("@na.nah.nhair");
+  });
+
+  it("FAQ retours : plus d'À COMPLÉTER", () => {
+    const retours = plain(site.faq).groups.find((g) => g.title === "Retours")!;
+    for (const item of retours.items) expect(item.todo).toBeUndefined();
   });
 });

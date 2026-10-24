@@ -2,12 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import ButtonLink from "@/components/ButtonLink";
 import { emotionalConcept, productBySlug, story, storyPage } from "@/content/site";
-import { formatPrice } from "@/lib/money";
-import { getShopData } from "@/lib/shop-data";
-import { capitalize } from "@/lib/typography";
 import { BrandText } from "@/components/BrandName";
-
-export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/mon-histoire" },
@@ -15,8 +10,7 @@ export const metadata: Metadata = {
   description: story.paragraphs[0],
 };
 
-export default async function StoryPage() {
-  const { products: shop } = await getShopData();
+export default function StoryPage() {
   const miraculous = productBySlug("miraculous")!;
 
   return (
@@ -51,10 +45,10 @@ export default async function StoryPage() {
       <section className="mx-auto mt-10 max-w-4xl sm:mt-16 px-4 sm:px-6">
         <div className="rounded-[2rem] bg-miraculous p-6 text-miraculous-deep sm:p-12">
           <h2 className="titre-h2">{storyPage.founderTitle}</h2>
-          <p className="mt-4">{capitalize(miraculous.text)}</p>
+          <p className="mt-4">{storyPage.founderText}</p>
           <p className="mt-4 accroche">{miraculous.phrase}</p>
           <Link href="/soins/miraculous" className="mt-6 inline-block rounded-full bg-miraculous-deep px-6 py-3 text-sm font-bold uppercase text-white">
-            {miraculous.shortName} · {formatPrice(shop.miraculous.priceCents)}
+            {storyPage.founderCta}
           </Link>
         </div>
       </section>

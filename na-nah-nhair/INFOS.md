@@ -166,6 +166,8 @@ Ce sérum aide à :
 - Donner de la brillance
 - Donner du volume
 
+Son parfum de fleur d’oranger transforme ta routine capillaire en un vrai moment de plaisir. Utilisé comme touche finale, le Luxurious Hair Serum devient ce petit luxe que tu mérites, pour des cheveux élégants et lumineux.
+
 ### Ingrédients (INCI)
 
 RICINUS COMMUNIS SEED OIL\*, OLEA EUROPAEA FRUIT OIL\*, COCOS NUCIFERA OIL\*, PERSEA GRATISSIMA OIL\*, BRASSICA NIGRA SEED OIL\*, SIMMONDSIA CHINENSIS SEED OIL\*, BRASSICA OLERACEA ITALICA SEED OIL\*, VITIS VINIFERA SEED OIL, EMBLICA OFFICINALIS FRUIT POWDER\*, FRAGRANCE, TOCOPHEROL, HELIANTHUS ANNUUS SEED OIL, ALPHA-HEXYLCINNAMALDEHYDE\*\*, CITRAL\*\*, D-LIMONENE\*\*, GERANIOL\*\*
@@ -212,7 +214,7 @@ RICINUS COMMUNIS SEED OIL\*, OLEA EUROPAEA FRUIT OIL\*, COCOS NUCIFERA OIL\*, PE
 - Date de fin du code NNH27 (pays : France)
 - Infos légales : statut de l'entreprise, TVA, hébergeur, responsable de publication
 - Email de réception : fourni (voir section 11)
-- Lien Instagram de la marque
+- Lien Instagram de la marque : fourni le 24/10/2026 (@na.nah.nhair)
 - Quiz : questions et règles validées (voir section 10)
 - Photos des flacons, du pack et photos détourées : fournies (21 et 22/10/2026) ; polices, logo
 
@@ -291,7 +293,7 @@ Cette section complète et remplace les `À COMPLÉTER` correspondants des secti
 - **Téléphone** : 01 80 18 29 29
 - **Email de contact et de réception des messages et commandes** : Contact@nanahnhair.com
 - **Statut de l'entreprise, TVA, hébergeur, responsable de publication** : `À COMPLÉTER`
-- **Instagram** : `À COMPLÉTER` (plus tard)
+- **Instagram** : @na.nah.nhair — https://www.instagram.com/na.nah.nhair/ (24/10/2026)
 
 ---
 
@@ -339,3 +341,15 @@ Ces décisions de la propriétaire de la marque complètent et remplacent les pa
 - **FAQ, utilisation des sérums** : titres des blocs en nom complet.
 - **Pages juridiques** (mentions légales, CGV v1, rétractation, confidentialité, cookies) : textes fournis le 23/10/2026 dans `content/juridique/`, projets à faire relire. Ils remplacent les passages de la section 11 sur les retours : rétractation de 14 jours, produit renvoyé neuf et non utilisé, frais de retour à la charge de la cliente.
 - **Commande** : case CGV non pré-cochée, bouton « Commander et payer », récapitulatif avec adresse et délai, preuve d'acceptation (date, version des CGV, numéro de commande).
+
+## 16. Modifications validées (24/10/2026)
+
+- **FAQ, retours** (mot pour mot ; les CGV et les mentions légales seront relues séparément) :
+  - « Puis-je retourner un produit ? » : Oui. Tu disposes de 14 jours après réception pour te rétracter, sans avoir à te justifier. Pour cela, écris-nous à Contact@nanahnhair.com avant la fin de ce délai. Le soin doit être renvoyé neuf, non utilisé, dans son emballage d’origine. Les frais de retour sont à ta charge, et nous te conseillons de renvoyer ton colis avec suivi. Nous te remboursons dans les 14 jours suivant la réception du colis, par le même moyen de paiement que ta commande.
+  - « Que faire si mon produit est défectueux ou erroné ? » : Écris-nous à Contact@nanahnhair.com avec ton numéro de commande et une photo du produit. Nous remplaçons ou remboursons le produit, et les frais de retour sont à notre charge. Tu bénéficies de la garantie légale de conformité.
+- **« trois univers » → « trois personnalités »** : carte « Les trois soins » et bloc final de la page Mon histoire (« …tout en révélant tes différentes facettes, telle que tu es, pour de vrai. »).
+- **Carte « Huiles végétales »** : noms complets en gras ; espace insécable entre « vitamine » et la lettre partout.
+- **Luxurious, description** : dernier paragraphe « Son parfum de fleur d’oranger transforme ta routine capillaire en un vrai moment de plaisir. Utilisé comme touche finale, le Luxurious Hair Serum devient ce petit luxe que tu mérites, pour des cheveux élégants et lumineux. »
+- **Page Mon histoire, carte Miraculous** : titre « Voici Miraculous. », texte « Celui par lequel tout a commencé. Dans ma chambre, c’est lui que j’ai créé en premier : déterminé, ambitieux, un peu audacieux, comme celle qu’il accompagne. », bouton « Découvrir Miraculous ».
+- **Instagram** : @na.nah.nhair (page Contact, pied de page, images story).
+- **Mise en page** : cartes alignées sur des lignes communes (soins, boutique, « De mon bureau à ta routine ») ; premier écran sans ronds de couleur, ombre douce sous chaque flacon ; fiches produits entièrement aux couleurs du soin.

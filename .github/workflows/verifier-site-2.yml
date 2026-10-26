@@ -76,6 +76,7 @@ jobs:
           check / "Touche un flacon"
           check /contact "na.nah.nhair"
           check /mon-histoire "Voici Miraculous"
+          check /soins/fabulous "fabulous-partage.jpg"
           check / "trois personnalités, une même envie"
           check /commande "Commander et payer"
           check /boutique "grid-cols-2 gap-x-3"

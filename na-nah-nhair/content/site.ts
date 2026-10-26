@@ -132,10 +132,9 @@ export const products: Product[] = fr([
     shortName: "Fabulous",
     infosPrice: "19,90 €",
     photo: {
-      file: "fabulous.jpg",
+      file: "fabulous.png",
       alt: "Flacon Fabulous Hair Serum, sérum capillaire de 30 ml",
       available: true,
-      responsive: "fabulous",
       cutout: "fabulous",
     },
     cutout: { file: "fabulous.png", alt: "Flacon Fabulous Hair Serum", available: true },
@@ -176,10 +175,9 @@ export const products: Product[] = fr([
     shortName: "Miraculous",
     infosPrice: "39,90 €",
     photo: {
-      file: "miraculous.jpg",
+      file: "miraculous.png",
       alt: "Flacon Miraculous Hair Serum, sérum capillaire de 30 ml",
       available: true,
-      responsive: "miraculous",
       cutout: "miraculous",
     },
     cutout: { file: "miraculous.png", alt: "Flacon Miraculous Hair Serum", available: true },
@@ -221,10 +219,9 @@ export const products: Product[] = fr([
     shortName: "Luxurious",
     infosPrice: "29,90 €",
     photo: {
-      file: "luxurious.jpg",
+      file: "luxurious.png",
       alt: "Flacon Luxurious Hair Serum, sérum capillaire de 30 ml",
       available: true,
-      responsive: "luxurious",
       cutout: "luxurious",
     },
     cutout: { file: "luxurious.png", alt: "Flacon Luxurious Hair Serum", available: true },
@@ -512,7 +509,8 @@ export const soinsPage = fr({
 export const storyPage = fr({
   kicker: "Mon histoire",
   // Carte Miraculous (modification 49)
-  founderTitle: "Voici Miraculous.",
+  // Modification 52 : point d'exclamation, espace fine insécable avant « ! »
+  founderTitle: "Voici Miraculous\u202f!",
   founderText: "Celui par lequel tout a commencé. Dans ma chambre, c’est lui que j’ai créé en premier : déterminé, ambitieux, un peu audacieux, comme celle qu’il accompagne.",
   founderCta: "Découvrir Miraculous",
   shopCta: { label: "Découvrir les trois soins", href: "/soins" },

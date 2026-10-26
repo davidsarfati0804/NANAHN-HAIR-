@@ -61,14 +61,19 @@ describe("produits conformes à INFOS.md", () => {
     expect(pack.infosPrice).toBe("69,90 €");
   });
 
-  it("photos des flacons et du pack : fichiers fournis, versions responsives et textes alternatifs", () => {
+  it("photos des flacons (détourages v3) et du pack : fichiers fournis, versions web et textes alternatifs", () => {
     for (const ph of [...products.map((p) => p.photo), pack.photo]) {
       expect(ph.available).toBe(true);
       expect(existsSync(new URL(`../../assets/images/${ph.file}`, import.meta.url))).toBe(true);
-      for (const w of [400, 800, 1200])
-        for (const ext of ["webp", "jpg"])
-          expect(existsSync(new URL(`../../public/images/produits/${ph.responsive}-${w}.${ext}`, import.meta.url))).toBe(true);
     }
+    for (const p of products) {
+      for (const f of ["160.webp", "320.webp", "max.webp", "max.png"])
+        expect(existsSync(new URL(`../../public/images/produits/${p.slug}-detoure-${f}`, import.meta.url)), f).toBe(true);
+      expect(existsSync(new URL(`../../public/images/produits/${p.slug}-partage.jpg`, import.meta.url))).toBe(true);
+      // Plus aucune ancienne photo à fond blanc des flacons
+      expect(existsSync(new URL(`../../public/images/produits/${p.slug}-800.jpg`, import.meta.url))).toBe(false);
+    }
+    for (const w of [400, 800, 1200]) expect(existsSync(new URL(`../../public/images/produits/pack-${w}.jpg`, import.meta.url))).toBe(true);
     expect(products.map((p) => p.photo.alt.replaceAll("\u00a0", " "))).toEqual([
       "Flacon Fabulous Hair Serum, sérum capillaire de 30 ml",
       "Flacon Miraculous Hair Serum, sérum capillaire de 30 ml",
@@ -258,7 +263,7 @@ describe("modifications 38 à 50", () => {
   });
 
   it("carte Miraculous de Mon histoire et Instagram", () => {
-    expect(plain(site.storyPage).founderTitle).toBe("Voici Miraculous.");
+    expect(plain(site.storyPage).founderTitle).toBe("Voici Miraculous\u202f!");
     expect(plain(site.storyPage).founderCta).toBe("Découvrir Miraculous");
     expect(site.legal.instagram).toBe("https://www.instagram.com/na.nah.nhair/");
     expect(site.legal.instagramHandle).toBe("@na.nah.nhair");

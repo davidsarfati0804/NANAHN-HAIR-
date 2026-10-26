@@ -37,7 +37,7 @@ Aucun ne contient de promesse de résultat, d'allégation ou d'ingrédient inven
 - Messages d'erreur du formulaire (nom, email, sujet, message, anti-spam, trop d'envois)
 
 ### Panier et commande
-- « Ton panier est vide. », « Continuer mes achats », « Commander », « Retirer », « Total TTC », « Calculée à l'étape suivante », « Mode de livraison », « Point relais Mondial Relay », « Modifier le panier »
+- « Ton panier est vide. », « Continuer mes achats », « Commander », « Retirer », « Total », « Calculée à l'étape suivante », « Mode de livraison », « Point relais Mondial Relay », « Modifier le panier »
 - « Montants recalculés par le serveur à partir des prix en vigueur. »
 - « Le paiement sécurisé (Stripe : carte, Apple Pay, Google Pay) sera activé à la phase 6. » (provisoire)
 - Messages d'erreur (stock insuffisant, produit indisponible, tarif indisponible, pas de transporteur)
@@ -67,7 +67,11 @@ Aucun ne contient de promesse de résultat, d'allégation ou d'ingrédient inven
 - Commande : libellés du formulaire d'adresse (« Adresse de livraison », « Prénom », « Nom », « Email », « Adresse », « Code postal », « Ville »), « Vérifie ton adresse de livraison : les champs signalés sont incomplets. », « Délai de livraison », « Commande n° … : conditions générales de vente acceptées (version v1). », « La commande n'a pas pu être enregistrée. Vérifie ton panier et réessaie. »
 - Pages juridiques : boutons « Télécharger les CGV », « Télécharger le formulaire » ; pied de page « Gérer mes cookies » (cité par la politique de cookies)
 - Politique de cookies : lignes du tableau décrivant le stockage réellement utilisé (« nnh-panier-v1 », « nnh-consentement » 6 mois, cookie « nnh_admin » 8 heures, espace d'administration uniquement)
-- Email de confirmation : lignes du récapitulatif (« Livraison : … », « Total TTC : … », « Adresse de livraison : … »)
+- Email de confirmation : lignes du récapitulatif (« Livraison : … », « Total : … », « Adresse de livraison : … »)
+
+### Ajoutés le 26/10/2026
+- Back-office : « TVA applicable » et son aide (réglage prévu, non activable)
+- Facture : intitulés « Facture », « N° », « Date », « Commande n° », « Client », « Produit », « Quantité », « Prix unitaire », « Montant », « Livraison », « Total »
 
 ## 2. Pages juridiques (à faire relire de toute façon)
 

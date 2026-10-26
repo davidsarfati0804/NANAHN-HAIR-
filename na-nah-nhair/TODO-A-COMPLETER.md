@@ -25,7 +25,7 @@ Toutes les informations manquantes. Chacune apparaît sur le site sous forme d'e
 - [x] `assets/images/fabulous.jpg`, `miraculous.jpg`, `luxurious.jpg` : fournies le 21/10/2026 (versions web : `scripts/preparer-photos.py`)
 - [x] `assets/images/pack.jpg` : fournie le 21/10/2026
 - [x] `assets/images/fabulous.png`, `miraculous.png`, `luxurious.png` : photos détourées fournies le 22/10/2026 (versions web : `scripts/preparer-detoures.py`)
-- [ ] Détourage manuel des flacons (mêmes noms de fichiers) : la version du 24/10/2026 laisse des restes blancs irréguliers au bas du flacon, surtout Fabulous (capture `captures/mod-40/`)
+- [ ] Détourage manuel des flacons (mêmes noms de fichiers) : la version 2 du 26/10/2026 est propre en bas mais garde de petites encoches sur les bords (Luxurious à gauche et à droite, Miraculous à gauche)
 - [ ] 4 choix de style à valider (A ou B) : section « Les 4 choix à valider » de `/guide-de-style`
 - [x] `assets/logo/` : logo fourni le 19/10/2026 (utilisé dans l'en-tête et comme titre de l'accueil)
 - [ ] Logo en version vectorielle (SVG) ou police du logo, pour un rendu encore plus net
@@ -48,10 +48,10 @@ Le build de **production** est bloqué tant qu'un de ces points reste dans les p
 (`npm run verifier:mise-en-ligne` affiche la liste exacte). Après chaque changement : `npm run pdf:juridique` (PDF des CGV et du formulaire).
 
 - [x] Frais de retour en cas de rétractation : à la charge de la cliente (CGV et page Rétractation)
-- [ ] **Forme juridique** de l'entreprise (micro-entreprise, EI, SASU, SAS…) et, si société : capital, RCS (mentions légales, CGV, confidentialité)
-- [ ] **Directeur de la publication** (mentions légales)
-- [ ] **Numéro de TVA** ou « TVA non applicable » (mentions légales, CGV)
-- [ ] **Hébergeur** : nom, adresse, site, téléphone (mentions légales)
+- [x] Forme juridique, capital, RCS : BIOTYVIE, SARL à associé unique, 1 000 €, RCS Paris 922 151 170 (26/10/2026)
+- [x] Directrice de la publication : la gérante (26/10/2026)
+- [x] TVA : franchise en base, « TVA non applicable, article 293 B du CGI » ; plus aucun « TTC » sur le site (26/10/2026)
+- [ ] **Hébergeur** : Netlify, Inc. renseigné dans les mentions légales ; à confirmer (hébergement final, téléphone de l'hébergeur demandé par la loi, non publié par Netlify : à faire valider)
 - [ ] **Médiateur de la consommation** : nom, adresse, site (mentions légales, CGV)
 - [ ] **Zone de livraison** : France métropolitaine seulement, ou Corse et DOM-TOM (CGV)
 - [ ] **Délai de livraison** à confirmer avec les transporteurs (CGV)
@@ -66,6 +66,7 @@ Le build de **production** est bloqué tant qu'un de ces points reste dans les p
 - [ ] Cookie de session du **paiement** : à décrire quand Stripe sera activé (cookies)
 - [ ] Phrase « aucun outil de mesure ni de publicité » à confirmer / mettre à jour (cookies)
 - [ ] Mentions « Projet de texte à faire relire avant publication » à retirer après relecture
+- [ ] Factures : modèle prêt (`lib/invoices/invoice.ts`), à produire automatiquement quand le paiement sera activé
 - [ ] **Relecture professionnelle** : CGV, rétractation, mentions légales, confidentialité, cookies ; conformité cosmétique (étiquetage, INCI, allégations pousse / repousse / chute)
 - [ ] **Envoi des emails** : service d'envoi à choisir ; l'email de confirmation est prêt (`lib/emails/confirmation.ts`, CGV et formulaire en PDF joints)
 

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { home, productPage, products } from "@/content/site";
 import type { ProductTheme } from "@/lib/design-tokens";
-import { cutoutHeight, cutoutSrcSet } from "@/lib/cutouts";
+import { cutoutFallback, cutoutSize, cutoutSrcSet } from "@/lib/cutouts";
 import { themeClasses } from "@/lib/theme-classes";
 
 // Sélecteur « Quel soin est le tien ? » (modification 34) : trois cartes-boutons, le flacon touché
@@ -48,13 +48,11 @@ export default function TrioSelector({ prices }: { prices: Record<ProductTheme, 
                 <span className="absolute inset-x-0 bottom-[6%] -top-[22%] flex justify-center">
                   {p.cutout.available ? (
                     <picture className="h-full">
-                      <source type="image/webp" srcSet={cutoutSrcSet(p.slug, "webp")} sizes="(max-width: 640px) 25vw, 180px" />
+                      <source type="image/webp" srcSet={cutoutSrcSet(p.slug)} sizes="(max-width: 640px) 28vw, 200px" />
                       <img
-                        src={`/images/produits/${p.slug}-detoure-240.png`}
-                        srcSet={cutoutSrcSet(p.slug, "png")}
-                        sizes="(max-width: 640px) 25vw, 180px"
-                        width={240}
-                        height={cutoutHeight[p.slug]}
+                        src={cutoutFallback(p.slug)}
+                        width={cutoutSize[p.slug].width}
+                        height={cutoutSize[p.slug].height}
                         alt={p.cutout.alt}
                         loading="lazy"
                         decoding="async"

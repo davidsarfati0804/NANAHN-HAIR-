@@ -1,5 +1,8 @@
-# Photos détourées (fond transparent) du premier écran de l'accueil (modification 22) :
-# versions web 240 / 480 / 720 px de large en WebP et PNG (transparence conservée, image non retouchée).
+# Flacons détourés (fond transparent, modifications 40 et 51), à partir de assets/images/<soin>.png :
+# WebP qualité 90 en 160 / 320 px et pleine résolution, PNG pleine résolution en secours.
+# Jamais d'agrandissement : la plus grande version est la taille du fichier fourni. Images non retouchées.
+# (Le premier écran de l'accueil garde ses fichiers <soin>-accueil-*, version de référence du 24/10/2026,
+#  sources dans assets/sources/detoures-accueil/.)
 # Usage : python3 scripts/preparer-detoures.py (depuis na-nah-nhair/)
 from pathlib import Path
 from PIL import Image
@@ -9,11 +12,11 @@ OUT = Path("public/images/produits")
 OUT.mkdir(parents=True, exist_ok=True)
 for slug in ["fabulous", "miraculous", "luxurious"]:
     im = Image.open(SRC / f"{slug}.png").convert("RGBA")
-    im = im.crop(im.getchannel("A").getbbox())
-    for w in (240, 480, 720):
-        h = round(im.height * w / im.width)
-        r = im.resize((w, h), Image.LANCZOS)
-        r.save(OUT / f"{slug}-detoure-{w}.webp", quality=88, method=6)
-        # PNG de secours (navigateurs sans WebP) : 256 couleurs, transparence conservée
-        r.quantize(256, method=Image.Quantize.FASTOCTREE).save(OUT / f"{slug}-detoure-{w}.png", optimize=True)
-        print(slug, w, h)
+    full_w, full_h = im.size
+    for w in (160, 320, full_w):
+        r = im if w == full_w else im.resize((w, round(full_h * w / full_w)), Image.LANCZOS)
+        name = "max" if w == full_w else str(w)
+        r.save(OUT / f"{slug}-detoure-{name}.webp", quality=90, method=6)
+    # Secours : PNG pleine résolution, sans perte
+    im.save(OUT / f"{slug}-detoure-max.png", optimize=True)
+    print(slug, full_w, full_h)

@@ -40,6 +40,13 @@ export default function ShippingForm({ settings }: { settings: ShopSettings }) {
           </div>
         </fieldset>
       ))}
+      <label className="flex max-w-xl items-start gap-2 text-sm font-bold">
+        <input type="checkbox" name="vat" defaultChecked={settings.vatApplicable} disabled className="mt-0.5 h-5 w-5 accent-deep-violet" />
+        <span>
+          {t.shipping.vat}
+          <span className="block font-normal">{t.shipping.vatHelp}</span>
+        </span>
+      </label>
       <div className="flex items-center gap-4">
         <button
           type="submit"

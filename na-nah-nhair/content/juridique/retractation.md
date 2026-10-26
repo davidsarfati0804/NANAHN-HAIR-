@@ -11,7 +11,7 @@ Tu as le droit de te rétracter de ta commande, **sans avoir à te justifier**, 
 Pour exercer ton droit de rétractation, écris-nous **avant la fin des 14 jours** :
 
 - par email à Contact@nanahnhair.com,
-- ou par courrier à : NA NAH N'HAIR, 24 rue Octave Feuillet, 75016 Paris.
+- ou par courrier à : BIOTYVIE (NA NAH N'HAIR), 24 rue Octave Feuillet, 75116 Paris.
 
 Tu peux utiliser le modèle ci-dessous, mais ce n'est pas obligatoire : une déclaration claire suffit (par exemple « Je me rétracte de ma commande n° … »).
 
@@ -31,7 +31,7 @@ Nous te remboursons **dans les 14 jours** suivant le moment où nous avons été
 
 *(Complète et renvoie ce formulaire uniquement si tu souhaites te rétracter de ta commande.)*
 
-À l'attention de NA NAH N'HAIR, 24 rue Octave Feuillet, 75016 Paris, Contact@nanahnhair.com :
+À l'attention de BIOTYVIE (NA NAH N'HAIR), 24 rue Octave Feuillet, 75116 Paris, Contact@nanahnhair.com :
 
 Je vous notifie par la présente ma rétractation du contrat portant sur la vente du bien ci-dessous :
 

@@ -30,6 +30,6 @@ export function organizationJsonLd() {
     url: siteUrl(),
     email: legal.email,
     telephone: legal.phone,
-    address: { "@type": "PostalAddress", streetAddress: "24 rue Octave Feuillet", postalCode: "75016", addressLocality: "Paris", addressCountry: "FR" },
+    address: { "@type": "PostalAddress", streetAddress: "24 rue Octave Feuillet", postalCode: "75116", addressLocality: "Paris", addressCountry: "FR" },
   };
 }

@@ -24,7 +24,7 @@
 
 Les présentes conditions générales de vente (CGV) s'appliquent à toute commande passée sur le site de NA NAH N'HAIR par un consommateur (personne qui achète pour un usage non professionnel).
 
-Vendeur : NA NAH N'HAIR, [À COMPLÉTER : forme juridique], SIRET 922 151 170 00011, 24 rue Octave Feuillet, 75016 Paris. Email : Contact@nanahnhair.com. Téléphone : 01 80 18 29 29. TVA : [À COMPLÉTER].
+Vendeur : la société BIOTYVIE, société à responsabilité limitée à associé unique au capital de 1 000 €, RCS Paris 922 151 170, SIRET 922 151 170 00011, siège social : 24 rue Octave Feuillet, 75116 Paris, exploitant la marque NA NAH N'HAIR. Email : Contact@nanahnhair.com. Téléphone : 01 80 18 29 29. TVA non applicable, article 293 B du CGI.
 
 En passant commande, tu déclares avoir lu et accepté les présentes CGV.
 
@@ -36,7 +36,7 @@ Ce sont des produits cosmétiques, qui ne remplacent pas un traitement médical.
 
 ## 3. Prix
 
-Les prix sont indiqués en euros, toutes taxes comprises (TTC). Les frais de livraison, s'il y en a, sont indiqués avant la validation de la commande. Les prix peuvent être modifiés à tout moment ; le prix applicable est celui affiché au moment de ta commande.
+Les prix sont indiqués en euros. TVA non applicable, article 293 B du CGI. Les frais de livraison, s'il y en a, sont indiqués avant la validation de la commande. Les prix peuvent être modifiés à tout moment ; le prix applicable est celui affiché au moment de ta commande.
 
 ## 4. Commande
 

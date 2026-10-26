@@ -44,17 +44,17 @@ test("produits : prix, stock, épuisé, désactivation, photo", async ({ page })
 
   // Prix invalide refusé
   const fab = page.getByRole("form", { name: "FABULOUS HAIR SERUM" });
-  await fab.getByLabel("Prix TTC (€)").fill("abc");
+  await fab.getByLabel("Prix (€)").fill("abc");
   await fab.getByRole("button", { name: "Enregistrer" }).click();
   await expect(fab.getByRole("status")).toHaveText("Prix invalide (exemple : 19,90).");
 
   // Nouveau prix visible sur le site
-  await fab.getByLabel("Prix TTC (€)").fill("21,50");
+  await fab.getByLabel("Prix (€)").fill("21,50");
   await fab.getByLabel("Stock").fill("3");
   await fab.getByRole("button", { name: "Enregistrer" }).click();
   await expect(fab.getByRole("status")).toHaveText("Modifications enregistrées.");
   // Le formulaire affiche bien les valeurs enregistrées
-  await expect(fab.getByLabel("Prix TTC (€)")).toHaveValue("21,50");
+  await expect(fab.getByLabel("Prix (€)")).toHaveValue("21,50");
   await expect(fab.getByLabel("Stock")).toHaveValue("3");
   await page.goto("/soins/fabulous");
   await expect(page.locator("h1 + p")).toContainText(/21,50\s€/);

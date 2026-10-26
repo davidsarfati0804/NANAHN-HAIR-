@@ -94,7 +94,8 @@ test("pages juridiques (modification 39) : contenu fourni, À COMPLÉTER visible
   }
   await page.goto("/mentions-legales");
   await expect(page.getByText(/SIRET\s:\s922 151 170 00011/)).toBeVisible();
-  await expect(page.locator("mark", { hasText: "À COMPLÉTER : par exemple micro-entreprise" })).toBeVisible();
+  await expect(page.getByText(/édité par la société BIOTYVIE/)).toBeVisible();
+  await expect(page.locator("mark", { hasText: "À COMPLÉTER : nom, adresse postale et site internet du médiateur" })).toBeVisible();
   await page.goto("/cgv");
   await expect(page.getByText(/3 jours ouvrés, préparation incluse/)).toBeVisible();
 });

@@ -20,9 +20,9 @@ Droit de rétractation de 14 jours après réception. Les frais de retour sont �
 ## Récapitulatif avant paiement
 
 - Produits et quantités
-- Prix TTC
+- Prix
 - Frais de livraison (ou « Livraison offerte »)
-- Total TTC
+- Total (avec la mention « TVA non applicable, article 293 B du CGI »)
 - Adresse de livraison
 - Délai de livraison : 3 jours ouvrés, préparation incluse
 
@@ -35,7 +35,7 @@ Bonjour [prénom],
 Merci pour ta commande n° [numéro]. Elle est confirmée et sera préparée sous 3 jours ouvrés.
 
 **Récapitulatif**
-[produits, quantités, prix TTC, livraison, total TTC, adresse de livraison]
+[produits, quantités, prix, livraison, total, mention « TVA non applicable, article 293 B du CGI », adresse de livraison]
 
 **Ton droit de rétractation**
 Tu disposes de 14 jours à compter de la réception de ta commande pour te rétracter, sans te justifier. Pour cela, écris-nous à Contact@nanahnhair.com. Le modèle de formulaire de rétractation est joint à cet email et disponible ici : [lien vers /retractation]. Le soin doit être renvoyé neuf, non utilisé, dans son emballage d'origine, et les frais de retour sont à ta charge.

@@ -397,7 +397,11 @@ export const home = fr({
 export const legal = fr({
   brand: "NA NAH N'HAIR",
   siret: "922 151 170 00011",
-  address: "24 rue Octave Feuillet, 75016 Paris",
+  address: "24 rue Octave Feuillet, 75116 Paris",
+  // Société qui exploite la marque (modification 53) ; seul le siège social est public
+  company: { name: "BIOTYVIE", form: "SARL à associé unique", capital: "1 000 €", rcs: "RCS Paris 922 151 170" },
+  // Franchise en base de TVA : prix nets, sans « TTC »
+  vatMention: "TVA non applicable, article 293 B du CGI",
   phone: "01 80 18 29 29",
   email: "Contact@nanahnhair.com",
   companyStatus: null,
@@ -748,7 +752,7 @@ export const cartTexts = fr({
   shipping: "Livraison",
   shippingFree: "Offerte",
   shippingTbd: "Calculée à l'étape suivante",
-  total: "Total TTC",
+  total: "Total",
   checkout: "Commander",
   continue: "Continuer mes achats",
   loading: "Chargement du panier…",
@@ -817,7 +821,7 @@ export const adminTexts = fr({
   saved: "Modifications enregistrées.",
   products: {
     title: "Produits et stocks",
-    price: "Prix TTC (€)",
+    price: "Prix (€)",
     stock: "Stock",
     stockHelp: "Laisser vide si le stock n'est pas suivi.",
     packStock: "Le pack n'a pas de stock propre : il est disponible tant que les trois sérums le sont.",
@@ -840,6 +844,8 @@ export const adminTexts = fr({
     carrierPrice: "Tarif (€)",
     carrierPriceHelp: "À COMPLÉTER : utile seulement si la livraison redevient payante.",
     carrierActive: "Proposé à la commande",
+    vat: "TVA applicable",
+    vatHelp: "Franchise en base de TVA : « non » (TVA non applicable, article 293 B du CGI). Réglage prévu pour plus tard, non activable pour l'instant.",
     save: "Enregistrer",
     errors: {
       threshold: "Montant invalide.",

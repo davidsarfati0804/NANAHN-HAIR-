@@ -4,7 +4,7 @@
 
 ## Qui est responsable de tes données ?
 
-Le responsable du traitement est NA NAH N'HAIR, [À COMPLÉTER : forme juridique], SIRET 922 151 170 00011, 24 rue Octave Feuillet, 75016 Paris. Contact : Contact@nanahnhair.com.
+Le responsable du traitement est la société BIOTYVIE (marque NA NAH N'HAIR), société à responsabilité limitée à associé unique, SIRET 922 151 170 00011, 24 rue Octave Feuillet, 75116 Paris. Contact : Contact@nanahnhair.com.
 
 ## Quelles données collectons-nous, et pourquoi ?
 

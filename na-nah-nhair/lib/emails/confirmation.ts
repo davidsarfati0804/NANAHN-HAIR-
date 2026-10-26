@@ -23,9 +23,10 @@ export const confirmationDocuments = () => [
 export function confirmationEmail(order: ConfirmationOrder, siteUrl: string) {
   const subject = "Ta commande NA NAH N'HAIR est confirmée";
   const recap = [
-    ...order.lines.map((l) => `${l.name} × ${l.quantity} : ${formatPrice(l.totalCents)} TTC`),
+    ...order.lines.map((l) => `${l.name} × ${l.quantity} : ${formatPrice(l.totalCents)}`),
     `Livraison : ${order.freeShipping ? "Livraison offerte" : formatPrice(order.shippingCents)}`,
-    `Total TTC : ${formatPrice(order.totalCents)}`,
+    `Total : ${formatPrice(order.totalCents)}`,
+    legal.vatMention,
     `Adresse de livraison : ${order.address}`,
   ];
   const [cgv, form] = confirmationDocuments();

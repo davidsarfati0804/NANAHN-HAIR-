@@ -67,6 +67,7 @@ export default function SiteFooter() {
       </div>
       <p className="border-t border-white/20 px-4 py-4 text-center text-sm">
         © {new Date().getFullYear()} <BrandText text={legal.brand} /> · SIRET {legal.siret} · <ManageCookiesButton />
+        <span className="mt-1 block text-[0.8125rem]">{legal.vatMention}</span>
       </p>
     </footer>
   );

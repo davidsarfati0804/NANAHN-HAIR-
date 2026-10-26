@@ -6,7 +6,7 @@ import { useCart } from "@/components/cart/CartProvider";
 import { productHref, productName, productPhoto } from "@/components/cart/names";
 import PhotoSlot from "@/components/PhotoSlot";
 import { useCatalog } from "@/components/cart/useCatalog";
-import { cartTexts as t } from "@/content/site";
+import { cartTexts as t, legal } from "@/content/site";
 import { formatPrice } from "@/lib/money";
 import { fromPublic } from "@/lib/catalog";
 import { computeQuote, maxAddable } from "@/lib/pricing";
@@ -122,6 +122,11 @@ export default function CartView() {
           {formatPrice(quote.totalCents)}
         </dd>
       </dl>
+      {!data.settings.vatApplicable && (
+        <p className="ml-auto mt-1 max-w-sm text-right text-sm" data-testid="mention-tva">
+          {legal.vatMention}
+        </p>
+      )}
 
       <div className="mt-8 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
         <ButtonLink href="/boutique" variant="secondary">

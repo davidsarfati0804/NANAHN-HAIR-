@@ -289,7 +289,7 @@ Cette section complète et remplace les `À COMPLÉTER` correspondants des secti
 
 - **Marque** : NA NAH N'HAIR
 - **SIRET** : 922 151 170 00011
-- **Adresse** : 24 rue Octave Feuillet, 75016 Paris
+- **Adresse** : 24 rue Octave Feuillet, 75116 Paris (adresse du Kbis, corrigée le 26/10/2026)
 - **Téléphone** : 01 80 18 29 29
 - **Email de contact et de réception des messages et commandes** : Contact@nanahnhair.com
 - **Statut de l'entreprise, TVA, hébergeur, responsable de publication** : `À COMPLÉTER`
@@ -353,3 +353,10 @@ Ces décisions de la propriétaire de la marque complètent et remplacent les pa
 - **Page Mon histoire, carte Miraculous** : titre « Voici Miraculous. », texte « Celui par lequel tout a commencé. Dans ma chambre, c’est lui que j’ai créé en premier : déterminé, ambitieux, un peu audacieux, comme celle qu’il accompagne. », bouton « Découvrir Miraculous ».
 - **Instagram** : @na.nah.nhair (page Contact, pied de page, images story).
 - **Mise en page** : cartes alignées sur des lignes communes (soins, boutique, « De mon bureau à ta routine ») ; premier écran sans ronds de couleur, ombre douce sous chaque flacon ; fiches produits entièrement aux couleurs du soin.
+
+## 17. Modifications validées (26/10/2026)
+
+- **Société** : le site est exploité par BIOTYVIE, SARL à associé unique au capital de 1 000 €, RCS Paris 922 151 170, siège social 24 rue Octave Feuillet, 75116 Paris (adresse du Kbis). Directrice de la publication : la gérante.
+- **TVA** : franchise en base. Prix nets en euros, sans « TTC » ; mention « TVA non applicable, article 293 B du CGI » au panier, à la commande, dans le pied de page, dans les emails et sur les factures.
+- **Pages juridiques** : mentions légales, CGV, rétractation et confidentialité mises à jour (textes fournis le 26/10/2026).
+- **Flacons** : détourages version 2 partout, sauf le premier écran de l'accueil qui garde ses fichiers de référence.

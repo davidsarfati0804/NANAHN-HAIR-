@@ -1,5 +1,5 @@
 import type { ProductTheme } from "@/lib/design-tokens";
-import { cutoutHeight, cutoutSrcSet } from "@/lib/cutouts";
+import { cutoutFallback, cutoutSize, cutoutSrcSet } from "@/lib/cutouts";
 import { themeClasses } from "@/lib/theme-classes";
 
 // photo.file : nom de la photo dans assets/images/ ; si « responsive », versions générées par
@@ -42,13 +42,11 @@ export default function PhotoSlot({
     return (
       <div className={`relative overflow-hidden bg-white ${className}`}>
         <picture>
-          <source type="image/webp" srcSet={cutoutSrcSet(photo.cutout, "webp")} sizes={sizes} />
+          <source type="image/webp" srcSet={cutoutSrcSet(photo.cutout)} sizes={sizes} />
           <img
-            src={`/images/produits/${photo.cutout}-detoure-480.png`}
-            srcSet={cutoutSrcSet(photo.cutout, "png")}
-            sizes={sizes}
-            width={240}
-            height={cutoutHeight[photo.cutout]}
+            src={cutoutFallback(photo.cutout)}
+            width={cutoutSize[photo.cutout].width}
+            height={cutoutSize[photo.cutout].height}
             alt={photo.alt}
             loading={loading}
             fetchPriority={priority ? "high" : "auto"}

@@ -124,3 +124,21 @@ test("panier corrompu dans le navigateur : ignoré sans planter", async ({ page 
   await page.goto("/panier");
   await expect(page.getByText("Ton panier est vide.")).toBeVisible();
 });
+
+test("franchise en base de TVA : aucun « TTC », mention 293 B au panier, à la commande et dans le pied de page", async ({ page }) => {
+  await page.goto("/soins/luxurious");
+  await page.getByRole("button", { name: /Ajouter au panier/ }).first().click();
+  await page.goto("/panier");
+  await expect(page.getByTestId("mention-tva")).toHaveText("TVA non applicable, article 293 B du CGI");
+  await expect(page.locator("body")).not.toContainText("TTC");
+  await page.goto("/commande");
+  await page.getByLabel("Colissimo").check();
+  await expect(page.getByTestId("mention-tva")).toHaveText("TVA non applicable, article 293 B du CGI");
+  // Total payé = total du panier (aucune TVA ajoutée)
+  await expect(page.getByTestId("total-serveur")).toHaveText(/29,90\s€/);
+  await expect(page.locator("footer")).toContainText("TVA non applicable, article 293 B du CGI");
+  for (const path of ["/", "/boutique", "/cgv", "/mentions-legales", "/faq"]) {
+    await page.goto(path);
+    expect(await page.content(), path).not.toMatch(/\bTTC\b|75016/);
+  }
+});

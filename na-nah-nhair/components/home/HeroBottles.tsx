@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { products } from "@/content/site";
 import type { ProductTheme } from "@/lib/design-tokens";
-import { cutoutHeight, cutoutSrcSet } from "@/lib/cutouts";
+import { heroHeight, heroSrcSet } from "@/lib/cutouts";
 import { themeClasses } from "@/lib/theme-classes";
 
 // Trois flacons du premier écran (modification 22) : Fabulous à gauche, Miraculous au centre
@@ -30,13 +30,13 @@ export default function HeroBottles({ className = "" }: { className?: string }) 
               {p.cutout.available ? (
                 // Au survol, au focus ou au toucher : le flacon se soulève et grossit (aucune ombre sur l'image : modification 42)
                 <picture>
-                  <source type="image/webp" srcSet={cutoutSrcSet(p.slug, "webp")} sizes="(max-width: 1023px) 30vw, 150px" />
+                  <source type="image/webp" srcSet={heroSrcSet(p.slug, "webp")} sizes="(max-width: 1023px) 30vw, 150px" />
                   <img
-                    src={`/images/produits/${p.slug}-detoure-240.png`}
-                    srcSet={cutoutSrcSet(p.slug, "png")}
+                    src={`/images/produits/${p.slug}-accueil-240.png`}
+                    srcSet={heroSrcSet(p.slug, "png")}
                     sizes="(max-width: 1023px) 30vw, 150px"
                     width={240}
-                    height={cutoutHeight[p.slug]}
+                    height={heroHeight[p.slug]}
                     alt={p.cutout.alt}
                     loading="eager"
                     fetchPriority="high"

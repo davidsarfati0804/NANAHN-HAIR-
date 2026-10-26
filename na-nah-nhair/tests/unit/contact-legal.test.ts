@@ -58,7 +58,7 @@ describe("pages juridiques (modification 39)", () => {
 
   it("mentions légales : informations connues présentes, manques signalés", () => {
     const text = legalText(legalDocBySlug("mentions-legales")!);
-    for (const v of ["922 151 170 00011", "24 rue Octave Feuillet, 75016 Paris", "Contact@nanahnhair.com"]) expect(text).toContain(v);
+    for (const v of ["922 151 170 00011", "24 rue Octave Feuillet, 75116 Paris", "BIOTYVIE", "TVA non applicable, article 293 B du CGI", "Contact@nanahnhair.com"]) expect(text).toContain(v);
     expect(text).toContain("[À COMPLÉTER");
   });
 

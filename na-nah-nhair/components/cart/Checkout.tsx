@@ -6,7 +6,7 @@ import { useCart } from "@/components/cart/CartProvider";
 import { productName } from "@/components/cart/names";
 import { useCatalog } from "@/components/cart/useCatalog";
 import ToComplete from "@/components/ToComplete";
-import { cartTexts, checkoutTexts as t } from "@/content/site";
+import { cartTexts, checkoutTexts as t, legal } from "@/content/site";
 import { formatPrice } from "@/lib/money";
 import type { Quote } from "@/lib/pricing";
 import type { CarrierId } from "@/lib/settings";
@@ -216,6 +216,11 @@ export default function Checkout() {
                   {formatPrice(quote.totalCents)}
                 </dd>
               </dl>
+              {!data?.settings.vatApplicable && (
+                <p className="mt-1 text-right text-sm" data-testid="mention-tva">
+                  {legal.vatMention}
+                </p>
+              )}
               {lineErrors.map((msg) => (
                 <p key={msg} role="alert" className="mt-3 font-bold">
                   {msg}

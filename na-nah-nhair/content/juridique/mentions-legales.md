@@ -4,27 +4,28 @@
 
 ## Éditeur du site
 
-- Nom de la marque : NA NAH N'HAIR
-- Forme juridique : [À COMPLÉTER : par exemple micro-entreprise, EI, SASU, SAS]
-- Capital social : [À COMPLÉTER si société, sinon supprimer cette ligne]
+- Le site NA NAH N'HAIR est édité par la société BIOTYVIE
+- Marque : NA NAH N'HAIR
+- Forme juridique : société à responsabilité limitée (SARL) à associé unique
+- Capital social : 1 000 €
 - SIRET : 922 151 170 00011
-- RCS : [À COMPLÉTER si société, sinon supprimer cette ligne]
-- Numéro de TVA : [À COMPLÉTER : numéro de TVA intracommunautaire, ou « TVA non applicable, article 293 B du CGI » selon le statut]
-- Adresse : 24 rue Octave Feuillet, 75016 Paris
+- RCS : Paris 922 151 170
+- TVA : TVA non applicable, article 293 B du CGI
+- Siège social : 24 rue Octave Feuillet, 75116 Paris
 - Email : Contact@nanahnhair.com
 - Téléphone : 01 80 18 29 29
 
 ## Directeur de la publication
 
-[À COMPLÉTER : nom et prénom de la personne responsable de la publication]
+Shana Sarfati, gérante de la société BIOTYVIE.
 
 ## Hébergeur
 
-[À COMPLÉTER : nom de l'hébergeur, adresse, site internet, téléphone]
+Netlify, Inc., 101 2nd Street, San Francisco, CA 94105, États-Unis. Site internet : www.netlify.com.
 
 ## Propriété intellectuelle
 
-Le site, son nom, son logo, ses textes, ses photographies, ses visuels et sa structure sont la propriété de NA NAH N'HAIR, sauf mention contraire. Toute reproduction, représentation ou utilisation, totale ou partielle, sans autorisation écrite préalable est interdite.
+Le site, son nom, son logo, ses textes, ses photographies, ses visuels et sa structure sont la propriété de la société BIOTYVIE (marque NA NAH N'HAIR), sauf mention contraire. Toute reproduction, représentation ou utilisation, totale ou partielle, sans autorisation écrite préalable est interdite.
 
 ## Données personnelles
 

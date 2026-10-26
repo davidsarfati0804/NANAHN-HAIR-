@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         title: p.name,
         description: p.description.intro,
         alternates: { canonical: `/soins/${p.slug}` },
-        openGraph: { images: [{ url: `/images/produits/${p.slug}-1200.jpg`, width: 1200, height: 1500, alt: p.photo.alt }] },
+        openGraph: { images: [{ url: `/images/produits/${p.slug}-partage.jpg`, width: 1200, height: 1500, alt: p.photo.alt }] },
       }
     : {};
 }

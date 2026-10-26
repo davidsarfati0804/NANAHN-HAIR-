@@ -37,7 +37,7 @@ export default function PhotoSlot({
     );
   }
 
-  // Flacon détouré (modification 40) : posé sur le panneau blanc arrondi, sans ombre ni bord ajoutés
+  // Flacon détouré (modifications 40 et 55) : posé sur le panneau blanc arrondi, 80 % de sa hauteur, centré, sans ombre ni bord
   if (photo.available && photo.cutout) {
     return (
       <div className={`relative overflow-hidden bg-white ${className}`}>
@@ -51,7 +51,7 @@ export default function PhotoSlot({
             loading={loading}
             fetchPriority={priority ? "high" : "auto"}
             decoding="async"
-            className="absolute inset-x-0 bottom-[7%] mx-auto h-[84%] w-auto"
+            className="absolute inset-x-0 top-[10%] mx-auto h-[80%] w-auto"
           />
         </picture>
       </div>

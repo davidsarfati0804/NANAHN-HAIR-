@@ -1,11 +1,11 @@
 import type { ProductTheme } from "@/lib/design-tokens";
 
 // Flacons détourés (fond transparent, modifications 40 et 51), générés par scripts/preparer-detoures.py.
-// Dimensions des fichiers fournis (version 2 du 26/10/2026) : la plus grande version n'est jamais agrandie.
+// Dimensions des fichiers fournis (version 3 du 26/10/2026, modification 55) : jamais agrandis.
 export const cutoutSize: Record<ProductTheme, { width: number; height: number }> = {
-  fabulous: { width: 464, height: 1246 },
-  miraculous: { width: 453, height: 1227 },
-  luxurious: { width: 461, height: 1238 },
+  fabulous: { width: 465, height: 1245 },
+  miraculous: { width: 457, height: 1226 },
+  luxurious: { width: 474, height: 1241 },
 };
 
 // WebP (qualité 90) en 160, 320 px et pleine résolution

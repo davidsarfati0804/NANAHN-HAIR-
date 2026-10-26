@@ -41,7 +41,7 @@ Les personnalités ne sont pas des catégories exclusives : une cliente peut êt
 
 ## 4. FABULOUS HAIR SERUM — 19,90 €
 
-- **Photo** : `assets/images/fabulous.jpg`
+- **Photo** : `assets/images/fabulous.png` (détourage, version 3)
 - **Personnalité** : la fraîche, naturelle et spontanée.
 - **Phrase « Je suis »** (cartes et fiche) : Je suis fraîche, naturelle et spontanée.
 - **Univers** : vert, frais, positif, accessible et pétillant.
@@ -90,7 +90,7 @@ RICINUS COMMUNIS SEED OIL\*, OLEA EUROPAEA FRUIT OIL\*, COCOS NUCIFERA OIL\*, PE
 
 ## 5. MIRACULOUS HAIR SERUM — 39,90 €
 
-- **Photo** : `assets/images/miraculous.jpg`
+- **Photo** : `assets/images/miraculous.png` (détourage, version 3)
 - **Personnalité** : la déterminée, ambitieuse et audacieuse.
 - **Phrase « Je suis »** (cartes et fiche) : Je suis déterminée, ambitieuse et audacieuse.
 - **Univers** : violet, confiance, force, ambition et transformation.
@@ -139,7 +139,7 @@ RICINUS COMMUNIS SEED OIL\*, OLEA EUROPAEA FRUIT OIL\*, COCOS NUCIFERA OIL\*, PE
 
 ## 6. LUXURIOUS HAIR SERUM — 29,90 €
 
-- **Photo** : `assets/images/luxurious.jpg`
+- **Photo** : `assets/images/luxurious.png` (détourage, version 3)
 - **Personnalité** : la féminine, élégante et sensorielle.
 - **Phrase « Je suis »** (cartes et fiche) : Je suis féminine, élégante et sensorielle.
 - **Univers** : rose, beauté, plaisir, sophistication et douceur.
@@ -350,7 +350,7 @@ Ces décisions de la propriétaire de la marque complètent et remplacent les pa
 - **« trois univers » → « trois personnalités »** : carte « Les trois soins » et bloc final de la page Mon histoire (« …tout en révélant tes différentes facettes, telle que tu es, pour de vrai. »).
 - **Carte « Huiles végétales »** : noms complets en gras ; espace insécable entre « vitamine » et la lettre partout.
 - **Luxurious, description** : dernier paragraphe « Son parfum de fleur d’oranger transforme ta routine capillaire en un vrai moment de plaisir. Utilisé comme touche finale, le Luxurious Hair Serum devient ce petit luxe que tu mérites, pour des cheveux élégants et lumineux. »
-- **Page Mon histoire, carte Miraculous** : titre « Voici Miraculous. », texte « Celui par lequel tout a commencé. Dans ma chambre, c’est lui que j’ai créé en premier : déterminé, ambitieux, un peu audacieux, comme celle qu’il accompagne. », bouton « Découvrir Miraculous ».
+- **Page Mon histoire, carte Miraculous** : titre « Voici Miraculous ! » (modification 52), texte « Celui par lequel tout a commencé. Dans ma chambre, c’est lui que j’ai créé en premier : déterminé, ambitieux, un peu audacieux, comme celle qu’il accompagne. », bouton « Découvrir Miraculous ».
 - **Instagram** : @na.nah.nhair (page Contact, pied de page, images story).
 - **Mise en page** : cartes alignées sur des lignes communes (soins, boutique, « De mon bureau à ta routine ») ; premier écran sans ronds de couleur, ombre douce sous chaque flacon ; fiches produits entièrement aux couleurs du soin.
 
@@ -360,3 +360,8 @@ Ces décisions de la propriétaire de la marque complètent et remplacent les pa
 - **TVA** : franchise en base. Prix nets en euros, sans « TTC » ; mention « TVA non applicable, article 293 B du CGI » au panier, à la commande, dans le pied de page, dans les emails et sur les factures.
 - **Pages juridiques** : mentions légales, CGV, rétractation et confidentialité mises à jour (textes fournis le 26/10/2026).
 - **Flacons** : détourages version 2 partout, sauf le premier écran de l'accueil qui garde ses fichiers de référence.
+
+## 18. Modifications validées (26/10/2026, suite)
+
+- **Carte Miraculous (Mon histoire)** : titre « Voici Miraculous ! ».
+- **Flacons, version 3** : boutique, sélecteur « Quel soin est le tien ? », fiches, panier et image de partage ; flacon à 80 % de la hauteur du panneau blanc dans la boutique. Le premier écran de l'accueil garde ses fichiers de référence (rendu jugé meilleur).

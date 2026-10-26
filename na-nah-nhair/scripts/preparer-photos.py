@@ -11,7 +11,8 @@ OUT.mkdir(parents=True, exist_ok=True)
 RATIO = 4 / 5  # largeur / hauteur
 WIDTHS = (400, 800, 1200)
 # Part de la hauteur occupée par le sujet : identique pour les trois flacons
-FILL = {"fabulous": 0.78, "miraculous": 0.78, "luxurious": 0.78, "pack": 0.92}
+# Les flacons seuls utilisent désormais les détourages (scripts/preparer-detoures.py) : seul le pack reste ici
+FILL = {"pack": 0.92}
 
 for name, fill in FILL.items():
     im = ImageOps.exif_transpose(Image.open(SRC / f"{name}.jpg")).convert("RGB")

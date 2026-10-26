@@ -1,4 +1,4 @@
-# Flacons détourés (fond transparent, modifications 40 et 51), à partir de assets/images/<soin>.png :
+# Flacons détourés (fond transparent, modifications 40, 51 et 55 : version 3), à partir de assets/images/<soin>.png :
 # WebP qualité 90 en 160 / 320 px et pleine résolution, PNG pleine résolution en secours.
 # Jamais d'agrandissement : la plus grande version est la taille du fichier fourni. Images non retouchées.
 # (Le premier écran de l'accueil garde ses fichiers <soin>-accueil-*, version de référence du 24/10/2026,
@@ -20,3 +20,17 @@ for slug in ["fabulous", "miraculous", "luxurious"]:
     # Secours : PNG pleine résolution, sans perte
     im.save(OUT / f"{slug}-detoure-max.png", optimize=True)
     print(slug, full_w, full_h)
+
+# Image de partage (Open Graph, modification 55) : le flacon v3 posé sur la couleur du soin, 1200 x 1500 JPG
+COLORS = {"fabulous": (0xB2, 0xDC, 0xCB), "miraculous": (0xB9, 0xA5, 0xE2), "luxurious": (0xEB, 0xC4, 0xDE)}  # = lib/design-tokens.ts
+for slug, color in COLORS.items():
+    im = Image.open(SRC / f"{slug}.png").convert("RGBA")
+    canvas = Image.new("RGBA", (1200, 1500), color + (255,))
+    h = round(1500 * 0.8)
+    w = round(im.width * h / im.height)
+    # Jamais d'agrandissement au-delà du fichier fourni : on garde sa taille si elle est plus petite
+    if h > im.height:
+        h, w = im.height, im.width
+    bottle = im if (w, h) == im.size else im.resize((w, h), Image.LANCZOS)
+    canvas.alpha_composite(bottle, ((1200 - w) // 2, (1500 - h) // 2))
+    canvas.convert("RGB").save(OUT / f"{slug}-partage.jpg", quality=88)

@@ -23,9 +23,7 @@ Renvoie le soin **neuf, non utilisé, dans son emballage d'origine**, au plus ta
 
 Nous te remboursons **dans les 14 jours** suivant le moment où nous avons été informés de ta décision de te rétracter. Nous pouvons attendre d'avoir reçu le produit, ou une preuve de son expédition, avant de te rembourser. Le remboursement utilise le même moyen de paiement que ta commande, sans frais pour toi.
 
-[OPTION, À ACTIVER SEULEMENT SI LES FLACONS SONT SCELLÉS : Conformément à l'article L221-28 du Code de la consommation, le droit de rétractation ne peut pas être exercé pour les produits descellés après la livraison qui ne peuvent pas être renvoyés pour des raisons d'hygiène ou de protection de la santé. Un soin dont le sceau est rompu n'est donc ni repris ni remboursé.]
-
-[OPTION, À VALIDER PAR UN PROFESSIONNEL : Ta responsabilité n'est engagée qu'à l'égard de la dépréciation du produit résultant de manipulations autres que celles nécessaires pour établir sa nature, ses caractéristiques et son bon fonctionnement. Nous pouvons déduire cette dépréciation du remboursement.]
+Ta responsabilité n'est engagée qu'à l'égard de la dépréciation du produit résultant de manipulations autres que celles nécessaires pour établir sa nature, ses caractéristiques et son bon fonctionnement. Nous pouvons déduire cette dépréciation du remboursement.
 
 ## Modèle de formulaire de rétractation
 

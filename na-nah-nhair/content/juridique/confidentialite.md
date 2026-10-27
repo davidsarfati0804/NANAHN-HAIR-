@@ -10,26 +10,23 @@ Le responsable du traitement est la société BIOTYVIE (marque NA NAH N'HAIR), s
 
 | Situation | Données | Pourquoi (finalité) | Base légale |
 | --- | --- | --- | --- |
-| Tu passes commande | Nom, prénom, adresse de livraison, adresse email, [À COMPLÉTER : téléphone si demandé], contenu de la commande | Traiter et livrer ta commande, te l'indiquer par email, établir la facture | Exécution du contrat |
+| Tu passes commande | Nom, prénom, adresse de livraison, adresse email, numéro de téléphone (facultatif, transmis au transporteur pour la livraison), contenu de la commande | Traiter et livrer ta commande, te l'indiquer par email, établir la facture | Exécution du contrat |
 | Tu paies | Données de paiement saisies chez notre prestataire de paiement (nous ne voyons ni ne stockons ton numéro de carte) | Encaisser ta commande | Exécution du contrat |
 | Tu nous écris (formulaire de contact, email) | Nom, email, contenu de ton message | Répondre à ta demande | Intérêt légitime |
 | Tu acceptes les CGV | Date et heure d'acceptation, version des CGV, numéro de commande | Prouver l'acceptation des conditions | Obligation légale / intérêt légitime |
 | Tu fais le quiz | Aucune donnée n'est enregistrée : ton résultat n'est conservé nulle part | Te proposer un soin | Sans objet |
-| Tu t'abonnes à une newsletter (si proposée) | Adresse email | T'envoyer nos actualités | Consentement |
 
 ## Combien de temps conservons-nous tes données ?
 
-[À COMPLÉTER ET À VALIDER, proposition :]
 - Données de commande et factures : 10 ans (obligation comptable).
 - Messages de contact : 3 ans après le dernier échange.
 - Preuves d'acceptation des CGV : la durée de conservation de la commande.
-- Newsletter : jusqu'au retrait de ton consentement, ou 3 ans sans interaction.
 
 ## Qui reçoit tes données ?
 
-Seules les personnes qui en ont besoin reçoivent tes données : NA NAH N'HAIR, et nos prestataires techniques, qui agissent sur nos instructions : [À COMPLÉTER ET À VÉRIFIER : Stripe (paiement), Supabase (base de données), Resend (emails), Colissimo et Mondial Relay (livraison), hébergeur du site]. Nous ne vendons pas tes données.
+Seules les personnes qui en ont besoin reçoivent tes données : NA NAH N'HAIR, et nos prestataires techniques, qui agissent sur nos instructions : Stripe (paiement), Supabase (base de données), Resend (emails), Colissimo et Mondial Relay (livraison) et Netlify (hébergement du site). Nous ne vendons pas tes données.
 
-Certains prestataires peuvent traiter des données en dehors de l'Union européenne. Dans ce cas, des garanties (par exemple les clauses contractuelles types de la Commission européenne) encadrent ces transferts : [À COMPLÉTER : détail par prestataire].
+Certains prestataires (par exemple Stripe, Resend et Netlify) sont des sociétés américaines ou ont des activités aux États-Unis. Dans ce cas, des garanties encadrent ces transferts : le cadre de protection des données UE–États-Unis ou les clauses contractuelles types de la Commission européenne, selon le prestataire.
 
 ## Tes droits
 

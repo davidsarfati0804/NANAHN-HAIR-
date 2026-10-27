@@ -50,13 +50,13 @@ Le paiement s'effectue en ligne, par carte bancaire (et par les moyens de paieme
 
 ## 6. Livraison
 
-Nous livrons en [À COMPLÉTER : France métropolitaine uniquement / précise pour la Corse et les DOM-TOM].
+Nous livrons en France métropolitaine, Corse comprise.
 
-Les commandes sont livrées sous **3 jours ouvrés, préparation incluse**, à compter de la confirmation du paiement [À COMPLÉTER : confirmer ce délai avec les transporteurs]. Si nous ne pouvons pas respecter ce délai, nous t'en informons, et en tout état de cause la commande est livrée au plus tard 30 jours après la conclusion du contrat. À défaut, tu peux, après nous avoir mis en demeure de livrer dans un délai raisonnable, annuler la commande et être remboursé.
+Les commandes sont livrées sous **3 jours ouvrés, préparation incluse**, à compter de la confirmation du paiement. Si nous ne pouvons pas respecter ce délai, nous t'en informons, et en tout état de cause la commande est livrée au plus tard 30 jours après la conclusion du contrat. À défaut, tu peux, après nous avoir mis en demeure de livrer dans un délai raisonnable, annuler la commande et être remboursé.
 
 Modes de livraison : Colissimo ou Mondial Relay (point relais), au choix lors de la commande.
 
-Frais de livraison : [À COMPLÉTER : « La livraison est offerte en France » ou grille de tarifs].
+Frais de livraison : la livraison est offerte pour toute commande livrée en France métropolitaine.
 
 Tu dois vérifier l'état du colis à la réception. En cas de colis abîmé, émets des réserves auprès du transporteur et préviens-nous à Contact@nanahnhair.com.
 
@@ -68,15 +68,13 @@ Pour te rétracter, informe-nous de ta décision par une déclaration dénuée d
 
 Pour que le délai soit respecté, il suffit que tu nous envoies ta communication relative à l'exercice du droit de rétractation avant l'expiration du délai de 14 jours.
 
-[OPTION, À ACTIVER SEULEMENT SI LES FLACONS SONT SCELLÉS : Conformément à l'article L221-28 du Code de la consommation, le droit de rétractation ne peut pas être exercé pour les produits descellés après la livraison qui ne peuvent pas être renvoyés pour des raisons d'hygiène ou de protection de la santé. Un soin dont le sceau est rompu n'est donc ni repris ni remboursé.]
-
 ## 8. Retours et remboursements
 
 En cas de rétractation, tu renvoies le soin **neuf, non utilisé, dans son emballage d'origine**, au plus tard 14 jours après nous avoir informés de ta décision. **Les frais de retour sont à ta charge.**
 
 Nous te remboursons de la totalité des sommes versées, y compris les frais de livraison standard le cas échéant (à l'exclusion des frais supplémentaires si tu as choisi un mode de livraison plus coûteux que le mode standard), **dans les 14 jours** suivant le moment où nous sommes informés de ta décision. Nous pouvons différer le remboursement jusqu'à la récupération du produit ou jusqu'à ce que tu aies fourni une preuve d'expédition. Le remboursement utilise le même moyen de paiement que la commande.
 
-[OPTION, À VALIDER PAR UN PROFESSIONNEL : Ta responsabilité n'est engagée qu'à l'égard de la dépréciation du produit résultant de manipulations autres que celles nécessaires pour établir sa nature, ses caractéristiques et son bon fonctionnement. Nous pouvons déduire cette dépréciation du remboursement.]
+Ta responsabilité n'est engagée qu'à l'égard de la dépréciation du produit résultant de manipulations autres que celles nécessaires pour établir sa nature, ses caractéristiques et son bon fonctionnement. Nous pouvons déduire cette dépréciation du remboursement.
 
 ## 9. Garanties légales
 
@@ -108,7 +106,6 @@ Tous les éléments du site (nom, logo, textes, photographies, visuels) sont pro
 
 En cas de litige, contacte-nous d'abord à Contact@nanahnhair.com pour trouver une solution amiable. Si le litige persiste, tu peux recourir gratuitement à un médiateur de la consommation : [À COMPLÉTER : nom, adresse postale et site internet du médiateur].
 
-[À COMPLÉTER SI LA VENTE EST OUVERTE À D'AUTRES PAYS DE L'UE : lien vers la plateforme européenne de règlement en ligne des litiges.]
 
 ## 15. Droit applicable
 

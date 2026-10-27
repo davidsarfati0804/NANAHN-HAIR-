@@ -4,7 +4,7 @@ import type { ProductTheme } from "@/lib/design-tokens";
 // Dimensions des fichiers fournis (version 3 du 26/10/2026, modification 55) : jamais agrandis.
 export const cutoutSize: Record<ProductTheme, { width: number; height: number }> = {
   fabulous: { width: 465, height: 1245 },
-  miraculous: { width: 457, height: 1226 },
+  miraculous: { width: 470, height: 1232 },
   luxurious: { width: 474, height: 1241 },
 };
 
@@ -14,8 +14,9 @@ export const cutoutSrcSet = (slug: ProductTheme) =>
 // Secours : PNG pleine résolution
 export const cutoutFallback = (slug: ProductTheme) => `/images/produits/${slug}-detoure-max.png`;
 
-// Premier écran de l'accueil : version de référence (24/10/2026), inchangée (modification 51)
-export const HERO_WIDTHS = [240, 480, 720] as const;
-export const heroHeight: Record<ProductTheme, number> = { fabulous: 655, miraculous: 647, luxurious: 640 };
+// Premier écran de l'accueil : version de référence (24/10/2026) pour Fabulous et Luxurious (modification 51) ;
+// Miraculous remplacé par le fichier de la modification 56 (470 px de large, jamais agrandi)
+export const heroWidths: Record<ProductTheme, readonly number[]> = { fabulous: [240, 480, 720], miraculous: [240, 470], luxurious: [240, 480, 720] };
+export const heroHeight: Record<ProductTheme, number> = { fabulous: 655, miraculous: 629, luxurious: 640 };
 export const heroSrcSet = (slug: ProductTheme, ext: "webp" | "png") =>
-  HERO_WIDTHS.map((w) => `/images/produits/${slug}-accueil-${w}.${ext} ${w}w`).join(", ");
+  heroWidths[slug].map((w) => `/images/produits/${slug}-accueil-${w}.${ext} ${w}w`).join(", ");

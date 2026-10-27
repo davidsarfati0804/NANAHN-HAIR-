@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { confirmationEmail } from "@/lib/emails/confirmation";
 import { newOrderNumber, validateAddress } from "@/lib/order";
 
-const address = { firstName: "Inès", lastName: "Martin", email: "ines@example.fr", address: "1 rue de la Paix", postalCode: "75002", city: "Paris" };
+const address = { firstName: "Inès", lastName: "Martin", email: "ines@example.fr", phone: "", address: "1 rue de la Paix", postalCode: "75002", city: "Paris" };
 
 describe("commande : adresse et numéro", () => {
   it("adresse valide acceptée, champs manquants ou invalides signalés", () => {
@@ -11,6 +11,18 @@ describe("commande : adresse et numéro", () => {
     expect(r.ok).toBe(false);
     if (!r.ok) expect(r.fields.sort()).toEqual(["city", "email", "postalCode"]);
     expect(validateAddress(null).ok).toBe(false);
+  });
+
+  it("téléphone facultatif, mais vérifié s'il est saisi", () => {
+    expect(validateAddress({ ...address, phone: "06 12 34 56 78" }).ok).toBe(true);
+    const r = validateAddress({ ...address, phone: "abc" });
+    expect(r.ok).toBe(false);
+    if (!r.ok) expect(r.fields).toEqual(["phone"]);
+  });
+
+  it("livraison en France métropolitaine, Corse comprise : outre-mer refusé", () => {
+    expect(validateAddress({ ...address, postalCode: "20000" }).ok).toBe(true);
+    for (const cp of ["97100", "97400", "98800"]) expect(validateAddress({ ...address, postalCode: cp }).ok, cp).toBe(false);
   });
 
   it("numéro de commande lisible et unique", () => {

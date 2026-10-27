@@ -11,12 +11,13 @@ import { formatPrice } from "@/lib/money";
 import type { Quote } from "@/lib/pricing";
 import type { CarrierId } from "@/lib/settings";
 
-const ADDRESS_FIELDS = ["firstName", "lastName", "email", "address", "postalCode", "city"] as const;
+const ADDRESS_FIELDS = ["firstName", "lastName", "email", "phone", "address", "postalCode", "city"] as const;
 type AddressField = (typeof ADDRESS_FIELDS)[number];
 const autoComplete: Record<AddressField, string> = {
   firstName: "given-name",
   lastName: "family-name",
   email: "email",
+  phone: "tel",
   address: "street-address",
   postalCode: "postal-code",
   city: "address-level2",
@@ -28,7 +29,7 @@ export default function Checkout() {
   const [carrier, setCarrier] = useState<CarrierId | null>(null);
   const [quote, setQuote] = useState<Quote | null>(null);
   const [failed, setFailed] = useState(false);
-  const [address, setAddress] = useState<Record<AddressField, string>>({ firstName: "", lastName: "", email: "", address: "", postalCode: "", city: "" });
+  const [address, setAddress] = useState<Record<AddressField, string>>({ firstName: "", lastName: "", email: "", phone: "", address: "", postalCode: "", city: "" });
   const [badFields, setBadFields] = useState<string[]>([]);
   const [cgv, setCgv] = useState(false);
   const [cgvError, setCgvError] = useState(false);
@@ -156,14 +157,14 @@ export default function Checkout() {
           </h2>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
             {ADDRESS_FIELDS.map((k) => (
-              <label key={k} className={`flex flex-col text-sm font-bold ${k === "email" || k === "address" ? "sm:col-span-2" : ""}`}>
+              <label key={k} className={`flex flex-col text-sm font-bold ${k === "email" || k === "phone" || k === "address" ? "sm:col-span-2" : ""}`}>
                 {t.fields[k]}
                 <input
                   name={k}
-                  type={k === "email" ? "email" : "text"}
+                  type={k === "email" ? "email" : k === "phone" ? "tel" : "text"}
                   inputMode={k === "postalCode" ? "numeric" : undefined}
                   autoComplete={autoComplete[k]}
-                  required
+                  required={k !== "phone"}
                   value={address[k]}
                   aria-invalid={badFields.includes(k)}
                   onChange={(e) => {
@@ -178,6 +179,7 @@ export default function Checkout() {
           {badFields.length > 0 && (
             <p role="alert" className="mt-3 font-bold text-luxurious-deep">
               {t.addressError}
+              {badFields.includes("postalCode") && ` ${t.deliveryZone}`}
             </p>
           )}
         </section>
@@ -234,7 +236,7 @@ export default function Checkout() {
             <div>
               <dt className="font-bold">{t.addressTitle}</dt>
               <dd data-testid="recap-adresse">
-                {ADDRESS_FIELDS.every((k) => address[k].trim())
+                {ADDRESS_FIELDS.every((k) => k === "phone" || address[k].trim())
                   ? `${address.firstName} ${address.lastName}, ${address.address}, ${address.postalCode} ${address.city}`
                   : "—"}
               </dd>

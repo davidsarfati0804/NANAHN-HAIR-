@@ -780,7 +780,9 @@ export const checkoutTexts = fr({
     end: ".",
   },
   addressTitle: "Adresse de livraison",
-  fields: { firstName: "Prénom", lastName: "Nom", email: "Email", address: "Adresse", postalCode: "Code postal", city: "Ville" },
+  fields: { firstName: "Prénom", lastName: "Nom", email: "Email", phone: "Téléphone (facultatif)", address: "Adresse", postalCode: "Code postal", city: "Ville" },
+  // Zone de livraison (CGV, article 6)
+  deliveryZone: "Nous livrons en France métropolitaine, Corse comprise.",
   addressError: "Vérifie ton adresse de livraison : les champs signalés sont incomplets.",
   delayLabel: "Délai de livraison",
   delayValue: "3 jours ouvrés, préparation incluse",

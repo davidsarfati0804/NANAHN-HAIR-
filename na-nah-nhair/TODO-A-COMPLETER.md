@@ -52,18 +52,19 @@ Le build de **production** est bloqué tant qu'un de ces points reste dans les p
 - [x] Directrice de la publication : la gérante (26/10/2026)
 - [x] TVA : franchise en base, « TVA non applicable, article 293 B du CGI » ; plus aucun « TTC » sur le site (26/10/2026)
 - [ ] **Hébergeur** : Netlify, Inc. renseigné dans les mentions légales ; à confirmer (hébergement final, téléphone de l'hébergeur demandé par la loi, non publié par Netlify : à faire valider)
-- [ ] **Médiateur de la consommation** : nom, adresse, site (mentions légales, CGV)
-- [ ] **Zone de livraison** : France métropolitaine seulement, ou Corse et DOM-TOM (CGV)
-- [ ] **Délai de livraison** à confirmer avec les transporteurs (CGV)
-- [ ] **Frais de livraison** : « livraison offerte » ou grille de tarifs (CGV)
-- [ ] **Plateforme européenne de règlement des litiges** si vente dans d'autres pays de l'UE (CGV)
-- [ ] **Sceau de garantie** sur les flacons : activer ou retirer l'option « produits descellés » (CGV, Rétractation)
-- [ ] Option « dépréciation du produit » : à valider par un professionnel (CGV, Rétractation)
+- [ ] **Médiateur de la consommation** : adhésion obligatoire, à choisir avant l'ouverture (pistes à vérifier : CM2C, AME Conso ; liste officielle www.economie.gouv.fr/mediation-conso) ; puis remplacer les deux emplacements (CGV article 14, mentions légales)
+- [x] Zone de livraison : France métropolitaine, Corse comprise (DOM-TOM exclus) ; le formulaire de commande refuse les codes postaux 97/98 (27/10/2026)
+- [ ] FAQ « Où livrez-vous ? » répond encore « France uniquement » : texte à aligner sur la zone des CGV si tu le souhaites
+- [x] Délai de livraison : « 3 jours ouvrés, préparation incluse » (à tenir en pratique, sinon le modifier partout)
+- [x] Frais de livraison : offerts (CGV) ; grille Colissimo / Mondial Relay seulement si la livraison redevient payante
+- [x] Plateforme européenne de règlement des litiges : ligne retirée des CGV (27/10/2026)
+- [x] Sceau de garantie : pas de sceau, paragraphe retiré (CGV, Rétractation) ; texte gardé dans `content/juridique/option-sceau-a-activer-plus-tard.txt`, à ajouter seulement si un sceau est mis en place
+- [ ] Paragraphe « dépréciation du produit » : actif, à faire valider par un professionnel (CGV, Rétractation)
 - [ ] **Dates de mise à jour** des CGV, de la confidentialité et des cookies
-- [ ] **Téléphone** demandé à la commande ou non (confidentialité ; aujourd'hui le formulaire de commande ne le demande pas)
-- [ ] **Durées de conservation** des données à valider (confidentialité)
-- [ ] **Prestataires** et transferts hors UE à vérifier (Stripe, Supabase, Resend, transporteurs, hébergeur) (confidentialité)
-- [ ] Cookie de session du **paiement** : à décrire quand Stripe sera activé (cookies)
+- [x] Téléphone : champ « Téléphone (facultatif) » ajouté au formulaire de commande, pour qu'il corresponde à la politique de confidentialité (27/10/2026)
+- [ ] Durées de conservation : 10 ans (commandes, factures), 3 ans (messages de contact), pas de newsletter ; à faire valider par un professionnel
+- [ ] **Prestataires** listés dans la confidentialité : Stripe, Supabase, Resend, Colissimo, Mondial Relay, Netlify. À CONFIRMER : aujourd'hui le site n'utilise **ni Supabase ni Resend** (données sur Netlify Blobs, service d'emails pas encore choisi) ; Stripe pas encore branché. Ajuster le tableau ou les choix techniques avant l'ouverture
+- [x] Cookies : paragraphe Stripe ajouté ; tableau complété d'après le code (« nnh-panier-v1 » panier, « nnh-consentement » 6 mois, « nnh_admin » 8 heures) (27/10/2026)
 - [ ] Phrase « aucun outil de mesure ni de publicité » à confirmer / mettre à jour (cookies)
 - [ ] Mentions « Projet de texte à faire relire avant publication » à retirer après relecture
 - [ ] Factures : modèle prêt (`lib/invoices/invoice.ts`), à produire automatiquement quand le paiement sera activé

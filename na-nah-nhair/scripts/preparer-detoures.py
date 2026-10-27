@@ -2,7 +2,7 @@
 # WebP qualité 90 en 160 / 320 px et pleine résolution, PNG pleine résolution en secours.
 # Jamais d'agrandissement : la plus grande version est la taille du fichier fourni. Images non retouchées.
 # (Le premier écran de l'accueil garde ses fichiers <soin>-accueil-*, version de référence du 24/10/2026,
-#  sources dans assets/sources/detoures-accueil/.)
+#  sources dans assets/sources/detoures-accueil/ ; Miraculous y est remplacé par le fichier de la modification 56.)
 # Usage : python3 scripts/preparer-detoures.py (depuis na-nah-nhair/)
 from pathlib import Path
 from PIL import Image

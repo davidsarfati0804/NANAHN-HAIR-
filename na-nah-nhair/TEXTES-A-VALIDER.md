@@ -89,3 +89,8 @@ Tous les libellés et messages du back-office (connexion, produits et stocks, li
 ## 4. Libellés des emplacements « À COMPLÉTER »
 
 Les intitulés des informations manquantes (« mode d'emploi de chaque sérum », « qui paie les frais de retour », « médiateur de la consommation »…) sont de moi ; ils seront remplacés par vos textes.
+
+## 5. Formulaire de commande (27/10/2026)
+
+- Libellé « Téléphone (facultatif) » : ajouté parce que la politique de confidentialité mentionne un téléphone transmis au transporteur.
+- Message « Nous livrons en France métropolitaine, Corse comprise. » (affiché si le code postal est hors zone) : repris de la zone de livraison des CGV.

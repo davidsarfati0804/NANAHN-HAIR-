@@ -365,3 +365,9 @@ Ces décisions de la propriétaire de la marque complètent et remplacent les pa
 
 - **Carte Miraculous (Mon histoire)** : titre « Voici Miraculous ! ».
 - **Flacons, version 3** : boutique, sélecteur « Quel soin est le tien ? », fiches, panier et image de partage ; flacon à 80 % de la hauteur du panneau blanc dans la boutique. Le premier écran de l'accueil garde ses fichiers de référence (rendu jugé meilleur).
+
+## 19. Modifications validées (27/10/2026)
+
+- **Pages juridiques** : textes mis à jour (livraison en France métropolitaine, Corse comprise ; livraison offerte ; plus d'option « sceau » ; paragraphe « dépréciation » actif ; plus de plateforme européenne ; prestataires Stripe, Supabase, Resend, Colissimo, Mondial Relay, Netlify ; pas de newsletter). Texte de l'option sceau gardé à part (`content/juridique/option-sceau-a-activer-plus-tard.txt`).
+- **Commande** : champ « Téléphone (facultatif) », transmis au transporteur ; codes postaux d'outre-mer (97, 98) refusés avec le message « Nous livrons en France métropolitaine, Corse comprise. ».
+- **Flacon Miraculous (modification 56)** : nouveau fichier `assets/images/miraculous.png` (470 x 1232) partout, y compris le premier écran de l'accueil (contour plus propre que la version de référence) ; anciennes versions supprimées. Fabulous et Luxurious inchangés.

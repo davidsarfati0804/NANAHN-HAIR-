@@ -97,3 +97,6 @@ jobs:
         run: |
           r=$(tr -d '\r' < rapport.txt | sed 's/%/%25/g' | awk 'BEGIN{ORS="%0A"}{print}')
           echo "::notice title=Rapport site-2::${r:0:60000}"
+          # Résumé court (l'annotation complète est tronquée par GitHub)
+          s=$(grep -E '^(OK|ABSENT)' rapport.txt | tail -8 | tr -d '\r' | awk 'BEGIN{ORS="%0A"}{print}')
+          echo "::notice title=Résumé site-2::$(grep -c '^OK' rapport.txt) OK, $(grep -c '^ABSENT' rapport.txt) ABSENT%0A$(grep '^ABSENT' rapport.txt | tr -d '\r' | awk 'BEGIN{ORS="%0A"}{print}')Derniers contrôles :%0A${s}"

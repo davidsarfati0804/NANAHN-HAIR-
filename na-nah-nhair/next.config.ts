@@ -47,9 +47,22 @@ const nextConfig: NextConfig = {
     // Photos produits envoyées depuis le back-office (4 Mo maximum, voir app/admin/actions.ts)
     serverActions: { bodySizeLimit: "5mb" },
   },
-  // Ancienne page « Retours » remplacée par la page Rétractation (modification 39)
+  // Ancienne page « Retours » remplacée par la page Rétractation (modification 39), et adresses du premier
+  // site (branche main, archivé le 28/10/2026) vers leurs équivalents : Google et les anciens liens suivent
   async redirects() {
-    return [{ source: "/retours", destination: "/retractation", permanent: true }];
+    const moved = (source: string, destination: string) => ({ source, destination, permanent: true });
+    return [
+      moved("/retours", "/retractation"),
+      moved("/a-propos", "/mon-histoire"),
+      moved("/produits/pack-zero-prise-de-tete", "/pack"),
+      moved("/produits/:slug(fabulous|miraculous|luxurious)", "/soins/:slug"),
+      moved("/produits/:autre*", "/soins"),
+      moved("/produits", "/soins"),
+      moved("/politique-confidentialite", "/confidentialite"),
+      moved("/livraison-retours", "/faq#livraison"),
+      moved("/routines", "/soins"),
+      moved("/resultats", "/quiz"),
+    ];
   },
   async headers() {
     return [

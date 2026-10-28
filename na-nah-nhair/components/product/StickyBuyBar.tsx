@@ -2,6 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { useCart } from "@/components/cart/CartProvider";
+import { useCatalog } from "@/components/cart/useCatalog";
+import { fromPublic } from "@/lib/catalog";
+import { MAX_QUANTITY_PER_LINE, maxAddable } from "@/lib/pricing";
 import { shop as texts } from "@/content/site";
 import type { ProductId } from "@/lib/catalog";
 
@@ -22,7 +25,14 @@ export default function StickyBuyBar({
   targetId: string;
   buttonClassName: string;
 }) {
-  const { add } = useCart();
+  const { add, items } = useCart();
+  const { data } = useCatalog();
+  // Même limite que le bouton de la fiche : stock restant, sérums déjà dans un pack compris
+  const inCart = items.find((i) => i.id === id)?.quantity ?? 0;
+  const max = data
+    ? maxAddable(fromPublic(data.products), items, id)
+    : Math.min(MAX_QUANTITY_PER_LINE, available === null ? MAX_QUANTITY_PER_LINE : available) - inCart;
+  const canAdd = max >= 1;
   const [visible, setVisible] = useState(false);
   const [added, setAdded] = useState(false);
 
@@ -49,11 +59,13 @@ export default function StickyBuyBar({
       <button
         type="button"
         tabIndex={visible ? 0 : -1}
+        disabled={!canAdd}
         onClick={() => {
+          if (!canAdd) return;
           add(id, 1);
           setAdded(true);
         }}
-        className={`${buttonClassName} shrink-0 px-5`}
+        className={`${buttonClassName} shrink-0 px-5 disabled:cursor-not-allowed disabled:opacity-50`}
       >
         {added ? texts.added : texts.addToCart}
       </button>

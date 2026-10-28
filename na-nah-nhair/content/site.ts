@@ -72,6 +72,8 @@ export type Product = {
   inciNotes: string[];
   usage: UsageGuide | null;
   precautions: string | null;
+  // Questions-réponses propres au soin (fiche produit) : null = À COMPLÉTER
+  faq: Array<{ question: string; answer: string }> | null;
   volume: string;
   founder?: boolean;
 };
@@ -167,6 +169,7 @@ export const products: Product[] = fr([
     inciNotes,
     usage: usageGuide("Fabulous Hair Serum", "mode-emploi-fabulous"),
     precautions: null,
+    faq: null,
     volume: "30 ml",
   },
   {
@@ -210,6 +213,7 @@ export const products: Product[] = fr([
     inciNotes,
     usage: usageGuide("Miraculous Hair Serum", "mode-emploi"),
     precautions: null,
+    faq: null,
     volume: "30 ml",
     founder: true,
   },
@@ -256,6 +260,7 @@ export const products: Product[] = fr([
     inciNotes,
     usage: usageGuide("Luxurious Hair Serum", "mode-emploi-luxurious"),
     precautions: null,
+    faq: null,
     volume: "30 ml",
   },
 ]);
@@ -448,6 +453,22 @@ export const consentTexts = fr({
   none: "aucun choix enregistré",
 });
 
+// Page introuvable et page d'erreur (textes d'interface, voir TEXTES-A-VALIDER.md)
+export const errorTexts = {
+  notFound: {
+    title: fr("Page introuvable"),
+    text: fr("Cette page n'existe pas ou a changé d'adresse."),
+    home: "Retour à l'accueil",
+    shop: "Voir la boutique",
+  },
+  error: {
+    title: fr("Une erreur est survenue"),
+    text: fr("La page n'a pas pu s'afficher. Réessaie dans un instant."),
+    retry: "Réessayer",
+    home: "Retour à l'accueil",
+  },
+};
+
 export const contactTexts = fr({
   title: "Contact",
   intro: "Une question sur un soin, une commande ou la livraison ? Écris-nous.",
@@ -462,13 +483,15 @@ export const contactTexts = fr({
   privacy: "Tes informations servent uniquement à te répondre. Voir la politique de confidentialité.",
   coordinatesTitle: "Coordonnées",
   instagramTitle: "Instagram",
-  instagramLabel: "Instagram de Na Nah N’hair (s'ouvre dans un nouvel onglet)",
+  // Le nom lu commence par le texte affiché (accessibilité : nom accessible = texte visible)
+  instagramLabel: "@na.nah.nhair, Instagram de Na Nah N’hair (s'ouvre dans un nouvel onglet)",
   errors: {
     name: "Indique ton nom (2 à 100 caractères).",
     email: "Indique une adresse email valide.",
     subject: "Choisis un sujet.",
     message: "Ton message doit contenir entre 10 et 3 000 caractères.",
     spam: "Message refusé. Réessaie dans quelques instants.",
+    tooFast: "Envoi trop rapide : vérifie ton message, puis envoie-le à nouveau.",
     rate: "Trop de messages envoyés. Réessaie plus tard.",
     server: "Le message n'a pas pu être envoyé. Écris-nous directement par email.",
   },
@@ -720,6 +743,9 @@ export const quiz = fr({
     shareTitle: (name: string) => `Je suis ${name}.`,
     quizAt: "Fais le quiz sur",
     siteTodo: "À COMPLÉTER : adresse du site",
+    // Adresse affichée sur l'image story (ex. « nanahnhair.com ») : null = À COMPLÉTER.
+    // Après l'avoir renseignée : node scripts/generer-stories.mjs (images public/story/)
+    siteAddress: null as string | null,
     instagram: "@na.nah.nhair",
   },
 });
@@ -780,6 +806,9 @@ export const checkoutTexts = fr({
     end: ".",
   },
   addressTitle: "Adresse de livraison",
+  // Information RGPD au moment de la collecte (texte d'interface, voir TEXTES-A-VALIDER.md)
+  privacyBefore: "Ces informations servent uniquement à préparer et livrer ta commande. En savoir plus : ",
+  privacyLink: "politique de confidentialité",
   fields: { firstName: "Prénom", lastName: "Nom", email: "Email", phone: "Téléphone (facultatif)", address: "Adresse", postalCode: "Code postal", city: "Ville" },
   // Zone de livraison (CGV, article 6)
   deliveryZone: "Nous livrons en France métropolitaine, Corse comprise.",
@@ -799,6 +828,8 @@ export const checkoutTexts = fr({
 });
 
 export const adminTexts = fr({
+  backup: "Télécharger une sauvegarde",
+  backupHelp: "(fichier à garder en lieu sûr : avant la mise en ligne, puis chaque semaine)",
   title: "Back-office",
   login: {
     title: "Connexion au back-office",

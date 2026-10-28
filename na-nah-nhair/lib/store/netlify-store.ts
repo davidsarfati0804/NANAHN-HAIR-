@@ -45,5 +45,22 @@ export function createNetlifyStore(name: string): KeyValueStore {
     async delete(key) {
       await store.delete(key);
     },
+    // Écriture conditionnelle (ETag) : si la clé a changé entre la lecture et l'écriture, on recommence
+    async update<T>(key: string, fn: (current: T | null) => T) {
+      for (let attempt = 0; attempt < 8; attempt++) {
+        const current = (await exists(key))
+          ? await store.getWithMetadata(key, { type: "json", consistency: "strong" })
+          : null;
+        const next = fn(((current?.data as T | undefined) ?? null) as T | null);
+        const result = await store.setJSON(key, next, current?.etag ? { onlyIfMatch: current.etag } : { onlyIfNew: true });
+        if (result.modified) return next;
+        await new Promise((r) => setTimeout(r, 30 + Math.random() * 120));
+      }
+      throw new Error(`Écriture concurrente impossible (${key})`);
+    },
+    async list(prefix) {
+      const { blobs } = await store.list({ prefix });
+      return blobs.map((b) => b.key);
+    },
   };
 }

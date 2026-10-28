@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import ButtonLink from "@/components/ButtonLink";
 import { useCart } from "@/components/cart/CartProvider";
@@ -155,6 +156,13 @@ export default function Checkout() {
           <h2 id="adresse" className="mt-10 titre-h2">
             {t.addressTitle}
           </h2>
+          <p className="mt-2 text-sm">
+            {t.privacyBefore}
+            <Link href="/confidentialite" target="_blank" className="font-bold underline underline-offset-4">
+              {t.privacyLink}
+            </Link>
+            .
+          </p>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
             {ADDRESS_FIELDS.map((k) => (
               <label key={k} className={`flex flex-col text-sm font-bold ${k === "email" || k === "phone" || k === "address" ? "sm:col-span-2" : ""}`}>

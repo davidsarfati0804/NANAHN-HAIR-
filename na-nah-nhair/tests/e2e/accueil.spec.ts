@@ -414,7 +414,7 @@ test.describe("modifications du 24/10/2026", () => {
 
   test("Instagram : lien sur la page Contact et dans le pied de page", async ({ page }) => {
     await page.goto("/contact");
-    const link = page.locator("main").getByRole("link", { name: "Instagram de Na Nah N’hair (s'ouvre dans un nouvel onglet)" });
+    const link = page.locator("main").getByRole("link", { name: "@na.nah.nhair, Instagram de Na Nah N’hair (s'ouvre dans un nouvel onglet)" });
     await expect(link).toHaveAttribute("href", "https://www.instagram.com/na.nah.nhair/");
     await expect(link).toHaveAttribute("target", "_blank");
     await expect(link).toHaveAttribute("rel", "noopener noreferrer");

@@ -152,7 +152,8 @@ export default function LegalMarkdown({ md, toc = false }: { md: string; toc?: b
             );
           case "table":
             return (
-              <div key={n} className="mt-4 overflow-x-auto rounded-2xl border-2 border-lavender">
+              // Tableau qui défile sur téléphone : atteignable au clavier (flèches) et nommé
+              <div key={n} tabIndex={0} role="region" aria-label={`Tableau : ${b.head.join(", ")}`} className="mt-4 overflow-x-auto rounded-2xl border-2 border-lavender">
                 <table className="w-full min-w-[34rem] border-collapse text-left text-sm">
                   <thead className="bg-lavender-soft">
                     <tr>

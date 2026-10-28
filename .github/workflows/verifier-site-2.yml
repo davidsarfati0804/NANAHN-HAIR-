@@ -85,6 +85,11 @@ jobs:
           check / "miraculous-accueil-470.webp"
           check /commande "Téléphone (facultatif)"
           check /cgv "Corse comprise"
+          check /page-inexistante "Page introuvable"
+          check /commande "politique de confidentialité"
+          redir() { if curl -s -o /dev/null -m 30 -w "%{redirect_url}" "$URL$1" | grep -q "$2"; then echo "OK      $1 → $2"; else echo "ABSENT  $1 → $2"; fi; }
+          redir /a-propos /mon-histoire
+          redir /produits/fabulous /soins/fabulous
           for p in /documents/cgv-v1.pdf /documents/formulaire-de-retractation.pdf /story/luxurious.png /images/produits/pack-800.webp /quiz/resultat/fabulous /quiz/resultat/miraculous; do
             curl -s -o /dev/null -m 30 -w "$p %{http_code} %{content_type}\n" "$URL$p" || echo "$p erreur"
           done
@@ -100,3 +105,9 @@ jobs:
           # Résumé court (l'annotation complète est tronquée par GitHub)
           s=$(grep -E '^(OK|ABSENT)' rapport.txt | tail -8 | tr -d '\r' | awk 'BEGIN{ORS="%0A"}{print}')
           echo "::notice title=Résumé site-2::$(grep -c '^OK' rapport.txt) OK, $(grep -c '^ABSENT' rapport.txt) ABSENT%0A$(grep '^ABSENT' rapport.txt | tr -d '\r' | awk 'BEGIN{ORS="%0A"}{print}')Derniers contrôles :%0A${s}"
+      - name: Échouer si un contrôle manque
+        run: |
+          if grep -q '^ABSENT' rapport.txt; then
+            echo "::error title=site-2::$(grep -c '^ABSENT' rapport.txt) contrôle(s) ABSENT"
+            exit 1
+          fi

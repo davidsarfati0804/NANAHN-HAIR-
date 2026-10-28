@@ -120,8 +120,9 @@ test("aucune donnée du back-office dans les réponses envoyées à un visiteur 
     for (const headers of [{}, { RSC: "1" }] as Array<Record<string, string>>) {
       const res = await request.get(path, { maxRedirects: 0, headers });
       const body = await res.text();
-      // Page : vraie redirection 307 ; navigation interne (RSC) : instruction de redirection dans la réponse
-      if (headers.RSC) expect(body, path).toContain("NEXT_REDIRECT");
+      // Page : vraie redirection 307 ; navigation interne (RSC) : redirection 307 (Next 16.4) ou instruction
+      // de redirection dans la réponse
+      if (headers.RSC) expect(res.status() === 307 || body.includes("NEXT_REDIRECT"), path).toBe(true);
       else expect(res.status(), path).toBe(307);
       for (const secret of ["priceCents", "freeShippingThresholdCents", "Produits et stocks", "IP "]) {
         expect(body, `${path} ${JSON.stringify(headers)}`).not.toContain(secret);

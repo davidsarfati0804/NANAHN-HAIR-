@@ -87,14 +87,19 @@ export function totpCode(secret: Buffer, counter: number, digits = 6, algorithm 
 }
 
 export function verifyTotp(secretBase32: string, code: string, now = Date.now()): boolean {
-  if (!/^\d{6}$/.test(code)) return false;
+  return matchTotp(secretBase32, code, now) !== null;
+}
+
+// Période (compteur) du code reconnu, ou null : permet de refuser un code déjà utilisé
+export function matchTotp(secretBase32: string, code: string, now = Date.now()): number | null {
+  if (!/^\d{6}$/.test(code)) return null;
   const secret = base32Decode(secretBase32);
   const counter = Math.floor(now / 1000 / 30);
   // Tolérance d'une période (30 s) avant et après
-  return [-1, 0, 1].some((d) => {
-    const expected = Buffer.from(totpCode(secret, counter + d));
-    return timingSafeEqual(expected, Buffer.from(code));
-  });
+  for (const d of [-1, 0, 1]) {
+    if (timingSafeEqual(Buffer.from(totpCode(secret, counter + d)), Buffer.from(code))) return counter + d;
+  }
+  return null;
 }
 
 // Limiteur persistant : les compteurs sont lus et écrits dans le stockage (partagés entre serveurs)

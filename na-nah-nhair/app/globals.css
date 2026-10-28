@@ -168,6 +168,11 @@
     letter-spacing: 0.05em;
     transition: background-color 0.15s;
   }
+  /* Nom de marque dans un bouton : sa largeur compte dans celle du bouton (un max-width en % la
+     ramenait à 0, et le nom débordait du bouton sur ordinateur) */
+  .bouton [data-brand-name] {
+    max-width: none !important; /* l'emporte sur le style en ligne du composant */
+  }
   .bouton--principal {
     background: var(--color-deep-violet);
     color: var(--color-white);

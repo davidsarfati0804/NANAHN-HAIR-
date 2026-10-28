@@ -38,6 +38,11 @@ function withTimeout(s: KeyValueStore, ms: number): KeyValueStore {
     getBinary: (k) => limit(s.getBinary(k), `lecture ${k}`),
     setBinary: (k, d, t) => limit(s.setBinary(k, d, t), `écriture ${k}`),
     delete: (k) => limit(s.delete(k), `suppression ${k}`),
+    update: (k, fn) => Promise.race([
+      s.update(k, fn),
+      new Promise<never>((_, reject) => setTimeout(() => reject(new Error(`Stockage trop lent (mise à jour ${k})`)), ms * 3)),
+    ]),
+    list: (p) => limit(s.list(p), `liste ${p}`),
   };
 }
 
@@ -89,9 +94,8 @@ export type AuditEntry = { at: string; action: string; detail: string };
 
 // Journal des actions du back-office (les 500 dernières)
 export async function appendAudit(action: string, detail: string) {
-  const log = (await kv().getJSON<AuditEntry[]>("audit-log")) ?? [];
-  log.unshift({ at: new Date().toISOString(), action, detail });
-  await kv().setJSON("audit-log", log.slice(0, 500));
+  const entry = { at: new Date().toISOString(), action, detail };
+  await kv().update<AuditEntry[]>("audit-log", (log) => [entry, ...(log ?? [])].slice(0, 500));
 }
 
 export async function getAudit(): Promise<AuditEntry[]> {
@@ -105,9 +109,8 @@ export async function getErrors(): Promise<AuditEntry[]> {
 // Journal des erreurs serveur (les 500 dernières)
 export async function logError(where: string, error: unknown) {
   try {
-    const log = (await kv().getJSON<AuditEntry[]>("error-log")) ?? [];
-    log.unshift({ at: new Date().toISOString(), action: where, detail: error instanceof Error ? error.message : String(error) });
-    await kv().setJSON("error-log", log.slice(0, 500));
+    const entry = { at: new Date().toISOString(), action: where, detail: error instanceof Error ? error.message : String(error) };
+    await kv().update<AuditEntry[]>("error-log", (log) => [entry, ...(log ?? [])].slice(0, 500));
   } catch {
     console.error(where, error);
   }
@@ -127,32 +130,32 @@ export async function getLoginAttempts(): Promise<AttemptLog> {
   return (await kv().getJSON<AttemptLog>("login-attempts")) ?? {};
 }
 
-export async function saveLoginAttempts(log: AttemptLog) {
-  await kv().setJSON("login-attempts", log);
+// Mise à jour atomique des compteurs de tentatives (connexion, contact, commandes)
+export async function updateAttempts(name: "login-attempts" | "contact-attempts" | "order-attempts", fn: (log: AttemptLog) => AttemptLog) {
+  return kv().update<AttemptLog>(name, (log) => fn(log ?? {}));
 }
 
-// Messages du formulaire de contact (les 1 000 derniers)
+// Double authentification : dernier code accepté (un code ne sert qu'une fois). Renvoie false si déjà utilisé.
+export async function consumeTotpCounter(counter: number): Promise<boolean> {
+  let accepted = false;
+  await kv().update<number>("admin-totp-last", (last) => {
+    accepted = counter > (last ?? 0);
+    return accepted ? counter : (last ?? 0);
+  });
+  return accepted;
+}
+
+// Messages du formulaire de contact (les 5 000 derniers ; écriture atomique : aucun message perdu)
 export async function getContactMessages(): Promise<ContactMessage[]> {
   return (await kv().getJSON<ContactMessage[]>("contact-messages")) ?? [];
 }
 
 export async function appendContactMessage(message: ContactMessage) {
-  const list = await getContactMessages();
-  list.unshift(message);
-  await kv().setJSON("contact-messages", list.slice(0, 1000));
+  await kv().update<ContactMessage[]>("contact-messages", (list) => [message, ...(list ?? [])].slice(0, 5000));
 }
 
 export async function deleteContactMessage(id: string) {
-  const list = await getContactMessages();
-  await kv().setJSON("contact-messages", list.filter((m) => m.id !== id));
-}
-
-export async function getContactAttempts(): Promise<AttemptLog> {
-  return (await kv().getJSON<AttemptLog>("contact-attempts")) ?? {};
-}
-
-export async function saveContactAttempts(log: AttemptLog) {
-  await kv().setJSON("contact-attempts", log);
+  await kv().update<ContactMessage[]>("contact-messages", (list) => (list ?? []).filter((m) => m.id !== id));
 }
 
 // Preuve d'acceptation des CGV (modification 39) : date et heure, version, numéro de commande, rien d'autre
@@ -164,6 +167,18 @@ export async function recordCgvAcceptance(record: CgvAcceptance) {
 
 export async function getCgvAcceptance(orderNumber: string): Promise<CgvAcceptance | null> {
   return kv().getJSON<CgvAcceptance>(`cgv-acceptations/${orderNumber}`);
+}
+
+// Sauvegarde complète (back-office) : toutes les données JSON ; les photos envoyées sont listées par clé
+export async function backupAll() {
+  const keys = (await kv().list("")).sort();
+  const data: Record<string, unknown> = {};
+  const media: string[] = [];
+  for (const key of keys) {
+    if (key.startsWith("media-")) media.push(key);
+    else data[key] = await kv().getJSON(key).catch((e) => ({ erreur: e instanceof Error ? e.message : String(e) }));
+  }
+  return { date: new Date().toISOString(), magasin: process.env.NNH_DATA_DIR ? "fichiers" : "netlify-blobs", donnees: data, photos: media };
 }
 
 // Diagnostic (page /api/sante) : type de stockage et temps de lecture, sans aucune donnée sensible
@@ -198,7 +213,7 @@ export async function storeDeepCheck() {
       return { etape: label, ok: false, ms: Date.now() - t0, erreur: e instanceof Error ? `${e.name}: ${e.message}` : String(e) };
     }
   };
-  const direct = getStore({ name: "na-nah-nhair" });
+  const direct = getStore({ name: storeName() });
   const store = kvRaw();
   return [
     await timed("écriture", () => direct.setJSON("diagnostic", { at: Date.now() })),

@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { adminTexts as t } from "@/content/site";
 import { adminConfig, clientIp, endSession, requireAdmin, startSession } from "@/lib/auth";
-import { checkAttempts, recordFailure, verifyPassword, verifyTotp } from "@/lib/auth-core";
+import { checkAttempts, matchTotp, recordFailure, verifyPassword } from "@/lib/auth-core";
 import { isProductId } from "@/lib/catalog";
 import { parseEuroInput } from "@/lib/money";
 import type { CarrierId } from "@/lib/settings";
@@ -14,17 +14,20 @@ import {
   deleteContactMessage,
   deleteMedia,
   getCatalog,
-  getLoginAttempts,
   getSettings,
   putMedia,
   saveCatalog,
-  saveLoginAttempts,
+  consumeTotpCounter,
+  updateAttempts,
   saveSettings,
 } from "@/lib/store";
 
-// 5 échecs par IP, et 50 échecs au total (toutes IP confondues), par tranche de 15 minutes
-const LIMITS: Array<[string, number]> = [["global", 50]];
+// 5 essais par IP par tranche de 15 minutes (réservés avant la vérification : des envois simultanés ne
+// passent pas la limite). Au-delà de 50 échecs toutes IP confondues, chaque essai est ralenti, mais les bons
+// identifiants restent acceptés : personne ne peut bloquer la gérante.
 const PER_IP = 5;
+const GLOBAL_SLOWDOWN = 50;
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 export type FormState = { ok?: boolean; error?: string } | null;
 
@@ -33,23 +36,38 @@ export async function login(_prev: FormState, formData: FormData): Promise<FormS
   if (!config.configured) return { error: t.login.notConfigured };
   const ip = await clientIp();
   const ipKey = `ip:${ip}`;
-  const attempts = await getLoginAttempts();
-  if (checkAttempts(attempts, [[ipKey, PER_IP], ...LIMITS])) return { error: t.login.blocked };
+  let blocked = false;
+  let busy = false;
+  let tries = 0;
+  await updateAttempts("login-attempts", (log) => {
+    blocked = checkAttempts(log, [[ipKey, PER_IP]]);
+    busy = checkAttempts(log, [["global", GLOBAL_SLOWDOWN]]);
+    if (blocked) return log;
+    const next = recordFailure(log, [ipKey, "global"]);
+    tries = next[ipKey].count;
+    return next;
+  });
+  if (blocked) return { error: t.login.blocked };
+  if (busy) await sleep(2000);
 
   const password = String(formData.get("password") ?? "");
   const code = String(formData.get("totp") ?? "").replace(/\s/g, "");
   const passwordOk = password.length > 0 && password.length < 200 && verifyPassword(password, config.passwordHash);
-  const totpOk = !config.totpSecret || verifyTotp(config.totpSecret, code);
+  const counter = passwordOk && config.totpSecret ? matchTotp(config.totpSecret, code) : null;
+  // Un code à 6 chiffres ne sert qu'une seule fois
+  const ok = counter !== null && (await consumeTotpCounter(counter));
 
-  if (!passwordOk || !totpOk) {
-    await saveLoginAttempts(recordFailure(attempts, [ipKey, "global"]));
-    await appendAudit("connexion refusée", `IP ${ip}`);
-    await new Promise((r) => setTimeout(r, 400)); // ralentit les essais en série
+  if (!ok) {
+    // Journal : le premier échec et le blocage seulement (pas d'inondation du journal)
+    if (tries === 1 || tries === PER_IP) await appendAudit(tries === PER_IP ? "connexion bloquée 15 min" : "connexion refusée", `IP ${ip}`);
+    await sleep(400); // ralentit les essais en série
     return { error: t.login.invalid };
   }
-  const { [ipKey]: _cleared, ...rest } = attempts;
-  void _cleared;
-  await saveLoginAttempts(rest);
+  await updateAttempts("login-attempts", (log) => {
+    const { [ipKey]: _cleared, ...rest } = log;
+    void _cleared;
+    return rest;
+  });
   await startSession();
   await appendAudit("connexion", `IP ${ip}`);
   redirect("/admin");
@@ -57,6 +75,7 @@ export async function login(_prev: FormState, formData: FormData): Promise<FormS
 
 export async function logout() {
   await endSession();
+  await appendAudit("déconnexion", "toutes les sessions fermées");
   redirect("/admin/connexion");
 }
 

@@ -1,5 +1,5 @@
-# Branche site-2 : publie le NOUVEAU site (dossier na-nah-nhair/).
-# Le premier site reste publié depuis la branche main, avec son propre netlify.toml.
+# Publie la boutique NA NAH N'HAIR (dossier na-nah-nhair/).
+# Jusqu'à la mise en ligne, la branche main garde l'ancien site (archivé en ZIP le 28/10/2026).
 [build]
   base = "na-nah-nhair"
   command = "npm run build"

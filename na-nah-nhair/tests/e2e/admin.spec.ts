@@ -120,8 +120,9 @@ test("aucune donnée du back-office dans les réponses envoyées à un visiteur 
     for (const headers of [{}, { RSC: "1" }] as Array<Record<string, string>>) {
       const res = await request.get(path, { maxRedirects: 0, headers });
       const body = await res.text();
-      // Page : vraie redirection 307 ; navigation interne (RSC) : instruction de redirection dans la réponse
-      if (headers.RSC) expect(body, path).toContain("NEXT_REDIRECT");
+      // Page : vraie redirection 307 ; navigation interne (RSC) : redirection 307 (Next 16.4) ou instruction
+      // de redirection dans la réponse
+      if (headers.RSC) expect(res.status() === 307 || body.includes("NEXT_REDIRECT"), path).toBe(true);
       else expect(res.status(), path).toBe(307);
       for (const secret of ["priceCents", "freeShippingThresholdCents", "Produits et stocks", "IP "]) {
         expect(body, `${path} ${JSON.stringify(headers)}`).not.toContain(secret);
@@ -202,12 +203,13 @@ test.describe("stock partagé et livraison (bugs remontés par la recette)", () 
     await adminLogin(page);
     await page.goto("/admin/livraison");
     await page.getByLabel("Livraison offerte à partir de (€)").fill("50");
+    // Mondial Relay proposé sans tarif : refusé, saisies conservées
+    await page.getByRole("group", { name: "Mondial Relay (point relais)" }).getByLabel("Proposé à la commande").check();
     await page.getByRole("group", { name: "Colissimo" }).getByLabel("Tarif (€)").fill("4,90");
     await page.getByRole("button", { name: "Enregistrer" }).click();
     await expect(page.getByText(/renseigne le tarif de chaque transporteur/)).toBeVisible();
-    // Les saisies ne sont pas effacées par l'erreur
     await expect(page.getByLabel("Livraison offerte à partir de (€)")).toHaveValue("50");
-    // Mondial Relay retiré : enregistrement accepté
+    // Mondial Relay retiré (réglage d'ouverture) : enregistrement accepté
     await page.getByRole("group", { name: "Mondial Relay (point relais)" }).getByLabel("Proposé à la commande").uncheck();
     await page.getByRole("button", { name: "Enregistrer" }).click();
     await expect(page.getByText("Modifications enregistrées.")).toBeVisible();

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { toPublic } from "@/lib/catalog";
+import { stripeConfig } from "@/lib/payments/stripe";
 import { getCatalog, getSettings, logError } from "@/lib/store";
 
 export const dynamic = "force-dynamic";
@@ -8,7 +9,7 @@ export async function GET() {
   try {
     const [catalog, settings] = await Promise.all([getCatalog(), getSettings()]);
     return NextResponse.json(
-      { products: toPublic(catalog), settings },
+      { products: toPublic(catalog), settings, paymentEnabled: stripeConfig().enabled },
       { headers: { "Cache-Control": "no-store" } },
     );
   } catch (e) {

@@ -63,6 +63,7 @@ Le build de **production** est bloqué tant qu'un de ces points reste dans les p
 - [ ] **Dates de mise à jour** des CGV, de la confidentialité et des cookies
 - [x] Téléphone : champ « Téléphone (facultatif) » ajouté au formulaire de commande, pour qu'il corresponde à la politique de confidentialité (27/10/2026)
 - [ ] Durées de conservation : 10 ans (commandes, factures), 3 ans (messages de contact), pas de newsletter ; à faire valider par un professionnel
+- [ ] **Emails par Gmail** (choix du 28/10/2026) : la politique de confidentialité cite Resend ; à remplacer par Google (Gmail / Google Workspace) après relecture
 - [ ] **Prestataires** listés dans la confidentialité : Stripe, Supabase, Resend, Colissimo, Mondial Relay, Netlify. À CONFIRMER : aujourd'hui le site n'utilise **ni Supabase ni Resend** (données sur Netlify Blobs, service d'emails pas encore choisi) ; Stripe pas encore branché. Ajuster le tableau ou les choix techniques avant l'ouverture
 - [x] Cookies : paragraphe Stripe ajouté ; tableau complété d'après le code (« nnh-panier-v1 » panier, « nnh-consentement » 6 mois, « nnh_admin » 8 heures) (27/10/2026)
 - [ ] Phrase « aucun outil de mesure ni de publicité » à confirmer / mettre à jour (cookies)
@@ -70,6 +71,16 @@ Le build de **production** est bloqué tant qu'un de ces points reste dans les p
 - [ ] Factures : modèle prêt (`lib/invoices/invoice.ts`), à produire automatiquement quand le paiement sera activé
 - [ ] **Relecture professionnelle** : CGV, rétractation, mentions légales, confidentialité, cookies ; conformité cosmétique (étiquetage, INCI, allégations pousse / repousse / chute)
 - [ ] **Envoi des emails** : service d'envoi à choisir ; l'email de confirmation est prêt (`lib/emails/confirmation.ts`, CGV et formulaire en PDF joints)
+
+## Vente en ligne (28/10/2026)
+
+- [ ] Compte **Stripe** : créer, puis clés de test dans Netlify (GUIDE.md, « Paiement en ligne ») ; validation du compte (identité, IBAN) avant les vrais paiements
+- [ ] **Gmail** : mot de passe d'application dans Netlify (GUIDE.md, « Emails »)
+- [ ] **Stock de départ** de chaque sérum (back-office > Produits et stocks)
+- [ ] **FAQ des trois fiches produit** (questions et réponses) : `content/site.ts`, champ `faq` de chaque soin ; sinon dire si le bloc doit être retiré
+- [ ] **Adresse du site** sur les images story du quiz : `quiz.story.siteAddress`, puis `node scripts/generer-stories.mjs`
+- [ ] Mondial Relay : compte et choix du point relais (désactivé à l'ouverture)
+- [ ] Propositions d'alignement FAQ / email avec les CGV : TEXTES-A-VALIDER.md §6
 
 ## Boutique
 

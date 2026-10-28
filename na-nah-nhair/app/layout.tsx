@@ -5,7 +5,7 @@ import { CartProvider } from "@/components/cart/CartProvider";
 import ConsentBanner from "@/components/consent/ConsentBanner";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
-import { brand, seo } from "@/content/site";
+import { brand, pack, seo } from "@/content/site";
 import { isIndexable, siteUrl } from "@/lib/site-url";
 import "./globals.css";
 
@@ -23,7 +23,13 @@ export const metadata: Metadata = {
   robots: isIndexable() ? undefined : { index: false, follow: false },
   title: { default: `${brand.name} | ${brand.signature}`, template: `%s | ${brand.name}` },
   description: seo.description,
-  openGraph: { siteName: brand.name, type: "website", locale: "fr_FR" },
+  // Image de partage par défaut (accueil et pages sans image propre) : la photo du pack des trois soins
+  openGraph: {
+    siteName: brand.name,
+    type: "website",
+    locale: "fr_FR",
+    images: [{ url: "/images/produits/pack-1200.jpg", width: 1200, height: 1500, alt: pack.photo.alt }],
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

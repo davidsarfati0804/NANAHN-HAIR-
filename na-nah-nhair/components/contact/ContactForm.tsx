@@ -2,17 +2,19 @@
 
 import Link from "next/link";
 import { startTransition, useActionState, useEffect, useRef, useState } from "react";
-import { type ContactState, sendContact } from "@/app/contact/actions";
+import { type ContactState, contactToken, sendContact } from "@/app/contact/actions";
 import { contactTexts as t } from "@/content/site";
 
 export default function ContactForm() {
   const [state, action, pending] = useActionState<ContactState, FormData>(sendContact, null);
-  const [startedAt, setStartedAt] = useState(0);
+  const [startedAt, setStartedAt] = useState("");
   const form = useRef<HTMLFormElement>(null);
   const status = useRef<HTMLDivElement>(null);
 
-  // eslint-disable-next-line react-hooks/set-state-in-effect -- heure d'affichage du formulaire (anti-spam)
-  useEffect(() => setStartedAt(Date.now()), []);
+  // Heure d'affichage du formulaire, signée par le serveur (anti-spam)
+  useEffect(() => {
+    contactToken().then(setStartedAt, () => setStartedAt(""));
+  }, []);
   useEffect(() => {
     if (state?.ok) form.current?.reset();
     if (state) status.current?.focus();

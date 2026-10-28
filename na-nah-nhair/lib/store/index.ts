@@ -3,20 +3,22 @@ import path from "node:path";
 import type { AttemptLog } from "@/lib/auth-core";
 import { type Catalog, PRODUCT_IDS, seedCatalog } from "@/lib/catalog";
 import type { ContactMessage } from "@/lib/contact";
+import type { Order } from "@/lib/orders";
 import { seedSettings, type ShopSettings } from "@/lib/settings";
 import { createFileStore } from "./file-store";
 import { createNetlifyStore } from "./netlify-store";
+import { storeName } from "@/lib/deploy";
 import type { KeyValueStore } from "./types";
 
-// Base de données provisoire (en attendant Supabase) :
-// Netlify Blobs une fois en ligne, fichiers dans .data/ en local.
+// Base de données : Netlify Blobs une fois en ligne (un magasin par contexte, lib/deploy.ts),
+// fichiers dans .data/ en local.
 let store: KeyValueStore | null = null;
 function kv(): KeyValueStore {
   if (!store) {
     // Sur Netlify, les fonctions serveur reçoivent NETLIFY_BLOBS_CONTEXT (ou SITE_ID) ; en local : fichiers
     const onNetlify = Boolean(process.env.NETLIFY_BLOBS_CONTEXT || process.env.NETLIFY === "true" || process.env.SITE_ID);
     const base = onNetlify
-      ? createNetlifyStore("na-nah-nhair")
+      ? createNetlifyStore(storeName())
       : createFileStore(process.env.NNH_DATA_DIR ?? path.join(process.cwd(), ".data"));
     // Délai court : une page ne doit jamais dépasser la limite de 10 s des fonctions Netlify
     store = withTimeout(base, 2500);
@@ -37,6 +39,11 @@ function withTimeout(s: KeyValueStore, ms: number): KeyValueStore {
     getBinary: (k) => limit(s.getBinary(k), `lecture ${k}`),
     setBinary: (k, d, t) => limit(s.setBinary(k, d, t), `écriture ${k}`),
     delete: (k) => limit(s.delete(k), `suppression ${k}`),
+    update: (k, fn) => Promise.race([
+      s.update(k, fn),
+      new Promise<never>((_, reject) => setTimeout(() => reject(new Error(`Stockage trop lent (mise à jour ${k})`)), ms * 3)),
+    ]),
+    list: (p) => limit(s.list(p), `liste ${p}`),
   };
 }
 
@@ -88,9 +95,8 @@ export type AuditEntry = { at: string; action: string; detail: string };
 
 // Journal des actions du back-office (les 500 dernières)
 export async function appendAudit(action: string, detail: string) {
-  const log = (await kv().getJSON<AuditEntry[]>("audit-log")) ?? [];
-  log.unshift({ at: new Date().toISOString(), action, detail });
-  await kv().setJSON("audit-log", log.slice(0, 500));
+  const entry = { at: new Date().toISOString(), action, detail };
+  await kv().update<AuditEntry[]>("audit-log", (log) => [entry, ...(log ?? [])].slice(0, 500));
 }
 
 export async function getAudit(): Promise<AuditEntry[]> {
@@ -104,9 +110,8 @@ export async function getErrors(): Promise<AuditEntry[]> {
 // Journal des erreurs serveur (les 500 dernières)
 export async function logError(where: string, error: unknown) {
   try {
-    const log = (await kv().getJSON<AuditEntry[]>("error-log")) ?? [];
-    log.unshift({ at: new Date().toISOString(), action: where, detail: error instanceof Error ? error.message : String(error) });
-    await kv().setJSON("error-log", log.slice(0, 500));
+    const entry = { at: new Date().toISOString(), action: where, detail: error instanceof Error ? error.message : String(error) };
+    await kv().update<AuditEntry[]>("error-log", (log) => [entry, ...(log ?? [])].slice(0, 500));
   } catch {
     console.error(where, error);
   }
@@ -126,32 +131,32 @@ export async function getLoginAttempts(): Promise<AttemptLog> {
   return (await kv().getJSON<AttemptLog>("login-attempts")) ?? {};
 }
 
-export async function saveLoginAttempts(log: AttemptLog) {
-  await kv().setJSON("login-attempts", log);
+// Mise à jour atomique des compteurs de tentatives (connexion, contact, commandes)
+export async function updateAttempts(name: "login-attempts" | "contact-attempts" | "order-attempts", fn: (log: AttemptLog) => AttemptLog) {
+  return kv().update<AttemptLog>(name, (log) => fn(log ?? {}));
 }
 
-// Messages du formulaire de contact (les 1 000 derniers)
+// Double authentification : dernier code accepté (un code ne sert qu'une fois). Renvoie false si déjà utilisé.
+export async function consumeTotpCounter(counter: number): Promise<boolean> {
+  let accepted = false;
+  await kv().update<number>("admin-totp-last", (last) => {
+    accepted = counter > (last ?? 0);
+    return accepted ? counter : (last ?? 0);
+  });
+  return accepted;
+}
+
+// Messages du formulaire de contact (les 5 000 derniers ; écriture atomique : aucun message perdu)
 export async function getContactMessages(): Promise<ContactMessage[]> {
   return (await kv().getJSON<ContactMessage[]>("contact-messages")) ?? [];
 }
 
 export async function appendContactMessage(message: ContactMessage) {
-  const list = await getContactMessages();
-  list.unshift(message);
-  await kv().setJSON("contact-messages", list.slice(0, 1000));
+  await kv().update<ContactMessage[]>("contact-messages", (list) => [message, ...(list ?? [])].slice(0, 5000));
 }
 
 export async function deleteContactMessage(id: string) {
-  const list = await getContactMessages();
-  await kv().setJSON("contact-messages", list.filter((m) => m.id !== id));
-}
-
-export async function getContactAttempts(): Promise<AttemptLog> {
-  return (await kv().getJSON<AttemptLog>("contact-attempts")) ?? {};
-}
-
-export async function saveContactAttempts(log: AttemptLog) {
-  await kv().setJSON("contact-attempts", log);
+  await kv().update<ContactMessage[]>("contact-messages", (list) => (list ?? []).filter((m) => m.id !== id));
 }
 
 // Preuve d'acceptation des CGV (modification 39) : date et heure, version, numéro de commande, rien d'autre
@@ -163,6 +168,57 @@ export async function recordCgvAcceptance(record: CgvAcceptance) {
 
 export async function getCgvAcceptance(orderNumber: string): Promise<CgvAcceptance | null> {
   return kv().getJSON<CgvAcceptance>(`cgv-acceptations/${orderNumber}`);
+}
+
+// Commandes : une clé par commande (commandes/<numéro>)
+export async function saveOrder(order: Order) {
+  await kv().setJSON(`commandes/${order.number}`, order);
+}
+
+export async function getOrder(number: string): Promise<Order | null> {
+  if (!/^NNH-\d{8}-[0-9A-F]{6}$/.test(number)) return null;
+  return kv().getJSON<Order>(`commandes/${number}`);
+}
+
+// Mise à jour atomique d'une commande (paiement confirmé deux fois par Stripe : traité une seule fois)
+export async function updateOrder(number: string, fn: (order: Order) => Order): Promise<Order> {
+  return kv().update<Order>(`commandes/${number}`, (o) => {
+    if (!o) throw new Error(`Commande inconnue : ${number}`);
+    return fn(o);
+  });
+}
+
+export async function listOrders(): Promise<Order[]> {
+  const keys = (await kv().list("commandes")).filter((k) => /NNH-\d{8}-[0-9A-F]{6}$/.test(k));
+  const orders = await Promise.all(keys.map((k) => kv().getJSON<Order>(k)));
+  return orders.filter((o): o is Order => Boolean(o)).sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+}
+
+// Compteur des factures : renvoie le numéro suivant, sans doublon ni trou
+export async function nextInvoiceCounter(year: number): Promise<number> {
+  const next = await kv().update<Record<string, number>>("compteur-factures", (c) => ({ ...(c ?? {}), [year]: (c?.[year] ?? 0) + 1 }));
+  return next[year];
+}
+
+// Stock : mise à jour atomique du catalogue enregistré (valeurs initiales si rien n'est encore enregistré)
+export async function updateCatalog(fn: (catalog: Catalog) => Catalog) {
+  return kv().update<Catalog>("catalog", (saved) => {
+    const seed = seedCatalog();
+    const current = saved ? (Object.fromEntries(PRODUCT_IDS.map((id) => [id, { ...seed[id], ...saved[id], id }])) as Catalog) : seed;
+    return fn(current);
+  });
+}
+
+// Sauvegarde complète (back-office) : toutes les données JSON ; les photos envoyées sont listées par clé
+export async function backupAll() {
+  const keys = (await kv().list("")).sort();
+  const data: Record<string, unknown> = {};
+  const media: string[] = [];
+  for (const key of keys) {
+    if (key.startsWith("media-")) media.push(key);
+    else data[key] = await kv().getJSON(key).catch((e) => ({ erreur: e instanceof Error ? e.message : String(e) }));
+  }
+  return { date: new Date().toISOString(), magasin: process.env.NNH_DATA_DIR ? "fichiers" : "netlify-blobs", donnees: data, photos: media };
 }
 
 // Diagnostic (page /api/sante) : type de stockage et temps de lecture, sans aucune donnée sensible
@@ -197,7 +253,7 @@ export async function storeDeepCheck() {
       return { etape: label, ok: false, ms: Date.now() - t0, erreur: e instanceof Error ? `${e.name}: ${e.message}` : String(e) };
     }
   };
-  const direct = getStore({ name: "na-nah-nhair" });
+  const direct = getStore({ name: storeName() });
   const store = kvRaw();
   return [
     await timed("écriture", () => direct.setJSON("diagnostic", { at: Date.now() })),
@@ -207,5 +263,5 @@ export async function storeDeepCheck() {
 }
 
 function kvRaw() {
-  return createNetlifyStore("na-nah-nhair");
+  return createNetlifyStore(storeName());
 }

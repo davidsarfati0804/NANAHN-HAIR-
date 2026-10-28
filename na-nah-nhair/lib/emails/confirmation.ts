@@ -1,6 +1,5 @@
 // Email de confirmation de commande (modification 39) : texte de content/juridique/textes-boutique.md.
-// Aucun service d'envoi n'est encore branché : ce module prépare l'email (objet, texte, HTML, pièces jointes)
-// qui sera envoyé à la confirmation du paiement.
+// Envoyé à la confirmation du paiement (lib/order-processing.ts, par lib/emails/send.ts).
 import { CGV_VERSION } from "@/content/juridique";
 import { legal } from "@/content/site";
 import { formatPrice } from "@/lib/money";
@@ -13,6 +12,8 @@ export type ConfirmationOrder = {
   freeShipping: boolean;
   totalCents: number;
   address: string;
+  // Lien vers la facture (ajout du 28/10/2026, texte à valider : TEXTES-A-VALIDER.md)
+  invoiceUrl?: string;
 };
 
 export const confirmationDocuments = () => [
@@ -44,6 +45,7 @@ export function confirmationEmail(order: ConfirmationOrder, siteUrl: string) {
     "Tes documents",
     `- Conditions générales de vente : ${siteUrl}/cgv (PDF joint : ${cgv.filename})`,
     `- Modèle de formulaire de rétractation : ${siteUrl}/retractation (PDF joint : ${form.filename})`,
+    ...(order.invoiceUrl ? [`- Ta facture : ${order.invoiceUrl}`] : []),
     "",
     `Une question ? Écris-nous à ${legal.email}.`,
     "",

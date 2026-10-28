@@ -72,6 +72,8 @@ export type Product = {
   inciNotes: string[];
   usage: UsageGuide | null;
   precautions: string | null;
+  // Questions-réponses propres au soin (fiche produit) : null = À COMPLÉTER
+  faq: Array<{ question: string; answer: string }> | null;
   volume: string;
   founder?: boolean;
 };
@@ -167,6 +169,7 @@ export const products: Product[] = fr([
     inciNotes,
     usage: usageGuide("Fabulous Hair Serum", "mode-emploi-fabulous"),
     precautions: null,
+    faq: null,
     volume: "30 ml",
   },
   {
@@ -210,6 +213,7 @@ export const products: Product[] = fr([
     inciNotes,
     usage: usageGuide("Miraculous Hair Serum", "mode-emploi"),
     precautions: null,
+    faq: null,
     volume: "30 ml",
     founder: true,
   },
@@ -256,6 +260,7 @@ export const products: Product[] = fr([
     inciNotes,
     usage: usageGuide("Luxurious Hair Serum", "mode-emploi-luxurious"),
     precautions: null,
+    faq: null,
     volume: "30 ml",
   },
 ]);
@@ -448,6 +453,32 @@ export const consentTexts = fr({
   none: "aucun choix enregistré",
 });
 
+// Page introuvable et page d'erreur (textes d'interface, voir TEXTES-A-VALIDER.md)
+export const errorTexts = {
+  notFound: {
+    title: fr("Page introuvable"),
+    text: fr("Cette page n'existe pas ou a changé d'adresse."),
+    home: "Retour à l'accueil",
+    shop: "Voir la boutique",
+  },
+  error: {
+    title: fr("Une erreur est survenue"),
+    text: fr("La page n'a pas pu s'afficher. Réessaie dans un instant."),
+    retry: "Réessayer",
+    home: "Retour à l'accueil",
+  },
+};
+
+// Page de retour après le paiement (textes d'interface, voir TEXTES-A-VALIDER.md)
+export const confirmedTexts = {
+  title: fr("Merci pour ta commande !"),
+  number: (n: string) => `Commande n° ${n}`,
+  paid: (email: string) => fr(`Ton paiement est confirmé. Un email de confirmation, avec ta facture, part à ${email}.`),
+  pending: fr("Ton paiement est en cours de confirmation. Tu recevras un email dès qu'il sera validé."),
+  unknown: fr("Ta commande est enregistrée. Tu recevras un email de confirmation."),
+  home: "Retour à l'accueil",
+};
+
 export const contactTexts = fr({
   title: "Contact",
   intro: "Une question sur un soin, une commande ou la livraison ? Écris-nous.",
@@ -462,13 +493,15 @@ export const contactTexts = fr({
   privacy: "Tes informations servent uniquement à te répondre. Voir la politique de confidentialité.",
   coordinatesTitle: "Coordonnées",
   instagramTitle: "Instagram",
-  instagramLabel: "Instagram de Na Nah N’hair (s'ouvre dans un nouvel onglet)",
+  // Le nom lu commence par le texte affiché (accessibilité : nom accessible = texte visible)
+  instagramLabel: "@na.nah.nhair, Instagram de Na Nah N’hair (s'ouvre dans un nouvel onglet)",
   errors: {
     name: "Indique ton nom (2 à 100 caractères).",
     email: "Indique une adresse email valide.",
     subject: "Choisis un sujet.",
     message: "Ton message doit contenir entre 10 et 3 000 caractères.",
     spam: "Message refusé. Réessaie dans quelques instants.",
+    tooFast: "Envoi trop rapide : vérifie ton message, puis envoie-le à nouveau.",
     rate: "Trop de messages envoyés. Réessaie plus tard.",
     server: "Le message n'a pas pu être envoyé. Écris-nous directement par email.",
   },
@@ -720,6 +753,9 @@ export const quiz = fr({
     shareTitle: (name: string) => `Je suis ${name}.`,
     quizAt: "Fais le quiz sur",
     siteTodo: "À COMPLÉTER : adresse du site",
+    // Adresse affichée sur l'image story (ex. « nanahnhair.com ») : null = À COMPLÉTER.
+    // Après l'avoir renseignée : node scripts/generer-stories.mjs (images public/story/)
+    siteAddress: null as string | null,
     instagram: "@na.nah.nhair",
   },
 });
@@ -780,6 +816,9 @@ export const checkoutTexts = fr({
     end: ".",
   },
   addressTitle: "Adresse de livraison",
+  // Information RGPD au moment de la collecte (texte d'interface, voir TEXTES-A-VALIDER.md)
+  privacyBefore: "Ces informations servent uniquement à préparer et livrer ta commande. En savoir plus : ",
+  privacyLink: "politique de confidentialité",
   fields: { firstName: "Prénom", lastName: "Nom", email: "Email", phone: "Téléphone (facultatif)", address: "Adresse", postalCode: "Code postal", city: "Ville" },
   // Zone de livraison (CGV, article 6)
   deliveryZone: "Nous livrons en France métropolitaine, Corse comprise.",
@@ -790,6 +829,9 @@ export const checkoutTexts = fr({
   submitError: "La commande n'a pas pu être enregistrée. Vérifie ton panier et réessaie.",
   backToCart: "Modifier le panier",
   paymentPending: "Le paiement en ligne (carte, Apple Pay, Google Pay) arrive bientôt.",
+  // Textes d'interface ajoutés le 28/10/2026 (voir TEXTES-A-VALIDER.md)
+  paymentSecure: "Paiement sécurisé par Stripe : carte bancaire, Apple Pay ou Google Pay.",
+  paymentCancelled: "Paiement annulé : ta commande n'a pas été payée. Tu peux réessayer.",
   carrierRequired: "Choisis un mode de livraison.",
   delay: "Délai : 3 jours ouvrés, préparation incluse.",
   quoteError: "Impossible de calculer le total. Réessaie dans un instant.",
@@ -799,6 +841,27 @@ export const checkoutTexts = fr({
 });
 
 export const adminTexts = fr({
+  backup: "Télécharger une sauvegarde",
+  orders: {
+    title: "Commandes",
+    empty: "Aucune commande pour l'instant.",
+    stripeOff: "Paiement en ligne : pas encore activé (clés Stripe à ajouter dans Netlify, voir GUIDE.md).",
+    stripeTest: "Paiement en ligne : Stripe en MODE TEST (aucun vrai paiement).",
+    stripeLive: "Paiement en ligne : Stripe actif (vrais paiements).",
+    mailOn: "Emails : envoi actif.",
+    mailOff: "Emails : pas encore configurés (Gmail à ajouter dans Netlify, voir GUIDE.md). Aucun email n'est envoyé.",
+    invoice: "Facture",
+    cgv: (version: string, at: string) => `CGV ${version} acceptées le ${at}`,
+    mailSent: (at: string) => `email envoyé le ${at}`,
+    mailError: (error: string) => `email non envoyé (${error})`,
+    shipped: (at: string, tracking: string) => `expédiée le ${at}${tracking ? `, suivi ${tracking}` : ""}`,
+    tracking: "Numéro de suivi",
+    ship: "Marquer expédiée",
+    updateShipping: "Mettre à jour le suivi",
+    resend: "Renvoyer l'email de confirmation",
+    cancel: "Annuler (non payée)",
+  },
+  backupHelp: "(fichier à garder en lieu sûr : avant la mise en ligne, puis chaque semaine)",
   title: "Back-office",
   login: {
     title: "Connexion au back-office",
@@ -812,6 +875,7 @@ export const adminTexts = fr({
   },
   nav: [
     { label: "Tableau de bord", href: "/admin" },
+    { label: "Commandes", href: "/admin/commandes" },
     { label: "Produits et stocks", href: "/admin/produits" },
     { label: "Livraison", href: "/admin/livraison" },
     { label: "Messages", href: "/admin/messages" },

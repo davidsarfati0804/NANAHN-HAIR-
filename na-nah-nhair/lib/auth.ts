@@ -2,6 +2,7 @@ import "server-only";
 import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { createSessionToken, SESSION_MAX_AGE_SECONDS, verifySessionToken } from "@/lib/auth-core";
+import { deployContext } from "@/lib/deploy";
 import { getSessionEpoch, setSessionEpoch } from "@/lib/store";
 
 export const SESSION_COOKIE = "nnh_admin";
@@ -11,7 +12,8 @@ export function adminConfig() {
   const passwordHash = process.env.ADMIN_PASSWORD_HASH;
   const sessionSecret = process.env.ADMIN_SESSION_SECRET;
   const totpSecret = process.env.ADMIN_TOTP_SECRET || null;
-  const configured = Boolean(passwordHash?.startsWith("scrypt$") && sessionSecret && sessionSecret.length >= 32);
+  // Double authentification obligatoire : sans code à 6 chiffres, le back-office reste fermé
+  const configured = Boolean(passwordHash?.startsWith("scrypt$") && sessionSecret && sessionSecret.length >= 32 && totpSecret);
   return { configured, passwordHash: passwordHash ?? "", sessionSecret: sessionSecret ?? "", totpSecret };
 }
 
@@ -37,7 +39,8 @@ export async function startSession() {
   const jar = await cookies();
   jar.set(SESSION_COOKIE, createSessionToken(adminConfig().sessionSecret), {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production" && process.env.NNH_INSECURE_COOKIES !== "1",
+    // NNH_INSECURE_COOKIES (tests locaux en http) est ignoré sur Netlify
+    secure: process.env.NODE_ENV === "production" && (process.env.NNH_INSECURE_COOKIES !== "1" || deployContext() !== "local"),
     sameSite: "strict",
     path: "/",
     maxAge: SESSION_MAX_AGE_SECONDS,

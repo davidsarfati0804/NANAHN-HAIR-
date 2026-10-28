@@ -59,8 +59,8 @@ test("commande : total recalculé par le serveur, transporteurs, paiement en att
   await expect(page.getByTestId("total-serveur")).toHaveText(/39,90\s€/);
   await page.getByLabel("Colissimo").check();
   await expect(page.getByTestId("total-serveur")).toHaveText(/39,90\s€/);
-  await page.getByLabel("Mondial Relay (point relais)").check();
-  await expect(page.getByText(/À COMPLÉTER : sélection du point relais/)).toBeVisible();
+  // Mondial Relay pas proposé à l'ouverture (28/10/2026) : Colissimo seul
+  await expect(page.getByLabel("Mondial Relay (point relais)")).toHaveCount(0);
   await expect(page.getByText(/Le paiement en ligne .* arrive bientôt/)).toBeVisible();
 });
 

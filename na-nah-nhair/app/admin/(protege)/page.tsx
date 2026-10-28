@@ -37,8 +37,12 @@ export default async function AdminHome() {
           Modifier
         </Link>
       </p>
-      <p className="mt-6 rounded-3xl border-2 border-dashed border-deep-violet bg-logo-yellow p-4 text-sm font-bold">
-        Commandes, codes promo et factures : phase 6 (avec Stripe).
+      <p className="mt-6">
+        {/* Téléchargement direct (fichier JSON), pas une page */}
+        <Link href="/admin/sauvegarde" prefetch={false} download className="font-bold underline underline-offset-4">
+          {t.backup}
+        </Link>{" "}
+        <span className="text-sm">{t.backupHelp}</span>
       </p>
     </div>
   );

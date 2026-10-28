@@ -45,7 +45,11 @@ export default async function StoryTemplate({ params }: { params: Promise<{ resu
           <p className="mt-10 font-bold" style={{ fontSize: 38, lineHeight: 1.3 }}>
             {s.quizAt}
             <span className="mt-3 block">
-              <span className="whitespace-nowrap rounded-lg bg-logo-yellow px-2 text-deep-violet">{s.siteTodo}</span>
+              {s.siteAddress ? (
+                <span className="whitespace-nowrap">{s.siteAddress}</span>
+              ) : (
+                <span className="whitespace-nowrap rounded-lg bg-logo-yellow px-2 text-deep-violet">{s.siteTodo}</span>
+              )}
             </span>
           </p>
           <p className="mt-4 font-bold" style={{ fontSize: 34 }}>

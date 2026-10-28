@@ -2,20 +2,26 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { brand, navigation } from "@/content/site";
 import CartCount from "@/components/cart/CartCount";
 import Image from "next/image";
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const toggle = useRef<HTMLButtonElement>(null);
   const pathname = usePathname();
   const isCurrent = (href: string) => (href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`));
 
   // Échap ferme le menu mobile
   useEffect(() => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    // Le focus revient sur le bouton « Menu » (sinon il se perd avec le menu fermé)
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      setOpen(false);
+      toggle.current?.focus();
+    };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
@@ -58,6 +64,7 @@ export default function SiteHeader() {
         <div className="flex items-center gap-2">
           <CartCount />
           <button
+            ref={toggle}
             type="button"
             className="min-h-11 rounded-full bg-deep-violet px-4 py-2 text-sm font-bold uppercase text-white lg:hidden"
             aria-expanded={open}

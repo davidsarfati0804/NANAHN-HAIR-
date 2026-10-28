@@ -151,7 +151,18 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         )}
 
         <Fold title={l.faqTitle} tone={foldTone} className="md:col-span-2">
-          <ToComplete label={`FAQ ${p.shortName} (questions et réponses)`} />
+          {p.faq ? (
+            <dl className="space-y-4">
+              {p.faq.map((q) => (
+                <div key={q.question}>
+                  <dt className="font-bold">{q.question}</dt>
+                  <dd className="mt-1">{q.answer}</dd>
+                </div>
+              ))}
+            </dl>
+          ) : (
+            <ToComplete label={`FAQ ${p.shortName} (questions et réponses)`} />
+          )}
         </Fold>
       </div>
 

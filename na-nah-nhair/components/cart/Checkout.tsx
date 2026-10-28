@@ -37,6 +37,12 @@ export default function Checkout() {
   const [submitting, setSubmitting] = useState(false);
   const [result, setResult] = useState<{ orderNumber: string; cgvVersion: string } | null>(null);
   const [submitError, setSubmitError] = useState(false);
+  const [cancelled, setCancelled] = useState(false);
+  // Retour depuis Stripe sans payer (?paiement=annule)
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- lecture de l'adresse après l'affichage
+    setCancelled(new URLSearchParams(window.location.search).get("paiement") === "annule");
+  }, []);
 
   const submit = async () => {
     setSubmitError(false);
@@ -52,7 +58,13 @@ export default function Checkout() {
         body: JSON.stringify({ items, carrier, address, acceptCgv: cgv }),
       });
       const data = await r.json().catch(() => ({}));
+      // Paiement actif : direction la page de paiement sécurisée de Stripe
+      if (r.ok && data.paymentUrl) {
+        window.location.assign(data.paymentUrl);
+        return;
+      }
       if (r.ok) setResult({ orderNumber: data.orderNumber, cgvVersion: data.cgvVersion });
+      else if (data.error === "trop-de-commandes") setSubmitError(true);
       else if (data.error === "cgv") setCgvError(true);
       else if (data.error === "adresse") setBadFields(data.fields ?? []);
       else setSubmitError(true);
@@ -305,8 +317,13 @@ export default function Checkout() {
           <p id="paiement-info" role="status" className="mt-2 text-sm">
             {!carrier && offered.length > 0 ? `${t.carrierRequired} ` : ""}
             {result ? `${t.accepted(result.orderNumber, result.cgvVersion)} ` : ""}
-            {t.paymentPending}
+            {data?.paymentEnabled ? t.paymentSecure : t.paymentPending}
           </p>
+          {cancelled && !result && (
+            <p role="alert" className="mt-2 text-sm font-bold">
+              {t.paymentCancelled}
+            </p>
+          )}
           {submitError && (
             <p role="alert" className="mt-2 text-sm font-bold text-luxurious-deep">
               {t.submitError}

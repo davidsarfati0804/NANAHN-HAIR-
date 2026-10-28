@@ -1,4 +1,4 @@
-import { readFile } from "node:fs/promises";
+import { readFile, rm } from "node:fs/promises";
 import path from "node:path";
 import { expect, test } from "@playwright/test";
 import { base32Decode, totpCode } from "../../lib/auth-core";
@@ -57,6 +57,8 @@ test("diagnostic public réduit ; détail réservé au back-office", async ({ pa
 });
 
 test("double authentification : un code déjà utilisé est refusé", async ({ page, browser }) => {
+  // Vraie connexion (pas de session réutilisée) : le dernier code accepté est celui de cette connexion
+  await rm(`${process.env.NNH_DATA_DIR!}.session-de-test`, { force: true });
   await adminLogin(page);
   const raw = await readFile(path.join(process.env.NNH_DATA_DIR!, "admin-totp-last"), "utf8");
   const used = totpCode(base32Decode(TEST_TOTP_SECRET), Number(JSON.parse(raw)));

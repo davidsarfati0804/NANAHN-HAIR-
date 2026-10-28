@@ -371,3 +371,14 @@ Ces décisions de la propriétaire de la marque complètent et remplacent les pa
 - **Pages juridiques** : textes mis à jour (livraison en France métropolitaine, Corse comprise ; livraison offerte ; plus d'option « sceau » ; paragraphe « dépréciation » actif ; plus de plateforme européenne ; prestataires Stripe, Supabase, Resend, Colissimo, Mondial Relay, Netlify ; pas de newsletter). Texte de l'option sceau gardé à part (`content/juridique/option-sceau-a-activer-plus-tard.txt`).
 - **Commande** : champ « Téléphone (facultatif) », transmis au transporteur ; codes postaux d'outre-mer (97, 98) refusés avec le message « Nous livrons en France métropolitaine, Corse comprise. ».
 - **Flacon Miraculous (modification 56)** : nouveau fichier `assets/images/miraculous.png` (470 x 1232) partout, y compris le premier écran de l'accueil (contour plus propre que la version de référence) ; anciennes versions supprimées. Fabulous et Luxurious inchangés.
+
+## 20. Recette et préparation de la vente (28/10/2026)
+
+- **Ancien site** archivé en ZIP et retiré de la branche `site-2` (la branche `main` le garde jusqu'à la mise en ligne).
+- **Next.js 16.4.3** (failles corrigées), données Netlify séparées entre production, `site-2` et aperçus.
+- **Vente** : commandes enregistrées, paiement Stripe Checkout (actif dès que les clés sont dans Netlify), stock qui
+  baisse au paiement, factures numérotées F-AAAA-00001, email de confirmation et alertes par Gmail, page Commandes.
+- **Livraison** : Colissimo seul à l'ouverture (Mondial Relay désactivé, réactivable dans le back-office).
+- **Correctifs de la recette** : page introuvable en français, redirections des anciennes adresses, bouton de
+  l'accueil, sécurité de l'administration, accessibilité, contrôle de mise en ligne étendu, sauvegarde.
+

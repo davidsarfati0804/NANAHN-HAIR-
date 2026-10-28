@@ -94,3 +94,24 @@ Les intitulés des informations manquantes (« mode d'emploi de chaque sérum »
 
 - Libellé « Téléphone (facultatif) » : ajouté parce que la politique de confidentialité mentionne un téléphone transmis au transporteur.
 - Message « Nous livrons en France métropolitaine, Corse comprise. » (affiché si le code postal est hors zone) : repris de la zone de livraison des CGV.
+
+## 6. Propositions d'alignement avec les CGV (28/10/2026, NON publiées : à valider)
+
+| Où | Texte actuel | Proposition (reprise des CGV) |
+| --- | --- | --- |
+| FAQ « Où livrez-vous ? » | « France uniquement. » | « En France métropolitaine, Corse comprise. » |
+| FAQ rétractation, dernière phrase | « Nous te remboursons dans les 14 jours suivant la réception du colis… » | « Nous te remboursons dans les 14 jours suivant le moment où tu nous informes de ta décision ; nous pouvons attendre d'avoir reçu le colis ou une preuve d'expédition. Le remboursement se fait par le même moyen de paiement que ta commande. » |
+| Email de confirmation | « Elle est confirmée et sera préparée sous 3 jours ouvrés. » | « Elle est confirmée et sera livrée sous 3 jours ouvrés, préparation incluse. » (les CGV parlent de livraison, pas de préparation) |
+
+Dis-moi « OK propositions » pour que je les mette en ligne, ou corrige-les.
+
+## 7. Textes d'interface ajoutés le 28/10/2026 (de moi)
+
+- Page introuvable : « Page introuvable », « Cette page n'existe pas ou a changé d'adresse. », boutons « Retour à l'accueil », « Voir la boutique ».
+- Page d'erreur : « Une erreur est survenue », « La page n'a pas pu s'afficher. Réessaie dans un instant. », « Réessayer ».
+- Commande : « Ces informations servent uniquement à préparer et livrer ta commande. En savoir plus : politique de confidentialité. » ; « Paiement sécurisé par Stripe : carte bancaire, Apple Pay ou Google Pay. » ; « Paiement annulé : ta commande n'a pas été payée. Tu peux réessayer. »
+- Après le paiement : « Merci pour ta commande ! », « Ton paiement est confirmé. Un email de confirmation, avec ta facture, part à … », « Ton paiement est en cours de confirmation. Tu recevras un email dès qu'il sera validé. »
+- Email de confirmation : ligne ajoutée « - Ta facture : [lien] ».
+- Contact : « Envoi trop rapide : vérifie ton message, puis envoie-le à nouveau. »
+- Lien Instagram (lu par les lecteurs d'écran) : « @na.nah.nhair, Instagram de Na Nah N'hair (s'ouvre dans un nouvel onglet) ».
+- Back-office : page Commandes, sauvegarde, emails d'alerte (nouvelle commande, nouveau message).

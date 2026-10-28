@@ -3,6 +3,7 @@ import path from "node:path";
 import type { AttemptLog } from "@/lib/auth-core";
 import { type Catalog, PRODUCT_IDS, seedCatalog } from "@/lib/catalog";
 import type { ContactMessage } from "@/lib/contact";
+import type { Order } from "@/lib/orders";
 import { seedSettings, type ShopSettings } from "@/lib/settings";
 import { createFileStore } from "./file-store";
 import { createNetlifyStore } from "./netlify-store";
@@ -167,6 +168,45 @@ export async function recordCgvAcceptance(record: CgvAcceptance) {
 
 export async function getCgvAcceptance(orderNumber: string): Promise<CgvAcceptance | null> {
   return kv().getJSON<CgvAcceptance>(`cgv-acceptations/${orderNumber}`);
+}
+
+// Commandes : une clé par commande (commandes/<numéro>)
+export async function saveOrder(order: Order) {
+  await kv().setJSON(`commandes/${order.number}`, order);
+}
+
+export async function getOrder(number: string): Promise<Order | null> {
+  if (!/^NNH-\d{8}-[0-9A-F]{6}$/.test(number)) return null;
+  return kv().getJSON<Order>(`commandes/${number}`);
+}
+
+// Mise à jour atomique d'une commande (paiement confirmé deux fois par Stripe : traité une seule fois)
+export async function updateOrder(number: string, fn: (order: Order) => Order): Promise<Order> {
+  return kv().update<Order>(`commandes/${number}`, (o) => {
+    if (!o) throw new Error(`Commande inconnue : ${number}`);
+    return fn(o);
+  });
+}
+
+export async function listOrders(): Promise<Order[]> {
+  const keys = (await kv().list("commandes")).filter((k) => /NNH-\d{8}-[0-9A-F]{6}$/.test(k));
+  const orders = await Promise.all(keys.map((k) => kv().getJSON<Order>(k)));
+  return orders.filter((o): o is Order => Boolean(o)).sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+}
+
+// Compteur des factures : renvoie le numéro suivant, sans doublon ni trou
+export async function nextInvoiceCounter(year: number): Promise<number> {
+  const next = await kv().update<Record<string, number>>("compteur-factures", (c) => ({ ...(c ?? {}), [year]: (c?.[year] ?? 0) + 1 }));
+  return next[year];
+}
+
+// Stock : mise à jour atomique du catalogue enregistré (valeurs initiales si rien n'est encore enregistré)
+export async function updateCatalog(fn: (catalog: Catalog) => Catalog) {
+  return kv().update<Catalog>("catalog", (saved) => {
+    const seed = seedCatalog();
+    const current = saved ? (Object.fromEntries(PRODUCT_IDS.map((id) => [id, { ...seed[id], ...saved[id], id }])) as Catalog) : seed;
+    return fn(current);
+  });
 }
 
 // Sauvegarde complète (back-office) : toutes les données JSON ; les photos envoyées sont listées par clé

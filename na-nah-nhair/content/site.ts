@@ -469,6 +469,16 @@ export const errorTexts = {
   },
 };
 
+// Page de retour après le paiement (textes d'interface, voir TEXTES-A-VALIDER.md)
+export const confirmedTexts = {
+  title: fr("Merci pour ta commande !"),
+  number: (n: string) => `Commande n° ${n}`,
+  paid: (email: string) => fr(`Ton paiement est confirmé. Un email de confirmation, avec ta facture, part à ${email}.`),
+  pending: fr("Ton paiement est en cours de confirmation. Tu recevras un email dès qu'il sera validé."),
+  unknown: fr("Ta commande est enregistrée. Tu recevras un email de confirmation."),
+  home: "Retour à l'accueil",
+};
+
 export const contactTexts = fr({
   title: "Contact",
   intro: "Une question sur un soin, une commande ou la livraison ? Écris-nous.",
@@ -819,6 +829,9 @@ export const checkoutTexts = fr({
   submitError: "La commande n'a pas pu être enregistrée. Vérifie ton panier et réessaie.",
   backToCart: "Modifier le panier",
   paymentPending: "Le paiement en ligne (carte, Apple Pay, Google Pay) arrive bientôt.",
+  // Textes d'interface ajoutés le 28/10/2026 (voir TEXTES-A-VALIDER.md)
+  paymentSecure: "Paiement sécurisé par Stripe : carte bancaire, Apple Pay ou Google Pay.",
+  paymentCancelled: "Paiement annulé : ta commande n'a pas été payée. Tu peux réessayer.",
   carrierRequired: "Choisis un mode de livraison.",
   delay: "Délai : 3 jours ouvrés, préparation incluse.",
   quoteError: "Impossible de calculer le total. Réessaie dans un instant.",
@@ -829,6 +842,25 @@ export const checkoutTexts = fr({
 
 export const adminTexts = fr({
   backup: "Télécharger une sauvegarde",
+  orders: {
+    title: "Commandes",
+    empty: "Aucune commande pour l'instant.",
+    stripeOff: "Paiement en ligne : pas encore activé (clés Stripe à ajouter dans Netlify, voir GUIDE.md).",
+    stripeTest: "Paiement en ligne : Stripe en MODE TEST (aucun vrai paiement).",
+    stripeLive: "Paiement en ligne : Stripe actif (vrais paiements).",
+    mailOn: "Emails : envoi actif.",
+    mailOff: "Emails : pas encore configurés (Gmail à ajouter dans Netlify, voir GUIDE.md). Aucun email n'est envoyé.",
+    invoice: "Facture",
+    cgv: (version: string, at: string) => `CGV ${version} acceptées le ${at}`,
+    mailSent: (at: string) => `email envoyé le ${at}`,
+    mailError: (error: string) => `email non envoyé (${error})`,
+    shipped: (at: string, tracking: string) => `expédiée le ${at}${tracking ? `, suivi ${tracking}` : ""}`,
+    tracking: "Numéro de suivi",
+    ship: "Marquer expédiée",
+    updateShipping: "Mettre à jour le suivi",
+    resend: "Renvoyer l'email de confirmation",
+    cancel: "Annuler (non payée)",
+  },
   backupHelp: "(fichier à garder en lieu sûr : avant la mise en ligne, puis chaque semaine)",
   title: "Back-office",
   login: {
@@ -843,6 +875,7 @@ export const adminTexts = fr({
   },
   nav: [
     { label: "Tableau de bord", href: "/admin" },
+    { label: "Commandes", href: "/admin/commandes" },
     { label: "Produits et stocks", href: "/admin/produits" },
     { label: "Livraison", href: "/admin/livraison" },
     { label: "Messages", href: "/admin/messages" },

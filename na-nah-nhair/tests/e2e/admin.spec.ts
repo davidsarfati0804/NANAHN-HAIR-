@@ -203,12 +203,13 @@ test.describe("stock partagé et livraison (bugs remontés par la recette)", () 
     await adminLogin(page);
     await page.goto("/admin/livraison");
     await page.getByLabel("Livraison offerte à partir de (€)").fill("50");
+    // Mondial Relay proposé sans tarif : refusé, saisies conservées
+    await page.getByRole("group", { name: "Mondial Relay (point relais)" }).getByLabel("Proposé à la commande").check();
     await page.getByRole("group", { name: "Colissimo" }).getByLabel("Tarif (€)").fill("4,90");
     await page.getByRole("button", { name: "Enregistrer" }).click();
     await expect(page.getByText(/renseigne le tarif de chaque transporteur/)).toBeVisible();
-    // Les saisies ne sont pas effacées par l'erreur
     await expect(page.getByLabel("Livraison offerte à partir de (€)")).toHaveValue("50");
-    // Mondial Relay retiré : enregistrement accepté
+    // Mondial Relay retiré (réglage d'ouverture) : enregistrement accepté
     await page.getByRole("group", { name: "Mondial Relay (point relais)" }).getByLabel("Proposé à la commande").uncheck();
     await page.getByRole("button", { name: "Enregistrer" }).click();
     await expect(page.getByText("Modifications enregistrées.")).toBeVisible();

@@ -16,7 +16,9 @@ export function seedSettings(): ShopSettings {
     carriers: {
       // Tarifs : À COMPLÉTER (INFOS §11)
       colissimo: { label: "Colissimo", priceCents: null, active: true },
-      "mondial-relay": { label: "Mondial Relay (point relais)", priceCents: null, active: true },
+      // Mondial Relay désactivé à l'ouverture (28/10/2026) : à réactiver dans le back-office quand le compte
+      // et le choix du point relais seront prêts
+      "mondial-relay": { label: "Mondial Relay (point relais)", priceCents: null, active: false },
     },
   };
 }

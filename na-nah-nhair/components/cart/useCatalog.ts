@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import type { ProductId, PublicProduct } from "@/lib/catalog";
 import type { ShopSettings } from "@/lib/settings";
 
-export type PublicCatalog = { products: Record<ProductId, PublicProduct>; settings: ShopSettings };
+export type PublicCatalog = { products: Record<ProductId, PublicProduct>; settings: ShopSettings; paymentEnabled?: boolean };
 
 // Prix et disponibilités à jour, lus sur le serveur
 export function useCatalog() {

@@ -8,6 +8,7 @@ import { adminConfig, clientIp, endSession, requireAdmin, startSession } from "@
 import { checkAttempts, matchTotp, recordFailure, verifyPassword } from "@/lib/auth-core";
 import { isProductId } from "@/lib/catalog";
 import { parseEuroInput } from "@/lib/money";
+import { sendOrderEmails } from "@/lib/order-processing";
 import type { CarrierId } from "@/lib/settings";
 import {
   appendAudit,
@@ -18,7 +19,9 @@ import {
   putMedia,
   saveCatalog,
   consumeTotpCounter,
+  getOrder,
   updateAttempts,
+  updateOrder,
   saveSettings,
 } from "@/lib/store";
 
@@ -164,4 +167,36 @@ export async function removeMessage(formData: FormData) {
   await deleteContactMessage(id);
   await appendAudit("message supprimé", id);
   revalidatePath("/admin/messages");
+}
+
+// Commandes : expédition (avec numéro de suivi), annulation d'une commande non payée, renvoi de l'email
+export async function shipOrder(formData: FormData) {
+  await requireAdmin();
+  const number = String(formData.get("number") ?? "");
+  const tracking = String(formData.get("tracking") ?? "").trim().slice(0, 60);
+  if (!/^NNH-\d{8}-[0-9A-F]{6}$/.test(number)) return;
+  await updateOrder(number, (o) =>
+    o.status === "payee" || o.status === "expediee" ? { ...o, status: "expediee", shipping: { shippedAt: new Date().toISOString(), tracking } } : o,
+  );
+  await appendAudit("commande expédiée", `${number}${tracking ? ` · suivi ${tracking}` : ""}`);
+  revalidatePath("/admin/commandes");
+}
+
+export async function cancelOrder(formData: FormData) {
+  await requireAdmin();
+  const number = String(formData.get("number") ?? "");
+  if (!/^NNH-\d{8}-[0-9A-F]{6}$/.test(number)) return;
+  await updateOrder(number, (o) => (o.status === "attente-paiement" ? { ...o, status: "annulee" } : o));
+  await appendAudit("commande annulée", number);
+  revalidatePath("/admin/commandes");
+}
+
+export async function resendOrderEmail(formData: FormData) {
+  await requireAdmin();
+  const number = String(formData.get("number") ?? "");
+  const order = await getOrder(number);
+  if (!order || order.status === "attente-paiement" || order.status === "annulee") return;
+  await sendOrderEmails(order);
+  await appendAudit("email de commande renvoyé", number);
+  revalidatePath("/admin/commandes");
 }

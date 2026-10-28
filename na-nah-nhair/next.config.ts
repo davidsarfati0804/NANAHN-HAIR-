@@ -31,6 +31,12 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  // Contexte Netlify connu au build seulement (absent à l'exécution des fonctions) : figé ici pour
+  // séparer les données de la production, de site-2 et des aperçus (lib/deploy.ts)
+  env: {
+    NNH_BUILD_CONTEXT: process.env.CONTEXT ?? "",
+    NNH_BUILD_BRANCH: process.env.BRANCH ?? "",
+  },
   // Images servies telles quelles (pas d'optimiseur Netlify) : les photos produits ont leurs propres
   // versions responsives (scripts/preparer-photos.py)
   images: { unoptimized: true },

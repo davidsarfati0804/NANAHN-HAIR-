@@ -6,17 +6,18 @@ import type { ContactMessage } from "@/lib/contact";
 import { seedSettings, type ShopSettings } from "@/lib/settings";
 import { createFileStore } from "./file-store";
 import { createNetlifyStore } from "./netlify-store";
+import { storeName } from "@/lib/deploy";
 import type { KeyValueStore } from "./types";
 
-// Base de données provisoire (en attendant Supabase) :
-// Netlify Blobs une fois en ligne, fichiers dans .data/ en local.
+// Base de données : Netlify Blobs une fois en ligne (un magasin par contexte, lib/deploy.ts),
+// fichiers dans .data/ en local.
 let store: KeyValueStore | null = null;
 function kv(): KeyValueStore {
   if (!store) {
     // Sur Netlify, les fonctions serveur reçoivent NETLIFY_BLOBS_CONTEXT (ou SITE_ID) ; en local : fichiers
     const onNetlify = Boolean(process.env.NETLIFY_BLOBS_CONTEXT || process.env.NETLIFY === "true" || process.env.SITE_ID);
     const base = onNetlify
-      ? createNetlifyStore("na-nah-nhair")
+      ? createNetlifyStore(storeName())
       : createFileStore(process.env.NNH_DATA_DIR ?? path.join(process.cwd(), ".data"));
     // Délai court : une page ne doit jamais dépasser la limite de 10 s des fonctions Netlify
     store = withTimeout(base, 2500);
@@ -207,5 +208,5 @@ export async function storeDeepCheck() {
 }
 
 function kvRaw() {
-  return createNetlifyStore("na-nah-nhair");
+  return createNetlifyStore(storeName());
 }

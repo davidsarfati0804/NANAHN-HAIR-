@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { deployBranch, deployContext, storeName } from "@/lib/deploy";
 import { storeDeepCheck, storeHealth } from "@/lib/store";
 
 export const dynamic = "force-dynamic";
@@ -11,8 +12,9 @@ export async function GET(request: Request) {
   return NextResponse.json(
     {
       ok: store.lectureOk,
-      contexte: process.env.CONTEXT ?? "local",
-      branche: process.env.BRANCH ?? null,
+      contexte: deployContext(),
+      branche: deployBranch() || null,
+      magasin: storeName(),
       noeud: process.version,
       stockage: store,
       // Présence (oui/non) des variables fournies par Netlify, sans leur valeur

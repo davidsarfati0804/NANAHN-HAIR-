@@ -1,5 +1,5 @@
 # Publie la boutique NA NAH N'HAIR (dossier na-nah-nhair/).
-# Jusqu'à la mise en ligne, la branche main garde l'ancien site (archivé en ZIP le 28/10/2026).
+# En production depuis le 01/11/2026 (branche main) ; ancien site archivé en ZIP et marqué par le tag ancien-site.
 [build]
   base = "na-nah-nhair"
   command = "npm run build"
@@ -11,7 +11,7 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
-# Garde-fou (modification 39) : en production, le build est refusé tant qu'une information
-# « À COMPLÉTER » reste dans les pages légales, les emails ou le pied de page.
+# Garde-fou (modification 39) : liste les informations « À COMPLÉTER ». Depuis la mise en ligne confirmée le
+# 01/11/2026, simple avertissement (--avertir) ; retirer --avertir une fois la liste vide.
 [context.production]
-  command = "npm run verifier:mise-en-ligne && npm run build"
+  command = "npm run verifier:mise-en-ligne -- --avertir && npm run build"

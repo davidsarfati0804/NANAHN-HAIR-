@@ -1,4 +1,4 @@
-# Commande d'essai sur le vrai site, en MODE TEST Stripe (carte 4242, aucun argent réel) — relance 2 :
+# Commande d'essai sur le vrai site, en MODE TEST Stripe (carte 4242, aucun argent réel) — relance 3 :
 # commande, page de paiement Stripe, retour sur le site, confirmation du paiement (webhook), email.
 name: Test paiement (mode test Stripe)
 
@@ -58,8 +58,21 @@ jobs:
             await fill("#billingPostalCode", "75116");
             const total = await page.locator('[data-testid="product-summary-total-amount"], #OrderDetails-TotalAmount').first().textContent().catch(() => "?");
             log(`Montant affiché par Stripe : ${total}`);
+            // Paiement en euros (le robot de test est aux États-Unis : Stripe propose aussi le dollar)
+            const eur = page.getByText("19,90 €", { exact: true }).first();
+            if (await eur.count()) await eur.click().catch(() => {});
+            const fields = await page.locator("input, select").evaluateAll((els) => els.filter((e) => e.offsetParent).map((e) => `${e.id || e.name}=${e.tagName === "SELECT" ? e.value : e.value ? "rempli" : "vide"}`));
+            log(`Champs visibles : ${fields.join(", ")}`);
             await page.locator('button[type="submit"]').first().click();
-            await page.waitForURL(/nanahnhair\.com\/commande\/confirmee/, { timeout: 60000 });
+            try {
+              await page.waitForURL(/nanahnhair\.com\/commande\/confirmee/, { timeout: 45000 });
+            } catch (e) {
+              const alerts = await page.locator('[role="alert"], .FieldError, [class*="Error"]').allInnerTexts().catch(() => []);
+              log(`Messages d'erreur Stripe : ${alerts.filter(Boolean).join(" | ") || "(aucun)"}`);
+              const frames = page.frames().map((f) => new URL(f.url() || "about:blank").host).filter(Boolean);
+              log(`Cadres présents : ${[...new Set(frames)].join(", ")}`);
+              throw e;
+            }
             log("Retour sur le site après paiement : OK");
             for (let i = 0; i < 6; i++) {
               const text = await page.locator("main").innerText();

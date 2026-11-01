@@ -3,11 +3,9 @@
 name: Test email (formulaire de contact)
 
 on:
-  workflow_dispatch:
-    inputs:
-      email:
-        description: Adresse indiquée comme expéditrice du message
-        required: true
+  push:
+    branches: [site-2]
+    paths: [.github/workflows/test-email-contact.yml]
 
 jobs:
   test:
@@ -24,7 +22,7 @@ jobs:
           npx playwright install --with-deps chromium > /dev/null 2>&1
       - name: Envoi du formulaire
         env:
-          EMAIL: ${{ inputs.email }}
+          EMAIL: contact@ge-mesdocs.fr
         run: |
           cat > test.mjs <<'JS'
           import { chromium } from "playwright";

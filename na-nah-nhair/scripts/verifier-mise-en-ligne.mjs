@@ -41,9 +41,13 @@ if (pages.status !== 0) {
   if (!lines.length) found.push(`pages publiques — contrôle en échec :\n${pages.stdout}${pages.stderr}`);
 }
 
+// --avertir : mise en ligne confirmée par la marque le 01/11/2026 avec des éléments encore « À COMPLÉTER »
+// (finis directement sur le site réel) : la liste s'affiche dans le journal de build sans bloquer.
+// Retirer --avertir de netlify.toml une fois la liste vide, pour rebloquer toute régression.
+const warnOnly = process.argv.includes("--avertir");
 if (found.length) {
-  console.error(`Mise en production bloquée : ${found.length} information(s) à compléter ou à valider.\n`);
+  console.error(`${warnOnly ? "AVERTISSEMENT (mise en ligne non bloquée)" : "Mise en production bloquée"} : ${found.length} information(s) à compléter ou à valider.\n`);
   for (const f of found) console.error(`- ${f}`);
-  process.exit(1);
+  if (!warnOnly) process.exit(1);
 }
 console.log("Aucune information À COMPLÉTER dans les pages légales, les emails et le pied de page.");

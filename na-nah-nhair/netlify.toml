@@ -1,4 +1,4 @@
-# Site Netlify n°2 (nouveau site). Dans Netlify, régler « Base directory » sur na-nah-nhair
+# Configuration lue quand Netlify construit depuis le dossier na-nah-nhair (voir aussi ../netlify.toml)
 [build]
   command = "npm run build"
   publish = ".next"
@@ -6,6 +6,7 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
-# Garde-fou (modification 39) : build de production refusé tant qu'il reste des « À COMPLÉTER »
+# Garde-fou (modification 39) : depuis la mise en ligne confirmée le 01/11/2026, simple avertissement (--avertir)
+# tant que les derniers « À COMPLÉTER » sont finis sur le site réel
 [context.production]
-  command = "npm run verifier:mise-en-ligne && npm run build"
+  command = "npm run verifier:mise-en-ligne -- --avertir && npm run build"

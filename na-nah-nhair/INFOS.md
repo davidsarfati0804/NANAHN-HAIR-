@@ -391,3 +391,8 @@ Ces décisions de la propriétaire de la marque complètent et remplacent les pa
 - **Boutique** (ordinateur et tablette) : « HAIR SERUM · 30 ML » juste sous le nom.
 - **Fabulous** : fichier propre partout, y compris le premier écran de l'accueil (l'ancienne version de référence avait une trace sous le flacon).
 - **Contact** (ordinateur) : conteneur centré, formulaire 60 % / coordonnées 40 %, carte alignée sur le premier champ et visible au défilement ; tablette et mobile : l'un sous l'autre.
+
+## 22. Mise en ligne (01/11/2026)
+
+- Mise en production confirmée par la marque avec des éléments encore « À COMPLÉTER » (finis sur le site réel). Le contrôle de mise en ligne avertit sans bloquer (`--avertir` dans netlify.toml) ; le retirer une fois la liste vide.
+- Ancien site : branche Git `ancien-site` (commit 7dfa7d3) et archive ZIP.

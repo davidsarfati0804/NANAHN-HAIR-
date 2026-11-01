@@ -1,0 +1,47 @@
+# Test d'envoi d'email : remplit le formulaire de contact du vrai site comme une visiteuse.
+# Le site doit envoyer l'alerte « Nouveau message » à la boîte de la boutique (SMTP OVH).
+name: Test email (formulaire de contact)
+
+on:
+  workflow_dispatch:
+    inputs:
+      email:
+        description: Adresse indiquée comme expéditrice du message
+        required: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Navigateur
+        run: |
+          npm init -y > /dev/null
+          npm install playwright@1.56.1 > /dev/null 2>&1
+          npx playwright install --with-deps chromium > /dev/null 2>&1
+      - name: Envoi du formulaire
+        env:
+          EMAIL: ${{ inputs.email }}
+        run: |
+          cat > test.mjs <<'JS'
+          import { chromium } from "playwright";
+          const browser = await chromium.launch();
+          const page = await browser.newPage();
+          await page.addInitScript(() => localStorage.setItem("nnh-consentement", "refuse"));
+          await page.goto("https://nanahnhair.com/contact", { waitUntil: "networkidle" });
+          await page.getByLabel("Nom").fill("Test technique du site");
+          await page.getByLabel("Email").fill(process.env.EMAIL);
+          await page.getByLabel("Sujet").selectOption("Autre");
+          await page.getByLabel("Message").fill("Test d'envoi d'email depuis le site nanahnhair.com (message automatique, à ignorer).");
+          await page.waitForTimeout(4000);
+          await page.getByRole("button", { name: "Envoyer" }).click();
+          await page.waitForTimeout(8000);
+          const status = (await page.getByRole("status").first().textContent()) ?? "";
+          console.log(`Réponse du site : ${status.trim() || "(vide)"}`);
+          await browser.close();
+          JS
+          node test.mjs | tee rapport.txt
+          echo "::notice title=Test email::$(tr -d '\r' < rapport.txt | tr '\n' ' ')"

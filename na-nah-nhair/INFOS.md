@@ -395,4 +395,4 @@ Ces décisions de la propriétaire de la marque complètent et remplacent les pa
 ## 22. Mise en ligne (01/11/2026)
 
 - Mise en production confirmée par la marque avec des éléments encore « À COMPLÉTER » (finis sur le site réel). Le contrôle de mise en ligne avertit sans bloquer (`--avertir` dans netlify.toml) ; le retirer une fois la liste vide.
-- Ancien site : tag Git `ancien-site` (commit 7dfa7d3) et archive ZIP.
+- Ancien site : branche Git `ancien-site` (commit 7dfa7d3) et archive ZIP.

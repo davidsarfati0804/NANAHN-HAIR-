@@ -1,5 +1,5 @@
 # Publie la boutique NA NAH N'HAIR (dossier na-nah-nhair/).
-# En production depuis le 01/11/2026 (branche main) ; ancien site archivé en ZIP et marqué par le tag ancien-site.
+# En production depuis le 01/11/2026 (branche main) ; ancien site archivé en ZIP et gardé dans la branche ancien-site.
 [build]
   base = "na-nah-nhair"
   command = "npm run build"

@@ -1,5 +1,5 @@
 # Test d'envoi d'email : remplit le formulaire de contact du vrai site comme une visiteuse.
-# (relance : 2) Le site doit envoyer l'alerte « Nouveau message » à la boîte de la boutique (SMTP OVH).
+# (relance : 3) Le site doit envoyer l'alerte « Nouveau message » à la boîte de la boutique (SMTP OVH).
 name: Test email (formulaire de contact)
 
 on:
@@ -9,7 +9,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - uses: actions/setup-node@v4

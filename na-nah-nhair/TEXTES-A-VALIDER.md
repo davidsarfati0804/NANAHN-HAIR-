@@ -11,12 +11,12 @@ Aucun ne contient de promesse de résultat, d'allégation ou d'ingrédient inven
 - « Les soins » (petit titre) / « Les trois soins »
 - « Pourquoi découvrir NA NAH N'HAIR » et les intitulés des cartes : « Made in France », « Créés par une naturopathe », « Huiles végétales », « Trois parfums », « Livraison offerte en France ». Les textes des cartes viennent d'INFOS/BRIEF.
 - Boutons : « Voir la fiche », « Découvrir le pack », « Lire mon histoire », « Aller à la boutique »
-- Le bloc final reprend le message du quiz d'INFOS : « Et si tu étais les trois ? » / « Découvre toute la collection. »
+- Le bloc final reprend le message du quiz d'INFOS : « Et si tu es les trois ? » / « Découvre toute la collection. »
 
 ### Boutique, pack, fiches
 - Boutique : « Trois soins et le pack. »
 - Pack : « Fabulous + Miraculous + Luxurious » (boutique)
-- Fiches : « Questions fréquentes », « Points clés », « Description », « Découvre aussi », « Mon produit fondateur » (repris de « c'est mon produit fondateur », INFOS §5)
+- Fiches : « Points clés », « Description », « Découvre aussi », « Mon produit fondateur » (repris de « c'est mon produit fondateur », INFOS §5)
 - « Plus que N en stock », « Épuisé », « Ajouté au panier », « Voir le panier »
 - Texte alternatif de la photo du pack : « Pack des 3 soins : les flacons Miraculous, Luxurious et Fabulous » (ceux des flacons sont fournis)
 

@@ -46,14 +46,7 @@ export default async function QuizResultPage({ params }: { params: Promise<{ res
           </Link>
         </p>
 
-        <section className="mt-6 w-full max-w-md rounded-[2rem] bg-white/70 px-6 py-5 sm:mt-8 sm:py-6">
-          <h2 className="titre-h3">{r.founderTitle}</h2>
-          <Link href="/soins/miraculous" className="mt-1 inline-block py-3 font-bold underline underline-offset-4">
-            {r.founderCta}
-          </Link>
-        </section>
-
-        <Link href="/quiz" className="mt-4 inline-block py-3 text-sm font-bold uppercase sm:mt-6 tracking-wide underline underline-offset-4">
+        <Link href="/quiz" className="mt-4 inline-block py-3 text-sm font-bold uppercase tracking-wide underline underline-offset-4 sm:mt-6">
           {quiz.restart}
         </Link>
       </div>

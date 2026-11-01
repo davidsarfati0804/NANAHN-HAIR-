@@ -106,7 +106,7 @@ Trois soins capillaires en flacons de 30 ml, plus le pack. Chaque fiche produit 
 - Système de points vers Fabulous / Luxurious / Miraculous, réellement fonctionnel.
 - Résultat personnalisé avec présentation du produit correspondant.
 - Égalité : proposer le pack (ou les deux soins à égalité).
-- Message final : « Et si tu étais les trois ? Découvre toute la collection. »
+- Message final : « Et si tu es les trois ? Découvre toute la collection. »
 
 ### Les trois soins
 

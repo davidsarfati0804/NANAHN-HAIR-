@@ -72,8 +72,6 @@ export type Product = {
   inciNotes: string[];
   usage: UsageGuide | null;
   precautions: string | null;
-  // Questions-réponses propres au soin (fiche produit) : null = À COMPLÉTER
-  faq: Array<{ question: string; answer: string }> | null;
   volume: string;
   founder?: boolean;
 };
@@ -127,6 +125,9 @@ const inciNotes = [
   "** Allergènes dus à la présence de parfum",
 ];
 
+// Texte fondateur de Miraculous (modification 58) : une seule source, fiche produit et carte « Voici Miraculous ! »
+const miraculousFounderText = "Celui par lequel tout a commencé. Dans ma chambre, c’est lui que j’ai créé en premier, pour celle qui est déterminée, ambitieuse et un peu audacieuse.";
+
 export const products: Product[] = fr([
   {
     slug: "fabulous",
@@ -163,13 +164,12 @@ export const products: Product[] = fr([
         "Diminuer les pellicules",
       ],
       outro:
-        "Sa texture légère s'intègre parfaitement dans une routine simple et agréable, sans alourdir les cheveux, tout en leur apportant juste ce qu'il faut de nutrition et de soin. Utilisé au quotidien, le Fabulous Hair Serum devient le geste de base pour des cheveux plus sains, plus doux et naturellement éclatants.",
+        "Sa texture légère s'intègre parfaitement dans une routine simple et agréable, sans alourdir les cheveux, tout en leur apportant juste ce qu'il faut de nutrition et de soin. Utilisé au quotidien, le **Fabulous Hair Serum** devient le geste de base pour des cheveux plus sains, plus doux et naturellement éclatants.",
     },
     inci: "RICINUS COMMUNIS SEED OIL*, OLEA EUROPAEA FRUIT OIL*, COCOS NUCIFERA OIL*, PERSEA GRATISSIMA OIL*, BRASSICA NIGRA SEED OIL*, SIMMONDSIA CHINENSIS SEED OIL*, BRASSICA OLERACEA ITALICA SEED OIL*, VITIS VINIFERA SEED OIL, EMBLICA OFFICINALIS FRUIT POWDER*, FRAGRANCE, TOCOPHEROL, HELIANTHUS ANNUUS SEED OIL, BENZYL SALICYLATE**, ALPHA-HEXYLCINNAMALDEHYDE**, D-CITRONELLOL**, D-LIMONENE**, GERANIOL**, LINALOOL**, BENZYL BENZOATE**, CITRAL**, EUGENOL**, ISOEUGENOL**",
     inciNotes,
     usage: usageGuide("Fabulous Hair Serum", "mode-emploi-fabulous"),
     precautions: null,
-    faq: null,
     volume: "30 ml",
   },
   {
@@ -188,7 +188,7 @@ export const products: Product[] = fr([
     iAm: "Je suis déterminée, ambitieuse et audacieuse.",
     universe: "violet, confiance, force, ambition et transformation.",
     scent: "Vanille patchouli",
-    text: "c'est mon produit fondateur. L'histoire de ma marque a commencé avec cette envie de créer une synergie capillaire pour aider une femme à prendre soin de ses cheveux.",
+    text: miraculousFounderText,
     phrase: "« Je crois en mon objectif. »",
     highlights: [
       "Stimule la pousse et la repousse",
@@ -207,13 +207,12 @@ export const products: Product[] = fr([
         "Réduire l'apparition des fourches",
       ],
       outro:
-        "Sa texture douce et sensorielle pénètre facilement le cuir chevelu pour nourrir, revitaliser et réactiver l'énergie du cheveu dès la racine. Utilisé en cure, il devient un véritable rituel de transformation.",
+        "Sa texture douce et sensorielle pénètre facilement le cuir chevelu pour nourrir, revitaliser et réactiver l'énergie du cheveu dès la racine. Utilisé en cure, le **Miraculous Hair Serum** devient un véritable rituel de transformation.",
     },
     inci: "RICINUS COMMUNIS SEED OIL*, OLEA EUROPAEA FRUIT OIL*, COCOS NUCIFERA OIL*, PERSEA GRATISSIMA OIL*, BRASSICA NIGRA SEED OIL*, SIMMONDSIA CHINENSIS SEED OIL*, BRASSICA OLERACEA ITALICA SEED OIL*, VITIS VINIFERA SEED OIL, EMBLICA OFFICINALIS FRUIT POWDER*, FRAGRANCE, TOCOPHEROL, HELIANTHUS ANNUUS SEED OIL, CITRAL**, COUMARIN**, BENZYL BENZOATE**, D-LIMONENE**, LINALOOL**",
     inciNotes,
     usage: usageGuide("Miraculous Hair Serum", "mode-emploi"),
     precautions: null,
-    faq: null,
     volume: "30 ml",
     founder: true,
   },
@@ -254,13 +253,12 @@ export const products: Product[] = fr([
       ],
       // Modification 47
       outro:
-        "Son parfum de fleur d’oranger transforme ta routine capillaire en un vrai moment de plaisir. Utilisé comme touche finale, le Luxurious Hair Serum devient ce petit luxe que tu mérites, pour des cheveux élégants et lumineux.",
+        "Son parfum de fleur d’oranger transforme ta routine capillaire en un vrai moment de plaisir. Utilisé comme touche finale, le **Luxurious Hair Serum** devient ce petit luxe que tu mérites, pour des cheveux élégants et lumineux.",
     },
     inci: "RICINUS COMMUNIS SEED OIL*, OLEA EUROPAEA FRUIT OIL*, COCOS NUCIFERA OIL*, PERSEA GRATISSIMA OIL*, BRASSICA NIGRA SEED OIL*, SIMMONDSIA CHINENSIS SEED OIL*, BRASSICA OLERACEA ITALICA SEED OIL*, VITIS VINIFERA SEED OIL, EMBLICA OFFICINALIS FRUIT POWDER*, FRAGRANCE, TOCOPHEROL, HELIANTHUS ANNUUS SEED OIL, ALPHA-HEXYLCINNAMALDEHYDE**, CITRAL**, D-LIMONENE**, GERANIOL**",
     inciNotes,
     usage: usageGuide("Luxurious Hair Serum", "mode-emploi-luxurious"),
     precautions: null,
-    faq: null,
     volume: "30 ml",
   },
 ]);
@@ -390,7 +388,7 @@ export const home = fr({
     ] as Array<{ title: string; text: string | null; todo?: string; lines?: Array<{ product: string; text: string }> }>,
   },
   finalCta: {
-    title: "Et si tu étais les trois ?",
+    title: "Et si tu es les trois ?",
     text: "Découvre toute la collection.",
     cta: { label: "Aller à la boutique", href: "/boutique" },
   },
@@ -523,12 +521,11 @@ export const productPage = fr({
   inciTitle: "Ingrédients (INCI)",
   usageTitle: "Mode d'emploi",
   precautionsTitle: "Précautions d'emploi",
-  faqTitle: "Questions fréquentes",
   founderBadge: "Mon produit fondateur",
   addToCart: "Ajouter au panier",
   othersTitle: "Découvre aussi",
   quizCta: { label: "Quel soin est le tien ?", href: "/quiz" },
-  packTitle: "Et si tu étais les trois ?",
+  packTitle: "Et si tu es les trois ?",
   packCta: "Découvrir le pack",
 });
 
@@ -544,7 +541,7 @@ export const storyPage = fr({
   // Carte Miraculous (modification 49)
   // Modification 52 : point d'exclamation, espace fine insécable avant « ! »
   founderTitle: "Voici Miraculous\u202f!",
-  founderText: "Celui par lequel tout a commencé. Dans ma chambre, c’est lui que j’ai créé en premier : déterminé, ambitieux, un peu audacieux, comme celle qu’il accompagne.",
+  founderText: miraculousFounderText,
   founderCta: "Découvrir Miraculous",
   shopCta: { label: "Découvrir les trois soins", href: "/soins" },
 });
@@ -740,9 +737,7 @@ export const quiz = fr({
     kicker: "Ton résultat",
     iAm: (name: string) => `Je suis ${name}.`,
     discoverCta: (name: string) => `Découvrir ${name}`,
-    founderTitle: "Découvre aussi Miraculous, mon produit fondateur",
-    founderCta: "Voir Miraculous",
-    finalMessage: "Et si tu étais les trois ? Découvre toute la collection.",
+    finalMessage: "Et si tu es les trois ? Découvre toute la collection.",
     finalHref: "/boutique",
   },
   // Image story 1080 x 1920 (assets/story/, scripts/generer-stories.mjs)

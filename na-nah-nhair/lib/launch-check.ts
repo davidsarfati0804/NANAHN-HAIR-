@@ -9,7 +9,6 @@ export function launchBlockers(stamps: { storyAddress: string | null }): string[
     if (!p.cutout.available) out.push(`fiche ${p.shortName} : photo détourée`);
     if (!p.usage) out.push(`fiche ${p.shortName} : mode d'emploi`);
     if (!p.usage && !p.precautions) out.push(`fiche ${p.shortName} : précautions d'emploi`);
-    if (!p.faq) out.push(`fiche ${p.shortName} : FAQ (questions et réponses) — content/site.ts, champ faq`);
   }
   if (!pack.photo.available) out.push("pack : photo");
   for (const r of home.reasons.items as Array<{ title: string; todo?: string }>) if (r.todo) out.push(`accueil, « ${r.title} » : ${r.todo}`);

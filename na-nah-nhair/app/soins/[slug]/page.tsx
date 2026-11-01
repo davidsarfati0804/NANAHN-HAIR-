@@ -8,6 +8,7 @@ import PhotoSlot from "@/components/PhotoSlot";
 import UsageGuide from "@/components/product/UsageGuide";
 import Fold from "@/components/product/Fold";
 import StickyBuyBar from "@/components/product/StickyBuyBar";
+import RichText from "@/components/RichText";
 import ToComplete from "@/components/ToComplete";
 import { pack, productBySlug, productPage as l, products } from "@/content/site";
 import { formatPrice } from "@/lib/money";
@@ -124,7 +125,12 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               <li key={h}>{h}</li>
             ))}
           </ul>
-          {p.description.outro && <p className="mt-3">{p.description.outro}</p>}
+          {/* Nom du soin en gras à la fin de la description (modification 57) */}
+          {p.description.outro && (
+            <p className="mt-3">
+              <RichText text={p.description.outro} />
+            </p>
+          )}
         </section>
 
         <Fold title={l.inciTitle} tone={foldTone} className="md:col-span-2">
@@ -150,20 +156,6 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           </section>
         )}
 
-        <Fold title={l.faqTitle} tone={foldTone} className="md:col-span-2">
-          {p.faq ? (
-            <dl className="space-y-4">
-              {p.faq.map((q) => (
-                <div key={q.question}>
-                  <dt className="font-bold">{q.question}</dt>
-                  <dd className="mt-1">{q.answer}</dd>
-                </div>
-              ))}
-            </dl>
-          ) : (
-            <ToComplete label={`FAQ ${p.shortName} (questions et réponses)`} />
-          )}
-        </Fold>
       </div>
 
       <section aria-labelledby="autres" className="mx-auto max-w-6xl px-4 sm:px-6">

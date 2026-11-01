@@ -8,7 +8,7 @@
 - Ordre des réponses différent à chaque question (le premier soin proposé change : Miraculous, Luxurious, Fabulous, Miraculous, Luxurious).
 - Points : 1 point par réponse, Miraculous 2 points aux questions 4 et 5.
 - Égalités : Miraculous l'emporte dès qu'il est à égalité (y compris l'égalité parfaite 2-2-2) ; égalité Fabulous / Luxurious seule → pack.
-- 4 pages résultat (`/quiz/resultat/fabulous|miraculous|luxurious|pack`) : personnalité, phrase, prix, « Ajouter au panier », bloc « Découvre aussi Miraculous, mon produit fondateur », message final « Et si tu étais les trois ? Découvre toute la collection. », « Refaire le quiz ».
+- 4 pages résultat (`/quiz/resultat/fabulous|miraculous|luxurious|pack`) : personnalité, phrase, prix, « Ajouter au panier », bloc « Découvre aussi Miraculous, mon produit fondateur », message final « Et si tu es les trois ? Découvre toute la collection. », « Refaire le quiz ».
 
 ### Phase 5 : boutique
 

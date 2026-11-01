@@ -8,13 +8,17 @@ export const metadata: Metadata = { title: t.title, description: t.intro, altern
 
 export default function ContactPage() {
   return (
-    <div className="mx-auto grid max-w-5xl gap-8 px-4 py-10 sm:gap-10 sm:px-6 sm:py-24 md:grid-cols-[1.4fr_1fr]">
-      <div>
+    // Ordinateur (modification 63) : conteneur centré, formulaire à gauche (60 %), coordonnées à droite (40 %),
+    // carte alignée sur le premier champ et visible au défilement. Tablette et mobile : l'un sous l'autre.
+    <div className="mx-auto grid max-w-5xl px-4 py-10 sm:px-6 sm:py-24 lg:max-w-6xl lg:grid-cols-[3fr_2fr] lg:gap-x-14">
+      <div className="lg:col-start-1">
         <h1 className="titre-h1">{t.title}</h1>
         <p className="mb-8 mt-3 accroche">{t.intro}</p>
+      </div>
+      <div className="lg:col-start-1 lg:row-start-2">
         <ContactForm />
       </div>
-      <aside className="md:pt-32">
+      <aside className="mt-8 sm:mt-10 lg:sticky lg:top-28 lg:col-start-2 lg:row-start-2 lg:mt-5 lg:self-start">
         <LavenderBox>
           <h2 className="titre-h3">{t.coordinatesTitle}</h2>
           <address className="mt-3 space-y-1 not-italic">

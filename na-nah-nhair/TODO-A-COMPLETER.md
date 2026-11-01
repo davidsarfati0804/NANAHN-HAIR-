@@ -77,7 +77,6 @@ Le build de **production** est bloqué tant qu'un de ces points reste dans les p
 - [ ] Compte **Stripe** : créer, puis clés de test dans Netlify (GUIDE.md, « Paiement en ligne ») ; validation du compte (identité, IBAN) avant les vrais paiements
 - [ ] **Gmail** : mot de passe d'application dans Netlify (GUIDE.md, « Emails »)
 - [ ] **Stock de départ** de chaque sérum (back-office > Produits et stocks)
-- [ ] **FAQ des trois fiches produit** (questions et réponses) : `content/site.ts`, champ `faq` de chaque soin ; sinon dire si le bloc doit être retiré
 - [ ] **Adresse du site** sur les images story du quiz : `quiz.story.siteAddress`, puis `node scripts/generer-stories.mjs`
 - [ ] Mondial Relay : compte et choix du point relais (désactivé à l'ouverture)
 - [ ] Propositions d'alignement FAQ / email avec les CGV : TEXTES-A-VALIDER.md §6

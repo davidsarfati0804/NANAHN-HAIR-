@@ -41,10 +41,10 @@ for (const s of scenarios) {
     // Aucune photo de flacon sur le résultat
     await expect(page.locator("main img")).toHaveCount(0);
     await expect(page.getByText(/À COMPLÉTER : photo/)).toHaveCount(0);
-    // Blocs obligatoires sur toutes les pages résultat
-    await expect(page.getByRole("heading", { name: "Découvre aussi Miraculous, mon produit fondateur" })).toBeVisible();
-    await expect(page.getByRole("link", { name: "Voir Miraculous" })).toHaveAttribute("href", "/soins/miraculous");
-    await expect(page.getByRole("link", { name: "Et si tu étais les trois ? Découvre toute la collection." })).toHaveAttribute("href", "/boutique");
+    // Plus de bloc « Découvre aussi Miraculous » (modification 60) ; message final au présent
+    await expect(page.getByText(/Découvre aussi Miraculous/)).toHaveCount(0);
+    await expect(page.getByRole("link", { name: "Voir Miraculous" })).toHaveCount(0);
+    await expect(page.getByRole("link", { name: "Et si tu es les trois ? Découvre toute la collection." })).toHaveAttribute("href", "/boutique");
     await expect(page.getByRole("link", { name: "Refaire le quiz" })).toHaveAttribute("href", "/quiz");
   });
 }

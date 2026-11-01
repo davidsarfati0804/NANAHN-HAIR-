@@ -279,18 +279,22 @@ function StoryTeaser() {
 }
 
 function Reasons() {
+  // Ordinateur et tablette (modification 59) : cartes de même hauteur, ajustées au contenu, texte plus grand,
+  // 3 colonnes sur tablette, 5 sur grand écran ; espace régulier avant le bloc suivant. Mobile inchangé.
+  // Sur grand écran, la 3e carte (Huiles végétales, trois lignes) est plus large : la hauteur commune, dictée par
+  // la carte la plus haute, reste proche du contenu des autres cartes.
   return (
-    <section aria-labelledby="raisons" className="section">
+    <section aria-labelledby="raisons" className="section md:pb-0">
       <h2 id="raisons" className="mb-6 titre-h2 sm:mb-10">
         <BrandText text={home.reasons.title} tone="logo" />
       </h2>
-      <ul className="grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-5">
+      <ul className="grid gap-3 sm:grid-cols-2 sm:gap-4 md:grid-cols-3 xl:grid-cols-[1fr_1fr_1.5fr_1fr_1fr]">
         {home.reasons.items.map((r) => (
-          <li key={r.title} className="rounded-3xl bg-lavender p-4 text-deep-violet sm:p-5">
-            <h3 className="titre-h3">{r.title}</h3>
-            {r.text && <p className="mt-2 text-sm">{r.text}</p>}
+          <li key={r.title} className="min-w-0 rounded-3xl bg-lavender p-4 text-deep-violet sm:p-5 md:px-6 md:py-7 xl:px-5 xl:py-7">
+            <h3 className="titre-h3 md:text-[1.375rem] md:leading-tight">{r.title}</h3>
+            {r.text && <p className="mt-2 text-sm md:mt-3 md:text-base md:leading-relaxed">{r.text}</p>}
             {r.lines && (
-              <ul className="mt-2 space-y-1 text-sm">
+              <ul className="mt-2 space-y-1 text-sm md:mt-3 md:space-y-1.5 md:text-base md:leading-relaxed">
                 {r.lines.map((l) => (
                   <li key={l.product}>
                     <span className="font-bold">{l.product}</span> : {l.text}
@@ -309,7 +313,7 @@ function Reasons() {
 function FinalCta() {
   const { finalCta } = home;
   return (
-    <section className="section">
+    <section className="section md:pt-18">
       <div className="rounded-[2rem] bg-deep-violet px-6 py-10 text-center text-white sm:py-16">
         <h2 className="titre-h2 text-white">{finalCta.title}</h2>
         <p className="mt-4 accroche">{finalCta.text}</p>

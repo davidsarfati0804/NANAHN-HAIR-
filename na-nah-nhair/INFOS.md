@@ -67,7 +67,7 @@ Ce sérum aide à :
 - Améliorer la santé du cheveu
 - Diminuer les pellicules
 
-Sa texture légère s'intègre parfaitement dans une routine simple et agréable, sans alourdir les cheveux, tout en leur apportant juste ce qu'il faut de nutrition et de soin. Utilisé au quotidien, le Fabulous Hair Serum devient le geste de base pour des cheveux plus sains, plus doux et naturellement éclatants.
+Sa texture légère s'intègre parfaitement dans une routine simple et agréable, sans alourdir les cheveux, tout en leur apportant juste ce qu'il faut de nutrition et de soin. Utilisé au quotidien, le **Fabulous Hair Serum** devient le geste de base pour des cheveux plus sains, plus doux et naturellement éclatants.
 
 ### Ingrédients (INCI)
 
@@ -95,7 +95,7 @@ RICINUS COMMUNIS SEED OIL\*, OLEA EUROPAEA FRUIT OIL\*, COCOS NUCIFERA OIL\*, PE
 - **Phrase « Je suis »** (cartes et fiche) : Je suis déterminée, ambitieuse et audacieuse.
 - **Univers** : violet, confiance, force, ambition et transformation.
 - **Odeur** : Vanille patchouli
-- **Texte** : c'est mon produit fondateur. L'histoire de ma marque a commencé avec cette envie de créer une synergie capillaire pour aider une femme à prendre soin de ses cheveux.
+- **Texte** : Celui par lequel tout a commencé. Dans ma chambre, c’est lui que j’ai créé en premier, pour celle qui est déterminée, ambitieuse et un peu audacieuse. (modification 58 : même texte sur la carte « Voici Miraculous ! » de Mon histoire)
 - **Sa phrase** : « Je crois en mon objectif. »
 
 ### Encadrés (points clés)
@@ -116,7 +116,7 @@ Ce sérum aide à :
 - Ralentir la chute capillaire
 - Réduire l'apparition des fourches
 
-Sa texture douce et sensorielle pénètre facilement le cuir chevelu pour nourrir, revitaliser et réactiver l'énergie du cheveu dès la racine. Utilisé en cure, il devient un véritable rituel de transformation.
+Sa texture douce et sensorielle pénètre facilement le cuir chevelu pour nourrir, revitaliser et réactiver l'énergie du cheveu dès la racine. Utilisé en cure, le **Miraculous Hair Serum** devient un véritable rituel de transformation.
 
 ### Ingrédients (INCI)
 
@@ -166,7 +166,7 @@ Ce sérum aide à :
 - Donner de la brillance
 - Donner du volume
 
-Son parfum de fleur d’oranger transforme ta routine capillaire en un vrai moment de plaisir. Utilisé comme touche finale, le Luxurious Hair Serum devient ce petit luxe que tu mérites, pour des cheveux élégants et lumineux.
+Son parfum de fleur d’oranger transforme ta routine capillaire en un vrai moment de plaisir. Utilisé comme touche finale, le **Luxurious Hair Serum** devient ce petit luxe que tu mérites, pour des cheveux élégants et lumineux.
 
 ### Ingrédients (INCI)
 
@@ -258,8 +258,7 @@ Quiz interactif de 5 questions, qui doit fonctionner réellement (logique de poi
 
 - Le soin qui a le plus de points est affiché, avec une présentation personnalisée (personnalité, phrase, prix, bouton « Ajouter au panier »).
 - **Égalité** : si Miraculous fait partie des soins à égalité, le résultat est Miraculous (mon produit fondateur). Si l'égalité est seulement entre Fabulous et Luxurious, le résultat est Luxurious (modification du 21/10/2026).
-- Sur toutes les pages résultat, ajouter un bloc « Découvre aussi Miraculous, mon produit fondateur », avec un lien vers sa fiche.
-- Message final obligatoire : « Et si tu étais les trois ? Découvre toute la collection. »
+- Message final obligatoire : « Et si tu es les trois ? Découvre toute la collection. »
 - Les textes de résultat ne doivent contenir aucune promesse de résultat garanti.
 - Tests à prévoir : les 3 résultats atteignables, toutes les égalités possibles, et les scores extrêmes (par exemple 5 réponses Fabulous).
 
@@ -349,8 +348,8 @@ Ces décisions de la propriétaire de la marque complètent et remplacent les pa
   - « Que faire si mon produit est défectueux ou erroné ? » : Écris-nous à Contact@nanahnhair.com avec ton numéro de commande et une photo du produit. Nous remplaçons ou remboursons le produit, et les frais de retour sont à notre charge. Tu bénéficies de la garantie légale de conformité.
 - **« trois univers » → « trois personnalités »** : carte « Les trois soins » et bloc final de la page Mon histoire (« …tout en révélant tes différentes facettes, telle que tu es, pour de vrai. »).
 - **Carte « Huiles végétales »** : noms complets en gras ; espace insécable entre « vitamine » et la lettre partout.
-- **Luxurious, description** : dernier paragraphe « Son parfum de fleur d’oranger transforme ta routine capillaire en un vrai moment de plaisir. Utilisé comme touche finale, le Luxurious Hair Serum devient ce petit luxe que tu mérites, pour des cheveux élégants et lumineux. »
-- **Page Mon histoire, carte Miraculous** : titre « Voici Miraculous ! » (modification 52), texte « Celui par lequel tout a commencé. Dans ma chambre, c’est lui que j’ai créé en premier : déterminé, ambitieux, un peu audacieux, comme celle qu’il accompagne. », bouton « Découvrir Miraculous ».
+- **Luxurious, description** : dernier paragraphe « Son parfum de fleur d’oranger transforme ta routine capillaire en un vrai moment de plaisir. Utilisé comme touche finale, le **Luxurious Hair Serum** devient ce petit luxe que tu mérites, pour des cheveux élégants et lumineux. »
+- **Page Mon histoire, carte Miraculous** : titre « Voici Miraculous ! » (modification 52), texte « Celui par lequel tout a commencé. Dans ma chambre, c’est lui que j’ai créé en premier, pour celle qui est déterminée, ambitieuse et un peu audacieuse. » (modification 58), bouton « Découvrir Miraculous ».
 - **Instagram** : @na.nah.nhair (page Contact, pied de page, images story).
 - **Mise en page** : cartes alignées sur des lignes communes (soins, boutique, « De mon bureau à ta routine ») ; premier écran sans ronds de couleur, ombre douce sous chaque flacon ; fiches produits entièrement aux couleurs du soin.
 
@@ -382,3 +381,13 @@ Ces décisions de la propriétaire de la marque complètent et remplacent les pa
 - **Correctifs de la recette** : page introuvable en français, redirections des anciennes adresses, bouton de
   l'accueil, sécurité de l'administration, accessibilité, contrôle de mise en ligne étendu, sauvegarde.
 
+
+## 21. Modifications 57 à 63 (01/11/2026)
+
+- **Fiches** : nom complet du soin en gras à la fin de la description ; bloc « Questions fréquentes » supprimé des trois fiches (la page FAQ ne change pas).
+- **Miraculous** : texte fondateur au féminin, une seule source pour la fiche et la carte « Voici Miraculous ! ».
+- **Accueil, « Pourquoi découvrir »** (ordinateur et tablette) : cartes ajustées, texte plus grand, 3 colonnes sur tablette, espace régulier avant le bloc suivant.
+- **Quiz** : plus de bloc « Découvre aussi Miraculous » ; « Et si tu es les trois ? Découvre toute la collection. » partout.
+- **Boutique** (ordinateur et tablette) : « HAIR SERUM · 30 ML » juste sous le nom.
+- **Fabulous** : fichier propre partout, y compris le premier écran de l'accueil (l'ancienne version de référence avait une trace sous le flacon).
+- **Contact** (ordinateur) : conteneur centré, formulaire 60 % / coordonnées 40 %, carte alignée sur le premier champ et visible au défilement ; tablette et mobile : l'un sous l'autre.

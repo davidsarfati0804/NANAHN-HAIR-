@@ -177,7 +177,9 @@ test.describe("rendu mobile (audit du 21/10/2026)", () => {
 
   test("fiche : blocs repliés sur téléphone, barre d'achat fixe en bas", async ({ page }) => {
     await page.goto("/soins/fabulous");
-    for (const title of ["Ingrédients (INCI)", "Mode d'emploi", "Questions fréquentes"])
+    // Plus de bloc « Questions fréquentes » sur les fiches (modification 57)
+    await expect(page.locator("summary", { hasText: "Questions fréquentes" })).toHaveCount(0);
+    for (const title of ["Ingrédients (INCI)", "Mode d'emploi"])
       await expect(page.locator("details").filter({ has: page.locator("summary", { hasText: title }) })).not.toHaveAttribute("open");
     const bar = page.locator("div.fixed.bottom-0").filter({ hasText: "Fabulous" });
     await expect(bar).toHaveAttribute("aria-hidden", "true");

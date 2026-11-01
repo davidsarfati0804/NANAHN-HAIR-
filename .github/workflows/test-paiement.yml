@@ -1,4 +1,4 @@
-# Commande d'essai sur le vrai site, en MODE TEST Stripe (carte 4242, aucun argent réel) — relance 3 :
+# Commande d'essai sur le vrai site, en MODE TEST Stripe (carte 4242, aucun argent réel) — relance 4 :
 # commande, page de paiement Stripe, retour sur le site, confirmation du paiement (webhook), email.
 name: Test paiement (mode test Stripe)
 
@@ -61,6 +61,9 @@ jobs:
             // Paiement en euros (le robot de test est aux États-Unis : Stripe propose aussi le dollar)
             const eur = page.getByText("19,90 €", { exact: true }).first();
             if (await eur.count()) await eur.click().catch(() => {});
+            // Case « enregistrer mes informations avec Link » : décochée (sinon Stripe exige un téléphone)
+            const link = page.locator("#enableStripePass");
+            if (await link.count() && (await link.isChecked().catch(() => false))) await link.uncheck({ force: true }).catch(() => {});
             const fields = await page.locator("input, select").evaluateAll((els) => els.filter((e) => e.offsetParent).map((e) => `${e.id || e.name}=${e.tagName === "SELECT" ? e.value : e.value ? "rempli" : "vide"}`));
             log(`Champs visibles : ${fields.join(", ")}`);
             await page.locator('button[type="submit"]').first().click();
@@ -71,6 +74,7 @@ jobs:
               log(`Messages d'erreur Stripe : ${alerts.filter(Boolean).join(" | ") || "(aucun)"}`);
               const frames = page.frames().map((f) => new URL(f.url() || "about:blank").host).filter(Boolean);
               log(`Cadres présents : ${[...new Set(frames)].join(", ")}`);
+              log(`Texte du bas de page : ${(await page.locator("body").innerText()).replace(/\s+/g, " ").slice(-500)}`);
               throw e;
             }
             log("Retour sur le site après paiement : OK");

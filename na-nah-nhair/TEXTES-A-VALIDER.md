@@ -115,3 +115,8 @@ Dis-moi « OK propositions » pour que je les mette en ligne, ou corrige-les.
 - Contact : « Envoi trop rapide : vérifie ton message, puis envoie-le à nouveau. »
 - Lien Instagram (lu par les lecteurs d'écran) : « @na.nah.nhair, Instagram de Na Nah N'hair (s'ouvre dans un nouvel onglet) ».
 - Back-office : page Commandes, sauvegarde, emails d'alerte (nouvelle commande, nouveau message).
+
+## 8. Emails (01/11/2026)
+
+- Nouvelle mise en page de l'email de confirmation (même texte validé), avec en plus : petit titre « Commande confirmée », titre « Merci pour ta commande ! », bouton « Voir ma facture ».
+- Alertes à la boutique : « Nouvelle commande payée », « Nouveau message du site », bouton « Ouvrir les commandes », « Réponds directement à cet email pour lui écrire. »

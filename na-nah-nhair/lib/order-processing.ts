@@ -1,5 +1,6 @@
 import "server-only";
 import { confirmationDocuments, confirmationEmail } from "@/lib/emails/confirmation";
+import { orderAlertEmail } from "@/lib/emails/alerts";
 import { sendMail, mailConfig } from "@/lib/emails/send";
 import { addressLine, decrementStock, invoiceNumber, type Order } from "@/lib/orders";
 import type { StripeCheckoutSession } from "@/lib/payments/stripe";
@@ -51,7 +52,7 @@ export async function sendOrderEmails(order: Order) {
       {
         orderNumber: order.number,
         firstName: order.address.firstName,
-        lines: order.lines.map((l) => ({ name: l.name, quantity: l.quantity, totalCents: l.totalCents })),
+        lines: order.lines.map((l) => ({ id: l.id, name: l.name, quantity: l.quantity, totalCents: l.totalCents })),
         shippingCents: order.shippingCents,
         freeShipping: order.freeShipping,
         totalCents: order.totalCents,
@@ -67,19 +68,8 @@ export async function sendOrderEmails(order: Order) {
       html: mail.html,
       attachments: confirmationDocuments().map((d) => ({ filename: d.filename, path: `${site}${d.path}` })),
     });
-    await sendMail({
-      to: mailConfig().notify,
-      subject: `Nouvelle commande ${order.number} (${formatPrice(order.totalCents)})`,
-      text: [
-        `Commande ${order.number} payée.`,
-        ...order.lines.map((l) => `${l.name} × ${l.quantity}`),
-        `Total : ${formatPrice(order.totalCents)}`,
-        `Livraison : ${addressLine(order.address)}`,
-        `Email : ${order.address.email}${order.address.phone ? ` · Téléphone : ${order.address.phone}` : ""}`,
-        "",
-        `Détail dans le back-office : ${site}/admin/commandes`,
-      ].join("\n"),
-    });
+    const alert = orderAlertEmail(order, site);
+    await sendMail({ to: mailConfig().notify, replyTo: order.address.email, ...alert });
     await updateOrder(order.number, (o) => ({
       ...o,
       emails: sent ? { confirmationSentAt: new Date().toISOString() } : { error: "envoi des emails pas encore configuré" },

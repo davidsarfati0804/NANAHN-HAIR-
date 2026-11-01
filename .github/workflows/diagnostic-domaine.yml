@@ -32,6 +32,13 @@ jobs:
             echo "--- certificat $h"
             echo | timeout 15 openssl s_client -servername $h -connect $h:443 2>/dev/null | openssl x509 -noout -subject -issuer -dates -ext subjectAltName 2>&1 | head -8 || true
           done
+          echo "--- contenu (nouveau site ?)"
+          for c in "/|Quel soin est le tien" "/boutique|HAIR SERUM" "/page-inexistante|Page introuvable" "/a-propos|Tout a commencé"; do
+            p="${c%%|*}"; t="${c#*|}"
+            if curl -sSL -m 20 "https://nanahnhair.com$p" | grep -q "$t"; then echo "OK      $p : $t"; else echo "ABSENT  $p : $t"; fi
+          done
+          echo "robots.txt : $(curl -sS -m 20 https://nanahnhair.com/robots.txt | tr '\n' ' ')"
+          echo "api/sante : $(curl -sS -m 20 https://nanahnhair.com/api/sante)"
           echo "--- début de la page"
           curl -sSL -m 20 https://www.nanahnhair.com/ 2>&1 | head -c 400 || true
       - name: Rapport

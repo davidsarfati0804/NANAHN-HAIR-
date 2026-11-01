@@ -1,5 +1,5 @@
 # Test d'envoi d'email : remplit le formulaire de contact du vrai site comme une visiteuse.
-# Le site doit envoyer l'alerte « Nouveau message » à la boîte de la boutique (SMTP OVH).
+# (relance : 2) Le site doit envoyer l'alerte « Nouveau message » à la boîte de la boutique (SMTP OVH).
 name: Test email (formulaire de contact)
 
 on:
@@ -18,8 +18,8 @@ jobs:
       - name: Navigateur
         run: |
           npm init -y > /dev/null
-          npm install playwright@1.56.1 > /dev/null 2>&1
-          npx playwright install --with-deps chromium > /dev/null 2>&1
+          npm install playwright@1.56.1 > install.txt 2>&1 || echo "npm install en échec" >> erreurs.txt
+          npx playwright install --with-deps chromium >> install.txt 2>&1 || echo "installation du navigateur en échec" >> erreurs.txt
       - name: Envoi du formulaire
         env:
           EMAIL: contact@ge-mesdocs.fr
@@ -41,5 +41,7 @@ jobs:
           console.log(`Réponse du site : ${status.trim() || "(vide)"}`);
           await browser.close();
           JS
-          node test.mjs | tee rapport.txt
-          echo "::notice title=Test email::$(tr -d '\r' < rapport.txt | tr '\n' ' ')"
+          node test.mjs > rapport.txt 2>&1 || echo "(script en échec)" >> rapport.txt
+          cat erreurs.txt >> rapport.txt 2>/dev/null || true
+          tail -5 install.txt >> rapport.txt 2>/dev/null || true
+          echo "::notice title=Test email::$(tr -d '\r' < rapport.txt | head -c 3000 | tr '\n' ' ')"

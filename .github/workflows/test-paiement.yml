@@ -1,4 +1,4 @@
-# Commande d'essai sur le vrai site, en MODE TEST Stripe (carte 4242, aucun argent réel) :
+# Commande d'essai sur le vrai site, en MODE TEST Stripe (carte 4242, aucun argent réel) — relance 2 :
 # commande, page de paiement Stripe, retour sur le site, confirmation du paiement (webhook), email.
 name: Test paiement (mode test Stripe)
 

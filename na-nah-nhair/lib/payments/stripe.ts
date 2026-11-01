@@ -6,8 +6,10 @@ import type { Order } from "@/lib/orders";
 // Actif seulement quand STRIPE_SECRET_KEY est défini dans Netlify (clé de test sk_test_… d'abord).
 // Aucune clé dans le code : variables d'environnement uniquement.
 export function stripeConfig() {
-  const secretKey = process.env.STRIPE_SECRET_KEY ?? "";
-  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET ?? "";
+  // Espaces, retours à la ligne ou guillemets collés par erreur autour de la valeur : ignorés
+  const clean = (v: string | undefined) => (v ?? "").trim().replace(/^["']|["']$/g, "").trim();
+  const secretKey = clean(process.env.STRIPE_SECRET_KEY);
+  const webhookSecret = clean(process.env.STRIPE_WEBHOOK_SECRET);
   return {
     enabled: /^sk_(test|live)_/.test(secretKey),
     testMode: secretKey.startsWith("sk_test_"),
@@ -15,6 +17,15 @@ export function stripeConfig() {
     webhookSecret,
     apiBase: process.env.STRIPE_API_BASE || "https://api.stripe.com",
   };
+}
+
+// État des réglages, sans jamais révéler de valeur (page /api/sante)
+export function stripeStatus() {
+  const raw = process.env.STRIPE_SECRET_KEY;
+  const c = stripeConfig();
+  const key = raw === undefined ? "absente" : c.enabled ? (c.testMode ? "test" : "réelle") : `présente mais non reconnue (${c.secretKey.length} caractères, commence par « ${c.secretKey.slice(0, 3)} »)`;
+  const webhook = process.env.STRIPE_WEBHOOK_SECRET === undefined ? "absent" : c.webhookSecret.startsWith("whsec_") ? "présent" : "présent mais non reconnu";
+  return { cle: key, webhook };
 }
 
 // Paramètres de la session de paiement (format attendu par l'API Stripe), à partir d'une commande enregistrée

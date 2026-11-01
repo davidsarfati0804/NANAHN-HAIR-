@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { adminConfig, isAdmin } from "@/lib/auth";
 import { deployBranch, deployContext, storeName } from "@/lib/deploy";
+import { mailConfig } from "@/lib/emails/send";
+import { stripeStatus } from "@/lib/payments/stripe";
 import { storeDeepCheck, storeHealth } from "@/lib/store";
 
 export const dynamic = "force-dynamic";
@@ -12,7 +14,9 @@ export async function GET(request: Request) {
   const store = await storeHealth();
   const headers = { "Cache-Control": "no-store" };
   if (!(await isAdmin())) {
-    return NextResponse.json({ ok: store.lectureOk, administrationActivee: adminConfig().configured, dureeTotaleMs: Date.now() - started, date: new Date().toISOString() }, { headers });
+    // Réglages présents ou non (jamais leur valeur) : utile pour vérifier une configuration Netlify à distance
+    const reglages = { stripe: stripeStatus(), emails: mailConfig().enabled ? "configurés" : "non configurés" };
+    return NextResponse.json({ ok: store.lectureOk, administrationActivee: adminConfig().configured, reglages, dureeTotaleMs: Date.now() - started, date: new Date().toISOString() }, { headers });
   }
   const detail = new URL(request.url).searchParams.get("detail") === "1";
   return NextResponse.json(

@@ -1,4 +1,4 @@
-# Diagnostic du nom de domaine (DNS, HTTPS, réponse du site, réglages) : la session de développement n'a pas accès au web.
+# Diagnostic du nom de domaine (DNS, HTTPS, réponse du site, réglages, relance 2) : la session de développement n'a pas accès au web.
 name: Diagnostic domaine
 
 on:

@@ -106,7 +106,7 @@ test("produits : prix, stock, épuisé, désactivation, photo", async ({ page })
   await expect(fab.getByRole("status")).toHaveText("Modifications enregistrées.");
   await page.goto("/soins/fabulous");
   // La photo du back-office remplace la photo fournie sur la fiche
-  const photo = page.locator('main img[alt="Flacon Fabulous Hair Serum, sérum capillaire de 30 ml"]').first();
+  const photo = page.locator('main img[alt^="Flacon Fabulous Hair Serum"]').first();
   await expect(photo).toBeVisible();
   await expect(photo).not.toHaveAttribute("src", /^\/images\/produits\//);
 

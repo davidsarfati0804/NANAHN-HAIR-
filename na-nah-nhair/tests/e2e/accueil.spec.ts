@@ -57,7 +57,9 @@ test("aucun lien interne cassé depuis l'accueil", async ({ page, request }) => 
 test("photos : flacons, pack et photos détourées fournis, plus aucun emplacement photo", async ({ page }) => {
   // Photos fournies (21/10/2026), textes alternatifs exacts (boutique)
   await page.goto("/boutique");
-  for (const name of ["Fabulous", "Miraculous", "Luxurious"])
+  // Fabulous : photo sur fond blanc (modification 66), texte alternatif « Flacon Fabulous Hair Serum »
+  await expect(page.locator('main img[alt="Flacon Fabulous Hair Serum"]').first()).toBeVisible();
+  for (const name of ["Miraculous", "Luxurious"])
     await expect(page.locator(`main img[alt="Flacon ${name} Hair Serum, sérum capillaire de 30 ml"]`)).toBeVisible();
   await page.goto("/");
   await expect(page.locator('main img[alt^="Pack des 3 soins"]')).toBeVisible();

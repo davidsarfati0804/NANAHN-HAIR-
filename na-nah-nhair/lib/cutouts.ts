@@ -3,7 +3,7 @@ import type { ProductTheme } from "@/lib/design-tokens";
 // Flacons détourés (fond transparent, modifications 40 et 51), générés par scripts/preparer-detoures.py.
 // Dimensions des fichiers fournis (version 3 du 26/10/2026, modification 55) : jamais agrandis.
 export const cutoutSize: Record<ProductTheme, { width: number; height: number }> = {
-  fabulous: { width: 465, height: 1245 },
+  fabulous: { width: 471, height: 1248 },
   miraculous: { width: 470, height: 1232 },
   luxurious: { width: 474, height: 1241 },
 };
@@ -15,8 +15,8 @@ export const cutoutSrcSet = (slug: ProductTheme) =>
 export const cutoutFallback = (slug: ProductTheme) => `/images/produits/${slug}-detoure-max.png`;
 
 // Premier écran de l'accueil : version de référence (24/10/2026) pour Luxurious (modification 51) ; Miraculous
-// et Fabulous remplacés par les fichiers des modifications 56 et 62 (jamais agrandis)
-export const heroWidths: Record<ProductTheme, readonly number[]> = { fabulous: [240, 465], miraculous: [240, 470], luxurious: [240, 480, 720] };
-export const heroHeight: Record<ProductTheme, number> = { fabulous: 643, miraculous: 629, luxurious: 640 };
+// et Fabulous remplacés par les fichiers des modifications 56 et 67 (jamais agrandis)
+export const heroWidths: Record<ProductTheme, readonly number[]> = { fabulous: [240, 471], miraculous: [240, 470], luxurious: [240, 480, 720] };
+export const heroHeight: Record<ProductTheme, number> = { fabulous: 636, miraculous: 629, luxurious: 640 };
 export const heroSrcSet = (slug: ProductTheme, ext: "webp" | "png") =>
   heroWidths[slug].map((w) => `/images/produits/${slug}-accueil-${w}.${ext} ${w}w`).join(", ");

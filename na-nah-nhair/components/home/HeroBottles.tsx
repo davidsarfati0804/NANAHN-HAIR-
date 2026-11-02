@@ -7,7 +7,8 @@ import { themeClasses } from "@/lib/theme-classes";
 // Trois flacons du premier écran (modification 22) : Fabulous à gauche, Miraculous au centre
 // (plus grand, plus haut), Luxurious à droite ; légèrement superposés, inclinés vers l'extérieur.
 const layout: Record<ProductTheme, { order: number; tilt: string; size: string; lift: string; delay: string }> = {
-  fabulous: { order: 0, tilt: "-rotate-[5deg]", size: "w-[27%]", lift: "mt-6", delay: "0s" },
+  // 27,3 % : nouveau fichier un peu plus large (modification 67), même hauteur que le précédent à 27 %
+  fabulous: { order: 0, tilt: "-rotate-[5deg]", size: "w-[27.3%]", lift: "mt-6", delay: "0s" },
   miraculous: { order: 1, tilt: "", size: "w-[33%] z-10 -mx-[3%]", lift: "", delay: "0.5s" },
   luxurious: { order: 2, tilt: "rotate-[5deg]", size: "w-[27%]", lift: "mt-6", delay: "1s" },
 };

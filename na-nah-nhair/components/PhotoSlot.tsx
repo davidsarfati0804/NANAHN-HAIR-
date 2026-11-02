@@ -4,7 +4,10 @@ import { themeClasses } from "@/lib/theme-classes";
 
 // photo.file : nom de la photo dans assets/images/ ; si « responsive », versions générées par
 // scripts/preparer-photos.py dans public/images/produits/ (400, 800, 1200 px, WebP + JPG, format 4:5)
-type Photo = { file: string; alt: string; available: boolean; responsive?: string; cutout?: ProductTheme };
+// studio : photo carrée sur fond blanc pur (modification 66), versions studio-400…1400 dans public/images/produits/
+type Photo = { file: string; alt: string; available: boolean; responsive?: string; cutout?: ProductTheme; studio?: string };
+
+const STUDIO_WIDTHS = [400, 800, 1200, 1400];
 
 const WIDTHS = [400, 800, 1200];
 
@@ -33,6 +36,31 @@ export default function PhotoSlot({
       <div className={`relative overflow-hidden bg-white ${className}`}>
         {/* eslint-disable-next-line @next/next/no-img-element -- photo du back-office, servie telle quelle */}
         <img src={src} alt={photo.alt} loading={loading} className="absolute inset-0 h-full w-full object-contain" />
+      </div>
+    );
+  }
+
+  // Photo sur fond blanc pur dans le panneau blanc (modification 66) : image carrée remplissant la hauteur du
+  // panneau (côtés blancs rognés, invisibles sur le blanc), flacon à environ 80 % de la hauteur, centré
+  if (photo.available && photo.studio) {
+    const set = (ext: string) => STUDIO_WIDTHS.map((w) => `/images/produits/${photo.studio}-${w}.${ext} ${w}w`).join(", ");
+    return (
+      <div className={`relative overflow-hidden bg-white ${className}`}>
+        <picture>
+          <source type="image/webp" srcSet={set("webp")} sizes={sizes} />
+          <img
+            src={`/images/produits/${photo.studio}-800.jpg`}
+            srcSet={set("jpg")}
+            sizes={sizes}
+            width={1400}
+            height={1400}
+            alt={photo.alt}
+            loading={loading}
+            fetchPriority={priority ? "high" : "auto"}
+            decoding="async"
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+        </picture>
       </div>
     );
   }

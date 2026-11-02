@@ -54,7 +54,7 @@ describe("email de confirmation", () => {
     expect(mail.text).toContain("Contact@nanahnhair.com");
     expect(mail.text).not.toMatch(/01 80 18 29 29|téléphone/i);
     expect(mail.text).toContain("Livraison offerte");
-    expect(mail.html).toContain('<a href="https://exemple.fr/cgv">');
+    expect(mail.html).toContain('href="https://exemple.fr/cgv"');
     // Franchise en base de TVA (modification 53)
     expect(mail.text).toContain("TVA non applicable, article 293 B du CGI");
     expect(mail.text).not.toContain("TTC");

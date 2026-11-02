@@ -6,12 +6,12 @@ import { legal } from "@/content/site";
 // Variables Netlify : SMTP_USER (adresse Gmail), SMTP_PASSWORD (mot de passe d'application Google,
 // jamais le mot de passe du compte), et au besoin MAIL_FROM, MAIL_NOTIFY, SMTP_HOST, SMTP_PORT.
 export function mailConfig() {
-  const user = process.env.SMTP_USER ?? "";
-  const password = process.env.SMTP_PASSWORD ?? "";
+  const user = (process.env.SMTP_USER ?? "").trim();
+  const password = (process.env.SMTP_PASSWORD ?? "").trim();
   return {
     enabled: Boolean(user && password),
-    host: process.env.SMTP_HOST || "smtp.gmail.com",
-    port: Number(process.env.SMTP_PORT || 465),
+    host: (process.env.SMTP_HOST || "smtp.gmail.com").trim(),
+    port: Number((process.env.SMTP_PORT || "465").trim()),
     user,
     password,
     from: process.env.MAIL_FROM || `NA NAH N'HAIR <${user}>`,

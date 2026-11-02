@@ -95,7 +95,7 @@ RICINUS COMMUNIS SEED OIL\*, OLEA EUROPAEA FRUIT OIL\*, COCOS NUCIFERA OIL\*, PE
 - **Phrase « Je suis »** (cartes et fiche) : Je suis déterminée, ambitieuse et audacieuse.
 - **Univers** : violet, confiance, force, ambition et transformation.
 - **Odeur** : Vanille patchouli
-- **Texte** : Celui par lequel tout a commencé. Dans ma chambre, c’est lui que j’ai créé en premier, pour celle qui est déterminée, ambitieuse et un peu audacieuse. (modification 58 : même texte sur la carte « Voici Miraculous ! » de Mon histoire)
+- **Texte** : Celui par lequel tout a commencé. Dans ma chambre, c’est lui que j’ai créé en premier, pour celle qui est déterminée, ambitieuse et audacieuse. (modifications 58 et 64 : même texte sur la carte « Voici Miraculous ! » de Mon histoire)
 - **Sa phrase** : « Je crois en mon objectif. »
 
 ### Encadrés (points clés)
@@ -349,7 +349,7 @@ Ces décisions de la propriétaire de la marque complètent et remplacent les pa
 - **« trois univers » → « trois personnalités »** : carte « Les trois soins » et bloc final de la page Mon histoire (« …tout en révélant tes différentes facettes, telle que tu es, pour de vrai. »).
 - **Carte « Huiles végétales »** : noms complets en gras ; espace insécable entre « vitamine » et la lettre partout.
 - **Luxurious, description** : dernier paragraphe « Son parfum de fleur d’oranger transforme ta routine capillaire en un vrai moment de plaisir. Utilisé comme touche finale, le **Luxurious Hair Serum** devient ce petit luxe que tu mérites, pour des cheveux élégants et lumineux. »
-- **Page Mon histoire, carte Miraculous** : titre « Voici Miraculous ! » (modification 52), texte « Celui par lequel tout a commencé. Dans ma chambre, c’est lui que j’ai créé en premier, pour celle qui est déterminée, ambitieuse et un peu audacieuse. » (modification 58), bouton « Découvrir Miraculous ».
+- **Page Mon histoire, carte Miraculous** : titre « Voici Miraculous ! » (modification 52), texte « Celui par lequel tout a commencé. Dans ma chambre, c’est lui que j’ai créé en premier, pour celle qui est déterminée, ambitieuse et audacieuse. » (modifications 58 et 64), bouton « Découvrir Miraculous ».
 - **Instagram** : @na.nah.nhair (page Contact, pied de page, images story).
 - **Mise en page** : cartes alignées sur des lignes communes (soins, boutique, « De mon bureau à ta routine ») ; premier écran sans ronds de couleur, ombre douce sous chaque flacon ; fiches produits entièrement aux couleurs du soin.
 

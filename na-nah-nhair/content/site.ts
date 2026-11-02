@@ -126,7 +126,7 @@ const inciNotes = [
 ];
 
 // Texte fondateur de Miraculous (modification 58) : une seule source, fiche produit et carte « Voici Miraculous ! »
-const miraculousFounderText = "Celui par lequel tout a commencé. Dans ma chambre, c’est lui que j’ai créé en premier, pour celle qui est déterminée, ambitieuse et un peu audacieuse.";
+const miraculousFounderText = "Celui par lequel tout a commencé. Dans ma chambre, c’est lui que j’ai créé en premier, pour celle qui est déterminée, ambitieuse et audacieuse.";
 
 export const products: Product[] = fr([
   {

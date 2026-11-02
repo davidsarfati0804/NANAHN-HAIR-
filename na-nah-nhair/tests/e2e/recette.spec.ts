@@ -49,7 +49,8 @@ test("menu mobile : Échap ferme le menu et rend le focus au bouton", async ({ p
 
 test("diagnostic public réduit ; détail réservé au back-office", async ({ page, request }) => {
   const pub = await (await request.get("/api/sante?detail=1")).json();
-  expect(Object.keys(pub).sort()).toEqual(["administrationActivee", "date", "dureeTotaleMs", "ok"]);
+  expect(Object.keys(pub).sort()).toEqual(["administrationActivee", "date", "dureeTotaleMs", "ok", "reglages"]);
+  expect(pub.reglages.stripe).toEqual({ cle: "absente", webhook: "absent" });
   await adminLogin(page);
   const admin = await (await page.request.get("/api/sante")).json();
   expect(admin.contexte).toBe("local");

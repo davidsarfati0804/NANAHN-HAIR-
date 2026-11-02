@@ -5,7 +5,9 @@ import { contactTexts as t } from "@/content/site";
 import { clientIp } from "@/lib/auth";
 import { checkAttempts, recordFailure } from "@/lib/auth-core";
 import { validateContact } from "@/lib/contact";
+import { contactAlertEmail } from "@/lib/emails/alerts";
 import { mailConfig, sendMail } from "@/lib/emails/send";
+import { siteUrl } from "@/lib/site-url";
 import { appendContactMessage, logError, updateAttempts } from "@/lib/store";
 
 export type ContactState = { ok?: boolean; error?: string; fieldErrors?: Record<string, string> } | null;
@@ -60,12 +62,7 @@ export async function sendContact(_prev: ContactState, formData: FormData): Prom
     await appendContactMessage({ id: randomBytes(8).toString("hex"), at: new Date().toISOString(), ...result.value });
     // Alerte à la boutique (si l'envoi des emails est configuré) ; un échec n'empêche pas l'enregistrement
     const m = result.value;
-    await sendMail({
-      to: mailConfig().notify,
-      replyTo: m.email,
-      subject: `Nouveau message : ${m.subject}`,
-      text: `De : ${m.name} <${m.email}>\nSujet : ${m.subject}\n\n${m.message}\n\n(Réponds directement à cet email pour lui écrire.)`,
-    }).catch((e) => logError("alerte email (contact)", e));
+    await sendMail({ to: mailConfig().notify, replyTo: m.email, ...contactAlertEmail(m, siteUrl()) }).catch((e) => logError("alerte email (contact)", e));
     return { ok: true };
   } catch (e) {
     await logError("contact", e);

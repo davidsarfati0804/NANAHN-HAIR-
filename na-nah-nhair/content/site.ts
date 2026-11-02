@@ -51,6 +51,9 @@ export type Product = {
   infosPrice: string;
   // cutout : flacon détouré affiché à la place de la photo à fond blanc (modification 40)
   photo: { file: string; alt: string; available: boolean; responsive?: string; cutout?: ProductTheme };
+  // Photo sur fond blanc pur pour les panneaux blancs de la fiche et de la boutique (modification 66) ;
+  // à défaut, ces panneaux affichent `photo`
+  panelPhoto?: { file: string; alt: string; available: boolean; studio: string };
   // Photo détourée (fond transparent) du premier écran de l'accueil (modification 22)
   cutout: { file: string; alt: string; available: boolean };
   personality: string;
@@ -140,6 +143,7 @@ export const products: Product[] = fr([
       available: true,
       cutout: "fabulous",
     },
+    panelPhoto: { file: "fabulous-fiche.jpg", alt: "Flacon Fabulous Hair Serum", available: true, studio: "fabulous-fiche" },
     cutout: { file: "fabulous.png", alt: "Flacon Fabulous Hair Serum", available: true },
     personality: "la fraîche, naturelle et spontanée.",
     iAm: "Je suis fraîche, naturelle et spontanée.",

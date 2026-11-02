@@ -396,3 +396,10 @@ Ces décisions de la propriétaire de la marque complètent et remplacent les pa
 
 - Mise en production confirmée par la marque avec des éléments encore « À COMPLÉTER » (finis sur le site réel). Le contrôle de mise en ligne avertit sans bloquer (`--avertir` dans netlify.toml) ; le retirer une fois la liste vide.
 - Ancien site : branche Git `ancien-site` (commit 7dfa7d3) et archive ZIP.
+
+## 23. Flacon vert Fabulous (modifications 64, 66, 67, 02/11/2026)
+
+- Miraculous : « déterminée, ambitieuse et audacieuse » (modification 64).
+- Fiche Fabulous et carte de la boutique : photo sur fond blanc pur `assets/images/fabulous-fiche.jpg` (versions 400 à 1400 px), flacon à environ 80 % de la hauteur du panneau.
+- Flacon détouré `assets/images/fabulous.png` (471 x 1248) : premier écran de l accueil, « Quel soin est le tien ? », panier, image de partage, emails.
+- Miraculous et Luxurious : inchangés (le point facultatif de la modification 66 ne s applique pas : leurs fiches utilisent les flacons détourés, pas des photos).

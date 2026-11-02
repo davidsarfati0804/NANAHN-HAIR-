@@ -56,7 +56,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       <div className={`${t.soft}`}>
         <div className="mx-auto grid max-w-6xl gap-6 px-4 py-6 sm:px-6 md:grid-cols-2 md:gap-10 md:py-16">
           <PhotoSlot
-            photo={p.photo}
+            photo={p.panelPhoto ?? p.photo}
             src={shop[p.slug].photoUrl}
             theme={p.slug}
             priority

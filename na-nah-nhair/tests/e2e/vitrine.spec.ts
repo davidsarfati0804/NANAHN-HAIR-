@@ -139,37 +139,15 @@ test.describe("mode d'emploi (Fabulous, Miraculous, Luxurious)", () => {
   }
 });
 
-test.describe("manifeste (fin de la page Mon histoire)", () => {
-  for (const vp of [
-    { w: 375, h: 812, n: "375" },
-    { w: 768, h: 1024, n: "768" },
-    { w: 1280, h: 900, n: "1280" },
-  ]) {
-    test(`citation encadrée et centrée, pastilles, bouton (${vp.n} px)`, async ({ page }) => {
-      await page.setViewportSize({ width: vp.w, height: vp.h });
-      await page.goto("/mon-histoire");
-      const frame = page.locator(".manifeste__cadre");
-      const quote = frame.locator(".manifeste__citation");
-      await quote.scrollIntoViewIfNeeded();
-      // Sans guillemets
-      await expect(quote).toHaveText(/^Je peux être à la fois plusieurs femmes\s:$/);
-      // Centrée horizontalement et verticalement dans son cadre
-      const f = (await frame.boundingBox())!;
-      const q = (await quote.boundingBox())!;
-      expect(Math.abs(q.x - f.x - (f.x + f.width - q.x - q.width))).toBeLessThanOrEqual(2);
-      expect(Math.abs(q.y - f.y - (f.y + f.height - q.y - q.height))).toBeLessThanOrEqual(2);
-      await expect(quote).toHaveCSS("text-align", "center");
-      const chips = page.locator(".manifeste__soin");
-      await expect(chips).toHaveText(["Je suis Fabulous.", "Je suis Miraculous.", "Je suis Luxurious."]);
-      await expect(page.locator(".manifeste__trois")).toHaveText("Je suis les trois.");
-      const boxes = await chips.evaluateAll((els) => els.map((e) => e.getBoundingClientRect()));
-      if (vp.w <= 420) for (let i = 1; i < 3; i++) expect(boxes[i].top).toBeGreaterThan(boxes[i - 1].bottom - 1); // empilées
-      const button = page.locator(".manifeste").getByRole("link", { name: "Découvrir les trois soins" });
-      await expect(button).toHaveAttribute("href", "/soins");
-      expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(0);
-      await page.locator(".manifeste").screenshot({ path: `captures/manifeste-${vp.n}.png` });
-    });
-  }
+test("Mon histoire : seulement le texte « Et si tu arrêtais de choisir ? », le bouton vers le quiz et l'encadré final", async ({ page }) => {
+  await page.goto("/mon-histoire");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Et si tu arrêtais de choisir ?");
+  await expect(page.locator("main strong")).toHaveText(["Miraculous", "Fabulous", "Luxurious"]);
+  await expect(page.locator("main").getByRole("link", { name: /Révèle ton/ })).toHaveAttribute("href", "/quiz");
+  await expect(page.locator("main blockquote")).toContainText("trois soins, trois personnalités");
+  for (const gone of ["Voici Miraculous", "Je suis les trois.", "Découvrir les trois soins", "Je me lance.", "plusieurs femmes :"])
+    await expect(page.locator("main"), gone).not.toContainText(gone);
+  await expect(page.locator(".manifeste")).toHaveCount(0);
 });
 
 test.describe("rendu mobile (audit du 21/10/2026)", () => {

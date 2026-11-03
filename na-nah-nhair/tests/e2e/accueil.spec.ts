@@ -359,13 +359,8 @@ test.describe("modifications du 22/10/2026", () => {
     await expect(page).toHaveTitle(/Fabulous Hair Serum|FABULOUS HAIR SERUM/);
   });
 
-  test("Mon histoire : nouveaux textes, nom de marque dans le bloc final", async ({ page }) => {
+  test("Mon histoire : nom de marque dans le bloc final, plus de « clinique »", async ({ page }) => {
     await page.goto("/mon-histoire");
-    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Tout a commencé sur mon bureau.");
-    // Texte au présent (modification 76) ; liste des trois soins ; plus aucun ancien paragraphe
-    await expect(page.getByText("Je me lance. Je crée mes 3 soins.")).toBeVisible();
-    await expect(page.locator("main li", { hasText: "Miraculous" }).first()).toHaveText(/Miraculous\s+Hair Serum/i);
-    await expect(page.locator("main")).not.toContainText(/Sans artifice|j’accompagnais|lâcher prise|une seule chose/);
     await expect(page.locator("blockquote svg[data-brand-name]")).toHaveCSS("color", "rgb(128, 118, 179)");
     await expect(page.locator("main")).not.toContainText(/clinique/i);
     await page.goto("/");

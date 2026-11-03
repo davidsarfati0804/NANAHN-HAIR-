@@ -55,6 +55,8 @@ export type Product = {
   // Photo sur fond blanc pur pour les panneaux blancs de la fiche et de la boutique (modification 66) ;
   // à défaut, ces panneaux affichent `photo`
   panelPhoto?: { file: string; alt: string; available: boolean; studio: string };
+  // Photo des cartes de la boutique (03/11/2026) : photo 4:5 sur fond blanc, assets/images/boutique/
+  shopPhoto: { file: string; alt: string; available: boolean; responsive: string };
   // Photo détourée (fond transparent) du premier écran de l'accueil (modification 22)
   cutout: { file: string; alt: string; available: boolean };
   personality: string;
@@ -145,6 +147,7 @@ export const products: Product[] = fr([
       cutout: "fabulous",
     },
     panelPhoto: { file: "fabulous-fiche.jpg", alt: "Flacon Fabulous Hair Serum", available: true, studio: "fabulous-fiche" },
+    shopPhoto: { file: "boutique/fabulous.jpg", alt: "Flacon Fabulous Hair Serum", available: true, responsive: "boutique-fabulous" },
     cutout: { file: "fabulous.png", alt: "Flacon Fabulous Hair Serum", available: true },
     personality: "la fraîche, naturelle et spontanée.",
     iAm: "Je suis fraîche, naturelle et spontanée.",
@@ -188,6 +191,7 @@ export const products: Product[] = fr([
       available: true,
       cutout: "miraculous",
     },
+    shopPhoto: { file: "boutique/miraculous.jpg", alt: "Flacon Miraculous Hair Serum, sérum capillaire de 30 ml", available: true, responsive: "boutique-miraculous" },
     cutout: { file: "miraculous.png", alt: "Flacon Miraculous Hair Serum", available: true },
     personality: "la déterminée, ambitieuse et audacieuse.",
     iAm: "Je suis déterminée, ambitieuse et audacieuse.",
@@ -232,6 +236,7 @@ export const products: Product[] = fr([
       available: true,
       cutout: "luxurious",
     },
+    shopPhoto: { file: "boutique/luxurious.jpg", alt: "Flacon Luxurious Hair Serum, sérum capillaire de 30 ml", available: true, responsive: "boutique-luxurious" },
     cutout: { file: "luxurious.png", alt: "Flacon Luxurious Hair Serum", available: true },
     personality: "la féminine, élégante et sensuelle.",
     iAm: "Je suis féminine, élégante et sensuelle.",

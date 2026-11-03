@@ -300,23 +300,23 @@ export const pack = fr({
     "Alterne les sérums selon tes besoins ou crée ta propre routine : **Miraculous** pour ta cure, **Fabulous** pour prendre soin de toi, **Luxurious** pour briller en sortie. Pour un résultat optimisé, utilise le soin 3 fois par semaine.",
 });
 
-// Page « Mon histoire » : textes fournis le 22/10/2026 (modification 31), mot pour mot
+// Page « Mon histoire » (consigne du 03/11/2026) : seul texte de la page avant l'encadré final.
+// **…** = gras ; « Na Nah N’hair » s'affiche dans la typographie du logo.
 export const story = fr({
   title: "Mon histoire",
-  heading: "Tout a commencé sur mon bureau.",
-  // Corps de la page, au présent (modification 76), un paragraphe par entrée
+  heading: "Et si tu arrêtais de choisir ?",
   paragraphs: [
-    "Je suis naturopathe et diplômée en aromathérapie. Mais avant mes diplômes, il y a… une rencontre.",
-    "En première année de naturopathie, lors d’un stage, j’accompagne une femme qui souhaite prendre soin de ses cheveux et favoriser leur longueur. Je relève le défi et me lance dans la préparation d’une synergie, au départ juste pour elle.",
-    "Je la revois un mois plus tard, et là… L’étonnement.",
-    "Motivée par mes professeurs, je décide de tester mes soins sur des amies.",
-    "J’aime aider les autres, me rendre utile, et savoir qu’une action de ma part peut apporter de la satisfaction à quelqu’un.",
-    "Je me lance. Je crée mes 3 soins.",
+    "Je vais te faire une confidence : je peux être à la fois plusieurs femmes.",
+    "Certains jours, j’ai envie de simplicité et de spontanéité. D’autres, je fonce vers mes objectifs sans regarder en arrière. Et parfois, j’ai juste envie de briller, pour moi, pour le plaisir. Je parie que toi aussi.",
+    "Naturopathe passionnée d’aromathérapie, j’ai toujours cru au pouvoir des huiles végétales. Alors un jour, je me suis lancée. Pas de grand décor, pas de mise en scène : tout a commencé sur mon bureau, dans ma chambre, avec une idée fixe et beaucoup d’ambition.",
+    "Le premier à voir le jour, c’est **Miraculous**, pour la femme déterminée et ambitieuse. Puis sont arrivés **Fabulous**, pour la femme naturelle et spontanée, et **Luxurious**, pour la femme élégante et sensuelle.",
+    "Trois soins, trois personnalités. Et tu sais quoi ? Tu as le droit d’être les trois.",
+    "Ici, pas de règles, pas de cases. Tu changes d’humeur ? Change de soin. Tu as envie des trois ? Fais-toi plaisir. Sans artifice, sans filtre : juste toi, telle que tu es.",
+    "Créés avec le cœur, fabriqués en France.",
+    "Mon histoire s’arrête ici. La tienne commence maintenant : fais le quiz et découvre quel Na Nah N’hair te ressemble aujourd’hui. Demain, ce sera peut-être un autre.",
   ],
-  // Liste des trois soins : nom (style des cartes de la boutique) puis « HAIR SERUM »
-  serums: ["Fabulous", "Miraculous", "Luxurious"],
-  personalities:
-    "Une femme ne s’identifie pas qu’à une seule personnalité : elle peut être naturelle et spontanée, déterminée et ambitieuse, élégante et sensuelle. Et elle sera aussi Fabulous, Miraculous et Luxurious.",
+  // « Révèle ton Na Nah N’hair. » mis en avant : bouton vers le quiz
+  cta: { label: "Révèle ton Na Nah N’hair.", href: "/quiz" },
   closing:
     "C’est ainsi qu’est née Na Nah N’hair : trois soins, trois personnalités, une même envie, celle de te laisser prendre soin de tes cheveux tout en révélant tes différentes facettes, telle que tu es, pour de vrai.",
 });
@@ -549,16 +549,6 @@ export const soinsPage = fr({
   title: "Les trois soins",
   intro: "Trois soins. Trois personnalités. Une seule question : lequel est le tien ?",
   quizCta: { label: "Je découvre mon Na Nah N'Hair", href: "/quiz" },
-});
-
-export const storyPage = fr({
-  kicker: "Mon histoire",
-  // Carte Miraculous (modification 49)
-  // Modification 52 : point d'exclamation, espace fine insécable avant « ! »
-  founderTitle: "Voici Miraculous\u202f!",
-  founderText: miraculousFounderText,
-  founderCta: "Découvrir Miraculous",
-  shopCta: { label: "Découvrir les trois soins", href: "/soins" },
 });
 
 // FAQ : questions = structure ; réponses = INFOS.md uniquement, sinon À COMPLÉTER

@@ -56,23 +56,7 @@ Chaque femme a plusieurs facettes. Les trois soins sont trois personnalités d'u
 
 À raconter de façon authentique, émotionnelle et professionnelle.
 
-> Je suis naturopathe et diplômée en aromathérapie. Mais avant mes diplômes, il y a… une rencontre.
->
-> En première année de naturopathie, lors d’un stage, j’accompagne une femme qui souhaite prendre soin de ses cheveux et favoriser leur longueur. Je relève le défi et me lance dans la préparation d’une synergie, au départ juste pour elle.
->
-> Je la revois un mois plus tard, et là… L’étonnement.
->
-> Motivée par mes professeurs, je décide de tester mes soins sur des amies.
->
-> J’aime aider les autres, me rendre utile, et savoir qu’une action de ma part peut apporter de la satisfaction à quelqu’un.
->
-> Je me lance. Je crée mes 3 soins.
->
-> FABULOUS HAIR SERUM · MIRACULOUS HAIR SERUM · LUXURIOUS HAIR SERUM
->
-> Une femme ne s’identifie pas qu’à une seule personnalité : elle peut être naturelle et spontanée, déterminée et ambitieuse, élégante et sensuelle. Et elle sera aussi Fabulous, Miraculous et Luxurious.
-
-(Texte de la modification 76, au présent, sans promesse de résultat. L'ancien texte n'est plus utilisé.)
+Texte de la page depuis le 03/11/2026 : « Et si tu arrêtais de choisir ? » (texte complet dans `content/site.ts`, `story`), suivi du bouton « Révèle ton Na Nah N'hair. » vers le quiz et de l'encadré final « C'est ainsi qu'est née Na Nah N'hair… ».
 
 Aucune promesse de résultat garanti.
 

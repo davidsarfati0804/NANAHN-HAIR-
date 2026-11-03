@@ -1,49 +1,47 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { Fragment } from "react";
 import ButtonLink from "@/components/ButtonLink";
-import { emotionalConcept, productBySlug, productPage, story, storyPage } from "@/content/site";
 import { BrandText } from "@/components/BrandName";
+import { story } from "@/content/site";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/mon-histoire" },
   title: story.title,
-  description: story.paragraphs[0],
+  description: story.paragraphs[0].replace(/\*\*/g, ""),
 };
 
-export default function StoryPage() {
-  const miraculous = productBySlug("miraculous")!;
-
+// Paragraphe : passages **en gras**, nom de marque dans la typographie et la lavande du logo
+function Rich({ text }: { text: string }) {
   return (
-    <article>
-      <header className="relative isolate bg-lavender-soft">
-        <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-          <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-miraculous opacity-70 blur-3xl" />
-        </div>
-        <div className="relative mx-auto max-w-4xl px-4 py-12 sm:px-6 sm:py-28">
-          <p className="surtitre">{storyPage.kicker}</p>
-          <h1 className="mt-4 titre-h1">{story.heading}</h1>
-        </div>
-      </header>
+    <>
+      {text.split(/(\*\*[^*]+\*\*)/).map((part, i) =>
+        part.startsWith("**") ? (
+          <strong key={i}>{part.slice(2, -2)}</strong>
+        ) : (
+          <Fragment key={i}>
+            <BrandText text={part} tone="logo" />
+          </Fragment>
+        ),
+      )}
+    </>
+  );
+}
 
-      <div className="mx-auto max-w-2xl space-y-6 px-4 py-10 text-lg sm:space-y-8 sm:py-16 leading-relaxed sm:px-6 sm:text-xl">
+// Page Mon histoire (consigne du 03/11/2026) : le texte « Et si tu arrêtais de choisir ? » et le bouton vers le
+// quiz, puis l'encadré violet foncé final. Rien d'autre.
+export default function StoryPage() {
+  return (
+    <article className="pb-10 sm:pb-16">
+      <div className="mx-auto max-w-2xl space-y-6 px-4 py-10 text-lg leading-relaxed sm:space-y-8 sm:px-6 sm:py-16 sm:text-xl">
+        <h1 className="titre-h1 text-balance">{story.heading}</h1>
         {story.paragraphs.map((para) => (
           <p key={para}>
-            <BrandText text={para} />
+            <Rich text={para} />
           </p>
         ))}
-        {/* Les trois soins (modification 76) : nom en style « carte boutique », HAIR SERUM dessous ;
-            le texte lu reste le nom complet (« Fabulous Hair Serum ») */}
-        <ul className="space-y-5 sm:space-y-6">
-          {story.serums.map((name) => (
-            <li key={name} className="text-deep-violet">
-              <span className="block nom-produit text-[2rem] leading-none sm:text-[2.5rem]">{name}</span>
-              <span className="block text-[0.8125rem] font-bold uppercase leading-snug tracking-[0.12em]"> {productPage.serumLabel}</span>
-            </li>
-          ))}
-        </ul>
-        <p>
-          <BrandText text={story.personalities} />
-        </p>
+        <ButtonLink href={story.cta.href} className="w-full sm:w-auto">
+          <BrandText text={story.cta.label} />
+        </ButtonLink>
       </div>
 
       <section className="mx-auto max-w-4xl px-4 sm:px-6">
@@ -53,37 +51,6 @@ export default function StoryPage() {
             <BrandText text={story.closing} tone="logo" />
           </p>
         </blockquote>
-      </section>
-
-      <section className="mx-auto mt-10 max-w-4xl sm:mt-16 px-4 sm:px-6">
-        <div className="rounded-[2rem] bg-miraculous p-6 text-miraculous-deep sm:p-12">
-          <h2 className="titre-h2">{storyPage.founderTitle}</h2>
-          <p className="mt-4">{storyPage.founderText}</p>
-          <p className="mt-4 accroche">{miraculous.phrase}</p>
-          <Link href="/soins/miraculous" className="mt-6 inline-block rounded-full bg-miraculous-deep px-6 py-3 text-sm font-bold uppercase text-white">
-            {storyPage.founderCta}
-          </Link>
-        </div>
-      </section>
-
-      {/* Manifeste (manifeste.html / manifeste.css fournis) */}
-      <section className="mt-10 px-4 sm:mt-16 sm:px-6">
-        <div className="manifeste">
-          <div className="manifeste__cadre">
-            <h2 className="manifeste__citation">{emotionalConcept.quote}</h2>
-          </div>
-          <ul className="manifeste__soins">
-            {emotionalConcept.lines.slice(0, 3).map((line, i) => (
-              <li key={line} className={`manifeste__soin manifeste__soin--${["fabulous", "miraculous", "luxurious"][i]}`}>
-                {line}
-              </li>
-            ))}
-          </ul>
-          <p className="manifeste__trois">{emotionalConcept.lines[3]}</p>
-          <ButtonLink href={storyPage.shopCta.href} className="mt-7">
-            {storyPage.shopCta.label}
-          </ButtonLink>
-        </div>
       </section>
     </article>
   );

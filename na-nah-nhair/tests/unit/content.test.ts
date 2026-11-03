@@ -171,18 +171,17 @@ describe("FAQ : réponses issues d'INFOS.md", () => {
   });
 });
 
-describe("histoire : texte de la modification 76 mot pour mot", () => {
-  it("titre, six paragraphes, trois soins, dernier paragraphe, bloc final, carte « Le défi »", () => {
+describe("histoire : texte du 03/11/2026 mot pour mot", () => {
+  it("titre, huit paragraphes, bouton vers le quiz, bloc final, carte « Le défi »", () => {
     const story = plain(site.story);
-    expect(story.heading).toBe("Tout a commencé sur mon bureau.");
-    expect(story.paragraphs).toHaveLength(6);
-    expect(story.paragraphs[0]).toBe("Je suis naturopathe et diplômée en aromathérapie. Mais avant mes diplômes, il y a… une rencontre.");
-    expect(story.paragraphs[2]).toBe("Je la revois un mois plus tard, et là… L’étonnement.");
-    expect(story.paragraphs[5]).toBe("Je me lance. Je crée mes 3 soins.");
-    expect(story.serums).toEqual(["Fabulous", "Miraculous", "Luxurious"]);
-    expect(story.personalities).toBe(
-      "Une femme ne s’identifie pas qu’à une seule personnalité : elle peut être naturelle et spontanée, déterminée et ambitieuse, élégante et sensuelle. Et elle sera aussi Fabulous, Miraculous et Luxurious.",
+    expect(story.heading).toBe("Et si tu arrêtais de choisir ?");
+    expect(story.paragraphs).toHaveLength(8);
+    expect(story.paragraphs[0]).toBe("Je vais te faire une confidence : je peux être à la fois plusieurs femmes.");
+    expect(story.paragraphs[3]).toBe(
+      "Le premier à voir le jour, c’est **Miraculous**, pour la femme déterminée et ambitieuse. Puis sont arrivés **Fabulous**, pour la femme naturelle et spontanée, et **Luxurious**, pour la femme élégante et sensuelle.",
     );
+    expect(story.paragraphs[6]).toBe("Créés avec le cœur, fabriqués en France.");
+    expect(story.cta).toEqual({ label: "Révèle ton Na Nah N’hair.", href: "/quiz" });
     expect(story.closing).toBe(
       "C’est ainsi qu’est née Na Nah N’hair : trois soins, trois personnalités, une même envie, celle de te laisser prendre soin de tes cheveux tout en révélant tes différentes facettes, telle que tu es, pour de vrai.",
     );
@@ -265,9 +264,7 @@ describe("modifications 38 à 50", () => {
     expect(oils.lines!.map((l) => l.product)).toEqual(["Fabulous Hair Serum", "Miraculous Hair Serum", "Luxurious Hair Serum"]);
   });
 
-  it("carte Miraculous de Mon histoire et Instagram", () => {
-    expect(plain(site.storyPage).founderTitle).toBe("Voici Miraculous\u202f!");
-    expect(plain(site.storyPage).founderCta).toBe("Découvrir Miraculous");
+  it("Instagram", () => {
     expect(site.legal.instagram).toBe("https://www.instagram.com/na.nah.nhair/");
     expect(site.legal.instagramHandle).toBe("@na.nah.nhair");
   });

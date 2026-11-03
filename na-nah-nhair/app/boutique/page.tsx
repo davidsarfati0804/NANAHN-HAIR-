@@ -34,7 +34,7 @@ export default async function BoutiquePage() {
           return (
             <li key={p.slug} className={`${t.base} ${t.text} row-span-5 mb-3 grid grid-rows-subgrid rounded-3xl p-2 sm:mb-6 sm:rounded-[2rem] sm:p-3`}>
               <Link href={`/soins/${p.slug}`} className="block">
-                <PhotoSlot photo={p.panelPhoto ?? p.photo} src={s.photoUrl} theme={p.slug} className="aspect-[4/5] rounded-[1.5rem]" sizes="(max-width: 640px) 50vw, 25vw" />
+                <PhotoSlot photo={p.shopPhoto} src={s.photoUrl} theme={p.slug} className="aspect-[4/5] rounded-[1.5rem]" sizes="(max-width: 640px) 50vw, 25vw" />
               </Link>
               <div className="px-2 pt-2 sm:px-3 sm:pt-3">
                 <h2 className={`nom-produit max-sm:text-[1.75rem] ${t.name}`}>

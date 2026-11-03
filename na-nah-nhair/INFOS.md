@@ -415,3 +415,4 @@ Ces décisions de la propriétaire de la marque complètent et remplacent les pa
 - **Luxurious** : « Je suis féminine, élégante et sensuelle. » (modification 79).
 
 - **Premier écran de l accueil (03/11/2026)** : flacon Fabulous remplacé par `assets/images/accueil/fabulous-detoure.png` (marges transparentes retirées, même taille et même place). Les autres images du flacon (boutique, fiches, « Quel soin est le tien ? ») ne changent pas.
+- **Boutique (03/11/2026)** : les trois cartes utilisent les photos `assets/images/boutique/{fabulous,miraculous,luxurious}.jpg` (4:5, fond blanc, versions 400 à 1200 px). Fiches, accueil, « Quel soin est le tien ? » et panier ne changent pas.

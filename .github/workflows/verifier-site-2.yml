@@ -70,7 +70,7 @@ jobs:
           check /soins/fabulous "fabulous-fiche-800.jpg"
           check / "fabulous-detoure-max.webp"
           check /mentions-legales "BIOTYVIE"
-          check /mon-histoire "Tout a commencé sur mon bureau"
+          check /mon-histoire "Et si tu arrêtais de choisir"
           check /boutique ">Hair Serum<"
           check /cgv "v1. Dernière mise à jour"
           check /retractation "Modèle de formulaire de rétractation"

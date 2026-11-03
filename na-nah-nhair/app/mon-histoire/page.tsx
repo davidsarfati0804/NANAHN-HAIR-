@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ButtonLink from "@/components/ButtonLink";
-import { emotionalConcept, productBySlug, story, storyPage } from "@/content/site";
+import { emotionalConcept, productBySlug, productPage, story, storyPage } from "@/content/site";
 import { BrandText } from "@/components/BrandName";
 
 export const metadata: Metadata = {
@@ -31,6 +31,19 @@ export default function StoryPage() {
             <BrandText text={para} />
           </p>
         ))}
+        {/* Les trois soins (modification 76) : nom en style « carte boutique », HAIR SERUM dessous ;
+            le texte lu reste le nom complet (« Fabulous Hair Serum ») */}
+        <ul className="space-y-5 sm:space-y-6">
+          {story.serums.map((name) => (
+            <li key={name} className="text-deep-violet">
+              <span className="block nom-produit text-[2rem] leading-none sm:text-[2.5rem]">{name}</span>
+              <span className="block text-[0.8125rem] font-bold uppercase leading-snug tracking-[0.12em]"> {productPage.serumLabel}</span>
+            </li>
+          ))}
+        </ul>
+        <p>
+          <BrandText text={story.personalities} />
+        </p>
       </div>
 
       <section className="mx-auto max-w-4xl px-4 sm:px-6">

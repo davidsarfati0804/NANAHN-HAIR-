@@ -107,3 +107,21 @@ test("commande : lien vers la politique de confidentialité", async ({ page }) =
   await page.goto("/commande");
   await expect(page.getByRole("link", { name: "politique de confidentialité" }).first()).toHaveAttribute("href", "/confidentialite");
 });
+
+// Modifications 69 et 75 : bouton « Découvrir [soin] → » du panneau, accueil et page Les soins
+for (const path of ["/", "/soins"]) {
+  test(`« Quel soin est le tien ? » (${path}) : bouton Découvrir au ton foncé du soin`, async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 800 });
+    await page.goto(path);
+    for (const [name, slug, rgb] of [["Fabulous", "fabulous", "rgb(29, 90, 60)"], ["Miraculous", "miraculous", "rgb(52, 43, 100)"], ["Luxurious", "luxurious", "rgb(138, 36, 83)"]] as const) {
+      await page.getByRole("button", { name, exact: true }).click();
+      const cta = page.getByRole("link", { name: new RegExp(`^Découvrir ${name}`, "i") });
+      await expect(cta).toHaveAttribute("href", `/soins/${slug}`);
+      await expect(cta).toHaveCSS("background-color", rgb);
+      await expect(cta).toHaveCSS("color", "rgb(255, 255, 255)");
+      const box = await cta.boundingBox();
+      expect(box!.height).toBeGreaterThanOrEqual(52);
+    }
+    await expect(page.getByRole("link", { name: /Voir la fiche/i })).toHaveCount(0);
+  });
+}

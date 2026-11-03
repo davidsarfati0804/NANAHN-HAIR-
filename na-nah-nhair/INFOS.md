@@ -95,7 +95,7 @@ RICINUS COMMUNIS SEED OIL\*, OLEA EUROPAEA FRUIT OIL\*, COCOS NUCIFERA OIL\*, PE
 - **Phrase « Je suis »** (cartes et fiche) : Je suis déterminée, ambitieuse et audacieuse.
 - **Univers** : violet, confiance, force, ambition et transformation.
 - **Odeur** : Vanille patchouli
-- **Texte** : Celui par lequel tout a commencé. Dans ma chambre, c’est lui que j’ai créé en premier, pour celle qui est déterminée, ambitieuse et audacieuse. (modifications 58 et 64 : même texte sur la carte « Voici Miraculous ! » de Mon histoire)
+- **Texte** : Le soin par lequel tout a commencé, en premier, pour celle qui est déterminée, ambitieuse et audacieuse. (modifications 58, 64 et 77 : même texte sur la carte « Voici Miraculous ! » de Mon histoire)
 - **Sa phrase** : « Je crois en mon objectif. »
 
 ### Encadrés (points clés)
@@ -140,8 +140,8 @@ RICINUS COMMUNIS SEED OIL\*, OLEA EUROPAEA FRUIT OIL\*, COCOS NUCIFERA OIL\*, PE
 ## 6. LUXURIOUS HAIR SERUM — 29,90 €
 
 - **Photo** : `assets/images/luxurious.png` (détourage, version 3)
-- **Personnalité** : la féminine, élégante et sensorielle.
-- **Phrase « Je suis »** (cartes et fiche) : Je suis féminine, élégante et sensorielle.
+- **Personnalité** : la féminine, élégante et sensuelle.
+- **Phrase « Je suis »** (cartes et fiche) : Je suis féminine, élégante et sensuelle.
 - **Univers** : rose, beauté, plaisir, sophistication et douceur.
 - **Odeur** : Fleur d’oranger
 - **Texte** : elle aime sentir bon, se sentir belle et transformer sa routine capillaire en un moment de plaisir.
@@ -227,7 +227,7 @@ Quiz interactif de 5 questions, qui doit fonctionner réellement (logique de poi
 ### 1. Ton rituel idéal du week-end ?
 
 - Un brunch entre copines puis une virée shopping → Miraculous (1 point)
-- Une escapade à la plage, sans réveil → Fabulous (1 point)
+- Une visite au musée, puis un café en terrasse → Fabulous (1 point)
 - Un hôtel spa avec vue, peignoir et coupe de champagne → Luxurious (1 point)
 
 ### 2. Ce que tu aimes dans un soin ?
@@ -238,7 +238,7 @@ Quiz interactif de 5 questions, qui doit fonctionner réellement (logique de poi
 
 ### 3. L'expérience que tu recherches ?
 
-- Un vent de fraîcheur, comme un matin d'été → Fabulous (1 point)
+- Une routine facile qui me ressemble → Fabulous (1 point)
 - Un moment glamour, rien que pour moi → Luxurious (1 point)
 - Un nouveau départ pour mes cheveux → Miraculous (1 point)
 
@@ -349,7 +349,7 @@ Ces décisions de la propriétaire de la marque complètent et remplacent les pa
 - **« trois univers » → « trois personnalités »** : carte « Les trois soins » et bloc final de la page Mon histoire (« …tout en révélant tes différentes facettes, telle que tu es, pour de vrai. »).
 - **Carte « Huiles végétales »** : noms complets en gras ; espace insécable entre « vitamine » et la lettre partout.
 - **Luxurious, description** : dernier paragraphe « Son parfum de fleur d’oranger transforme ta routine capillaire en un vrai moment de plaisir. Utilisé comme touche finale, le **Luxurious Hair Serum** devient ce petit luxe que tu mérites, pour des cheveux élégants et lumineux. »
-- **Page Mon histoire, carte Miraculous** : titre « Voici Miraculous ! » (modification 52), texte « Celui par lequel tout a commencé. Dans ma chambre, c’est lui que j’ai créé en premier, pour celle qui est déterminée, ambitieuse et audacieuse. » (modifications 58 et 64), bouton « Découvrir Miraculous ».
+- **Page Mon histoire, carte Miraculous** : titre « Voici Miraculous ! » (modification 52), texte « Le soin par lequel tout a commencé, en premier, pour celle qui est déterminée, ambitieuse et audacieuse. » (modifications 58, 64 et 77), bouton « Découvrir Miraculous ».
 - **Instagram** : @na.nah.nhair (page Contact, pied de page, images story).
 - **Mise en page** : cartes alignées sur des lignes communes (soins, boutique, « De mon bureau à ta routine ») ; premier écran sans ronds de couleur, ombre douce sous chaque flacon ; fiches produits entièrement aux couleurs du soin.
 
@@ -403,3 +403,14 @@ Ces décisions de la propriétaire de la marque complètent et remplacent les pa
 - Fiche Fabulous et carte de la boutique : photo sur fond blanc pur `assets/images/fabulous-fiche.jpg` (versions 400 à 1400 px), flacon à environ 80 % de la hauteur du panneau.
 - Flacon détouré `assets/images/fabulous.png` (471 x 1248) : premier écran de l accueil, « Quel soin est le tien ? », panier, image de partage, emails.
 - Miraculous et Luxurious : inchangés (le point facultatif de la modification 66 ne s applique pas : leurs fiches utilisent les flacons détourés, pas des photos).
+
+## 24. Modifications 69 à 79 (03/11/2026)
+
+- **« Quel soin est le tien ? »** (accueil et page Les soins, un seul composant) : bouton « Découvrir [soin] → » au ton foncé du soin (modifications 69 et 75 ; la 68 est annulée).
+- **Phrase de l'accueil et de l'encadré de Mon histoire** : « Je peux être à la fois plusieurs femmes : » (modifications 70 et 78).
+- **Pourquoi découvrir** : carte « Créés avec passion » (modification 71) ; carte Made in France : « Avec des ingrédients issus de l’agriculture biologique. » (modification 72). Ce n'est pas un label : aucune certification affichée tant qu'aucune n'est fournie.
+- **Quiz** : question 1, « Une visite au musée, puis un café en terrasse » → Fabulous (1 point) ; question 3, « Une routine facile qui me ressemble » → Fabulous (1 point) (modifications 73 et 74).
+- **Mon histoire** : nouveau corps de texte au présent (modification 76, texte complet dans BRIEF.md §3).
+- **Miraculous** : « Le soin par lequel tout a commencé, en premier, pour celle qui est déterminée, ambitieuse et audacieuse. » partout (modification 77).
+- **Luxurious** : « Je suis féminine, élégante et sensuelle. » (modification 79).
+

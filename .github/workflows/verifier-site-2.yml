@@ -92,8 +92,8 @@ jobs:
           redir /a-propos /mon-histoire
           redir /produits/fabulous /soins/fabulous
           check /quiz/resultat/miraculous "Et si tu es les trois"
-          check /mon-histoire "ambitieuse et audacieuse."
-          check /soins/miraculous "ambitieuse et audacieuse."
+          check /mon-histoire "Le soin par lequel tout a commencé"
+          check /soins/luxurious "élégante et sensuelle."
           for p in /documents/cgv-v1.pdf /documents/formulaire-de-retractation.pdf /story/luxurious.png /images/produits/pack-800.webp /quiz/resultat/fabulous /quiz/resultat/miraculous; do
             curl -s -o /dev/null -m 30 -w "$p %{http_code} %{content_type}\n" "$URL$p" || echo "$p erreur"
           done

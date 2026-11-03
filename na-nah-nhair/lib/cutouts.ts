@@ -15,8 +15,9 @@ export const cutoutSrcSet = (slug: ProductTheme) =>
 export const cutoutFallback = (slug: ProductTheme) => `/images/produits/${slug}-detoure-max.png`;
 
 // Premier écran de l'accueil : version de référence (24/10/2026) pour Luxurious (modification 51) ; Miraculous
-// et Fabulous remplacés par les fichiers des modifications 56 et 67 (jamais agrandis)
-export const heroWidths: Record<ProductTheme, readonly number[]> = { fabulous: [240, 471], miraculous: [240, 470], luxurious: [240, 480, 720] };
-export const heroHeight: Record<ProductTheme, number> = { fabulous: 636, miraculous: 629, luxurious: 640 };
+// remplacé par le fichier de la modification 56, Fabulous par assets/images/accueil/fabulous-detoure.png (03/11/2026,
+// marges transparentes retirées) ; jamais agrandis
+export const heroWidths: Record<ProductTheme, readonly number[]> = { fabulous: [240, 474], miraculous: [240, 470], luxurious: [240, 480, 720] };
+export const heroHeight: Record<ProductTheme, number> = { fabulous: 632, miraculous: 629, luxurious: 640 };
 export const heroSrcSet = (slug: ProductTheme, ext: "webp" | "png") =>
   heroWidths[slug].map((w) => `/images/produits/${slug}-accueil-${w}.${ext} ${w}w`).join(", ");

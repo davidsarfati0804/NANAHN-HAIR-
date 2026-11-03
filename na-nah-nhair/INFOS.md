@@ -414,3 +414,4 @@ Ces décisions de la propriétaire de la marque complètent et remplacent les pa
 - **Miraculous** : « Le soin par lequel tout a commencé, en premier, pour celle qui est déterminée, ambitieuse et audacieuse. » partout (modification 77).
 - **Luxurious** : « Je suis féminine, élégante et sensuelle. » (modification 79).
 
+- **Premier écran de l accueil (03/11/2026)** : flacon Fabulous remplacé par `assets/images/accueil/fabulous-detoure.png` (marges transparentes retirées, même taille et même place). Les autres images du flacon (boutique, fiches, « Quel soin est le tien ? ») ne changent pas.

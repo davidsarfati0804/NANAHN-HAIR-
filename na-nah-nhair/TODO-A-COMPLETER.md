@@ -72,6 +72,10 @@ Le build de **production** est bloqué tant qu'un de ces points reste dans les p
 - [ ] **Relecture professionnelle** : CGV, rétractation, mentions légales, confidentialité, cookies ; conformité cosmétique (étiquetage, INCI, allégations pousse / repousse / chute)
 - [ ] **Envoi des emails** : service d'envoi à choisir ; l'email de confirmation est prêt (`lib/emails/confirmation.ts`, CGV et formulaire en PDF joints)
 
+## Mention bio (03/11/2026)
+
+- [ ] Valider avec le laboratoire la mention bio (ingrédients issus de l'agriculture biologique) et, si un label est obtenu, ajouter son logo
+
 ## Vente en ligne (28/10/2026)
 
 - [ ] Compte **Stripe** : créer, puis clés de test dans Netlify (GUIDE.md, « Paiement en ligne ») ; validation du compte (identité, IBAN) avant les vrais paiements

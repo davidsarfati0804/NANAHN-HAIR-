@@ -171,14 +171,17 @@ describe("FAQ : réponses issues d'INFOS.md", () => {
   });
 });
 
-describe("histoire : textes du 22/10/2026 (modification 31) mot pour mot", () => {
-  it("titre, cinq paragraphes, bloc final, carte « Le défi »", () => {
+describe("histoire : texte de la modification 76 mot pour mot", () => {
+  it("titre, six paragraphes, trois soins, dernier paragraphe, bloc final, carte « Le défi »", () => {
     const story = plain(site.story);
     expect(story.heading).toBe("Tout a commencé sur mon bureau.");
-    expect(story.paragraphs).toHaveLength(5);
-    expect(story.paragraphs[0]).toBe("Je suis naturopathe et diplômée en aromathérapie. Mais avant les diplômes, il y a eu une rencontre.");
-    expect(story.paragraphs[4]).toBe(
-      "Parce qu’une femme n’est jamais qu’une seule chose. Elle peut être fraîche et spontanée, déterminée et audacieuse, élégante et sensorielle, parfois tout ça dans la même journée.",
+    expect(story.paragraphs).toHaveLength(6);
+    expect(story.paragraphs[0]).toBe("Je suis naturopathe et diplômée en aromathérapie. Mais avant mes diplômes, il y a… une rencontre.");
+    expect(story.paragraphs[2]).toBe("Je la revois un mois plus tard, et là… L’étonnement.");
+    expect(story.paragraphs[5]).toBe("Je me lance. Je crée mes 3 soins.");
+    expect(story.serums).toEqual(["Fabulous", "Miraculous", "Luxurious"]);
+    expect(story.personalities).toBe(
+      "Une femme ne s’identifie pas qu’à une seule personnalité : elle peut être naturelle et spontanée, déterminée et ambitieuse, élégante et sensuelle. Et elle sera aussi Fabulous, Miraculous et Luxurious.",
     );
     expect(story.closing).toBe(
       "C’est ainsi qu’est née Na Nah N’hair : trois soins, trois personnalités, une même envie, celle de te laisser prendre soin de tes cheveux tout en révélant tes différentes facettes, telle que tu es, pour de vrai.",

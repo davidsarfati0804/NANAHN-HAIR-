@@ -44,7 +44,7 @@ Chaque femme a plusieurs facettes. Les trois soins sont trois personnalités d'u
 |---|---|---|---|---|
 | FABULOUS | 19,90 € | Fraîche, naturelle, spontanée | Vert, frais, positif, pétillant | « Simplement moi, simplement Fabulous. » |
 | MIRACULOUS | 39,90 € | Déterminée, ambitieuse, audacieuse. Produit fondateur | Violet, confiance, force, transformation | « Je crois en mon objectif. » |
-| LUXURIOUS | 29,90 € | Féminine, élégante, sensorielle | Rose, beauté, plaisir, douceur | « Parce que je mérite ce petit luxe. » |
+| LUXURIOUS | 29,90 € | Féminine, élégante, sensuelle | Rose, beauté, plaisir, douceur | « Parce que je mérite ce petit luxe. » |
 
 **Pack des trois soins** : 69,90 €.
 
@@ -56,7 +56,23 @@ Chaque femme a plusieurs facettes. Les trois soins sont trois personnalités d'u
 
 À raconter de façon authentique, émotionnelle et professionnelle.
 
-> Je suis naturopathe et diplômée en aromathérapie. En première année de naturopathie, lors d'un stage en clinique, j'accompagnais une femme qui souhaitait prendre soin de ses cheveux et favoriser leur longueur. J'ai relevé le défi en préparant une synergie personnalisée pour elle. Cette expérience m'a donné envie d'aider d'autres personnes et de créer mes propres soins capillaires. J'ai commencé mes préparations dans ma chambre, sur mon bureau. J'aime aider les autres, me rendre utile et savoir qu'une petite action de ma part peut apporter de la satisfaction à quelqu'un. C'est ainsi qu'est née l'idée de NA NAH N'HAIR : trois soins, trois univers, une même envie de permettre aux femmes de prendre soin de leurs cheveux tout en révélant différentes facettes de leur personnalité.
+> Je suis naturopathe et diplômée en aromathérapie. Mais avant mes diplômes, il y a… une rencontre.
+>
+> En première année de naturopathie, lors d’un stage, j’accompagne une femme qui souhaite prendre soin de ses cheveux et favoriser leur longueur. Je relève le défi et me lance dans la préparation d’une synergie, au départ juste pour elle.
+>
+> Je la revois un mois plus tard, et là… L’étonnement.
+>
+> Motivée par mes professeurs, je décide de tester mes soins sur des amies.
+>
+> J’aime aider les autres, me rendre utile, et savoir qu’une action de ma part peut apporter de la satisfaction à quelqu’un.
+>
+> Je me lance. Je crée mes 3 soins.
+>
+> FABULOUS HAIR SERUM · MIRACULOUS HAIR SERUM · LUXURIOUS HAIR SERUM
+>
+> Une femme ne s’identifie pas qu’à une seule personnalité : elle peut être naturelle et spontanée, déterminée et ambitieuse, élégante et sensuelle. Et elle sera aussi Fabulous, Miraculous et Luxurious.
+
+(Texte de la modification 76, au présent, sans promesse de résultat. L'ancien texte n'est plus utilisé.)
 
 Aucune promesse de résultat garanti.
 

@@ -149,7 +149,7 @@ test.describe("modifications du 20/10/2026", () => {
     for (const vp of vps) {
       await page.setViewportSize({ width: vp.width, height: vp.height });
       await page.goto("/");
-      const h2 = page.getByRole("heading", { name: /Je ne suis pas qu’une seule femme/ });
+      const h2 = page.getByRole("heading", { name: /Je peux être à la fois plusieurs femmes/ });
       const box = (await h2.boundingBox())!;
       const parent = (await h2.locator("..").boundingBox())!;
       const left = box.x - parent.x;
@@ -261,9 +261,10 @@ test.describe("modifications du 21/10/2026", () => {
   test("premier écran : petits textes, sans sticker, lien vers la section suivante", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByText("5 questions · 1 résultat")).toBeVisible();
-    // Sticker retiré (modification 28) ; la carte « Créés par une naturopathe » de « Pourquoi découvrir » reste
-    await expect(page.getByText("Créés par une naturopathe")).toHaveCount(1);
-    await expect(page.locator("section[aria-labelledby=raisons]").getByText("Créés par une naturopathe")).toBeVisible();
+    // Sticker retiré (modification 28) ; carte « Créés avec passion » (modification 71)
+    await expect(page.getByText("Créés par une naturopathe")).toHaveCount(0);
+    await expect(page.locator("section[aria-labelledby=raisons]").getByText("Créés avec passion")).toBeVisible();
+    await expect(page.locator("section[aria-labelledby=raisons]").getByText("Avec des ingrédients issus de l’agriculture biologique.")).toBeVisible();
     // Livraison offerte active par défaut dans le back-office
     await expect(page.getByText("Made in France · 30 ml · Livraison offerte en France")).toBeVisible();
     await page.getByRole("link", { name: /Découvre les trois soins/ }).click();
@@ -285,8 +286,8 @@ test.describe("modifications du 21/10/2026", () => {
     for (const vp of [375, 390, 768, 1280]) {
       await page.setViewportSize({ width: vp, height: 900 });
       await page.goto("/");
-      const h2 = page.getByRole("heading", { level: 2, name: "Je ne suis pas qu’une seule femme." });
-      await expect(h2).toHaveText("Je ne suis pas qu’une seule femme.");
+      const h2 = page.getByRole("heading", { level: 2, name: /^Je peux être à la fois plusieurs femmes\s:$/ });
+      await expect(h2).toHaveText(/^Je peux être à la fois plusieurs femmes\s:$/);
       const frame = (await h2.locator("..").boundingBox())!;
       const title = (await h2.boundingBox())!;
       const chips = (await h2.locator("xpath=following-sibling::ul").boundingBox())!;
@@ -361,7 +362,10 @@ test.describe("modifications du 22/10/2026", () => {
   test("Mon histoire : nouveaux textes, nom de marque dans le bloc final", async ({ page }) => {
     await page.goto("/mon-histoire");
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("Tout a commencé sur mon bureau.");
-    await expect(page.getByText(/Sans artifice, sans filtre\.$/)).toBeVisible();
+    // Texte au présent (modification 76) ; liste des trois soins ; plus aucun ancien paragraphe
+    await expect(page.getByText("Je me lance. Je crée mes 3 soins.")).toBeVisible();
+    await expect(page.locator("main li", { hasText: "Miraculous" }).first()).toHaveText(/Miraculous\s+Hair Serum/i);
+    await expect(page.locator("main")).not.toContainText(/Sans artifice|j’accompagnais|lâcher prise|une seule chose/);
     await expect(page.locator("blockquote svg[data-brand-name]")).toHaveCSS("color", "rgb(128, 118, 179)");
     await expect(page.locator("main")).not.toContainText(/clinique/i);
     await page.goto("/");

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { home, productPage, products } from "@/content/site";
+import { home, productPage, products, quiz } from "@/content/site";
 import type { ProductTheme } from "@/lib/design-tokens";
 import { cutoutFallback, cutoutSize, cutoutSrcSet } from "@/lib/cutouts";
 import { themeClasses } from "@/lib/theme-classes";
@@ -10,6 +10,14 @@ import { themeClasses } from "@/lib/theme-classes";
 // Sélecteur « Quel soin est le tien ? » (modification 34) : trois cartes-boutons, le flacon touché
 // se soulève très discrètement (transform uniquement, 400 ms), une seule carte sélectionnée à la fois,
 // et le panneau dessous affiche le soin. Mouvement réduit : seulement le contour et le panneau.
+// Bouton « DÉCOUVRIR [SOIN] → » (modifications 69 et 75) : ton foncé du soin, texte blanc (contraste AA),
+// ombre douce de la couleur du bouton ; pleine largeur sur téléphone, au moins 320 px sur ordinateur
+const ctaColor: Record<ProductTheme, string> = {
+  fabulous: "bg-fabulous-deep shadow-[0_4px_10px_color-mix(in_srgb,var(--color-fabulous-deep)_25%,transparent)]",
+  miraculous: "bg-miraculous-deep shadow-[0_4px_10px_color-mix(in_srgb,var(--color-miraculous-deep)_25%,transparent)]",
+  luxurious: "bg-luxurious-deep shadow-[0_4px_10px_color-mix(in_srgb,var(--color-luxurious-deep)_25%,transparent)]",
+};
+
 const cardColor: Record<ProductTheme, string> = {
   fabulous: "bg-fabulous",
   miraculous: "bg-miraculous",
@@ -83,9 +91,17 @@ export default function TrioSelector({ prices }: { prices: Record<ProductTheme, 
             <p className="text-sm font-bold uppercase tracking-wide">{productPage.serumLabel}</p>
             <p className="mt-3">{current.iAm}</p>
             <p className="mt-3 nom-produit">{prices[current.slug]}</p>
-            <Link href={`/soins/${current.slug}`} className={`mt-4 ${t.button}`}>
-              {home.trio.cta}
-              <span className="sr-only"> {current.shortName}</span>
+            <Link
+              href={`/soins/${current.slug}`}
+              className={`group mt-5 inline-flex min-h-[52px] w-full items-center justify-center gap-2.5 whitespace-nowrap rounded-full px-4 py-3 text-[0.8125rem] font-bold uppercase tracking-[0.06em] sm:gap-3 sm:px-6 sm:text-sm sm:tracking-[0.08em] text-white transition-[filter] duration-200 hover:brightness-90 focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-deep-violet active:brightness-90 motion-reduce:transition-none sm:w-auto sm:min-w-80 ${ctaColor[current.slug]}`}
+            >
+              {quiz.result.discoverCta(current.shortName)}
+              <span
+                aria-hidden
+                className="inline-flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full bg-white/25 text-xs transition-transform duration-200 group-hover:translate-x-1 group-active:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 motion-reduce:group-active:translate-x-0"
+              >
+                →
+              </span>
             </Link>
           </div>
         ) : (

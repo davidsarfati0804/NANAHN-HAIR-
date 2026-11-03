@@ -152,7 +152,7 @@ test.describe("manifeste (fin de la page Mon histoire)", () => {
       const quote = frame.locator(".manifeste__citation");
       await quote.scrollIntoViewIfNeeded();
       // Sans guillemets
-      await expect(quote).toHaveText("Je ne suis pas qu’une seule femme.");
+      await expect(quote).toHaveText(/^Je peux être à la fois plusieurs femmes\s:$/);
       // Centrée horizontalement et verticalement dans son cadre
       const f = (await frame.boundingBox())!;
       const q = (await quote.boundingBox())!;

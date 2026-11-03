@@ -37,9 +37,10 @@ export const navigation = fr([
 ]);
 
 export const emotionalConcept = fr({
-  // Citation sans guillemets, pour le manifeste de la page Mon histoire (manifeste.html fourni)
-  quote: "Je ne suis pas qu’une seule femme.",
-  title: "Je ne suis pas qu’une seule femme.",
+  // Citation sans guillemets, pour le manifeste de la page Mon histoire (modification 78)
+  quote: "Je peux être à la fois plusieurs femmes :",
+  // Titre de la section violette de l'accueil (modification 70), entrée propre à l'accueil
+  title: "Je peux être à la fois plusieurs femmes :",
   lines: ["Je suis Fabulous.", "Je suis Miraculous.", "Je suis Luxurious.", "Je suis les trois."],
 });
 
@@ -128,8 +129,8 @@ const inciNotes = [
   "** Allergènes dus à la présence de parfum",
 ];
 
-// Texte fondateur de Miraculous (modification 58) : une seule source, fiche produit et carte « Voici Miraculous ! »
-const miraculousFounderText = "Celui par lequel tout a commencé. Dans ma chambre, c’est lui que j’ai créé en premier, pour celle qui est déterminée, ambitieuse et audacieuse.";
+// Texte fondateur de Miraculous (modifications 58, 64, 77) : une seule source, fiche produit et carte « Voici Miraculous ! »
+const miraculousFounderText = "Le soin par lequel tout a commencé, en premier, pour celle qui est déterminée, ambitieuse et audacieuse.";
 
 export const products: Product[] = fr([
   {
@@ -232,8 +233,8 @@ export const products: Product[] = fr([
       cutout: "luxurious",
     },
     cutout: { file: "luxurious.png", alt: "Flacon Luxurious Hair Serum", available: true },
-    personality: "la féminine, élégante et sensorielle.",
-    iAm: "Je suis féminine, élégante et sensorielle.",
+    personality: "la féminine, élégante et sensuelle.",
+    iAm: "Je suis féminine, élégante et sensuelle.",
     universe: "rose, beauté, plaisir, sophistication et douceur.",
     scent: "Fleur d’oranger",
     text: "elle aime sentir bon, se sentir belle et transformer sa routine capillaire en un moment de plaisir.",
@@ -298,13 +299,19 @@ export const pack = fr({
 export const story = fr({
   title: "Mon histoire",
   heading: "Tout a commencé sur mon bureau.",
+  // Corps de la page, au présent (modification 76), un paragraphe par entrée
   paragraphs: [
-    "Je suis naturopathe et diplômée en aromathérapie. Mais avant les diplômes, il y a eu une rencontre.",
-    "En première année de naturopathie, lors d’un stage, j’accompagnais une femme qui souhaitait prendre soin de ses cheveux et favoriser leur longueur. J’ai relevé le défi : préparer une synergie rien que pour elle.",
-    "Cette expérience m’a donné envie d’aider d’autres personnes et de créer mes propres soins capillaires. J’ai commencé mes préparations dans ma chambre, sur mon bureau. Sans artifice, sans filtre.",
-    "J’aime aider les autres, me rendre utile, et savoir qu’une petite action de ma part peut apporter de la satisfaction à quelqu’un. Ce que je voulais, au fond ? Que prendre soin de ses cheveux devienne un vrai moment pour soi : se faire plaisir, lâcher prise, être soi-même.",
-    "Parce qu’une femme n’est jamais qu’une seule chose. Elle peut être fraîche et spontanée, déterminée et audacieuse, élégante et sensorielle, parfois tout ça dans la même journée.",
+    "Je suis naturopathe et diplômée en aromathérapie. Mais avant mes diplômes, il y a… une rencontre.",
+    "En première année de naturopathie, lors d’un stage, j’accompagne une femme qui souhaite prendre soin de ses cheveux et favoriser leur longueur. Je relève le défi et me lance dans la préparation d’une synergie, au départ juste pour elle.",
+    "Je la revois un mois plus tard, et là… L’étonnement.",
+    "Motivée par mes professeurs, je décide de tester mes soins sur des amies.",
+    "J’aime aider les autres, me rendre utile, et savoir qu’une action de ma part peut apporter de la satisfaction à quelqu’un.",
+    "Je me lance. Je crée mes 3 soins.",
   ],
+  // Liste des trois soins : nom (style des cartes de la boutique) puis « HAIR SERUM »
+  serums: ["Fabulous", "Miraculous", "Luxurious"],
+  personalities:
+    "Une femme ne s’identifie pas qu’à une seule personnalité : elle peut être naturelle et spontanée, déterminée et ambitieuse, élégante et sensuelle. Et elle sera aussi Fabulous, Miraculous et Luxurious.",
   closing:
     "C’est ainsi qu’est née Na Nah N’hair : trois soins, trois personnalités, une même envie, celle de te laisser prendre soin de tes cheveux tout en révélant tes différentes facettes, telle que tu es, pour de vrai.",
 });
@@ -324,7 +331,6 @@ export const home = fr({
     kicker: "Trois soins, trois personnalités",
     accroche: "À chaque personnalité, son soin.",
     title: "Quel soin est le tien ?",
-    cta: "Voir la fiche",
     // Sélecteur de flacons (modification 34)
     touchHint: "Touche un flacon",
   },
@@ -367,9 +373,10 @@ export const home = fr({
   reasons: {
     title: "Pourquoi découvrir NA NAH N'HAIR",
     items: [
-      { title: "Made in France", text: null },
+      // Modification 72 : « Avec des… » (tous les ingrédients ne sont pas biologiques ; aucun label affiché)
+      { title: "Made in France", text: "Avec des ingrédients issus de l’agriculture biologique." },
       {
-        title: "Créés par une naturopathe",
+        title: "Créés avec passion",
         text: "Je suis naturopathe et diplômée en aromathérapie.",
       },
       {
@@ -536,7 +543,6 @@ export const productPage = fr({
 export const soinsPage = fr({
   title: "Les trois soins",
   intro: "Trois soins. Trois personnalités. Une seule question : lequel est le tien ?",
-  cta: "Voir la fiche",
   quizCta: { label: "Je découvre mon Na Nah N'Hair", href: "/quiz" },
 });
 
@@ -699,7 +705,7 @@ export const quiz = fr({
       question: "Ton rituel idéal du week-end ?",
       answers: [
         { text: "Un brunch entre copines puis une virée shopping", product: "miraculous", points: 1 },
-        { text: "Une escapade à la plage, sans réveil", product: "fabulous", points: 1 },
+        { text: "Une visite au musée, puis un café en terrasse", product: "fabulous", points: 1 },
         { text: "Un hôtel spa avec vue, peignoir et coupe de champagne", product: "luxurious", points: 1 },
       ],
     },
@@ -714,7 +720,7 @@ export const quiz = fr({
     {
       question: "L'expérience que tu recherches ?",
       answers: [
-        { text: "Un vent de fraîcheur, comme un matin d'été", product: "fabulous", points: 1 },
+        { text: "Une routine facile qui me ressemble", product: "fabulous", points: 1 },
         { text: "Un moment glamour, rien que pour moi", product: "luxurious", points: 1 },
         { text: "Un nouveau départ pour mes cheveux", product: "miraculous", points: 1 },
       ],

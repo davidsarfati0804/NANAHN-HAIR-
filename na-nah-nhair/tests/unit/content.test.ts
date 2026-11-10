@@ -182,12 +182,13 @@ describe("histoire : texte du 03/11/2026 mot pour mot", () => {
     );
     expect(story.paragraphs[6]).toBe("Créés avec le cœur, fabriqués en France.");
     expect(story.cta).toEqual({ label: "Révèle ton Na Nah N’hair.", href: "/quiz" });
-    expect(story.closing).toBe(
-      "C’est ainsi qu’est née Na Nah N’hair : trois soins, trois personnalités, une même envie, celle de te laisser prendre soin de tes cheveux tout en révélant tes différentes facettes, telle que tu es, pour de vrai.",
-    );
-    expect(plain(site.home).story.cards[0].text).toBe(
-      "En première année de naturopathie, lors d’un stage, une femme souhaite prendre soin de ses cheveux et favoriser leur longueur. J’ai relevé le défi : une synergie sur mesure, rien que pour elle.",
-    );
+    // Plus d'encadré final (modification 81)
+    expect("closing" in story).toBe(false);
+    // Cartes de l'accueil « Hier, aujourd’hui, demain » (modification 83)
+    const cards = plain(site.home).story.cards;
+    expect(cards.map((c: { title: string }) => c.title)).toEqual(["Hier, mon bureau", "Aujourd’hui, trois soins", "Demain, ton tour"]);
+    expect(cards[1].text).toBe("Le premier à voir le jour, c’est Miraculous. Puis sont arrivés Fabulous et Luxurious.");
+    expect(plain(site.home).story.cta).toEqual({ label: "Fais le quiz", href: "/quiz" });
   });
 
   it("apostrophes courbes uniquement, plus de « clinique »", () => {

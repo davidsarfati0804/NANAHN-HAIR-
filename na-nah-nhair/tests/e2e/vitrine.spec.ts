@@ -139,12 +139,12 @@ test.describe("mode d'emploi (Fabulous, Miraculous, Luxurious)", () => {
   }
 });
 
-test("Mon histoire : seulement le texte « Et si tu arrêtais de choisir ? », le bouton vers le quiz et l'encadré final", async ({ page }) => {
+test("Mon histoire : seulement le texte « Et si tu arrêtais de choisir ? » et le bouton vers le quiz", async ({ page }) => {
   await page.goto("/mon-histoire");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Et si tu arrêtais de choisir ?");
   await expect(page.locator("main strong")).toHaveText(["Miraculous", "Fabulous", "Luxurious"]);
   await expect(page.locator("main").getByRole("link", { name: /Révèle ton/ })).toHaveAttribute("href", "/quiz");
-  await expect(page.locator("main blockquote")).toContainText("trois soins, trois personnalités");
+  await expect(page.locator("main blockquote")).toHaveCount(0);
   for (const gone of ["Voici Miraculous", "Je suis les trois.", "Découvrir les trois soins", "Je me lance.", "plusieurs femmes :"])
     await expect(page.locator("main"), gone).not.toContainText(gone);
   await expect(page.locator(".manifeste")).toHaveCount(0);

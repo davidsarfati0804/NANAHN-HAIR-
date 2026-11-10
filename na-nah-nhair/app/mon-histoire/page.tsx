@@ -27,11 +27,11 @@ function Rich({ text }: { text: string }) {
   );
 }
 
-// Page Mon histoire (consigne du 03/11/2026) : le texte « Et si tu arrêtais de choisir ? » et le bouton vers le
-// quiz, puis l'encadré violet foncé final. Rien d'autre.
+// Page Mon histoire (consigne du 03/11/2026, modification 81) : le texte « Et si tu arrêtais de choisir ? » et le
+// bouton vers le quiz, puis directement le pied de page.
 export default function StoryPage() {
   return (
-    <article className="pb-10 sm:pb-16">
+    <article>
       <div className="mx-auto max-w-2xl space-y-6 px-4 py-10 text-lg leading-relaxed sm:space-y-8 sm:px-6 sm:py-16 sm:text-xl">
         <h1 className="titre-h1 text-balance">{story.heading}</h1>
         {story.paragraphs.map((para) => (
@@ -43,15 +43,6 @@ export default function StoryPage() {
           <BrandText text={story.cta.label} />
         </ButtonLink>
       </div>
-
-      <section className="mx-auto max-w-4xl px-4 sm:px-6">
-        <blockquote className="rounded-[2rem] bg-deep-violet px-6 py-10 text-center text-white sm:px-12 sm:py-14">
-          {/* Nom de marque dans la police et le violet du logo : contraste 3,1 sur violet foncé, AA en grand texte */}
-          <p className="font-display text-[2rem] leading-none sm:text-6xl">
-            <BrandText text={story.closing} tone="logo" />
-          </p>
-        </blockquote>
-      </section>
     </article>
   );
 }

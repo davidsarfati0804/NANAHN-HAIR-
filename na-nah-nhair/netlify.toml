@@ -10,3 +10,8 @@
 # tant que les derniers « À COMPLÉTER » sont finis sur le site réel
 [context.production]
   command = "npm run verifier:mise-en-ligne -- --avertir && npm run build"
+
+# Vraie boutique uniquement : adresse définitive et ouverture à Google (site-2 et les aperçus restent masqués)
+[context.production.environment]
+  NNH_INDEXABLE = "1"
+  SITE_URL = "https://nanahnhair.com"

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import RichText from "@/components/RichText";
 import Link from "next/link";
@@ -18,6 +19,9 @@ import { getShopData } from "@/lib/shop-data";
 import { organizationJsonLd } from "@/lib/structured-data";
 import { themeClasses } from "@/lib/theme-classes";
 import { BrandText } from "@/components/BrandName";
+
+// Adresse de référence de l'accueil pour Google (évite les doublons avec d'anciennes adresses)
+export const metadata: Metadata = { alternates: { canonical: "/" } };
 
 export const dynamic = "force-dynamic";
 

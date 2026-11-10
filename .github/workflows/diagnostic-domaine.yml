@@ -1,4 +1,4 @@
-# Diagnostic du nom de domaine (DNS, HTTPS, réponse du site, réglages, relance 2) : la session de développement n'a pas accès au web.
+# Diagnostic du nom de domaine (DNS, HTTPS, réponse du site, réglages, relance 3) : la session de développement n'a pas accès au web.
 name: Diagnostic domaine
 
 on:
@@ -38,6 +38,10 @@ jobs:
             if curl -sSL -m 20 "https://nanahnhair.com$p" | grep -q "$t"; then echo "OK      $p : $t"; else echo "ABSENT  $p : $t"; fi
           done
           echo "robots.txt : $(curl -sS -m 20 https://nanahnhair.com/robots.txt | tr '\n' ' ')"
+          echo "accueil, consigne aux moteurs : $(curl -sS -m 20 https://nanahnhair.com/ | grep -o '<meta name="robots"[^>]*>' || echo 'aucune (indexable)')"
+          for u in https://nanahnhair.netlify.app/ https://nanahnhair.netlify.app/a-propos https://nanahnhair.netlify.app/boutique; do
+            echo "ancienne adresse $u → $(curl -s -o /dev/null -m 20 -w '%{http_code} %{redirect_url}' "$u")"
+          done
           echo "api/sante : $(curl -sS -m 20 https://nanahnhair.com/api/sante)"
           echo "--- début de la page"
           curl -sSL -m 20 https://www.nanahnhair.com/ 2>&1 | head -c 400 || true

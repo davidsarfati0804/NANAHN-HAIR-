@@ -36,6 +36,10 @@ const nextConfig: NextConfig = {
   env: {
     NNH_BUILD_CONTEXT: process.env.CONTEXT ?? "",
     NNH_BUILD_BRANCH: process.env.BRANCH ?? "",
+    // Adresse définitive et ouverture à Google : fixées au build de production (netlify.toml), car les variables
+    // de netlify.toml ne sont pas transmises aux fonctions à l'exécution
+    NNH_INDEXABLE: process.env.NNH_INDEXABLE ?? "",
+    SITE_URL: process.env.SITE_URL ?? "",
   },
   // Images servies telles quelles (pas d'optimiseur Netlify) : les photos produits ont leurs propres
   // versions responsives (scripts/preparer-photos.py)
@@ -52,6 +56,14 @@ const nextConfig: NextConfig = {
   async redirects() {
     const moved = (source: string, destination: string) => ({ source, destination, permanent: true });
     return [
+      // Ancienne adresse de la boutique (nanahnhair.netlify.app, encore référencée par Google avec l'ancien site) :
+      // renvoi définitif vers le vrai domaine. Les adresses de test (site-2--…) ne sont pas concernées.
+      {
+        source: "/:path*",
+        has: [{ type: "host" as const, value: "nanahnhair.netlify.app" }],
+        destination: "https://nanahnhair.com/:path*",
+        permanent: true,
+      },
       moved("/retours", "/retractation"),
       moved("/a-propos", "/mon-histoire"),
       moved("/produits/pack-zero-prise-de-tete", "/pack"),

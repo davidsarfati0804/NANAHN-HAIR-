@@ -429,3 +429,4 @@ Ces décisions de la propriétaire de la marque complètent et remplacent les pa
 - **Fiches produits** : Conservation : 20 mois après ouverture (modification 85, durée confirmée par le laboratoire).
 - **Symbole PAO 20M (petit pot)** : bloc Ingrédients des fiches et FAQ « Comment conserver mes soins ? » (modification 86).
 
+- **Google (10/11/2026)** : l ancienne adresse nanahnhair.netlify.app renvoie définitivement vers nanahnhair.com ; la vraie boutique est ouverte aux moteurs de recherche (`NNH_INDEXABLE` et `SITE_URL` fixés dans netlify.toml pour la production seulement ; site-2 reste masqué).

@@ -56,7 +56,7 @@ Chaque femme a plusieurs facettes. Les trois soins sont trois personnalités d'u
 
 À raconter de façon authentique, émotionnelle et professionnelle.
 
-Texte de la page depuis le 03/11/2026 : « Et si tu arrêtais de choisir ? » (texte complet dans `content/site.ts`, `story`), suivi du bouton « Révèle ton Na Nah N'hair. » vers le quiz et de l'encadré final « C'est ainsi qu'est née Na Nah N'hair… ».
+Texte de la page depuis le 03/11/2026 : « Et si tu arrêtais de choisir ? » (texte complet dans `content/site.ts`, `story`), suivi du bouton « Révèle ton Na Nah N'hair. » vers le quiz (plus d'encadré final depuis la modification 81).
 
 Aucune promesse de résultat garanti.
 

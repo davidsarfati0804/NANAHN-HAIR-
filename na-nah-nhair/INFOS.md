@@ -304,7 +304,7 @@ Ces décisions de la propriétaire de la marque complètent et remplacent les pa
 - **Cartes et fiches produits** : la ligne « Personnalité » est remplacée par la phrase « Je suis… » ; la ligne « Univers » n'est plus affichée.
 - **Pack** : nouveau contenu et nouveau mode d'emploi (section 7).
 - **Livraison** : « Délai : 3 jours ouvrés, préparation incluse. »
-- **Accueil, section « Mon histoire »** : trois cartes « Le défi », « Le bureau », « Les trois soins » (textes dans `content/site.ts`), titre « De mon bureau à ta routine », sticker « Naturopathe · Aromathérapie » ; pas de photo sur la carte « Le bureau » (22/10/2026).
+- **Accueil, section « Mon histoire »** : trois cartes « Hier, mon bureau », « Aujourd’hui, trois soins », « Demain, ton tour » (modification 83, textes dans `content/site.ts`), titre « De mon bureau à ta routine », sticker « Naturopathe · Aromathérapie » ; pas de photo sur la carte « Le bureau » (22/10/2026).
 - **Fiches produits et pack** : bouton « Quel soin est le tien ? » vers le quiz.
 - **Nom de marque** affiché « Na Nah N’hair », dans la typographie du logo.
 - **Quiz** : nouvelles réponses aux questions 1 à 4 (section 10) ; question 5 et règles de calcul inchangées.
@@ -408,7 +408,7 @@ Ces décisions de la propriétaire de la marque complètent et remplacent les pa
 
 - **« Quel soin est le tien ? »** (accueil et page Les soins, un seul composant) : bouton « Découvrir [soin] → » au ton foncé du soin (modifications 69 et 75 ; la 68 est annulée).
 - **Phrase de l'accueil et de l'encadré de Mon histoire** : « Je peux être à la fois plusieurs femmes : » (modifications 70 et 78).
-- **Pourquoi découvrir** : carte « Créés avec passion » (modification 71) ; carte Made in France : « Avec des ingrédients issus de l’agriculture biologique. » (modification 72). Ce n'est pas un label : aucune certification affichée tant qu'aucune n'est fournie.
+- **Pourquoi découvrir** : carte « Créés avec le cœur » (modifications 71 et 84) ; carte Made in France : « Avec des ingrédients issus de l’agriculture biologique. » (modification 72). Ce n'est pas un label : aucune certification affichée tant qu'aucune n'est fournie.
 - **Quiz** : question 1, « Une visite au musée, puis un café en terrasse » → Fabulous (1 point) ; question 3, « Une routine facile qui me ressemble » → Fabulous (1 point) (modifications 73 et 74).
 - **Mon histoire** : nouveau corps de texte au présent (modification 76, texte complet dans BRIEF.md §3).
 - **Miraculous** : « Le soin par lequel tout a commencé, en premier, pour celle qui est déterminée, ambitieuse et audacieuse. » partout (modification 77).
@@ -417,3 +417,15 @@ Ces décisions de la propriétaire de la marque complètent et remplacent les pa
 - **Premier écran de l accueil (03/11/2026)** : flacon Fabulous remplacé par `assets/images/accueil/fabulous-detoure.png` (marges transparentes retirées, même taille et même place). Les autres images du flacon (boutique, fiches, « Quel soin est le tien ? ») ne changent pas.
 - **Boutique (03/11/2026)** : les trois cartes utilisent les photos `assets/images/boutique/{fabulous,miraculous,luxurious}.jpg` (4:5, fond blanc, versions 400 à 1200 px). Fiches, accueil, « Quel soin est le tien ? » et panier ne changent pas.
 - **Page Mon histoire (03/11/2026)** : la page ne contient plus que le texte « Et si tu arrêtais de choisir ? » (titre de la page), le bouton « Révèle ton Na Nah N’hair. » vers le quiz et l encadré violet foncé final. Supprimés : le bandeau « Tout a commencé sur mon bureau. », la liste des trois soins, la carte « Voici Miraculous ! » et le bloc « Je peux être à la fois plusieurs femmes : » avec ses pastilles. L accueil ne change pas.
+
+## 25. Modifications 81 à 86 (10/11/2026)
+
+- **Mon histoire** : encadré violet foncé final supprimé ; la page se termine par le bouton « Révèle ton Na Nah N’hair. » (modification 81).
+- **Accueil, cartes « De mon bureau à ta routine »** (modification 83) :
+  - Carte 1 « Hier, mon bureau » : « Pas de grand décor, pas de mise en scène : tout a commencé sur mon bureau, dans ma chambre, avec une idée fixe et beaucoup d’ambition. »
+  - Carte 2 « Aujourd’hui, trois soins » : « Le premier à voir le jour, c’est Miraculous. Puis sont arrivés Fabulous et Luxurious. » + les trois pastilles de couleur.
+  - Carte 3 « Demain, ton tour » : « Mon histoire s’arrête ici. La tienne commence maintenant. » + bouton « Fais le quiz » (vers le quiz).
+- **Pourquoi découvrir** : carte « Créés avec le cœur » (modification 84).
+- **Fiches produits** : Conservation : 20 mois après ouverture (modification 85, durée confirmée par le laboratoire).
+- **Symbole PAO 20M (petit pot)** : bloc Ingrédients des fiches et FAQ « Comment conserver mes soins ? » (modification 86).
+

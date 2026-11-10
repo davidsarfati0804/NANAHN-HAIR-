@@ -79,6 +79,8 @@ export type Product = {
   usage: UsageGuide | null;
   precautions: string | null;
   volume: string;
+  // Durée de conservation après ouverture (modification 85, confirmée par le laboratoire)
+  conservation: string;
   founder?: boolean;
 };
 
@@ -179,6 +181,7 @@ export const products: Product[] = fr([
     usage: usageGuide("Fabulous Hair Serum", "mode-emploi-fabulous"),
     precautions: null,
     volume: "30 ml",
+    conservation: "20 mois",
   },
   {
     slug: "miraculous",
@@ -223,6 +226,7 @@ export const products: Product[] = fr([
     usage: usageGuide("Miraculous Hair Serum", "mode-emploi"),
     precautions: null,
     volume: "30 ml",
+    conservation: "20 mois",
     founder: true,
   },
   {
@@ -270,6 +274,7 @@ export const products: Product[] = fr([
     usage: usageGuide("Luxurious Hair Serum", "mode-emploi-luxurious"),
     precautions: null,
     volume: "30 ml",
+    conservation: "20 mois",
   },
 ]);
 
@@ -300,7 +305,7 @@ export const pack = fr({
     "Alterne les sérums selon tes besoins ou crée ta propre routine : **Miraculous** pour ta cure, **Fabulous** pour prendre soin de toi, **Luxurious** pour briller en sortie. Pour un résultat optimisé, utilise le soin 3 fois par semaine.",
 });
 
-// Page « Mon histoire » (consigne du 03/11/2026) : seul texte de la page avant l'encadré final.
+// Page « Mon histoire » (consigne du 03/11/2026, modification 81 : plus d'encadré final) : seul texte de la page.
 // **…** = gras ; « Na Nah N’hair » s'affiche dans la typographie du logo.
 export const story = fr({
   title: "Mon histoire",
@@ -317,8 +322,6 @@ export const story = fr({
   ],
   // « Révèle ton Na Nah N’hair. » mis en avant : bouton vers le quiz
   cta: { label: "Révèle ton Na Nah N’hair.", href: "/quiz" },
-  closing:
-    "C’est ainsi qu’est née Na Nah N’hair : trois soins, trois personnalités, une même envie, celle de te laisser prendre soin de tes cheveux tout en révélant tes différentes facettes, telle que tu es, pour de vrai.",
 });
 
 export const home = fr({
@@ -357,21 +360,22 @@ export const home = fr({
     regionLabel: "Mon histoire en trois cartes",
     swipeHint: "glisse pour la suite →",
     dotLabel: (n: number) => `Afficher la carte ${n}`,
+    // Cartes « Hier, aujourd’hui, demain » (modification 83), textes tirés de la page Mon histoire
     cards: [
       {
-        title: "Le défi",
-        text: "En première année de naturopathie, lors d’un stage, une femme souhaite prendre soin de ses cheveux et favoriser leur longueur. J’ai relevé le défi : une synergie sur mesure, rien que pour elle.",
+        title: "Hier, mon bureau",
+        text: "Pas de grand décor, pas de mise en scène : tout a commencé sur mon bureau, dans ma chambre, avec une idée fixe et beaucoup d’ambition.",
       },
       {
-        title: "Le bureau",
-        text: "Mes premières préparations sont nées dans ma chambre, sur mon bureau.",
+        title: "Aujourd’hui, trois soins",
+        text: "Le premier à voir le jour, c’est Miraculous. Puis sont arrivés Fabulous et Luxurious.",
       },
       {
-        title: "Les trois soins",
-        text: "Trois soins, trois personnalités, une même envie : prendre soin de tes cheveux.",
+        title: "Demain, ton tour",
+        text: "Mon histoire s’arrête ici. La tienne commence maintenant.",
       },
     ],
-    cta: { label: "Découvrir les trois soins", href: "/soins" },
+    cta: { label: "Fais le quiz", href: "/quiz" },
     readMore: { label: "Lire toute mon histoire", href: "/mon-histoire" },
   },
   // Faits repris d'INFOS.md uniquement
@@ -381,7 +385,7 @@ export const home = fr({
       // Modification 72 : « Avec des… » (tous les ingrédients ne sont pas biologiques ; aucun label affiché)
       { title: "Made in France", text: "Avec des ingrédients issus de l’agriculture biologique." },
       {
-        title: "Créés avec passion",
+        title: "Créés avec le cœur",
         text: "Je suis naturopathe et diplômée en aromathérapie.",
       },
       {
@@ -532,6 +536,8 @@ export const productPage = fr({
   universeLabel: "Univers",
   scentLabel: "Odeur",
   volumeLabel: "Contenance",
+  conservationLabel: "Conservation",
+  conservationValue: (duration: string) => `${duration} après ouverture`,
   highlightsTitle: "Points clés",
   descriptionTitle: "Description",
   inciTitle: "Ingrédients (INCI)",
@@ -561,6 +567,8 @@ export type FaqItem = {
   blocks?: { title: string; steps: { label: string; text: string }[] }[];
   // Réponse « Par email à … » avec lien mailto
   mailto?: { before: string; email: string };
+  // Icône affichée à gauche de la réponse (symbole PAO « 20M »)
+  icon?: { src: string; alt: string };
   todo?: string;
 };
 export type FaqGroup = { title: string; items: FaqItem[] };
@@ -591,6 +599,12 @@ export const faq: { title: string; groups: FaqGroup[] } = fr({
         {
           question: "Comment utiliser le pack des 3 soins ?",
           answer: [pack.usage],
+        },
+        // Modification 86 : symbole « 20M » (petit pot) à côté de la réponse
+        {
+          question: "Comment conserver mes soins ?",
+          answer: ["Chaque soin se conserve 20 mois après ouverture. C’est ce que signifie le petit pot ouvert avec « 20M » imprimé sur l’emballage."],
+          icon: { src: "/icons/pao-20m-miraculous.svg", alt: "Durée de conservation après ouverture : 20 mois" },
         },
       ],
     },

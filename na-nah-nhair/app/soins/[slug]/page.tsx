@@ -86,6 +86,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               <dd>{p.scent}</dd>
               <dt className="font-bold">{l.volumeLabel}</dt>
               <dd>{p.volume}</dd>
+              {/* Modification 85 : jamais coupé ; sous le libellé sur les écrans très étroits (320 px) */}
+              <dt className="font-bold">{l.conservationLabel}</dt>
+              <dd className="whitespace-nowrap max-[359px]:col-span-2 max-[359px]:-mt-1">{l.conservationValue(p.conservation)}</dd>
             </dl>
             <p className="mt-4">{capitalize(p.text)}</p>
 
@@ -140,6 +143,15 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               <li key={n}>{n}</li>
             ))}
           </ul>
+          {/* Symbole « 20M » (petit pot), couleur du soin, comme sur l'emballage (modification 86) */}
+          {/* eslint-disable-next-line @next/next/no-img-element -- icône vectorielle servie telle quelle */}
+          <img
+            src={`/icons/pao-20m-${p.slug}.svg`}
+            width={120}
+            height={104}
+            alt="Durée de conservation après ouverture : 20 mois"
+            className="mt-4 h-11 w-auto md:h-12"
+          />
         </Fold>
 
         {/* Mode d'emploi fourni : il contient aussi les précautions, affiché sur toute la largeur */}

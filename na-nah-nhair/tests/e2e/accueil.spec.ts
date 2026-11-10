@@ -42,7 +42,8 @@ test("boutons du hero", async ({ page }) => {
     return svg.left - words[words.length - 1].right;
   });
   expect(gap).toBeGreaterThan(2);
-  await expect(page.getByRole("link", { name: "Découvrir les trois soins" }).first()).toHaveAttribute("href", "/soins");
+  // Carte 3 « Demain, ton tour » : bouton vers le quiz (modification 83)
+  await expect(page.locator("section[aria-labelledby=histoire]").getByRole("link", { name: "Fais le quiz" })).toHaveAttribute("href", "/quiz");
 });
 
 test("aucun lien interne cassé depuis l'accueil", async ({ page, request }) => {
@@ -261,9 +262,9 @@ test.describe("modifications du 21/10/2026", () => {
   test("premier écran : petits textes, sans sticker, lien vers la section suivante", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByText("5 questions · 1 résultat")).toBeVisible();
-    // Sticker retiré (modification 28) ; carte « Créés avec passion » (modification 71)
+    // Sticker retiré (modification 28) ; carte « Créés avec le cœur » (modifications 71 et 84)
     await expect(page.getByText("Créés par une naturopathe")).toHaveCount(0);
-    await expect(page.locator("section[aria-labelledby=raisons]").getByText("Créés avec passion")).toBeVisible();
+    await expect(page.locator("section[aria-labelledby=raisons]").getByText("Créés avec le cœur")).toBeVisible();
     await expect(page.locator("section[aria-labelledby=raisons]").getByText("Avec des ingrédients issus de l’agriculture biologique.")).toBeVisible();
     // Livraison offerte active par défaut dans le back-office
     await expect(page.getByText("Made in France · 30 ml · Livraison offerte en France")).toBeVisible();
@@ -359,9 +360,10 @@ test.describe("modifications du 22/10/2026", () => {
     await expect(page).toHaveTitle(/Fabulous Hair Serum|FABULOUS HAIR SERUM/);
   });
 
-  test("Mon histoire : nom de marque dans le bloc final, plus de « clinique »", async ({ page }) => {
+  test("Mon histoire : plus d'encadré final, plus de « clinique »", async ({ page }) => {
     await page.goto("/mon-histoire");
-    await expect(page.locator("blockquote svg[data-brand-name]")).toHaveCSS("color", "rgb(128, 118, 179)");
+    await expect(page.locator("main blockquote")).toHaveCount(0);
+    await expect(page.locator("main")).not.toContainText("C’est ainsi qu’est née");
     await expect(page.locator("main")).not.toContainText(/clinique/i);
     await page.goto("/");
     await expect(page.locator("section[aria-labelledby=histoire]")).not.toContainText(/clinique/i);
@@ -390,14 +392,11 @@ test.describe("modifications du 24/10/2026", () => {
       for (const sel of ["dl div:nth-child(1)", "dl div:nth-child(2)", "a"]) expect(new Set(await tops(sel)).size, sel).toBe(1);
       const heights = await cards.evaluateAll((lis) => lis.map((li) => Math.round(li.getBoundingClientRect().height)));
       expect(new Set(heights).size).toBe(1);
-      // « De mon bureau à ta routine » : pastilles juste sous le texte de la carte 3
+      // « De mon bureau à ta routine » : pastilles juste sous le texte de la carte 2, bouton sous celui de la carte 3
       const story = page.getByRole("list", { name: "Mon histoire en trois cartes" }).locator(":scope > li");
-      const gap = await story.nth(2).evaluate((li) => {
-        const p = li.querySelector("p")!.getBoundingClientRect();
-        const dots = li.querySelector("ul")!.getBoundingClientRect();
-        return dots.top - p.bottom;
-      });
-      expect(gap).toBeLessThanOrEqual(30);
+      const below = (li: Element, s: string) => li.querySelector(s)!.getBoundingClientRect().top - li.querySelector("p")!.getBoundingClientRect().bottom;
+      expect(await story.nth(1).evaluate(below, "ul")).toBeLessThanOrEqual(30);
+      expect(await story.nth(2).evaluate(below, "a")).toBeLessThanOrEqual(30);
       expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(0);
     });
   }

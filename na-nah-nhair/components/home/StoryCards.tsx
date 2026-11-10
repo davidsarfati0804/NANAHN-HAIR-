@@ -7,9 +7,9 @@ import { themeClasses } from "@/lib/theme-classes";
 
 const s = home.story;
 const cardStyles = [
-  "bg-logo-yellow", // Le défi
-  "bg-lavender-soft", // Le bureau
-  "border-2 border-lavender bg-white", // Les trois soins
+  "bg-logo-yellow", // Hier, mon bureau
+  "bg-lavender-soft", // Aujourd’hui, trois soins
+  "border-2 border-lavender bg-white", // Demain, ton tour
 ];
 
 // Trois cartes : défilement au doigt sur téléphone (scroll-snap), côte à côte sur grand écran
@@ -44,7 +44,7 @@ export default function StoryCards() {
   return (
     <div>
       {/* Grille à lignes communes (numéro, titre, texte) : même alignement dans les trois cartes ;
-          dans la carte 3, pastilles et bouton suivent le texte (modification 44), sans ancrage en bas */}
+          pastilles (carte 2) et bouton (carte 3) suivent le texte, sans ancrage en bas (modifications 44 et 83) */}
       <ul
         ref={list}
         tabIndex={0}
@@ -69,22 +69,17 @@ export default function StoryCards() {
             </h3>
             <div className="mt-3">
               <p className="leading-relaxed">{card.text}</p>
+              {/* Carte 2 : les trois pastilles ; carte 3 : bouton vers le quiz (modification 83), juste sous le texte */}
+              {i === 1 && (
+                <ul aria-hidden className="flex gap-2 pt-6">
+                  {(["fabulous", "miraculous", "luxurious"] as const).map((p) => (
+                    <li key={p} className={`h-6 w-6 rounded-full ${themeClasses[p].base}`} />
+                  ))}
+                </ul>
+              )}
               {i === 2 && (
                 <div className="pt-6">
-                  <ul aria-hidden className="flex gap-2">
-                    {(["fabulous", "miraculous", "luxurious"] as const).map(
-                      (p) => (
-                        <li
-                          key={p}
-                          className={`h-6 w-6 rounded-full ${themeClasses[p].base}`}
-                        />
-                      ),
-                    )}
-                  </ul>
-                  <Link
-                    href={s.cta.href}
-                    className="mt-5 bouton bouton--principal"
-                  >
+                  <Link href={s.cta.href} className="bouton bouton--principal">
                     {s.cta.label}
                   </Link>
                 </div>

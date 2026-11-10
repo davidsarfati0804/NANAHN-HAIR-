@@ -21,11 +21,26 @@ export default function FaqList({ items }: { items: FaqItem[] }) {
             </span>
           </summary>
           <div className="mt-2 space-y-2 pb-2 sm:mt-3 sm:pb-0">
-            {item.answer?.map((line) => (
-              <p key={line}>
-                <RichText text={line} />
-              </p>
-            ))}
+            {item.icon ? (
+              // Réponse avec icône à gauche (symbole « 20M », modification 86)
+              <div className="flex items-start gap-4">
+                {/* eslint-disable-next-line @next/next/no-img-element -- icône vectorielle servie telle quelle */}
+                <img src={item.icon.src} width={120} height={104} alt={item.icon.alt} className="h-12 w-auto shrink-0" />
+                <div className="min-w-0 space-y-2">
+                  {item.answer?.map((line) => (
+                    <p key={line}>
+                      <RichText text={line} />
+                    </p>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              item.answer?.map((line) => (
+                <p key={line}>
+                  <RichText text={line} />
+                </p>
+              ))
+            )}
             {item.list && (
               <ul className="list-disc space-y-1 pl-5">
                 {item.list.map((line) => (
